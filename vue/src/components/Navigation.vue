@@ -1,0 +1,41 @@
+<template>
+    <ul>
+        <li>
+            <router-link
+                :to="{
+                    name: ''
+                }"
+            >
+            Home
+            </router-link>
+        </li>
+        <li>
+            Username
+        </li>
+        <li>
+            <router-link
+                :to="{
+                    name: 'login'
+                }"
+            >
+            Login
+            </router-link>
+        </li>
+        <li>
+            <router-link
+                :to="{
+                    name: 'dashboard'
+                }"
+            >
+            Dashboard
+            </router-link>
+        </li>
+        <li>
+            <a
+                href='#'
+            >
+            Logout
+            </a>
+        </li>
+    </ul>
+</template>
