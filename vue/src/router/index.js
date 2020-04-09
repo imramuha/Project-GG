@@ -4,12 +4,14 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 
+import store from '@/store';
+
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home
   },
   {
@@ -20,7 +22,15 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: Dashboard
+    component: Dashboard,
+    beforeEnter: (to, from, next) => { 
+      if (!store.getters['auth/authenticated']) {
+        return next({
+          name: 'login'
+        })
+      }
+      next();
+    }
   },
 ];
 

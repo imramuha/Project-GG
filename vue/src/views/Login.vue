@@ -40,7 +40,13 @@ export default {
             login: 'auth/login'
         }),
         submit() {
-           this.login(this.form);
+           this.login(this.form).then(() => {
+               this.$router.replace({
+                   name: 'dashboard',
+               }).catch(() => {
+                   console.log('failed');
+               })
+           });
         }
     }
 };
