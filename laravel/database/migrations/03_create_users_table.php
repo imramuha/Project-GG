@@ -21,6 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('role_id')->unsigned()->index()->/*default(3)->*/nullable();
+        });
+
+        Schema::table('users', function($table) {
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');;
         });
     }
 
