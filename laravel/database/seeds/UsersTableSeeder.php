@@ -25,9 +25,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('users')->insert([
-            'username' => 'randomGG',
-            'email' => 'random@gg.com',
-            'password' => bcrypt('random123'),
+            'username' => 'ModGG',
+            'email' => 'mod@gg.com',
+            'password' => bcrypt('mod123'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
