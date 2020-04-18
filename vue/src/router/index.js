@@ -1,18 +1,35 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from 'vue-router'
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
 
+import WaitingRoom from "../views/WaitingRoom.vue";
+import Profile from "../views/Profile.vue";
+
 import store from '@/store';
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-const routes = [
-  {
+
+export default new Router({
+  mode: "history",
+  routes: [{
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/waitingroom",
+    name: "waiting-room",
+    component: WaitingRoom
+    
+  },
+  {
+    path: "/profile/:id",
+    name: "profile",
+    component: Profile,
+    props: true,
   },
   {
     path: "/login",
@@ -23,7 +40,7 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
-    beforeEnter: (to, from, next) => { 
+    beforeEnter: (to, from, next) => {
       if (!store.getters['auth/authenticated']) {
         return next({
           name: 'login'
@@ -31,11 +48,9 @@ const routes = [
       }
       next();
     }
-  },
-];
-
-const router = new VueRouter({
-  routes
+  }],
 });
 
-export default router;
+/* 
+ADD A 404 PAGE -> check out the documentation (history mode^)
+*/

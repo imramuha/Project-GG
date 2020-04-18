@@ -9,11 +9,16 @@ use App\User;
 
 class AccountController extends Controller
 {
+    // siging
+    public function __construct() {
+        $this->middleware(['auth:api']);
+    }
+
     /*
-    * PROFILE 
+    * Get all users except the logged one in ^^
     */
-    public function showRole () {
-        $roles = User::find(2)->roles()->orderBy('name')->get();
-        return response()->json($roles);
+    public function showUsers () {
+        $users = User::where('id', '!=', auth()->id())->get();
+        return response()->json($users);
     }
 }

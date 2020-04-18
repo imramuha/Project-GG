@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class MeController extends Controller
 {
-      // siging
+    // siging
     public function __construct() {
         $this->middleware(['auth:api']);
     }
