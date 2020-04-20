@@ -13,5 +13,8 @@ const apiClient = axios.create({
 export default {
   getFriends() {
     return axios.get('/frontend/users')
+  },
+   getFriend(id) {
+    return axios.get('/frontend/user/' + id)
   }
 }

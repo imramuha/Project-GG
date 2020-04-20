@@ -1,7 +1,8 @@
 <template>
     <div>
-          <router-link :to="{name: 'profile', params: { id: friend.id } }">
+        <router-link :to="{name: 'profile', params: { id: friend.id } }">
         <h1>{{ friend.id }}</h1>
+    
         <p>icon: {{ friend.icon}}</p>
        <p>name: {{ friend.name }}</p>
          <p>username: {{ friend.username }}</p>

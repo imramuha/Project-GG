@@ -21,4 +21,32 @@ class AccountController extends Controller
         $users = User::where('id', '!=', auth()->id())->get();
         return response()->json($users);
     }
+
+    public function showUser ($id) {
+        
+        // TODO:: !! WHILE REGISTEING FRIENDSHIP WE NEED TO ADD requesters ID ON user_id_one in relation_user ELSE on user_id_two
+   
+        $user = User::where('id', $id)->get();
+        //$user = User::find($id)->relationTwo()->orderBy('name')->get();
+        if(auth()->id() < $id) {
+            $relation = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
+        } else {
+            $relation = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
+        }
+        return response()->json(['user' => $user, 'relation' => $relation]);
+    }
+
+    // determine the authenticated user's relation with the opened user :)
+    public function showUserRelation($id) {
+        // TODO: JOIN WITH THE PREVIOUS CALL
+
+        if(auth()->id() < $id) {
+            $relation = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
+        } else {
+            $relation = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
+        }
+        return response()->json([$relation]);
+    }
+
+
 }

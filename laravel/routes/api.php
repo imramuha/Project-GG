@@ -30,4 +30,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('role', 'AccountController@showRole');
 
     Route::get('users', 'AccountController@showUsers');
+    
+    Route::get('/user/{id}', 'AccountController@showUser');
+    //Route::get('/user/{id}', 'AccountController@showUserRelation');
 });
