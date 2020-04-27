@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::post('login', 'LoginController');
+    Route::post('register', 'RegisterController');
     Route::post('logout', 'LogoutController');
     Route::get('me', 'MeController');
 });
@@ -32,5 +33,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('users', 'AccountController@showUsers');
     
     Route::get('/user/{id}', 'AccountController@showUser');
+
+    Route::get('/posts', 'AccountController@showPosts');
     //Route::get('/user/{id}', 'AccountController@showUserRelation');
 });

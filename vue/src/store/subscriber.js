@@ -1,4 +1,4 @@
-import store from '@/store';
+/*import store from '@/store';
 import axios from 'axios';
 
 // any mutation that is commited will be given to us here
@@ -16,4 +16,4 @@ store.subscribe((mutation) => {
             }
         break;
     }
-})
+})*/

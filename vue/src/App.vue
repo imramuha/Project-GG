@@ -1,20 +1,25 @@
 <template>
     <div id="app">
-        <Navigation />
-        <router-view />
+        <AppNav />
+        <router-view class="page" />
     </div>
 </template>
 
 <script>
-import Navigation from "@/components/Navigation";
+//import Navigation from "@/components/Navigation";
+import AppNav from "@/components/AppNav";
+
 export default {
     components: {
-        Navigation
+        //Navigation
+        AppNav
     }
 };
 </script>
 
-<style>
+<style lang="css">
+@import './assets/styles/styles.scss';
+
 html {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;

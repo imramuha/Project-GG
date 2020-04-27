@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Post;
 
 class AccountController extends Controller
 {
@@ -46,6 +47,17 @@ class AccountController extends Controller
             $relation = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
         }
         return response()->json([$relation]);
+    }
+
+
+
+     /*
+    * Get all users except the logged one in ^^
+    */
+    public function showPosts () {
+
+        $posts = Post::get();
+        return response()->json(['posts'=>$posts]);
     }
 
 

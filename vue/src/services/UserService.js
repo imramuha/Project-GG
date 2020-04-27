@@ -1,4 +1,4 @@
-import axios from 'axios'
+/*import axios from 'axios'*/
    
 /*
 const apiClient = axios.create({  
@@ -9,7 +9,7 @@ const apiClient = axios.create({
     'Content-Type': 'application/json'
   }
 })*/
-
+/*
 export default {
   getFriends() {
     return axios.get('/frontend/users')
@@ -17,4 +17,4 @@ export default {
    getFriend(id) {
     return axios.get('/frontend/user/' + id)
   }
-}
+}*/
