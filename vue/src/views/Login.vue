@@ -1,53 +1,46 @@
 <template>
-    <form @submit.prevent="submit">
-        {{ form }}
-        <div>
-            <label for="email">email</label>
+  <div>
+    <form @submit.prevent="login">
+      <label for="email">Email:</label>
+      <input v-model="email" type="email" name="email" value />
 
-            <input type="text" name="email" id="email" v-model="form.email" />
-        </div>
+      <label for="password">Password:</label>
+      <input v-model="password" type="password" name="password" value />
 
-        <div>
-            <label for="password">password</label>
+      <button type="submit" name="button">Login</button>
+      <p>{{ error }}</p>
 
-            <input type="password" name="password" id="password" v-model="form.password" />
-        </div>
-
-        <div>
-            <button type="submit">Login</button>
-        </div>
+      <router-link to="/register">
+        Don't have an account? Register.
+      </router-link>
     </form>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import { mapActions } from 'vuex';
-
 export default {
-    name: "Login",
-    components: {},
-    data() {
-        return {
-            form: {
-                email: "",
-                password: ""
-            }
-        };
-    },
-    methods: {
-        ...mapActions({
-            login: 'auth/login'
-        }),
-        submit() {
-           this.login(this.form).then(() => {
-               this.$router.replace({
-                   name: 'dashboard',
-               }).catch(() => {
-                   console.log('failed');
-               })
-           });
-        }
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    login() {
+      this.$store
+        .dispatch("login", {
+          email: this.email,
+          password: this.password
+        })
+        .then(() => {
+          this.$router.push({ name: "dashboard" });
+        })
+        .catch(err => {
+          this.error = err.response.data.error;
+        });
     }
+  }
 };
 </script>

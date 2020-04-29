@@ -1,17 +1,17 @@
 <template>
-  <div>
-    Home
+  <div v-if="!loggedIn">
+    To use this app you'll need to
+    <router-link to="/login">Login</router-link>or
+    <router-link to="/register">Register</router-link>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import { authComputed } from "../store/helpers.js";
 
 export default {
-  name: "Home",
-  components: {
-    
+  computed: {
+    ...authComputed
   }
 };
 </script>
