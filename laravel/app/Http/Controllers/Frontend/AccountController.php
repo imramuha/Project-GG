@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Post;
+use App\Models\Status;
 
 class AccountController extends Controller
 {
@@ -34,19 +35,46 @@ class AccountController extends Controller
         } else {
             $relation = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
         }
+
         return response()->json(['user' => $user, 'relation' => $relation]);
     }
+
 
     // determine the authenticated user's relation with the opened user :)
     public function showUserRelation($id) {
         // TODO: JOIN WITH THE PREVIOUS CALL
 
-        if(auth()->id() < $id) {
-            $relation = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
-        } else {
-            $relation = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
+        $user = User::where('id', $id)->get();
+        $relation_one = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
+        $relation_two = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
+
+        $relation = array_merge($relation_one->toArray(), $relation_two->toArray());
+        return response()->json(["user" => $user, "relation" => $relation]);
+    }
+
+    // show all friends
+    public function showFriends() {
+        // show friends -> works!! CLEAN IT UP
+
+        $relations_one = User::find(auth()->id())->relationOne()->where('name', 'friends')->get();
+        $relations_two = User::find(auth()->id())->relationTwo()->where('name', 'friends')->get();
+
+        $user_ids_array = array();
+
+        foreach($relations_one as $user) {
+            array_push($user_ids_array, $user->pivot->user_id_two);
         }
-        return response()->json([$relation]);
+
+        foreach($relations_two as $user) {
+            array_push($user_ids_array, $user->pivot->user_id_one);
+        }
+
+        $users = User::with("status")->find($user_ids_array);
+
+        $relations = array_merge($relations_one->toArray(), $relations_two->toArray());
+        
+        // return all the friends
+        return response()->json($users);
     }
 
 
@@ -57,7 +85,16 @@ class AccountController extends Controller
     public function showPosts () {
 
         $posts = Post::get();
-        return response()->json(['posts'=>$posts]);
+        return response()->json($posts);
+    }
+
+         /*
+    * Get all users except the logged one in ^^
+    */
+    public function showUserPosts () {
+     
+        $posts = Post::where('creator_id', '=', auth()->id())->get();
+        return response()->json($posts);
     }
 
 

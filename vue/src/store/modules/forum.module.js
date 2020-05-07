@@ -3,15 +3,20 @@
  */
 
 // import the api endpoints
-import { getAllPosts } from "@/services/forum.api";
+import { getAllPosts, getUserPosts } from "@/services/forum.api";
 
 const state = {
-  posts: []
+  posts: [],
+  userposts: []
 };
 
 const getters = {
   getPosts(state) {
     return state.posts;
+  },
+  // care - name
+  getUserPosts(state) {
+    return state.userposts;
   }
 };
 
@@ -25,12 +30,25 @@ const actions = {
       // handle the error here
       console.log(error);
     }
+  },
+  async fetchUserPosts({ commit }) {
+    try {
+      const response = await getUserPosts();
+      console.log(response)
+      commit("SET_USER_POSTS", response.data);
+    } catch (error) {
+      // handle the error here
+      console.log(error);
+    }
   }
 };
 
 const mutations = {
   SET_POSTS(state, data) {
     state.posts = data;
+  },
+  SET_USER_POSTS(state, data) {
+    state.userposts = data;
   }
 };
 

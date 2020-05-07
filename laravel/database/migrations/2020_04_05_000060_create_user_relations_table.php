@@ -18,7 +18,7 @@ class CreateUserRelationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->integer('relation_id')->nullable();
-            $table->integer('user_id_one')->nullable()->unsigned();
+            $table->integer('user_id_one')->nullable();
             $table->integer('user_id_two')->unsigned()->nullable();
         });
     }

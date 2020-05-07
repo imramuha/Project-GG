@@ -30,5 +30,17 @@ class UserRelationsTableSeeder extends Seeder
             'user_id_two' => 3,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
+        DB::table('user_relations')->insert([
+            'relation_id' => 3,
+            'user_id_one' => 5,
+            'user_id_two' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('user_relations')->insert([
+            'relation_id' => 3,
+            'user_id_one' => 4,
+            'user_id_two' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }

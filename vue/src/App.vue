@@ -17,8 +17,8 @@ export default {
 };
 </script>
 
-<style lang="css">
-@import "./assets/styles/styles.scss";
+<style lang="scss">
+@import "@/assets/styles/styles.scss";
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -33,8 +33,6 @@ body {
 }
 #app {
   box-sizing: border-box;
-  width: 500px;
-  padding: 0 20px 20px;
   margin: 0 auto;
 }
 hr {

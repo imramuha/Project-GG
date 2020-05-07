@@ -9,7 +9,7 @@ import Forum from "../views/Forum.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 
-import WaitingRoom from "../views/WaitingRoom.vue";
+
 import Profile from "../views/Profile.vue";
 
 Vue.use(Router);
@@ -44,11 +44,6 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login
-    },
-    {
-      path: "/waitingroom",
-      name: "waiting-room",
-      component: WaitingRoom
     },
     {
       path: "/profile/:id",

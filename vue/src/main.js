@@ -4,8 +4,15 @@ import router from "./router";
 import store from "./store/store";
 import httpClient from "./services/httpClient";
 import axios from "axios";
+// TEMP
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 Vue.config.productionTip = false;
+
+// TEMP BOOTSTRAP
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 new Vue({
   router,
