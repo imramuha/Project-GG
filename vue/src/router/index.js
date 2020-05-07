@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 
 import Dashboard from "../views/Dashboard.vue";
 import Forum from "../views/Forum.vue";
+import Post from "../views/Post.vue";
 // forumpost
 
 import Register from "../views/Register.vue";
@@ -49,6 +50,12 @@ const router = new Router({
       path: "/profile/:id",
       name: "profile",
       component: Profile,
+      props: true
+    },
+    {
+      path: "/post/:id",
+      name: "post",
+      component: Post,
       props: true
     }
   ]

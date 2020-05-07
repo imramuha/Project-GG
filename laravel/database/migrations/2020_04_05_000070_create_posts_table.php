@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('date');
             $table->string('time');
-            $table->integer('creator_id')->nullable()->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->timestamps();
             
         });

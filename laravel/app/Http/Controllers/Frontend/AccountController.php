@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\Post;
 use App\Models\Status;
+use App\Models\Comment;
 
 class AccountController extends Controller
 {
@@ -93,8 +94,17 @@ class AccountController extends Controller
     */
     public function showUserPosts () {
      
-        $posts = Post::where('creator_id', '=', auth()->id())->get();
+        $posts = Post::where('user_id', '=', auth()->id())->get();
         return response()->json($posts);
+    }
+
+
+        /*
+    * Get all users except the logged one in ^^
+    */
+    public function showPost ($id) {
+        $post = Post::where('id', '=', $id)->with("comments", "comments.user")->get();
+        return response()->json($post);
     }
 
 

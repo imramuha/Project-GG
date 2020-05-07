@@ -7,7 +7,10 @@ const getAllPosts = () => httpClient.get(END_POINT);
 
 const getUserPosts = () => httpClient.get(USER_END_POINT);
 
-console.log(httpClient.get('user'+END_POINT));
+const POST_END_POINT = "/api/frontend/post/";
+
+const getPost = (id) => httpClient.get(POST_END_POINT + id);
+
 
 // you can pass arguments to use as request parameters/data
 // const getUser = (user_id) => httpClient.get(END_POINT, { user_id });
@@ -16,6 +19,6 @@ console.log(httpClient.get('user'+END_POINT));
 
 export {
   getAllPosts,
-  getUserPosts
-  //createUser
+  getUserPosts,
+  getPost
 };

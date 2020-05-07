@@ -90,4 +90,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo('App\Status', 'status_id');
     }
+
+
+    /**
+     * get the comments the belong to this user
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

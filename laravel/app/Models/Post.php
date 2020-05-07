@@ -12,4 +12,12 @@ class Post extends Model
         'date',
         'time',
     ];
+
+    /**
+     * get the comments the belong to this post
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

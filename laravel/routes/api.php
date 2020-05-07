@@ -35,6 +35,9 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/user/{id}', 'AccountController@showUser');
 
     Route::get('/posts', 'AccountController@showPosts');
+    Route::get('/post/{id}', 'AccountController@showPost');
+
+
     Route::get('/userposts', 'AccountController@showUserPosts');
     Route::get('/users/{id}', 'AccountController@showUserRelation');
 
