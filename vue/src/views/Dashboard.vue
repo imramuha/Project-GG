@@ -12,76 +12,73 @@
             </div>
         </div>
         <div class="main">
-            <div>empty/logo?</div>
-            <div>Dashboard navbar</div>
+            <div>empty/logo? - emitting: {{ emit }}</div>
             <div>
-                <p>forum posts</p>
-                <template v-if="!isLoading">
-                    <PostCard
-                        v-for="userpost in userposts"
-                        v-bind:key="userpost.id"
-                        :post="userpost"
-                    />
+                <DashboardNav v-on:emitToDashboard="onDashboardNavClick" />
+            </div>
+            <div>
+                <!-- TBD loading/api call loader <template v-if="!isLoading">-->
+                <template>
+                    <component
+                        :is="mainComponent"
+                    ></component>
                 </template>
-                <p v-else>Loading posts</p>
+                <!--<p v-else>Loading posts</p>-->
             </div>
         </div>
         <div class="friendlist">
             <div>empty/logo?</div>
             <div>Search bar</div>
-            <div>Friends<template  >
-                 <Friendlist
-                       v-for="friend in friends"
-                        v-bind:key="friend.id"
-                        :friend="friend"
-                    />
-                    </template>
+            <div>
+                Friends
+                <template>
+                    <Friendlist v-for="friend in friends" v-bind:key="friend.id" :friend="friend" />
+                </template>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import PostCard from "@/components/PostCard";
-import Friendlist from "@/components/Friendlist";
+
+import Friendlist from "@/components/dashboard/Friendlist";
+import DashboardNav from "@/components/dashboard/DashboardNav";
+
+import Reviews from "@/components/dashboard/Reviews";
+import Inbox from "@/components/dashboard/Inbox";
+import Feed from "@/components/dashboard/Feed";
+import Posts from "@/components/dashboard/Posts";
 
 import { getAllFriends } from "@/services/friend.api";
 
-import { mapActions, mapGetters } from "vuex";
 
 export default {
-    components: { PostCard, Friendlist },
+    components: { Posts, Feed, Inbox, Reviews, Friendlist, DashboardNav },
     data() {
         return {
-            isLoading: true,
-            userposts: [],
-            friends: []
+            // isLoading: true,
+            friends: [],
+            items: [],
+            mainComponent: Feed,
+            emit: "feed"
         };
-    },
-    computed: {
-        ...mapGetters("Forum", ["getUserPosts"])
     },
     methods: {
-        ...mapActions("Forum", ["fetchUserPosts"])
+        // Triggered when `childtodashboard` event is emitted by the child. <---- needs cleaning
+        onDashboardNavClick(value) {
+            this.emit = value;
+            if (value == "feed") {
+                this.mainComponent = Feed;
+            } else if (value == "inbox") {
+                this.mainComponent = Inbox;
+            } else if (value == "reviews") {
+                this.mainComponent = Reviews;
+            } else if (value == "posts") {
+                this.mainComponent = Posts;
+            }
+        }
     },
     async mounted() {
-        // Make network request if the data is empty
-        if (this.getUserPosts.length === 0) {
-            // set loading screen
-            this.isLoading = true;
-            // await this.fetchPosts();
-
-            await this.fetchUserPosts();
-
-            this.userposts = this.getUserPosts;
-            // console.log(this.posts[0].id)
-
-            this.isLoading = false;
-        } else {
-            this.userposts = this.getUserPosts;
-            this.isLoading = false;
-        };
-
         try {
             const response = await getAllFriends();
             this.friends = response.data;
@@ -89,7 +86,7 @@ export default {
         } catch (error) {
             console.log(error);
         }
-    },
+    }
 };
 </script>
 
