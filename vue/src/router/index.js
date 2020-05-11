@@ -12,6 +12,7 @@ import Login from "../views/Login.vue";
 
 
 import Profile from "../views/Profile.vue";
+import User from "../views/User.vue";
 
 Vue.use(Router);
 
@@ -45,6 +46,12 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: User,
+      props: true
     },
     {
       path: "/profile/:id",

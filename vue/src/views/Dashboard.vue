@@ -2,7 +2,7 @@
     <div class="dashboard">
         <div class="nav">
             <div>
-                <p>My profile</p>
+                <router-link to="/user" class="button">My profile</router-link>
             </div>
             <div>
                 <p>Lobby</p>

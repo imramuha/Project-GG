@@ -9,6 +9,7 @@ use App\User;
 use App\Models\Post;
 use App\Models\Status;
 use App\Models\Comment;
+use App\Models\Review;
 
 class AccountController extends Controller
 {
@@ -23,6 +24,15 @@ class AccountController extends Controller
     public function showUsers () {
         $users = User::where('id', '!=', auth()->id())->get();
         return response()->json($users);
+    }
+
+    /*
+    * show logged in user ^^
+    */
+    public function showMe () {
+        $user = User::where('id', '=', auth()->id())->get();
+        $reviews = Review::where('user_id', '=', auth()->id())->with('reviewer')->get();
+        return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
 
     public function showUser ($id) {

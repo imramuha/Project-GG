@@ -99,4 +99,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Comment::class);
     }
+
+
+        //
+    /**
+     * Get the category that the product belongs to.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Reviews::class);
+    }
 }

@@ -10,13 +10,17 @@
     <b-button href="#" variant="primary">Unfriend</b-button>
     <b-button href="#" variant="primary">Block</b-button>
     <b-button href="#" variant="primary">Unblock</b-button>
+    <ReviewInput />
   </div>
 </template>
 
 <script>
 import { getFriend } from "@/services/friend.api";
 
+import ReviewInput from "@/components/ReviewInput";
+
 export default {
+  components: { ReviewInput },
   props: ["id"],
   data() {
     return {
