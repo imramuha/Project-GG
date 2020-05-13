@@ -47,4 +47,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/friends', 'AccountController@showFriends');
 
     Route::get('/games', 'AccountController@showUserGameData');
+
+
+    // Route::get('/example', 'AccountController@showExample');
 });

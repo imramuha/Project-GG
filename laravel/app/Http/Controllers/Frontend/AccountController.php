@@ -174,4 +174,6 @@ class AccountController extends Controller
         $data = UserGameData::where('user_id', '=', auth()->user()->id)->with("user", "game", "data")->get();
         return response()->json($data);
     }
+
+    
 }

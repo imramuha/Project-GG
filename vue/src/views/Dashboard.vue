@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/styles/styles.scss";
+@import "@/assets/sass/main.scss";
 
 img {
     width: 150px;

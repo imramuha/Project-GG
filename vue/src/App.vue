@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/styles/styles.scss";
+@import "@/assets/sass/main.scss";
 
 html {
   -webkit-text-size-adjust: 100%;
