@@ -109,4 +109,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Reviews::class);
     }
+
+
+        /**
+     * get the comments the belong to this user
+     */
+    public function usergamedata()
+    {
+        return $this->hasMany(UserGameData::class);
+    }
+
 }

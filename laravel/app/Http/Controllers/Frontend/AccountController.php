@@ -10,20 +10,14 @@ use App\Models\Post;
 use App\Models\Status;
 use App\Models\Comment;
 use App\Models\Review;
+use App\Models\UserGameData;
+use App\Models\Game;
 
 class AccountController extends Controller
 {
     // siging
     public function __construct() {
         $this->middleware(['auth:api']);
-    }
-
-    /*
-    * Get all users except the logged one in ^^
-    */
-    public function showUsers () {
-        $users = User::where('id', '!=', auth()->id())->get();
-        return response()->json($users);
     }
 
     /*
@@ -34,6 +28,30 @@ class AccountController extends Controller
         $reviews = Review::where('user_id', '=', auth()->id())->with('reviewer')->get();
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
+
+    public function editMe (Request $request) {
+        $id = auth()->user()->id;
+
+        //'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        User::where('id', '=', $id)->update(array(
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+
+        ));
+
+        $response = array('response' => 'Your profile has been updated.', 'succes' => true);
+        return $response;
+    }
+
+        /*
+    * Get all users except the logged one in ^^
+    */
+    public function showUsers () {
+        $users = User::where('id', '!=', auth()->id())->get();
+        return response()->json($users);
+    }
+
 
     public function showUser ($id) {
         
@@ -117,5 +135,43 @@ class AccountController extends Controller
         return response()->json($post);
     }
 
+    /* ------- | ** CLEANER FROM HERE ON ** | ------ */
 
+    /* 
+    * POST REVIEW ON USER PROFILE
+    */
+
+    public function postReview(Request $request) {
+        
+        $review = Review::create([
+            'comment' => $request->input('comment'),
+            'score' => $request->input('rating'),
+            'user_id' => $request->input('id'),
+            'reviewer_id' => auth()->user()->id,
+        ]);
+
+        $response = array('response' => 'Your review has been posted!', 'succes' => true);
+        return $response;
+    }
+
+    public function postComment(Request $request) {
+
+        $comment = Comment::create([
+            'comment' => $request->input('comment'),
+            'user_id' => auth()->user()->id,
+            'post_id' => $request->input('post_id'),
+        ]);
+
+        $response = array('response' => 'Your comment has been posted!', 'succes' => true);
+        return $response;
+    }
+
+    /*
+    * Get all logged in users game data
+    */
+    public function showUserGameData () {
+
+        $data = UserGameData::where('user_id', '=', auth()->user()->id)->with("user", "game", "data")->get();
+        return response()->json($data);
+    }
 }

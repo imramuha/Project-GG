@@ -5,13 +5,23 @@
       <li>{{ post.title }}</li>
       <li>{{ post.date }}</li>
     </ul>
+    <form class="comment-form" @submit.prevent="onSubmit">
+          <p>
+              <label for="comment">Comment:</label>
+              <input id="comment" v-model="comment" placeholder="comment" />
+          </p>
+
+          <p>
+              <input type="submit" value="Submit" />
+          </p>
+      </form>
     <CommentCard v-for="comment in comments" v-bind:key="comment.id" :comment="comment" />
   </div>
 </template>
 
 <script>
 import CommentCard from "@/components/CommentCard";
-import { getPost } from "@/services/forum.api";
+import { getPost, postComment } from "@/services/forum.api";
 
 export default {
   components: { CommentCard },
@@ -20,9 +30,10 @@ export default {
     return {
       post: [],
       comments: [],
+      comment: null,
+      user_id: null,
     };
   },
-  created() {},
   async mounted() {
         try {
             const response = await getPost(this.id);
@@ -34,6 +45,26 @@ export default {
             console.log(error);
         }
     },
+      methods: {
+        async onSubmit() {
+            let comment = {
+                post_id: this.post.id,
+                comment: this.comment,
+            };
+            try {
+                let response = await postComment(comment);
+                console.log(comment);
+                console.log(response);
+
+                this.comment = null;
+                this.post_id = null;
+
+                //console.log(this.friend.id);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 };
 </script>
 
