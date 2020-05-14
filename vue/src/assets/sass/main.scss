@@ -1,2 +1,42 @@
-@import '../../../node_modules/bootstrap/scss/bootstrap';
-@import '../../../node_modules/bootstrap-vue/src/index.scss';
+    @import 'abstracts/variables';
+    @import 'abstracts/functions';
+    @import 'abstracts/mixins';
+    //@import 'vendors/bootstrap';
+    //@import 'vendors/jquery-ui';
+    //@import 'base/reset';
+    @import 'base/typography';
+    @import 'layout/navigation';
+    @import 'layout/grid';
+    @import 'layout/header';
+    @import 'layout/footer';
+    @import 'layout/sidebar';
+    //@import 'layout/forms';
+    @import 'components/buttons';
+    //@import 'components/carousel';
+    //@import 'components/slider';
+    //@import 'pages/home';
+    //@import 'pages/about';
+    @import 'pages/_access';
+    //@import 'themes/theme';
+    //@import 'themes/admin';
+    html {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Lato', sans-serif;
+    }
+    
+    a {
+        color: $candy;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+            color: $candyL
+        }
+    }

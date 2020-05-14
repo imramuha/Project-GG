@@ -1,20 +1,29 @@
 /*
 using the break points
-.container {
-  padding: 0 15px;
-  // 576px window width and more
-  @include sm {
-    padding: 0 20px;
+ padding-bottom: 200%; // Default property, this will be applied to all screen sizes
+  color: #FFF;          // Unless overriden below
+  
+  @include sm {         // 576px window width and more
+    padding-bottom: 100%;
+    color: #000;
   }
-  // 992px window width and more
-  @include lg {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1100px;
+  
+  @include md {         // 768px window width and more
+    padding-bottom: 50%;
   }
-  // 1400px window width and more
-  @include rwd(1400) {
-    margin-bottom: 20px;
-    margin-top: 20px;
+  
+  @include lg {         // 992px window width and more
+    padding-bottom: 10%;
   }
+
+  @include xl {         // 1200px window width and more
+    padding-top: 20%;
+    padding-bottom: 0;
+    color: #1337;
+  }
+}
 }*/
+
+.accessNavigation {
+  position: absolute;
+}

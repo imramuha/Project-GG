@@ -1,15 +1,49 @@
-// 
+//
 // BREAKPOINTS
 // !no xsm -> mobile first
+// Screen size variables
+// screen-xs-min: 425px;  // Tiny phones
+$screen-sm-min: 576px; // Small tablets and large smartphones (landscape view)
+$screen-md-min: 768px; // Small tablets (portrait view)
+$screen-lg-min: 992px; // Tablets and small desktops
+$screen-xl-min: 1200px; // Large tablets and desktops
+$breakpoints: ( sm: 576px, md: 768px, lg: 992px, xl: 1200, );
 
-// Small tablets and large smartphones (landscape view)
-$screen-sm-min: 576px;
+/*
+* TYPOGRAPHY
+*/
 
-// Small tablets (portrait view)
-$screen-md-min: 768px;
+$p-font-sizes: ( null: 15px, sm: 16px, md: 17px, lg: 19px, xl: 21px, );
+$h1-font-sizes: ( null: 26px, sm: 29px, md: 33px, lg: 38px, xl: 41px, );
 
-// Tablets and small desktops
-$screen-lg-min: 992px;
+/* POSSIBILITY !
+$p-font-sizes: (
+  null  : 15px,
+  small : 16px,
+  medium: 17px,
+  900px : 18px,
+  large : 19px,
+  1440px: 20px,
+);*/
 
-// Large tablets and desktops
-$screen-xl-min: 1200px;
+
+/*
+*  COLOURS
+*/
+
+$midnightH: #202020;
+$midnight: #222222;
+$midnightL: #333333;
+$paintH: #3e9dcc;
+$paint: #57d6e5;
+$paintL: #addded;
+$candyH: #b34d3b;
+$candy: #ff68a5;
+$candyL: #ff8eba;
+$mysteryH: #191120;
+$mystery: #322143;
+$mysteryL: #463655;
+$slate: #88c2a9;
+$sand: #e5d6a9;
+$melt: #818181;
+$snow: #ffffff;

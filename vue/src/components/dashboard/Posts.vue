@@ -56,29 +56,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/sass/main.scss";
-
-img {
-    width: 150px;
-    height: 150px;
-}
-
-.dashboard {
-    display: flex;
-}
-
-.nav {
-    flex: 0.5 1 auto;
-    flex-direction: column;
-}
-
-.main {
-    flex: 4 1 auto;
-    flex-direction: column;
-}
-
-.friendlist {
-    flex: 1.5 1 auto;
-    flex-direction: column;
-}
 </style>
