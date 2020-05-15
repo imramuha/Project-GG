@@ -1,5 +1,7 @@
 <template>
   <div class="accessNavigation">
+    
+    <img src="@/assets/images/logo.svg">
     <router-link to="/">Home</router-link>
     <router-link v-if="loggedIn" to="/dashboard">Dashboard</router-link>
     <router-link v-if="loggedIn" to="/forum" class="button">Forum</router-link>

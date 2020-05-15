@@ -1,29 +1,26 @@
-/*
-using the break points
- padding-bottom: 200%; // Default property, this will be applied to all screen sizes
-  color: #FFF;          // Unless overriden below
-  
-  @include sm {         // 576px window width and more
-    padding-bottom: 100%;
-    color: #000;
-  }
-  
-  @include md {         // 768px window width and more
-    padding-bottom: 50%;
-  }
-  
-  @include lg {         // 992px window width and more
-    padding-bottom: 10%;
-  }
-
-  @include xl {         // 1200px window width and more
-    padding-top: 20%;
-    padding-bottom: 0;
-    color: #1337;
-  }
-}
-}*/
-
 .accessNavigation {
-  position: absolute;
+    width: 100%;
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    font-size: 13px;
+    img {
+        width: 100px;
+        height: auto;
+    }
+     :first-child {
+        margin: 20px 0 0 30px;
+    }
+     :last-child {
+        margin: 20px 30px 0 0;
+        border: 3px solid $snow;
+        border-radius: 20px;
+        padding: 6px 20px;
+    }
+    a:hover {
+        text-decoration: none;
+        color: $melt;
+        border-color: $melt;
+    }
 }
