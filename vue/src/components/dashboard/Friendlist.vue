@@ -3,7 +3,7 @@
         <div class="friendlistCategory">
         
                 <h1 v-on:click="toggleOnline">
-                    <span>{{toggleIconOnline}}</span> online ({{ onlineFriends.length }})
+                  online ({{ onlineFriends.length }}) <span>{{toggleIconOnline}}</span>
                 </h1>
 
                 <FriendlistCard v-show="showOnlineSection" v-for="friend in onlineFriends" v-bind:key="friend.id" :friend="friend" />
@@ -12,7 +12,7 @@
         <div class="friendlistCategory">
         
                 <h1 v-on:click="toggleOffline">
-                    <span>{{toggleIconOffline}}</span> offline ({{ offlineFriends.length }})
+                  offline ({{ offlineFriends.length }}) <span>{{toggleIconOffline}}</span>
                 </h1>
                 <FriendlistCard v-show="showOfflineSection" v-for="friend in offlineFriends" v-bind:key="friend.id" :friend="friend" />
         
@@ -35,7 +35,7 @@ export default {
             onlineFriends: [],
             showOnlineSection: true,
             showOfflineSection: false,
-            toggleIconOnline: "+",
+            toggleIconOnline: "-",
             toggleIconOffline: "+"
         };
     },

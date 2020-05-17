@@ -1,31 +1,86 @@
-        .friendlist {
-            height: 100%;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-        
-        .friendlistCategory {
-            h1 {
-                background-color: $midnight;
+.friendlist {
+    height: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+    background-color: $midnightL;
+}
+
+.friendlistCategory {
+    display: flex;
+    flex-direction: column;
+    h1 {
+        box-shadow: 0 0 3px $midnightH;
+        text-transform: uppercase;
+        border-radius: 2px;
+        padding: 5px;
+        background-color: $midnight;
+        color: $snow;
+        font-size: 12px;
+        margin: 0 0 5px;
+        &:hover {
+            cursor: pointer;
+            span {
                 color: $melt;
-                font-size: 11;
-                margin: 0;
-                &:hover {
-                    cursor: pointer;
-                    color: $candy;
-                }
             }
         }
-        
-        .friendlistCard {
-            background-color: $sand;
-            display: flex;
-            flex-direction: column;
+        span {
+            float: right;
+        }
+    }
+}
+
+.friendlistCard {
+    background-color: $midnight;
+    font-size: 11px;
+    margin-bottom: 5px;
+    box-shadow: 0 0 3px $midnightH;
+    padding: 10px 0px;
+    .friendlistCardImg {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 25px;
+        }
+    }
+    .friendlistCardUser {
+        flex-grow: 3;
+        margin: 0px;
+        p {
+            margin: 0px;
             font-size: 11px;
-            margin-bottom: 5px;
-            img {
-                width: 25px;
-                height: 25px;
-                border-radius: 5px;
+            &:first-child {
+                font-size: 15px;
+                margin: 0px;
+                color: $snow;
             }
+            color: $melt;
         }
+    }
+    .friendlistCardStatus {
+        flex-grow: 1;
+        text-align: center;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .statusCircle {
+            width: 100%;
+            height: 100%;
+            width: 5px;
+            height: 5px;
+            margin-top: 3px;
+            border-radius: 1px;
+            background-color: $slate;
+        }
+        p {
+            margin: 0px;
+        }
+    }
+    a {
+        display: flex;
+    }
+}
