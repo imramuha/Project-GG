@@ -1,3 +1,4 @@
+    // abstracts 
     @import 'abstracts/variables';
     @import 'abstracts/functions';
     @import 'abstracts/mixins';
@@ -10,13 +11,15 @@
     @import 'layout/header';
     @import 'layout/footer';
     @import 'layout/sidebar';
-    //@import 'layout/forms';
+    @import 'layout/sidenav';
+    @import 'layout/friendlist'; //@import 'layout/forms';
     @import 'components/buttons';
     //@import 'components/carousel';
     //@import 'components/slider';
     //@import 'pages/home';
-    //@import 'pages/about';
+    @import 'pages/_landingspage';
     @import 'pages/_access';
+    @import 'pages/_dashboard';
     //@import 'themes/theme';
     //@import 'themes/admin';
     html {
@@ -33,5 +36,9 @@
     }
     
     a {
+        color: inherit;
         text-decoration: none;
+        &:hover {
+            cursor: pointer;
+        }
     }

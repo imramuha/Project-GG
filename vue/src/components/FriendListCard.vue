@@ -1,15 +1,10 @@
 <template>
-  <div>
+  <div class="friendlistCard">
     <router-link :to="{ name: 'profile', params: { id: friend.id } }">
-      <h1>{{ friend.id }}</h1>
-
-      <p>icon: {{ friend.icon }}</p>
-      <p>name: {{ friend.name }}</p>
-      <p>username: {{ friend.username }}</p>
-      <BaseIcon name="users">
-        <p slot="tagline">tagline: {{ friend.tagline }}</p>
-        <p slot="status">status: {{ friend.status }}</p>
-      </BaseIcon>
+        <img src="https://placekitten.com/250/250" />
+        <p>{{ friend.username }}</p>
+        <p>{{ friend.email }}</p>
+        <p>{{ friend.status.name }}</p>
     </router-link>
   </div>
 </template>
@@ -17,13 +12,14 @@
 <script>
 export default {
   props: {
-    friend: Object
-  }
+    friend: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+  },
 };
 </script>
 
-<style scoped>
-p {
-  color: green;
-}
-</style>
+<style scoped></style>

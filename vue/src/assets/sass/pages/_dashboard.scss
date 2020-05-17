@@ -1,0 +1,70 @@
+    .dashboard {
+        background-color: $midnight;
+        color: snow;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        box-sizing: border-box;
+    }
+    
+    .sidenav {
+        display: flex;
+        background-color: $midnightH;
+        flex-grow: 0.5;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0 auto;
+        a {
+            text-align: center;
+            font-size: 13px;
+            color: $candy;
+            font-weight: 600;
+            font-variant: small-caps;
+            &:hover {
+                color: $candyL;
+                text-decoration: underline;
+            }
+        }
+    }
+    
+    .content {
+        display: flex;
+        background-color: $midnightL;
+        flex-grow: 10;
+        flex-direction: column;
+        .contentHeader {
+            height: 22%;
+            background-color: $melt;
+        }
+        .contentNav {
+            height: 8%;
+            display: flex;
+            justify-content: space-evenly;
+            background-color: sand;
+        }
+        .contentMain {
+            height: 70%;
+            background-color: $melt;
+        }
+    }
+    
+    .sidecontent {
+        display: flex;
+        background-color: $midnight;
+        flex-grow: 1;
+        flex-direction: column;
+        .sidecontentHeader {
+            height: 22%;
+            background-color: $mystery;
+        }
+        .sidecontentFunction {
+            height: 8%;
+            display: flex;
+            justify-content: space-evenly;
+            background-color: mysteryH;
+        }
+        .sidecontentFriendlist {
+            height: 70%;
+            background-color: $mysteryL;
+        }
+    }

@@ -17,6 +17,14 @@
             @include font-size($access-title-font-sizes);
             line-height: 10px;
         }
+        a {
+            color: $candy;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+                color: $candyL
+            }
+        }
         p,
         label {
             @include font-size($access-p-font-sizes);

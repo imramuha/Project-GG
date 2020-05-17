@@ -1,0 +1,20 @@
+.landingsPage {
+    background-color: $midnight;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 50px;
+    a {
+        color: $candy;
+        margin: 20px;
+        font-weight: 600;
+        &:hover {
+            text-decoration: underline;
+            color: $candyL
+        }
+    }
+}
