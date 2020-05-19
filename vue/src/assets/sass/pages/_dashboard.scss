@@ -1,70 +1,157 @@
-    .dashboard {
-        background-color: $midnight;
-        color: snow;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        box-sizing: border-box;
-    }
-    
-    .sidenav {
-        display: flex;
-        background-color: $midnightH;
-        flex-grow: 0.5;
-        flex-direction: column;
-        justify-content: space-around;
-        padding: 0 auto;
-        a {
-            text-align: center;
-            font-size: 13px;
-            color: $candy;
-            font-weight: 600;
-            font-variant: small-caps;
-            &:hover {
-                color: $candyL;
-                text-decoration: underline;
+        .dashboard {
+            background-color: $midnight;
+            color: snow;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            box-sizing: border-box;
+        }
+        
+        .sidenav {
+            display: flex;
+            background-color: $midnightH;
+            flex-grow: 0.5;
+            flex-direction: column;
+            justify-content: space-around;
+            box-sizing: border-box;
+            padding: 0 auto;
+            a {
+                text-align: center;
+                font-size: 13px;
+                color: $candy;
+                font-weight: 600;
+                font-variant: small-caps;
+                &:hover {
+                    color: $candyL;
+                    text-decoration: underline;
+                }
             }
         }
-    }
-    
-    .content {
-        display: flex;
-        background-color: $midnightL;
-        flex-grow: 10;
-        flex-direction: column;
-        .contentHeader {
-            height: 22%;
-            background-color: $melt;
-        }
-        .contentNav {
-            height: 8%;
+        
+        .content {
             display: flex;
-            justify-content: space-evenly;
-            background-color: sand;
+            background-color: $midnightL;
+            flex-grow: 10;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 7px;
+            .contentHeader {
+                height: 22%;
+                background-color: $midnight;
+                margin-bottom: 7px;
+                border-radius: 2px;
+            }
+            .contentNav {
+                height: 8%;
+                display: flex;
+                .dashboardNav {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    button {
+                        font-size: 13px;
+                        color: $candy;
+                        font-weight: 600;
+                        border-radius: 3px;
+                        width: 100%;
+                        background-color: inherit;
+                        font-size: 11px;
+                        color: $snow;
+                        border: none;
+                        border: 2px solid $melt;
+                        margin: 5px 5px 0px;
+                        //box-shadow: 0 0 3px $snow;
+                        text-transform: uppercase;
+                        &:hover {
+                            color: $melt;
+                        }
+                    }
+                }
+                background-color: $midnight;
+                box-shadow: 0 0 3px $midnightH;
+            }
+            .contentMain {
+                height: 70%;
+                background-color: $midnight;
+                box-sizing: border-box;
+                border-radius: 3px;
+                padding: 7px;
+                div {
+                    width: 100%;
+                    height: 100%;
+                    background-color: $midnightH;
+                }
+            }
         }
-        .contentMain {
-            height: 70%;
-            background-color: $melt;
-        }
-    }
-    
-    .sidecontent {
-        display: flex;
-        background-color: $midnight;
-        flex-grow: 1;
-        flex-direction: column;
-        .sidecontentHeader {
-            height: 22%;
-            background-color: $mystery;
-        }
-        .sidecontentFunction {
-            height: 8%;
+        
+        .sidecontent {
             display: flex;
-            justify-content: space-evenly;
-            background-color: mysteryH;
+            flex-grow: 1;
+            flex-direction: column;
+            box-shadow: 0 0 3px $midnightH;
+            box-sizing: border-box;
+            .sidecontentHeader {
+                height: 22%;
+                background-color: $midnightL;
+                padding: 7px;
+                box-sizing: border-box;
+                .sidecontentNotifications {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    background-color: $midnightH;
+                    box-shadow: 0 0 3px $midnightH;
+                    border-radius: 2px;
+                    .notificationsEmpty {
+                        display: flex;
+                        font-size: 13px;
+                        color: $melt;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+            .sidecontentFunction {
+                height: 8%;
+                display: flex;
+                justify-content: space-evenly;
+                background-color: $midnightL;
+                box-sizing: border-box;
+                padding: 7px;
+                align-items: center;
+                justify-content: center;
+                form {
+                    display: flex;
+                    height: 86%;
+                    width: 100%;
+                    input {
+                        color: $melt;
+                        padding: 0 10px;
+                        border: none;
+                        background-color: $midnightH;
+                        flex-grow: 7;
+                        border-radius: 2px;
+                        &:focus {
+                            border: 1px solid $candy;
+                        }
+                    }
+                    button {
+                        flex-grow: 2.5;
+                        background-color: $midnightL;
+                        border: none;
+                        color: $snow;
+                        border-radius: 2px;
+                        &:hover {
+                            color: $melt;
+                            cursor: pointer;
+                        }
+                    }
+                    box-shadow: 0 0 3px $midnightH;
+                }
+            }
+            .sidecontentFriendlist {
+                height: 70%;
+                background-color: $mysteryL;
+            }
         }
-        .sidecontentFriendlist {
-            height: 70%;
-            background-color: $mysteryL;
-        }
-    }

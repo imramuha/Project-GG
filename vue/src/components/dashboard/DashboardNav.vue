@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dashboardNav">
     <button @click="feed" v-on:click="emitToDashboard">
       Feed
     </button>

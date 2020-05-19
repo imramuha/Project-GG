@@ -4,9 +4,7 @@
       <router-link to="/user" class="button">Profile</router-link>
       <router-link to="/user" class="button">Lobby</router-link>
       <router-link to="/dashboard">Dashboard</router-link>
-      <router-link to="/forum" class="button"
-        >Forum</router-link
-      >
+      <router-link to="/forum" class="button">Forum</router-link>
       <router-link to="/user" class="button">Settings</router-link>
       <button type="button" class="logoutButton" @click="logout">
         Logout
@@ -15,7 +13,9 @@
     <div class="content">
       <div class="contentHeader">empty/logo? - emitting: {{ emit }}</div>
       <div class="contentNav">
-        <DashboardNav v-on:emitToDashboard="onDashboardNavClick" />
+        <template>
+          <DashboardNav v-on:emitToDashboard="onDashboardNavClick" />
+        </template>
       </div>
       <div class="contentMain">
         <!-- TBD loading/api call loader <template v-if="!isLoading">-->
@@ -26,20 +26,23 @@
       </div>
     </div>
     <div class="sidecontent">
-      <div class="sidecontentHeader">empty/logo?</div>
-      <div class="sidecontentFunction"> <input type="text" placeholder="Search.."></div>
+      <div class="sidecontentHeader"><div class="sidecontentNotifications"><div class="notificationsEmpty">There are no notifications available.</div></div></div>
+      <div class="sidecontentFunction">
+        <form>
+          <input type="text" placeholder="Search a player.." name="search" />
+          <button type="submit"><i class="fa fa-search">X</i></button>
+        </form>
+      </div>
       <div class="sidecontentFriendlist">
-          <template>
-          <Friendlist
-          />
-          </template>
+        <template>
+          <Friendlist />
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 import Friendlist from "@/components/dashboard/Friendlist";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 
@@ -48,35 +51,34 @@ import Inbox from "@/components/dashboard/Inbox";
 import Feed from "@/components/dashboard/Feed";
 import Posts from "@/components/dashboard/Posts";
 
-
 export default {
-    components: { Posts, Feed, Inbox, Reviews, Friendlist, DashboardNav },
-    data() {
-        return {
-            // isLoading: true,
-            items: [],
-            mainComponent: Feed,
-            emit: "feed"
-        };
+  components: { Posts, Feed, Inbox, Reviews, Friendlist, DashboardNav },
+  data() {
+    return {
+      // isLoading: true,
+      items: [],
+      mainComponent: Feed,
+      emit: "feed",
+    };
+  },
+  methods: {
+    // Triggered when `childtodashboard` event is emitted by the child. <---- needs cleaning
+    onDashboardNavClick(value) {
+      this.emit = value;
+      if (value == "feed") {
+        this.mainComponent = Feed;
+      } else if (value == "inbox") {
+        this.mainComponent = Inbox;
+      } else if (value == "reviews") {
+        this.mainComponent = Reviews;
+      } else if (value == "posts") {
+        this.mainComponent = Posts;
+      }
     },
-    methods: {
-        // Triggered when `childtodashboard` event is emitted by the child. <---- needs cleaning
-        onDashboardNavClick(value) {
-            this.emit = value;
-            if (value == "feed") {
-                this.mainComponent = Feed;
-            } else if (value == "inbox") {
-                this.mainComponent = Inbox;
-            } else if (value == "reviews") {
-                this.mainComponent = Reviews;
-            } else if (value == "posts") {
-                this.mainComponent = Posts;
-            }
-        },
     logout() {
       this.$store.dispatch("logout");
-    }
     },
+  },
 };
 </script>
 

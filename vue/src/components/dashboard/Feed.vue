@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>Feed component {{ data }}</p>
+        Feed component {{ data }}
     </div>
 </template>
 
