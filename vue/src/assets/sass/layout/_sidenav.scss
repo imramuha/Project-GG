@@ -1,0 +1,42 @@
+    .sidenav {
+        display: flex;
+        background-color: $midnightH;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 7px;
+        border-right: $melt;
+        .sidenavButtons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            a {
+                width: 0px;
+                margin-bottom: 10px;
+                flex: 50%;
+                text-align: center;
+                font-size: 40px;
+                font-weight: 600;
+                text-transform: uppercase;
+                &:hover {
+                    color: $melt;
+                }
+            }
+            button {
+                border: 2px solid $melt;
+                border-radius: 20px;
+                padding: 6px 20px;
+                font-size: 11px;
+                color: $melt;
+                background-color: $midnightL;
+                width: 100%;
+                border-radius: 20px;
+                //margin-top: 10px;
+                &:hover {
+                    text-decoration: none;
+                    cursor: pointer;
+                    color: $snow;
+                }
+            }
+        }
+    }

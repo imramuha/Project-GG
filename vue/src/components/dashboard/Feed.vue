@@ -1,22 +1,19 @@
 <template>
-    <div>
-        Feed component {{ data }}
-    </div>
+  <div class="feed">Feed component {{ data }}</div>
 </template>
 
 <script>
 export default {
-    name: "Feed",
-    props: {
-        data: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        }
+  name: "Feed",
+  props: {
+    data: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
+  }
 };
-   
 </script>
 
 <style></style>

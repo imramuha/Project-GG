@@ -25,21 +25,21 @@ export default {
   data() {
     return {
       friend: [],
-      relation: [],
+      relation: []
     };
   },
   async mounted() {
-        try {
-            const response = await getFriend(this.id);
-            this.friend = response.data.user[0];
-            
-            this.relation = response.data.relation[0];
+    try {
+      const response = await getFriend(this.id);
+      this.friend = response.data.user[0];
 
-            //console.log(this.friend.id);
-        } catch (error) {
-            console.log(error);
-        }
-    },
+      this.relation = response.data.relation[0];
+
+      //console.log(this.friend.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 </script>
 

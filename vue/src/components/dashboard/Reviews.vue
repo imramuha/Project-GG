@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <p>Reviews component</p>
-    </div>
+  <div class="reviews">
+
+  </div>
 </template>
 
-<script>
-
-   
-</script>
+<script></script>
 
 <style></style>

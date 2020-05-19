@@ -24,7 +24,7 @@ const actions = {
   async fetchPosts({ commit }) {
     try {
       const response = await getAllPosts();
-      console.log(response)
+      console.log(response);
       commit("SET_POSTS", response.data);
     } catch (error) {
       // handle the error here
@@ -34,7 +34,7 @@ const actions = {
   async fetchUserPosts({ commit }) {
     try {
       const response = await getUserPosts();
-      console.log(response)
+      console.log(response);
       commit("SET_USER_POSTS", response.data);
     } catch (error) {
       // handle the error here

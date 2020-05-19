@@ -1,12 +1,9 @@
 <template>
-    <div>
-        <p>Inbox component</p>
-    </div>
+  <div class="inbox">
+    
+  </div>
 </template>
 
-<script>
-
-   
-</script>
+<script></script>
 
 <style></style>

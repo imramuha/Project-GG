@@ -10,20 +10,13 @@ const getUserPosts = () => httpClient.get(USER_END_POINT);
 
 const POST_END_POINT = "/api/frontend/post/";
 
-const getPost = (id) => httpClient.get(POST_END_POINT + id);
+const getPost = id => httpClient.get(POST_END_POINT + id);
 
-
-const postComment = (data) => httpClient.post(COMMENT_END_POINT, data);
-
+const postComment = data => httpClient.post(COMMENT_END_POINT, data);
 
 // you can pass arguments to use as request parameters/data
 // const getUser = (user_id) => httpClient.get(END_POINT, { user_id });
 // maybe more than one..
 // const createUser = (username, password) => httpClient.post(END_POINT, { username, password });
 
-export {
-  getAllPosts,
-  getUserPosts,
-  getPost,
-  postComment
-};
+export { getAllPosts, getUserPosts, getPost, postComment };

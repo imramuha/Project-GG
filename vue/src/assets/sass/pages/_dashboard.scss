@@ -1,31 +1,10 @@
         .dashboard {
-            background-color: $midnight;
+            background-color: $midnightH;
             color: snow;
             width: 100%;
             height: 100%;
             display: flex;
             box-sizing: border-box;
-        }
-        
-        .sidenav {
-            display: flex;
-            background-color: $midnightH;
-            flex-grow: 0.5;
-            flex-direction: column;
-            justify-content: space-around;
-            box-sizing: border-box;
-            padding: 0 auto;
-            a {
-                text-align: center;
-                font-size: 13px;
-                color: $candy;
-                font-weight: 600;
-                font-variant: small-caps;
-                &:hover {
-                    color: $candyL;
-                    text-decoration: underline;
-                }
-            }
         }
         
         .content {
@@ -37,49 +16,73 @@
             padding: 7px;
             .contentHeader {
                 height: 22%;
-                background-color: $midnight;
+                background-color: $midnightL;
                 margin-bottom: 7px;
                 border-radius: 2px;
+                padding: 7px;
+                box-shadow: 0 0 3px $midnightH;
+                box-sizing: border-box;
+                div {
+                    box-sizing: border-box;
+                    display: flex;
+                    font-size: 13px;
+                    color: $melt;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    background-color: $midnightH;
+                    color: $melt;
+                    padding: 7px;
+                }
             }
             .contentNav {
                 height: 8%;
                 display: flex;
+                padding: 7px;
+                box-shadow: 0 0 3px $midnightH;
+                box-sizing: border-box;
                 .dashboardNav {
                     width: 100%;
                     display: flex;
-                    justify-content: center;
+                    justify-content: space-between;
+                    box-sizing: border-box;
                     button {
                         font-size: 13px;
-                        color: $candy;
                         font-weight: 600;
-                        border-radius: 3px;
+                        border-radius: 2px;
                         width: 100%;
                         background-color: inherit;
                         font-size: 11px;
                         color: $snow;
                         border: none;
-                        border: 2px solid $melt;
-                        margin: 5px 5px 0px;
-                        //box-shadow: 0 0 3px $snow;
+                        //border: 1px solid $melt;
+                        background-color: $midnight;
+                        box-shadow: 0 0 3px $midnight;
                         text-transform: uppercase;
+                        &:not(:last-child) {
+                            margin-right: 5px;
+                        }
                         &:hover {
                             color: $melt;
                         }
                     }
                 }
-                background-color: $midnight;
-                box-shadow: 0 0 3px $midnightH;
             }
             .contentMain {
                 height: 70%;
-                background-color: $midnight;
+                background-color: $midnightL;
                 box-sizing: border-box;
                 border-radius: 3px;
                 padding: 7px;
+                box-shadow: 0 0 3px $midnight;
                 div {
+                    box-sizing: border-box;
                     width: 100%;
                     height: 100%;
                     background-color: $midnightH;
+                    color: $melt;
+                    padding: 7px;
                 }
             }
         }
@@ -88,13 +91,16 @@
             display: flex;
             flex-grow: 1;
             flex-direction: column;
-            box-shadow: 0 0 3px $midnightH;
             box-sizing: border-box;
+            padding: 7px;
+            background-color: $midnightL;
             .sidecontentHeader {
                 height: 22%;
                 background-color: $midnightL;
                 padding: 7px;
                 box-sizing: border-box;
+                border-radius: 2px;
+                box-shadow: 0 0 3px $midnightH;
                 .sidecontentNotifications {
                     display: flex;
                     justify-content: center;
@@ -118,9 +124,10 @@
                 justify-content: space-evenly;
                 background-color: $midnightL;
                 box-sizing: border-box;
-                padding: 7px;
+                padding: 7px 7px 0px;
                 align-items: center;
                 justify-content: center;
+                box-shadow: 0 0 3px $midnightH;
                 form {
                     display: flex;
                     height: 86%;
@@ -138,7 +145,7 @@
                     }
                     button {
                         flex-grow: 2.5;
-                        background-color: $midnightL;
+                        background-color: $midnight;
                         border: none;
                         color: $snow;
                         border-radius: 2px;
@@ -153,5 +160,6 @@
             .sidecontentFriendlist {
                 height: 70%;
                 background-color: $mysteryL;
+                box-shadow: 0 0 3px $midnightH;
             }
         }

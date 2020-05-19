@@ -7,49 +7,49 @@ import Forum from "@/store/modules/forum.module";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        user: null
+  state: {
+    user: null
+  },
+  mutations: {
+    SET_USER_DATA(state, userData) {
+      state.user = userData;
+      localStorage.setItem("user", JSON.stringify(userData));
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${userData.token}`;
     },
-    mutations: {
-        SET_USER_DATA(state, userData) {
-            state.user = userData;
-            localStorage.setItem("user", JSON.stringify(userData));
-            axios.defaults.headers.common[
-                "Authorization"
-            ] = `Bearer ${userData.token}`;
-        },
-        LOGOUT() {
-            localStorage.removeItem("user");
-            // forced refresh
-            location.reload();
-        }
+    LOGOUT() {
+      localStorage.removeItem("user");
+      // forced refresh
+      location.reload();
+    }
+  },
+  actions: {
+    register({ commit }, credentials) {
+      return axios
+        .post("http://127.0.0.1:8000/api/auth/register", credentials)
+        .then(({ data }) => {
+          console.log("user data is", data);
+          commit("SET_USER_DATA", data);
+        });
     },
-    actions: {
-        register({ commit }, credentials) {
-            return axios
-                .post("http://127.0.0.1:8000/api/auth/register", credentials)
-                .then(({ data }) => {
-                    console.log("user data is", data);
-                    commit("SET_USER_DATA", data);
-                });
-        },
-        login({ commit }, credentials) {
-            return axios
-                .post("http://127.0.0.1:8000/api/auth/login", credentials)
-                .then(({ data }) => {
-                    commit("SET_USER_DATA", data);
-                });
-        },
-        logout({ commit }) {
-            commit("LOGOUT");
-        }
+    login({ commit }, credentials) {
+      return axios
+        .post("http://127.0.0.1:8000/api/auth/login", credentials)
+        .then(({ data }) => {
+          commit("SET_USER_DATA", data);
+        });
     },
-    getters: {
-        loggedIn(state) {
-            return !!state.user;
-        }
-    },
-    modules: {
-        Forum,
-    },
+    logout({ commit }) {
+      commit("LOGOUT");
+    }
+  },
+  getters: {
+    loggedIn(state) {
+      return !!state.user;
+    }
+  },
+  modules: {
+    Forum
+  }
 });
