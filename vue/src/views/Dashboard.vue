@@ -15,7 +15,6 @@
         </div>
         <div class="content">
             <div class="contentHeader">
-             
                 <div><router-link to="/user" class="button">PROFILE - </router-link>is currently not available - emitting: {{ emit }}</div>
             </div>
             <div class="contentNav">
@@ -62,9 +61,10 @@ import Reviews from "@/components/dashboard/Reviews";
 import Inbox from "@/components/dashboard/Inbox";
 import Feed from "@/components/dashboard/Feed";
 import Posts from "@/components/dashboard/Posts";
+import News from "@/components/dashboard/News";
 
 export default {
-    components: { Posts, Feed, Inbox, Reviews, Friendlist, DashboardNav },
+    components: { Posts, Feed, News, Inbox, Reviews, Friendlist, DashboardNav },
     data() {
         return {
             // isLoading: true,
@@ -81,6 +81,8 @@ export default {
                 this.mainComponent = Feed;
             } else if (value == "inbox") {
                 this.mainComponent = Inbox;
+            } else if (value == "news") {
+                this.mainComponent = News;
             } else if (value == "reviews") {
                 this.mainComponent = Reviews;
             } else if (value == "posts") {

@@ -20,4 +20,12 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+        /**
+     * get the comments the belong to this post
+     */
+    public function likedPosts()
+    {
+        return $this->hasMany(LikedPost::class);
+    }
 }

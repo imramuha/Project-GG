@@ -1,10 +1,17 @@
 <template>
-  <div class="posts">
-    <PostCard
-      v-for="userpost in userposts"
-      v-bind:key="userpost.id"
-      :post="userpost"
-    />
+  <div>
+    <div class="posts">
+      <PostCard
+        v-for="userpost in userposts"
+        v-bind:key="userpost.id"
+        :post="userpost"
+      />
+    </div>
+    <div class="postsNav">
+      <button>Previous</button>
+      <p>1 - 2 - 3 - 4</p>
+      <button>Next</button>
+    </div>
   </div>
 </template>
 
@@ -19,14 +26,14 @@ export default {
   data() {
     return {
       isLoading: true,
-      userposts: []
+      userposts: [],
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getUserPosts"])
+    ...mapGetters("Forum", ["getUserPosts"]),
   },
   methods: {
-    ...mapActions("Forum", ["fetchUserPosts"])
+    ...mapActions("Forum", ["fetchUserPosts"]),
   },
 
   async mounted() {
@@ -39,7 +46,6 @@ export default {
       await this.fetchUserPosts();
 
       this.userposts = this.getUserPosts;
-      // console.log(this.posts[0].id)
 
       this.isLoading = false;
     } else {
@@ -54,7 +60,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
 </script>
 

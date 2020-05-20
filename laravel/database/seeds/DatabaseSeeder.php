@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRelationsTableSeeder::class);
         $this->call(PostsTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(LikedPostsTableSeeder::class);
         $this->call(GamesTableSeeder::class);
         $this->call(DataTableSeeder::class);
         $this->call(OptionsTableSeeder::class);

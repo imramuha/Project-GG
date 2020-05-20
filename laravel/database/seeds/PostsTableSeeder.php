@@ -35,6 +35,30 @@ class PostsTableSeeder extends Seeder
             "date"=> "July 28, 2022",
             "user_id"=> 3,
         ]);
+        DB::table('posts')->insert([
+            "title"=> "Smite vs LOL - what do you prefer and why?",
+            "time"=> "7:00",
+            "date"=> "July 27, 2020",
+            "user_id"=> 3,
+        ]);
+        DB::table('posts')->insert([
+            "title"=> "Looking for duo - Silver/Gold (toplaner here)",
+            "time"=> "11:00",
+            "date"=> "July 11, 2020",
+            "user_id"=> 3,
+        ]);
+        DB::table('posts')->insert([
+            "title"=> "Looking for group - Silver/Gold (toplaner here)",
+            "time"=> "10:00",
+            "date"=> "July 21, 2020",
+            "user_id"=> 3,
+        ]);
+        DB::table('posts')->insert([
+            "title"=> "Looking for friends - Tryndamaere main",
+            "time"=> "9:00",
+            "date"=> "July 26, 2020",
+            "user_id"=> 3,
+        ]);
 
     }
 }

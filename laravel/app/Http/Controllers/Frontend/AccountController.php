@@ -122,7 +122,7 @@ class AccountController extends Controller
     */
     public function showUserPosts () {
      
-        $posts = Post::where('user_id', '=', auth()->id())->get();
+        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts')->get();
         return response()->json($posts);
     }
 
@@ -131,8 +131,17 @@ class AccountController extends Controller
     * Get all users except the logged one in ^^
     */
     public function showPost ($id) {
-        $post = Post::where('id', '=', $id)->with("comments", "comments.user")->get();
+        $post = Post::where('id', '=', $id)->with("comments", "comments.user", "likedPosts")->get();
         return response()->json($post);
+    }
+
+    /*
+    *   Delete a post
+    */
+    public function deleteUserPost ($id) {
+        Post::where('id', $id)->where('user_id',  auth()->user()->id)->delete();
+        $response = array('response' => "Your post has been deleted!", 'success' => true);
+        return $response;
     }
 
     /* ------- | ** CLEANER FROM HERE ON ** | ------ */

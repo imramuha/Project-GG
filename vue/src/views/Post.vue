@@ -4,6 +4,7 @@
       <li>{{ post.id }}</li>
       <li>{{ post.title }}</li>
       <li>{{ post.date }}</li>
+      <li>GG'd: {{ this.likes }}</li>
     </ul>
     <form class="comment-form" @submit.prevent="onSubmit">
       <p>
@@ -35,7 +36,8 @@ export default {
       post: [],
       comments: [],
       comment: null,
-      user_id: null
+      user_id: null,
+      likes: null
     };
   },
   async mounted() {
@@ -43,6 +45,7 @@ export default {
       const response = await getPost(this.id);
       this.post = response.data[0];
       this.comments = response.data[0].comments;
+      this.likes = this.post.liked_posts.length
       console.log(this.post);
     } catch (error) {
       console.log(error);
