@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="postsboard">
     <div class="posts">
       <PostCard
         v-for="userpost in userposts"

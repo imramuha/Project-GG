@@ -6,12 +6,20 @@
         <img src="https://placekitten.com/250/250" />
       </div>
       <div class="postcardContent">
-        <h1>{{ post.title }}</h1>
+        <div class="postcardContentHeader">
+          <h1>{{ post.title }}</h1>
+        </div>
+        <div class="postcardContentBody">
         <p>{{ post.date }}</p>
         <p>
           This is the post content, that will be added later on during this
           project
         </p>
+        </div>
+        <div class="postcardContentFooter">
+        <p>Comments (2)</p>
+        <p>Report</p>
+        </div>
       </div>
       <div class="postcardStats">
         <button type="button" @click="gg">GG</button>
