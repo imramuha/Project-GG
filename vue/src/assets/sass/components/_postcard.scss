@@ -2,7 +2,6 @@
             height: 100%;
             width: 100%;
             box-sizing: border-box;
-            background-color: $midnightH;
             overflow: hidden;
         }
         
@@ -10,10 +9,94 @@
             display: flex;
             justify-content: space-between;
             box-sizing: border-box;
-            background-color: $midnightH;
             color: $melt;
-            padding: 7px;
             height: 90%;
+        }
+        
+        .postCard {
+            display: flex;
+            height: 100%;
+            overflow: hidden;
+            padding: 7px;
+            border-radius: 2px;
+            background-color: $midnight;
+            box-shadow: 0 0 3px $midnight;
+            &:not(:last-child) {
+                margin-right: 5px;
+            }
+            width: 100%;
+            a {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                .postcardImg {
+                    img {
+                        margin-bottom: 0px;
+                        width: 100%;
+                        height: auto;
+                        border-radius: 2px;
+                    }
+                }
+                .postcardContent {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    .postcardContentHeader {
+                        h1 {
+                            color: $snow;
+                            font-size: 15px;
+                            height: 35px;
+                            overflow: hidden;
+                        }
+                    }
+                    .postcardContentBody {
+                        p {
+                            margin: 0px;
+                            font-size: 13px;
+                            color: $snow;
+                        }
+                        p:nth-child(1) {
+                            color: $melt;
+                            font-size: 11px;
+                            margin: 0px;
+                        }
+                    }
+                    .postcardContentFooter {
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: row;
+                        flex-grow: 1;
+                        font-size: 9px;
+                        color: $candy;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        p:nth-child(1) {
+                            color: $melt;
+                        }
+                    }
+                }
+                .postcardStats {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    button {
+                        font-size: 11px;
+                        height: auto;
+                        color: $melt;
+                        background-color: $midnightL;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50px;
+                        border: 1px solid $melt;
+                        &:hover {
+                            text-decoration: none;
+                            cursor: pointer;
+                            color: $snow;
+                        }
+                    }
+                }
+            }
         }
         
         .postsNav {
@@ -21,6 +104,7 @@
             display: flex;
             padding: 7px;
             justify-content: center;
+            align-items: center;
             button {
                 border: 2px solid $melt;
                 border-radius: 20px;
@@ -37,78 +121,7 @@
                     color: $snow;
                 }
             }
-        }
-        
-        .postCard {
-            display: flex;
-            width: 19%;
-            height: 100%;
-            a {
-                display: flex;
-                flex-direction: column;
-                //justify-content: space-between;
-                height: 100%;
-                .postcardImg {
-                    img {
-                        margin-bottom: 0px;
-                        width: 100%;
-                        height: auto;
-                        border-radius: 2px;
-                    }
-                }
-                .postcardContent {
-                    height: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    flex-direction: column;
-                    .postcardContentHeader {
-                        flex-grow: 0.5;
-                        h1 {
-                            font-size: 15px;
-                            height: 35px;
-                            overflow: hidden;
-                        }
-                    }
-                    .postcardContentBody {
-                        flex-grow: 3;
-                        p:nth-child(1) {}
-                        p:nth-child(1) {
-                            font-size: 13px;
-                        }
-                    }
-                    .postcardContentFooter {
-                        display: flex;
-                        justify-content: space-between;
-                        flex-direction: row;
-                        flex-grow: 1;
-                        font-size: 8px;
-                        color: $candy;
-                        font-weight: 600;
-                        text-transform: uppercase;
-                        p:nth-child(1) {
-                            color: $melt;
-                        }
-                    }
-                }
-                .postcardStats {
-                    display: flex;
-                    justify-content: space-between;
-                    button {
-                        border: 1px solid $melt;
-                        font-size: 11px;
-                        height: auto;
-                        color: $melt;
-                        background-color: $midnightL;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50px;
-                        //margin-top: 10px;
-                        &:hover {
-                            text-decoration: none;
-                            cursor: pointer;
-                            color: $snow;
-                        }
-                    }
-                }
+            p {
+                margin: 0px 10px;
             }
         }

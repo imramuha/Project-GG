@@ -40,6 +40,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/users/{id}', 'AccountController@showUserRelation');
 
     Route::post('/user/review', 'AccountController@postReview');
+    Route::get('/userreviews', 'AccountController@showUserReviews');
 
     Route::get('/posts', 'AccountController@showPosts');
     Route::get('/post/{id}', 'AccountController@showPost');
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     Route::get('/friends', 'AccountController@showFriends');
 
-    Route::get('/games', 'AccountController@showUserGameData');
+    Route::get('/usergames', 'AccountController@showUserGameData');
 
 
     // Route::get('/example', 'AccountController@showExample');

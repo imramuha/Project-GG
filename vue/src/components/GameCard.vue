@@ -1,19 +1,19 @@
 <template>
   <div class="postCard">
-    <router-link :to="{ name: 'post', params: { id: review.id } }"
+    <router-link :to="{ name: 'post', params: { id: game.id } }"
       >
       <div class="postcardImg">
         <img src="https://placekitten.com/250/250" />
       </div>
       <div class="postcardContent">
         <div class="postcardContentHeader">
-          <h1>{{ review.reviewer_id }}</h1>
+          <h1>{{ game.game.name }}</h1>
         </div>
         <div class="postcardContentBody">
-       <p>{{ review.comment }}</p>
+        <p>{{ game.data.username }}</p>
         <p>
-          {{ review.score }} 
-        </p> 
+          {{ game.data.data }}
+        </p>
         </div>
       </div>
     </router-link>
@@ -21,9 +21,9 @@
 </template>
 <script>
 export default {
-  name: "ReviewCard",
+  name: "GameCard",
   props: {
-    review: {
+    game: {
       type: Object,
       default: () => {
         return {};

@@ -6,8 +6,8 @@
     <button @click="inbox" v-on:click="emitToDashboard">
       Inbox
     </button>
-    <button @click="news" v-on:click="emitToDashboard">
-      News
+    <button @click="games" v-on:click="emitToDashboard">
+      Games
     </button>
     <button @click="reviews" v-on:click="emitToDashboard">
       Reviews
@@ -32,8 +32,11 @@ export default {
     inbox() {
       this.childMessage = "inbox";
     },
-    news() {
+    /*news() {
       this.childMessage = "news";
+    },*/
+    games() {
+      this.childMessage = "games";
     },
     reviews() {
       this.childMessage = "reviews";

@@ -180,9 +180,17 @@ class AccountController extends Controller
     */
     public function showUserGameData () {
 
-        $data = UserGameData::where('user_id', '=', auth()->user()->id)->with("user", "game", "data")->get();
+        $data = UserGameData::where('user_id', '=', auth()->user()->id)->with("game", "data")->paginate(8);
         return response()->json($data);
     }
 
+    /*
+    * Get all logged in users receiven-reviews
+    */
+    public function showUserReviews () {
+
+        $data = Review::where('user_id', '=', auth()->user()->id)->paginate(4);
+        return response()->json($data);
+    }
     
 }

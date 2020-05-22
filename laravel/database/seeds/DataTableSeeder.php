@@ -24,5 +24,49 @@ class DataTableSeeder extends Seeder
             'username' => "Imosh",
             'data' => "Platnium",
         ]);
+        DB::table('data')->insert([
+            'username' => "Muddykip",
+            'data' => "Platnium",
+        ]);
+        DB::table('data')->insert([
+            'username' => "muddyk",
+            'data' => "",
+        ]);
+        DB::table('data')->insert([
+            'username' => "Muddykipnew",
+            'data' => "Platnium",
+        ]);
+        DB::table('data')->insert([
+            'username' => "muddykyt",
+            'data' => "",
+        ]);
+        DB::table('data')->insert([
+            'username' => "MuddyKip",
+            'data' => "",
+        ]);
+        DB::table('data')->insert([
+            'username' => "Muddykip",
+            'data' => "",
+        ]);
+        DB::table('data')->insert([
+            'username' => "Muddy#4874",
+            'data' => "",
+        ]);
+        DB::table('data')->insert([
+            'username' => "Muddykip87",
+            'data' => "platnium",
+        ]);
+        DB::table('data')->insert([
+            'username' => "Muddy_kip",
+            'data' => "",
+        ]);
+        DB::table('data')->insert([
+            'username' => "Muddykip",
+            'data' => "Kind good at this game",
+        ]);
+        DB::table('data')->insert([
+            'username' => "muddyk",
+            'data' => "I am bad at this :/",
+        ]);
     }
 }

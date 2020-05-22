@@ -60,11 +60,12 @@ import DashboardNav from "@/components/dashboard/DashboardNav";
 import Reviews from "@/components/dashboard/Reviews";
 import Inbox from "@/components/dashboard/Inbox";
 import Feed from "@/components/dashboard/Feed";
+import Games from "@/components/dashboard/Games";
 import Posts from "@/components/dashboard/Posts";
 import News from "@/components/dashboard/News";
 
 export default {
-    components: { Posts, Feed, News, Inbox, Reviews, Friendlist, DashboardNav },
+    components: { Posts, Games, Feed, News, Inbox, Reviews, Friendlist, DashboardNav },
     data() {
         return {
             // isLoading: true,
@@ -83,6 +84,8 @@ export default {
                 this.mainComponent = Inbox;
             } else if (value == "news") {
                 this.mainComponent = News;
+            } else if (value == "games") {
+                this.mainComponent = Games;
             } else if (value == "reviews") {
                 this.mainComponent = Reviews;
             } else if (value == "posts") {

@@ -27,7 +27,6 @@ class OptionsTableSeeder extends Seeder
         DB::table('options')->insert([
             "name" => "Iron",
         ]);
-       
         DB::table('options')->insert([
             "name" => "10-15",
         ]);
