@@ -51,6 +51,6 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     Route::get('/usergames', 'AccountController@showUserGameData');
 
-
+    Route::get('/conversation/{id}', 'AccountController@showMessagesFor');
     // Route::get('/example', 'AccountController@showExample');
 });

@@ -1,0 +1,64 @@
+.inbox {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.conversation {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h1 {
+        margin: 0px;
+        background-color: $midnightH;
+        color: $snow;
+    }
+}
+
+.messagesFeed {
+    height: 100%;
+    background-color: $midnight;
+    overflow-y: scroll;
+    padding: 5px;
+    ul {
+        list-style-type: none;
+        .messagereceived {
+            text-align: right;
+            background-color: $midnightL;
+        }
+        .messagesent {
+            background-color: $candy;
+        }
+    }
+}
+
+.messageComposer {
+    textarea {
+        width: 100%;
+        resize: none;
+        background-color: transparent;
+        border-color: $snow;
+        color: $snow;
+        border-radius: 2px;
+        padding: 7px;
+    }
+}
+
+.messagersList {
+    flex: 2;
+    overflow-y: scroll;
+    border-left: 1px solid $candy;
+    ul {
+        list-style-type: none;
+        padding-left: 0px;
+        li {
+            max-height: 100px;
+            background-color: $candy;
+            cursor: pointer;
+        }
+        li.selected {
+            background-color: $sand;
+        }
+    }
+}

@@ -12,6 +12,7 @@ use App\Models\Comment;
 use App\Models\Review;
 use App\Models\UserGameData;
 use App\Models\Game;
+use App\Models\Message;
 
 class AccountController extends Controller
 {
@@ -191,6 +192,15 @@ class AccountController extends Controller
 
         $data = Review::where('user_id', '=', auth()->user()->id)->paginate(4);
         return response()->json($data);
+    }
+    
+    /*
+    * Get all messages for a user
+    */
+    public function showMessagesFor ($id) {
+
+        $messages = Message::where('from', $id)->orWhere('to', $id)->get();
+        return response()->json($messages);
     }
     
 }
