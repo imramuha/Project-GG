@@ -10,6 +10,8 @@
 import MessagesFeed from "@/components/inbox/MessagesFeed";
 import MessageComposer from "@/components/inbox/MessageComposer";
 
+import { postMessage } from "@/services/inbox.api";
+
 export default {
     components: { MessagesFeed, MessageComposer},
     props: {
@@ -23,8 +25,26 @@ export default {
         }
     },
     methods: {
-        sendMessage(text) {
-            console.log(text);
+        async sendMessage(text) {
+            if(!this.friend) {
+                return;
+            }
+
+            let userMessage = {
+                text: text,
+                friend_id: this.friend.id
+            };
+
+            console.log(userMessage);
+            try {
+                await postMessage(userMessage)
+               .then((response) => {
+                    this.$emit('new', response.data);
+                });
+
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 }

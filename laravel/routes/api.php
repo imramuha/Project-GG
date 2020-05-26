@@ -19,13 +19,12 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
-    Route::post('login', 'LoginController');
+    Route::get('login', 'LoginController')->name('login');
+    Route::post('login', 'LoginController')->name('login');
     Route::post('register', 'RegisterController');
     Route::post('logout', 'LogoutController');
     Route::get('me', 'MeController');
 });
-
-Route::get('role', 'Frontend\AccountController@showRole');
 
 Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('role', 'AccountController@showRole');
@@ -52,5 +51,10 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/usergames', 'AccountController@showUserGameData');
 
     Route::get('/conversation/{id}', 'AccountController@showMessagesFor');
-    // Route::get('/example', 'AccountController@showExample');
+    Route::post('/conversation/send', 'AccountController@sendMessageTo');
+
+
+    Route::post('/messaging/auth', 'AccountController@messagingAuth');
 });
+
+

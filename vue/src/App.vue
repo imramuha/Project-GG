@@ -8,8 +8,10 @@
 <script>
 //import Navigation from "@/components/Navigation";
 import AppNav from "@/components/AppNav";
+import "@/assets/js/main.js";
 
 export default {
+  
   components: {
     //Navigation
     AppNav
@@ -19,6 +21,7 @@ export default {
 
 <style lang="scss">
 @import "@/assets/sass/main.scss";
+
 
 html {
   -webkit-text-size-adjust: 100%;

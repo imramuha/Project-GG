@@ -14,6 +14,11 @@ use App\Models\UserGameData;
 use App\Models\Game;
 use App\Models\Message;
 
+use App\Events\NewMessage;
+use App\Events\MyEvent;
+use Auth;
+use Pusher;
+
 class AccountController extends Controller
 {
     // siging
@@ -25,6 +30,8 @@ class AccountController extends Controller
     * show logged in user ^^
     */
     public function showMe () {
+
+
         $user = User::where('id', '=', auth()->id())->get();
         $reviews = Review::where('user_id', '=', auth()->id())->with('reviewer')->get();
         return response()->json(['user' => $user, 'reviews' => $reviews]);
@@ -201,6 +208,54 @@ class AccountController extends Controller
 
         $messages = Message::where('from', $id)->orWhere('to', $id)->get();
         return response()->json($messages);
+    }
+
+    public function messagingAuth(Request $request)
+    {
+        $app_id = '1007194';
+        $app_key = 'c8af74134473385784fa';
+        $app_secret = '0c0667626ba79b7d337e';
+        $app_cluster = 'eu';
+
+        $pusher = new Pusher\Pusher( $app_key, $app_secret, $app_id, array('cluster' => $app_cluster) );
+
+
+
+        if(auth()->user()) {
+            $channel_name = $request->input('channel_name');
+            $socket_id = $request->input('socket_id');
+
+            $auth = $pusher->socket_auth($channel_name, $socket_id);
+            return response()->json($auth);
+        }
+
+            /*
+    Check if a user exists.
+    if we have a user we're going to allow the subscription to succeed.
+        fetch the socket_id and channel_name values from the $request e.g. $channelName = $request->input('channel_name');
+        create a signature using $auth = $this->pusher->socket_auth($channelName, $socketId) (docs)
+        respond to the request with that signature
+    If there is no user then we'll respond with a 401 Unauthorized.
+*/
+        return response(null, 401);
+    }
+
+    /*
+    * send message
+    */
+    public function sendMessageTo (Request $request) {
+
+        $message = Message::create([
+            'from' => auth()->user()->id,
+            'to' => $request->friend_id,
+            'text' => $request->text,
+        ]);
+
+        $user = Auth::user();
+
+        broadcast(new NewMessage($user, $message));
+        //event(new MyEvent($message));
+        return response()->json($message);
     }
     
 }
