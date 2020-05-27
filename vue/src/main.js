@@ -54,7 +54,7 @@ Pusher.log = function(message) {
 */
 
 import Pusher from "pusher-js"
-Pusher.logToConsole = true;
+//Pusher.logToConsole = true;
 
 window.pusher = new Pusher('c8af74134473385784fa', {
     authEndpoint: 'http://127.0.0.1:8000/api/frontend/messaging/auth',

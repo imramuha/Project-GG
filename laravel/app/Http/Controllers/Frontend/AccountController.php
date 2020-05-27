@@ -215,7 +215,17 @@ class AccountController extends Controller
     */
     public function showMessagesFor ($id) {
 
-        $messages = Message::where('from', $id)->orWhere('to', $id)->get();
+        $messages = Message::where(function($query) use($id) {
+            $query->where('from', $id)
+                ->where('to',  auth()->user()->id);
+        })
+        ->orWhere(function($query) use($id) {
+            $query->where('to', $id)
+                ->where('from',  auth()->user()->id);
+        })
+        ->orderBy('id', 'asc')->get();
+
+        //$messagess = $messages->merge($messages2)->sort('id');
         return response()->json($messages);
     }
 
