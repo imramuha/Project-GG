@@ -18,16 +18,13 @@ class NewMessage implements ShouldBroadcast
 
 
     public $message;
-    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user, Message $message)
+    public function __construct(Message $message)
     {
-        //
-        $this->user = $user;
         $this->message = $message;
     }
 
@@ -42,6 +39,6 @@ class NewMessage implements ShouldBroadcast
     }
 
     public function broadcastWith() {
-        return ["message" => $this->message, "user" => $this->user];
+        return ["message" => $this->message];
     }
 }

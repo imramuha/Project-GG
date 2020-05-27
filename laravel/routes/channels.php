@@ -21,8 +21,8 @@ Broadcast::channel('messages.{id}', function ($user) {
     //return $user->id == (int) $id;
 });*/
 
-Broadcast::channel('messages.{id}', function ($user, $userId) {
-    return $user->id === $userId;
+Broadcast::channel('messages.{id}', function ($user, $id) {
+    return true;
   });
 
 

@@ -34,36 +34,23 @@ export default {
       getMe().then((response) => {
         this.user = response;
 
-/* global pusher */
-       const channel = pusher.subscribe(
-          `private-messages${this.user.data.user[0].id}`);
+        /* global pusher */
+        const channel = pusher.subscribe(
+          `private-messages${this.user.data.user[0].id}`
+        );
 
-          console.log(channel);
-
-        pusher.bind(`NewMessage`, function(data) {
+        channel.bind("NewMessage", (data) => {
           console.log(data);
           this.handleIncoming(data);
         });
-/*
-        channel.bind("pusher:subscription_error", function(members) {
-          console.log(members);
-        });*/
       });
 
       getAllFriends().then((response) => {
         this.friends = response.data;
       });
-
-      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }
-
-    /*Echo.private(`messages${this.user.data.user[0].id}`).listen('NewMessage', (e) => {
-        console.log("this works")
-        console.log(e);
-        this.handleIncoming(e.message);
-      })*/
   },
   methods: {
     async startConversationWith(friend) {
@@ -81,9 +68,10 @@ export default {
       this.messages.push(text);
     },
     handleIncoming(data) {
-      if (this.selectedFriend && data.message.from == this.selectedFriend.id) {
-        this.saveNewMessage(data.message);
-        this.message.push(data.message);
+      console.log("hi");
+      if (this.selectedFriend && data.from == this.selectedFriend.id) {
+        this.saveNewMessage(data);
+        this.message.push(data);
       }
     },
   },
