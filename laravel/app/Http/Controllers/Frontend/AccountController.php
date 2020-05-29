@@ -209,6 +209,15 @@ class AccountController extends Controller
         $data = Review::where('user_id', '=', auth()->user()->id)->paginate(4);
         return response()->json($data);
     }
+
+        /*
+    * Get all games
+    */
+    public function showQueueGames () {
+
+        $games = Game::with('options')->get();
+        return response()->json($games);
+    }
     
     /*
     * Get all messages for a user

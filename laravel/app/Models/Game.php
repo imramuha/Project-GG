@@ -14,4 +14,13 @@ class Game extends Model
     {
         return $this->hasMany(UserGameData::class);
     }
+
+        //
+    /**
+     * The users that belong to the role.
+     */
+    public function options()
+    {
+        return $this->belongsToMany('App\Option', 'game_options');
+    }
 }

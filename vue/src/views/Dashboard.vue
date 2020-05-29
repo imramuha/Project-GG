@@ -5,6 +5,9 @@
               <img src="@/assets/images/logo.svg" />
             </div>
             <!--<router-link to="/user" class="button">Lobby</router-link>-->
+            <button type="button" class="logoutButton" @click="queue">
+                Queue up
+            </button>
             <div class="sidenavButtons">
                 <router-link to="/"><i class="fas fa-home"></i></router-link>
                 <router-link to="/dashboard"><i class="fas fa-tachometer-alt"></i></router-link>
@@ -64,8 +67,10 @@ import Games from "@/components/dashboard/Games";
 import Posts from "@/components/dashboard/Posts";
 import News from "@/components/dashboard/News";
 
+import Queue from "@/components/Queue";
+
 export default {
-    components: { Posts, Games, Feed, News, Inbox, Reviews, Friendlist, DashboardNav },
+    components: { Posts, Games, Feed, News, Inbox, Queue, Reviews, Friendlist, DashboardNav },
     data() {
         return {
             // isLoading: true,
@@ -91,6 +96,9 @@ export default {
             } else if (value == "posts") {
                 this.mainComponent = Posts;
             }
+        },
+        queue() {
+            this.mainComponent = Queue
         },
         logout() {
             this.$store.dispatch("logout");

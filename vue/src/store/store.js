@@ -8,6 +8,8 @@ import Review from "@/store/modules/review.module";
 
 Vue.use(Vuex);
 
+import Pusher from "pusher-js"
+
 export default new Vuex.Store({
     state: {
         user: null
@@ -24,6 +26,22 @@ export default new Vuex.Store({
             localStorage.removeItem("user");
             // forced refresh
             location.reload();
+        },
+        ACTIVATE_PUSHER(userData) {
+            Pusher.logToConsole = true;
+
+            console.log(userData.user.token);
+            console.log('pusher')
+
+            window.pusher = new Pusher('c8af74134473385784fa', {
+                authEndpoint: 'http://127.0.0.1:8000/api/frontend/messaging/auth',
+                cluster: 'eu',
+                auth: {
+                    headers: {
+                        Authorization: `Bearer ${userData.user.token}`,
+                    }
+                },
+            });
         }
     },
     actions: {

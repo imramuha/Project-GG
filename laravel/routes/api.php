@@ -49,6 +49,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/friends', 'AccountController@showFriends');
 
     Route::get('/usergames', 'AccountController@showUserGameData');
+    Route::get('/queuegames', 'AccountController@showQueueGames');
 
     Route::get('/conversation/{id}', 'AccountController@showMessagesFor');
     Route::post('/conversation/send', 'AccountController@sendMessageTo');

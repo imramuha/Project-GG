@@ -3,14 +3,12 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store/store";
 import httpClient from "./services/httpClient";
+//import pusher from "./services/pusher";
 import axios from "axios";
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 // TEMP
-
-const userData = localStorage.getItem("user");
-const user = JSON.parse(userData);
 /*
 
 import VueEcho from 'vue-echo';
@@ -53,19 +51,6 @@ Pusher.log = function(message) {
 }; *
 */
 
-import Pusher from "pusher-js"
-//Pusher.logToConsole = true;
-
-window.pusher = new Pusher('c8af74134473385784fa', {
-    authEndpoint: 'http://127.0.0.1:8000/api/frontend/messaging/auth',
-    cluster: 'eu',
-    auth: {
-        headers: {
-            Authorization: `Bearer ${user.token}`,
-        }
-    },
-});
-
 Vue.config.productionTip = false;
 
 new Vue({
@@ -78,6 +63,10 @@ new Vue({
             // check to see if there is indeed a user
             const userData = JSON.parse(userString); // parse user data into JSON
             this.$store.commit("SET_USER_DATA", userData); // restore user data with Vuex
+
+            console.log(userData)
+
+            this.$store.commit("ACTIVATE_PUSHER", userData); // restore user data with Vuex
         }
         axios.interceptors.response.use(
             response => response, // simply return the response

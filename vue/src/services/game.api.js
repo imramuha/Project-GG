@@ -4,4 +4,5 @@ import httpClient from "./httpClient";
 
 const getUserGames = url => httpClient.get(url);
 
+
 export { getUserGames };
