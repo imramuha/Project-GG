@@ -50,6 +50,10 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     Route::get('/usergames', 'AccountController@showUserGameData');
     Route::get('/queuegames', 'AccountController@showQueueGames');
+    Route::post('/queue', 'AccountController@queue');
+    Route::get('/lounge/{id}', 'AccountController@lounge');
+    Route::get('/exitlounge', 'AccountController@exitLounge');
+
 
     Route::get('/conversation/{id}', 'AccountController@showMessagesFor');
     Route::post('/conversation/send', 'AccountController@sendMessageTo');

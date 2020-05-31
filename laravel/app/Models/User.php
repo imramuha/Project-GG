@@ -128,4 +128,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(LikedPost::class);
     }
 
+           //
+       /**
+     * Get the post of this user
+     */
+    public function lobbies()
+    {
+        return $this->belongsToMany('App\Models\Lobby', 'lobby_users');
+    }
 }

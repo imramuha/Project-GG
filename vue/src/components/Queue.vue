@@ -1,40 +1,49 @@
 <template>
   <div class="queue">
     <h1>Queue component</h1>
-    <label for='firstOption' >Games</label><br />
+    <label for="firstOption">Games</label>
+    <br />
     <select v-model="firstOption" :selected="0">
-      <option disabled value="">Select your game</option>
+      <option disabled value>Select your game</option>
       <option
         v-for="(queuegame, index) in queuegames"
         v-bind:key="queuegame.id"
         :value="index"
         >{{ queuegame.name }}</option
       >
-    </select><br />
-    <label for='firstOption' >Options</label><br />
+    </select>
+    <br />
+    <label for="firstOption">Options</label>
+    <br />
     <select
       v-model="secondOption"
       :selected="0"
       v-if="this.queuegames[firstOption]"
     >
-      <option disabled value="">Select your option</option>
+      <option disabled value>Select your option</option>
       <option
-        v-for="option in queuegames[firstOption].options"
+        v-for="(option, index) in queuegames[firstOption].options"
         v-bind:key="option.id"
+        :value="index"
         >{{ option.name }}</option
       >
-    </select><br />
+    </select>
+    <br />
     <button type="button" class="logoutButton" @click="lounge">
       Queue up/Enter Longue
     </button>
     <template>
-      <component :is="mainComponent"></component>
+      <component
+        :lobby="lobby"
+        v-bind:key="lobby.id"
+        :is="mainComponent"
+      ></component>
     </template>
   </div>
 </template>
 
 <script>
-import { getQueueGames } from "@/services/queue.api";
+import { getQueueGames, queue } from "@/services/queue.api";
 
 import Lounge from "@/components/Lounge";
 
@@ -47,6 +56,7 @@ export default {
       queuegames: [],
       firstOption: "",
       secondOption: "",
+      lobby: "",
     };
   },
   computed: {
@@ -56,12 +66,35 @@ export default {
     },
   },
   methods: {
-    lounge() {
-      if (this.mainComponent == null) {
-        this.mainComponent = Lounge;
-        console.log("lounge");
-      } else {
-        this.mainComponent = null;
+    async lounge() {
+      let lounge = {
+        name:
+          this.queuegames[this.firstOption].name +
+          " [" +
+          this.queuegames[this.firstOption].options[this.secondOption].name +
+          "]",
+        code:
+          this.firstOption +
+          "-" +
+          this.queuegames[this.firstOption].options[this.secondOption].id,
+      };
+      this.lobby = lounge;
+      try {
+        await queue(lounge).then((response) => {
+          console.log(response.data.data);
+          this.lobby.id = response.data.data;
+          console.log(this.lobby.id);
+          if (this.mainComponent == null) {
+            this.mainComponent = Lounge;
+          } else {
+            this.mainComponent = null;
+          }
+        });
+
+        this.name = null;
+        this.code = null;
+      } catch (error) {
+        console.log(error);
       }
     },
   },
@@ -70,17 +103,7 @@ export default {
       const response = await getQueueGames();
       this.queuegames = response.data;
 
-      console.log(this.queuegames);
-
-      // adds friends to either online of offline array :)
-      /* this.friends.forEach(item => {
-        if (item.status.name == "online") {
-          this.onlineFriends.push(item);
-        }
-        if (item.status.name == "offline") {
-          this.offlineFriends.push(item);
-        }
-      });*/
+      //console.log(this.queuegames);
     } catch (error) {
       console.log(error);
     }

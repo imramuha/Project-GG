@@ -14,6 +14,8 @@ use App\Models\UserGameData;
 use App\Models\Game;
 use App\Models\Message;
 
+use App\Models\Lobby;
+
 use App\Events\NewMessage;
 use App\Events\MyEvent;
 use Auth;
@@ -217,6 +219,45 @@ class AccountController extends Controller
 
         $games = Game::with('options')->get();
         return response()->json($games);
+    }
+
+    public function queue(Request $request) {
+
+        $lobby = Lobby::firstOrCreate([
+            'name' => $request->input('name'),
+            'code' => $request->input('code')
+        ]);
+
+        if($lobby->wasRecentlyCreated) {
+            
+            $user_id = auth()->user()->id;
+            $lobby->users()->attach($user_id);
+                        
+            $response = array('response' => 'You just entered the Lounge', 'succes' => true);
+            return $response;
+        } else {
+            $user_id = auth()->user()->id;
+            $lobby->users()->attach($user_id);
+
+            return array('response' => 'This lobby already exists :)', 'succes' => true, 'data' => $lobby->id);
+        }
+    }
+
+    public function lounge($id) {
+
+        $lobby = Lobby::where('id', $id)->with('users')->get();
+        return response()->json($lobby);
+/*
+        $lobby = Lobby::where('user_id', '=', auth()->user()->id)->paginate(4);
+        return response()->json($data);*/
+    }
+
+    public function exitLounge () {
+        /*Post::where('id', $id)->where('user_id',  auth()->user()->id)->delete();
+        $response = array('response' => "Your post has been deleted!", 'success' => true);*/
+        $user = User::find(auth()->user()->id);
+        $user->lobbies()->wherePivot('user_id','=', auth()->user()->id)->detach();
+        return array('response' => 'User just existed the lobby', 'succes' => true);
     }
     
     /*
