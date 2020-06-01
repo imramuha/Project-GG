@@ -253,11 +253,41 @@ class AccountController extends Controller
     }
 
     public function exitLounge () {
-        /*Post::where('id', $id)->where('user_id',  auth()->user()->id)->delete();
-        $response = array('response' => "Your post has been deleted!", 'success' => true);*/
+        // finds the logged in user
         $user = User::find(auth()->user()->id);
-        $user->lobbies()->wherePivot('user_id','=', auth()->user()->id)->detach();
-        return array('response' => 'User just existed the lobby', 'succes' => true);
+        
+        // checks if user has any active lobbies
+        $userLobby = User::where('id', auth()->user()->id)->with('lobbies')->first();
+        
+        // gets the lobby user is in
+        if(count($userLobby->lobbies)) {
+            $userLobbyId = $userLobby->lobbies[0]->id;       
+
+            // finds the users active lobby
+            $lobby = Lobby::find($userLobbyId);
+
+            // detach that user from that lobby
+            $user->lobbies()->wherePivot('user_id','=', auth()->user()->id)->detach();
+
+            // gets all the users in that lobby
+            $lobbies = $lobby->users()->wherePivot('lobby_id','=', $userLobbyId)->get();
+
+            // counts how many users that active lobby has
+            $length = count($lobbies);
+
+            // if the lobby has 0 users deletes it else the user just gets cleared from that lobby
+            if(!$length) {
+                // delete the lobby
+                Lobby::where('id', $userLobbyId)->delete();
+                return response()->json(['response' => "your lobby has been cleared.", 'succes' => true]);
+            }
+            
+            return response()->json(['response' => "User has exited the lobby.", 'succes' => true]);
+        }
+        return response()->json(['data' => "User was not in a lobby.", 'succes' => true]);
+        // else 
+        
+        //return array('response' => 'User just existed the lobby', 'succes' => true);
     }
     
     /*
