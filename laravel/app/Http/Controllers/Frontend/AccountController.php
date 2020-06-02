@@ -223,33 +223,52 @@ class AccountController extends Controller
 
     public function queue(Request $request) {
 
+        // checks if a lobby with similar code/name exists else create
         $lobby = Lobby::firstOrCreate([
             'name' => $request->input('name'),
             'code' => $request->input('code')
         ]);
 
+
+        // checks if a new lobby was creates
         if($lobby->wasRecentlyCreated) {
             
+            // attaches user to that newly created lobby/pivot
             $user_id = auth()->user()->id;
             $lobby->users()->attach($user_id);
                         
             $response = array('response' => 'You just entered the Lounge', 'succes' => true);
             return $response;
-        } else {
-            $user_id = auth()->user()->id;
-            $lobby->users()->attach($user_id);
 
-            return array('response' => 'This lobby already exists :)', 'succes' => true, 'data' => $lobby->id);
-        }
+        } else {
+            // checks if the user already has a lobby -> sends that lobby id to the lounge
+            if(!$lobby->users()->wherePivot('user_id','=',  auth()->user()->id)->count() > 0) {
+
+                // gets the lobby and checks how many users it has
+                $lobbyId = $lobby->id;
+                $users = $lobby->users()->wherePivot('lobby_id','=', $lobbyId)->get();
+                if(count($users) < 5) {
+
+                    // attaches user to that newly created lobby/pivot
+                    $user_id = auth()->user()->id;
+                    $lobby->users()->attach($user_id);
+
+                    return array('response' => 'This lobby already exists, user has been added to the lobby', 'succes' => true, 'data' => $lobby->id);
+                } else {
+                    return array('response' => 'Lobby is full create a new one', 'succes' => true, 'data' => $lobby->id);
+                    // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
+                }
+            } else {
+                return array('response' => 'user already has a lobby.', "succes" => true, "data" => $lobby->id);
+            } 
+        } 
     }
 
     public function lounge($id) {
 
         $lobby = Lobby::where('id', $id)->with('users')->get();
         return response()->json($lobby);
-/*
-        $lobby = Lobby::where('user_id', '=', auth()->user()->id)->paginate(4);
-        return response()->json($data);*/
+
     }
 
     public function exitLounge () {
