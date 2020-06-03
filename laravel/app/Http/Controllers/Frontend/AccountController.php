@@ -42,8 +42,7 @@ class AccountController extends Controller
     */
     public function showMe () {
 
-
-        $user = User::where('id', '=', auth()->id())->get();
+        $user = User::where('id', '=', auth()->id())->with('status')->get();
         $reviews = Review::where('user_id', '=', auth()->id())->with('reviewer')->get();
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }

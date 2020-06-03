@@ -17,9 +17,7 @@
             </div>
         </div>
         <div class="content">
-            <div class="contentHeader">
-                <div><router-link to="/user" class="button">PROFILE - </router-link>is currently not available - emitting: {{ emit }}</div>
-            </div>
+            <ProfileHeader />
             <div class="contentNav">
                 <template>
                     <DashboardNav v-on:emitToDashboard="onDashboardNavClick" />
@@ -36,7 +34,7 @@
         <div class="sidecontent">
             <div class="sidecontentHeader">
                 <div class="sidecontentNotifications">
-                    <div class="notificationsEmpty">There are no notifications available.</div>
+                    <div class="notificationsEmpty">There are no notifications available.  emitting: {{ emit }}</div>
                 </div>
             </div>
             <div class="sidecontentFunction">
@@ -59,6 +57,7 @@
 <script>
 import Friendlist from "@/components/dashboard/Friendlist";
 import DashboardNav from "@/components/dashboard/DashboardNav";
+import ProfileHeader from "@/components/dashboard/ProfileHeader";
 
 import Reviews from "@/components/dashboard/Reviews";
 import Inbox from "@/components/dashboard/Inbox";
@@ -70,7 +69,7 @@ import News from "@/components/dashboard/News";
 import Queue from "@/components/Queue";
 
 export default {
-    components: { Posts, Games, Feed, News, Inbox, Queue, Reviews, Friendlist, DashboardNav },
+    components: { Posts, Games, Feed, News, Inbox, Queue, Reviews, Friendlist, DashboardNav, ProfileHeader },
     data() {
         return {
             // isLoading: true,
