@@ -181,7 +181,7 @@ class AccountController extends Controller
         return $response;
     }
 
-    public function postComment(Request $request) {
+    public function createComment(Request $request) {
 
         $comment = Comment::create([
             'comment' => $request->input('comment'),
@@ -189,6 +189,22 @@ class AccountController extends Controller
             'post_id' => $request->input('post_id'),
         ]);
 
+        $response = array('response' => 'Your comment has been posted!', 'succes' => true);
+        return $response;
+    }
+
+    public function createPost(Request $request) {
+
+        $user_id = auth()->user()->id;
+        $post = Post::create([
+            'title' => $request->input('title'),
+            'subtitle' => $request->input('subtitle'),
+            'text' => $request->input('text'),
+            'image' => null,
+            'user_id' => $user_id,
+        ]);
+
+        return $post;
         $response = array('response' => 'Your comment has been posted!', 'succes' => true);
         return $response;
     }
