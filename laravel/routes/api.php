@@ -30,13 +30,13 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('role', 'AccountController@showRole');
 
     Route::get('/user', 'AccountController@showMe');
-    Route::post('/user/edit', 'AccountController@editMe');
+    Route::post('/useredit', 'AccountController@userEdit');
 
     Route::get('users', 'AccountController@showUsers');  
     Route::get('/user/{id}', 'AccountController@showUser');
     Route::get('/userposts', 'AccountController@showUserPosts');
     Route::get('/userpost/delete/{id}', 'AccountController@deleteUserPost');
-    Route::get('/users/{id}', 'AccountController@showUserRelation');
+    Route::get('/relation/{id}', 'AccountController@showRelation');
 
     Route::post('/user/review', 'AccountController@postReview');
     Route::get('/userreviews', 'AccountController@showUserReviews');

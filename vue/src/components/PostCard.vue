@@ -3,7 +3,7 @@
     <router-link :to="{ name: 'post', params: { id: post.id } }"
       >
       <div class="postcardImg">
-        <img src="https://placekitten.com/250/250" />
+        <img :src="post.image" />
       </div>
       <div class="postcardContent">
         <div class="postcardContentHeader">

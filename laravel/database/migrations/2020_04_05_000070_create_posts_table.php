@@ -18,12 +18,16 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('subtitle');
             $table->text('text');
-            $table->string('image')->nullable();
+
             $table->timestamps();
             $table->integer('user_id')->nullable()->unsigned();
             
         });
+
+        // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
+        DB::statement("ALTER TABLE posts ADD image LONGBLOB");
     }
+
 
     /**
      * Reverse the migrations.

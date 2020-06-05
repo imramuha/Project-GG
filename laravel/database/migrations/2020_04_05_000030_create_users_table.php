@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->integer('status_id')->unsigned()->index()->default(1)->nullable();
         });
 
-
+        // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
+        DB::statement("ALTER TABLE users ADD image LONGBLOB");
     }
 
     /**

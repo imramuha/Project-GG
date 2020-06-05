@@ -14,10 +14,17 @@
         <input id="text" v-model="text" placeholder="text" />
       </p>
 
-      <!--<p>
-        <label for="rating">image:</label>
-        <textarea id="rating" v-model="rating"></textarea>
-      </p>-->
+      
+        <label for="image">image:</label>
+       <div v-if="!image">
+          <h2>Select an image</h2>
+          <input accept="image/*" type="file" @change="onImageChange">
+        </div>
+        <div v-else>
+          <img :src="image" />
+          <button @click="removeImage">Remove image</button>
+        </div>
+    
 
       <p>
         <input type="submit" value="Submit" />
@@ -35,7 +42,7 @@ export default {
       title: null,
       subtitle: null,
       text: null,
-      //image: null,
+      image: '',
     };
   },
   methods: {
@@ -44,10 +51,19 @@ export default {
         title: this.title,
         subtitle: this.subtitle,
         text: this.text,
-        image: null,
+        image: this.image,
       };
+
+      let config = {
+        header: {
+            'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      console.log(this.image)
+
       try {
-        let response = await createPost(post);
+        let response = await createPost(post, config);
         console.log(post);
         console.log(response);
 
@@ -60,6 +76,24 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    onImageChange(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+            return;
+        this.createImage(files[0]);
+        console.log(files[0])
+    },
+    createImage(file) {
+        let reader = new FileReader();
+        let vm = this;
+        reader.onload = (e) => {
+            vm.image = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    },
+    removeImage: function () {
+      this.image = '';
     }
   }
 };

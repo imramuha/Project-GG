@@ -13,6 +13,7 @@ import Login from "../views/Login.vue";
 
 import Profile from "../views/Profile.vue";
 import User from "../views/User.vue";
+import UserEdit from "../views/UserEdit.vue";
 
 Vue.use(Router);
 
@@ -53,6 +54,11 @@ const router = new Router({
             props: true
         },
         {
+            path: "/useredit",
+            name: "useredit",
+            component: UserEdit,
+            props: true
+        }, {
             path: "/profile/:id",
             name: "profile",
             component: Profile,

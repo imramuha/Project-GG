@@ -2,7 +2,7 @@
     <div class="contentHeader">
         <div class="userImage">
 
-<router-link to="/user" class="button"> <img src="https://placekitten.com/250/250" /></router-link>
+<router-link to="/user" class="button"> <img :src="user.image" /></router-link>
         </div>
 
         <div class="userDataContainer">
@@ -13,7 +13,7 @@
                     <p> {{ user.status.name }} </p>
                 </div>
                 <div class="userDataRight">
-                    <button>edit</button>
+                         <router-link to="/useredit"><button>EDIT</button></router-link>
                 </div>
             </div>
 

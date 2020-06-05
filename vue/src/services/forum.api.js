@@ -16,7 +16,7 @@ const getPost = id => httpClient.get(POST_END_POINT + id);
 
 const postComment = data => httpClient.post(COMMENT_END_POINT, data);
 
-const createPost = data => httpClient.post(CREATE_END_POINT, data);
+const createPost = (data, config) => httpClient.post(CREATE_END_POINT, data, config);
 
 // you can pass arguments to use as request parameters/data
 // const getUser = (user_id) => httpClient.get(END_POINT, { user_id });

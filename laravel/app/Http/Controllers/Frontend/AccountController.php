@@ -47,15 +47,13 @@ class AccountController extends Controller
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
 
-    public function editMe (Request $request) {
+    public function userEdit (Request $request) {
+
         $id = auth()->user()->id;
 
-        //'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         User::where('id', '=', $id)->update(array(
-            'username' => $request->input('username'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
-
+            'image' => $request->input('image'),
         ));
 
         $response = array('response' => 'Your profile has been updated.', 'succes' => true);
@@ -73,30 +71,25 @@ class AccountController extends Controller
 
     public function showUser ($id) {
         
-        // TODO:: !! WHILE REGISTEING FRIENDSHIP WE NEED TO ADD requesters ID ON user_id_one in relation_user ELSE on user_id_two
-   
         $user = User::where('id', $id)->get();
-        //$user = User::find($id)->relationTwo()->orderBy('name')->get();
-        if(auth()->id() < $id) {
-            $relation = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
-        } else {
-            $relation = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
-        }
 
-        return response()->json(['user' => $user, 'relation' => $relation]);
+        return response()->json(['user' => $user]);
     }
 
 
     // determine the authenticated user's relation with the opened user :)
-    public function showUserRelation($id) {
+    public function showRelation($id) {
+
+        // TODO:: !! WHILE REGISTEING FRIENDSHIP WE NEED TO ADD requesters ID ON user_id_one in relation_user ELSE on user_id_two
         // TODO: JOIN WITH THE PREVIOUS CALL
 
-        $user = User::where('id', $id)->get();
+        $user = User::find($id)->get();
         $relation_one = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
         $relation_two = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
 
         $relation = array_merge($relation_one->toArray(), $relation_two->toArray());
-        return response()->json(["user" => $user, "relation" => $relation]);
+
+        return response()->json($relation);
     }
 
     // show all friends
@@ -195,12 +188,15 @@ class AccountController extends Controller
 
     public function createPost(Request $request) {
 
+        $image = base64_encode($request->input('image'));
+
         $user_id = auth()->user()->id;
+
         $post = Post::create([
             'title' => $request->input('title'),
             'subtitle' => $request->input('subtitle'),
             'text' => $request->input('text'),
-            'image' => null,
+            'image' => $request->input('image'),
             'user_id' => $user_id,
         ]);
 
