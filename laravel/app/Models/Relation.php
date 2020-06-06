@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ class Relation extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_relations');
+        return $this->belongsToMany('App\User', 'user_relations', 'user_id_one', 'user_id_two');
     }
 /*
     public function usersOne()

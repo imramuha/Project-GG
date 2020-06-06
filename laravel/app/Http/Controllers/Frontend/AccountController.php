@@ -14,6 +14,8 @@ use App\Models\UserGameData;
 use App\Models\Game;
 use App\Models\Message;
 
+use App\Models\Relation;
+
 use App\Models\Lobby;
 
 use App\Events\NewMessage;
@@ -47,7 +49,7 @@ class AccountController extends Controller
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
 
-    public function userEdit (Request $request) {
+    public function editUser (Request $request) {
 
         $id = auth()->user()->id;
 
@@ -117,9 +119,64 @@ class AccountController extends Controller
         return response()->json($users);
     }
 
+    /*
+    *  createRelation
+    */
+    public function createRelation (Request $request) {
+        
+        $relation = Relation::where('name', $request->input('relation'))->first();        
+        $profile = User::find($request->input('profile_id'));
+        $logged_id = auth()->user()->id;        
+        $profile_id = $request->input('profile_id');
 
+        $relation_id = $request->input('relation_id');
+        //return array(['logged'=>$logged_id, "prof"=>$profile_id, 'rel' => $relation_id]);
+        // User::find(1)->roles()->updateExistingPivot($roleId, $attributes);
+        // $hasPivot = User::where('id', $userId)->whereHas('tasks', function ($q) use ($taskId) {
+        /*$q->where('id', $taskId);
+            })
+            ->exists();*/
 
-     /*
+ 
+        $test = $relation->users()->wherePivot('user_id_two', "=", $profile->id)->wherePivot('user_id_one',"=", $logged_id)->exists();
+        $test2 = $relation->users()->wherePivot('user_id_one', "=", $profile->id)->wherePivot('user_id_two', "=", $logged_id)->exists();
+        
+        if($test) {
+            return $test;
+        }
+
+        /*
+        // based on the id it gets put in either one or two
+        if($logged_id < $profile->id) {
+            $relation->users()->attach($logged_id, ['user_id_two'=>$profile->id, "relation_id"=>$relation_id]);
+        } else {
+            $relation->users()->attach($logged_id, ['user_id_one'=>$profile->id, "relation_id"=>$relation_id]);
+        }
+        return array(['succes'=>"your relationship was made."]);
+        */
+
+        // get relation id where relation name = $relation
+        // look up the relation between the sent profile id and logged in user++
+
+    }
+
+    /*
+    *  user adds games to their collection
+    */
+    public function addUserGame ($profile_id, $relation) {
+        // attach the game to the user
+
+    }
+
+    /*
+    *  user removes games to their collection
+    */
+    public function removeUserGame ($game_id) {
+        // remove/detach the game from user
+
+    }
+
+    /*
     * Get all users except the logged one in ^^
     */
     public function showPosts () {

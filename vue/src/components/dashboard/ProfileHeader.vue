@@ -1,19 +1,32 @@
 <template>
     <div class="contentHeader">
         <div class="userImage">
-
-<router-link to="/user" class="button"> <img :src="user.image" /></router-link>
+            <div v-if="user.image">
+                <router-link to="/user" class="button">
+                    <img :src="user.image" />
+                </router-link>
+            </div>
+            <div v-else>
+                <router-link to="/user" class="button">
+                    <img src="@/assets/images/profile.jpeg" />
+                </router-link>
+            </div>
         </div>
 
         <div class="userDataContainer">
             <div class="userData">
                 <div class="userDataLeft">
-                    <h1> {{ user.username }}</h1>
-                    <p> Likes to swim a lot<!--{{ user.line }}--> </p>
-                    <p> {{ user.status.name }} </p>
+                    <h1>{{ user.username }}</h1>
+                    <p>
+                        Likes to swim a lot
+                        <!--{{ user.line }}-->
+                    </p>
+                    <p>{{ user.status.name }}</p>
                 </div>
                 <div class="userDataRight">
-                         <router-link to="/useredit"><button>EDIT</button></router-link>
+                    <router-link to="/useredit">
+                        <button>EDIT</button>
+                    </router-link>
                 </div>
             </div>
 
@@ -25,7 +38,6 @@
 </template>
 
 <script>
-
 import { getMe } from "@/services/user.api";
 
 export default {
