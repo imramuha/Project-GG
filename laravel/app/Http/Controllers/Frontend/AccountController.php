@@ -124,40 +124,37 @@ class AccountController extends Controller
     */
     public function createRelation (Request $request) {
         
-        $relation = Relation::where('name', $request->input('relation'))->first();        
+        $relation = Relation::where('name', $request->input('relation'))->first();  
+        $relation_id = $relation->id;
+
         $profile = User::find($request->input('profile_id'));
-        $logged_id = auth()->user()->id;        
         $profile_id = $request->input('profile_id');
 
-        $relation_id = $request->input('relation_id');
-        //return array(['logged'=>$logged_id, "prof"=>$profile_id, 'rel' => $relation_id]);
-        // User::find(1)->roles()->updateExistingPivot($roleId, $attributes);
-        // $hasPivot = User::where('id', $userId)->whereHas('tasks', function ($q) use ($taskId) {
-        /*$q->where('id', $taskId);
-            })
-            ->exists();*/
+        $user_id = auth()->user()->id;      
+        $user = User::find(auth()->id());
 
- 
-        $test = $relation->users()->wherePivot('user_id_two', "=", $profile->id)->wherePivot('user_id_one',"=", $logged_id)->exists();
-        $test2 = $relation->users()->wherePivot('user_id_one', "=", $profile->id)->wherePivot('user_id_two', "=", $logged_id)->exists();
+        // depending on what kind of relation is found => do the following. ^ clean it up by higher/lower users id <>
+        if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach()) {
+            
+            // THIS detaches the logged in user/profile id's relation!!!!
+            // next step is recreating that relationship -> attach
+            // Also works -> this makes the new relation
+            $user->relationOne()->attach($relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$logged_id]);
+            
+            return array(["response"=>"relation One was succesfully updated."]);
         
-        if($test) {
-            return $test;
-        }
+        } else if ( $user->relationTwo()->wherePivot('user_id_one', $profile_id)->wherePivot("user_id_two", auth()->id())->detach()) {
 
-        /*
-        // based on the id it gets put in either one or two
-        if($logged_id < $profile->id) {
-            $relation->users()->attach($logged_id, ['user_id_two'=>$profile->id, "relation_id"=>$relation_id]);
+            // THIS WORKS
+            $user->relationTwo()->attach('4', ['user_id_one'=>$profile->id, "user_id_two"=>$logged_id]);
+
+            return array(["response"=>"relation two was succesfully updated."]);
+
         } else {
-            $relation->users()->attach($logged_id, ['user_id_one'=>$profile->id, "relation_id"=>$relation_id]);
+            // THIS IS ALSO IMPORTANT WHEN CREATING THE RELATION!!!!
+            // depending on which id (user or profile id is higher !! we either do relationOne attach or relationTwo attach)
+            return array(['response' => 'No relation was found']);
         }
-        return array(['succes'=>"your relationship was made."]);
-        */
-
-        // get relation id where relation name = $relation
-        // look up the relation between the sent profile id and logged in user++
-
     }
 
     /*
