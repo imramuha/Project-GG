@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Post;
+use App\Models\LikedPost;
 use App\Models\Status;
 use App\Models\Comment;
 use App\Models\Review;
@@ -198,6 +199,30 @@ class AccountController extends Controller
     public function showPost ($id) {
         $post = Post::where('id', '=', $id)->with("comments", "comments.user", "likedPosts")->get();
         return response()->json($post);
+    }
+
+    /*
+    * Like or dislike a post
+    */
+    public function likePost (Request $request) {
+
+        $post_id = $request->input('post_id');
+        $user_id = auth()->id();
+
+        // check if the user likes the following/sent post id
+        $likedPost = LikedPost::where('user_id', '=', $user_id)->where('post_id', "=", $post_id)->first();
+
+        // if post is liked -> delete it like else create a like
+        if($likedPost) {
+            $likedPost->delete();
+            return $likedPost;
+        } else {
+            $like = LikedPost::create([
+                'user_id' => $user_id,
+                'post_id' => $post_id,
+            ]);
+            return $like;
+        }
     }
 
     /*
