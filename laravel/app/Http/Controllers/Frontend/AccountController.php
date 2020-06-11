@@ -80,6 +80,46 @@ class AccountController extends Controller
     }
 
 
+    
+    /* 
+    * search for users
+    */
+    public function searchUser (Request $request) {
+        $searchTerm = $request->input('search');
+
+        $users = User::search($searchTerm)->get();
+
+        return response()->json(['users' => $users]);
+    }
+
+
+    public function userStatus (Request $request) {
+
+        $status_name = $request->input('status');
+        $status = Status::where('name', "=", $status_name)->first();
+
+        
+        User::where('id', '=', auth()->id())->update(array(
+            'status_id' => $status->id,
+        ));
+
+        return array(['response' => 'The status has been updated.']);
+        // this function changes the user status
+        // whenever they log in
+        // log out
+        // stay afk
+        // <ingame class=""></ingame>
+        // change their own status to offline/online
+        // to do: when user logs in onlin
+        // when logs out -> offline
+        // user can set status themselves too
+        /*      User::where('id', '=', $id)->update(array(
+            'email' => $request->input('email'),
+            'image' => $request->input('image'),
+        ));
+*/
+    }
+
     // determine the authenticated user's relation with the opened user :)
     public function showRelation($id) {
 
@@ -146,8 +186,8 @@ class AccountController extends Controller
         
         } else if ( $user->relationTwo()->wherePivot('user_id_one', $profile_id)->wherePivot("user_id_two", auth()->id())->detach()) {
 
-            // THIS WORKS
-            $user->relationTwo()->attach('4', ['user_id_one'=>$profile->id, "user_id_two"=>$logged_id]);
+            // THIS WORKS ??? REPPL
+            $user->relationTwo()->attach($relation_id, ['user_id_one'=>$profile->id, "user_id_two"=>$logged_id]);
 
             return array(["response"=>"relation two was succesfully updated."]);
 
@@ -158,21 +198,7 @@ class AccountController extends Controller
         }
     }
 
-    /*
-    *  user adds games to their collection
-    */
-    public function addUserGame ($profile_id, $relation) {
-        // attach the game to the user
 
-    }
-
-    /*
-    *  user removes games to their collection
-    */
-    public function removeUserGame ($game_id) {
-        // remove/detach the game from user
-
-    }
 
     /*
     * Get all users except the logged one in ^^
@@ -293,12 +319,79 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
+        /*
+    *  user adds games to their collection
+    */
+    public function addUserGame (Request $request) {
+        // attach the game to the user
+        // 
+
+        $game_id = $request->input('game_id');
+        $user_id = auth()->id();
+
+        if($request->input('data_id')) {
+            // update it            
+            Data::where('id', '=', $id)->update(array(
+                'username' => $request->input('username'),
+                'data' => $request->input('data'),
+            ));
+            return array(['response' => 'Your game data was updated.']);
+        } else {
+            // create it
+            $data = Data::create([
+                'username' => $request->input('username'),
+                'data' => $request->input('data')
+            ]);
+    
+            $gameUserData = GameUserData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
+
+            if($gameUserData) {
+                return array(['response' => 'This game user data exist.']);
+            } else {
+                // Create a new gameuserdata
+                $newGameUserData = GameUserDat::create([
+                    'data_id' => $data->id,
+                    'user_id' => $user_id,
+                    "game_id" => $game_id,
+                ]);
+                return array(['response' => 'Game user data was created.']);
+            }
+        }
+    }
+
+    /*
+    *  user removes games to their collection
+    */
+    public function removeUserGame (Request $request) {
+        // remove/detach the game from user
+
+        $game_id = $request->input('game_id');
+        $user_id = auth()->id();
+
+        $gameUserData = GameUserData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
+        $data_id = $gameUserData->data_id;
+        $gameUserData->delete();
+        
+        $data = Data::where('data_id', "=", $data_id)->first();
+        $data->delete();
+    }
+
+
     /*
     * Get all logged in users receiven-reviews
     */
     public function showUserReviews () {
 
         $data = Review::where('user_id', '=', auth()->user()->id)->paginate(4);
+        return response()->json($data);
+    }
+
+       /*
+    * Get all logged in users receiven-reviews
+    */
+    public function showPostedReviews () {
+
+        $data = Review::where('reviewer_id', '=', auth()->user()->id)->paginate(4);
         return response()->json($data);
     }
 

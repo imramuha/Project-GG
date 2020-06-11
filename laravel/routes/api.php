@@ -36,12 +36,16 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/user/{id}', 'AccountController@showUser');
     Route::get('/userposts', 'AccountController@showUserPosts');
     Route::get('/userpost/delete/{id}', 'AccountController@deleteUserPost');
+    Route::post('/searchusers', 'AccountController@searchUsers');
+
+    Route::post('/userstatus', 'AccountController@userStatus');
 
     Route::get('/relation/{id}', 'AccountController@showRelation');
     Route::post('/createrelation', 'AccountController@createRelation');
 
     Route::post('/user/review', 'AccountController@postReview');
     Route::get('/userreviews', 'AccountController@showUserReviews');
+    Route::get('/userpostedreviews', 'AccountController@showPostedReviews');
 
     Route::get('/posts', 'AccountController@showPosts');
     Route::get('/post/{id}', 'AccountController@showPost');
@@ -52,8 +56,12 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     Route::get('/friends', 'AccountController@showFriends');
 
+    Route::post('/addusergame', 'AccountController@addUserGame');
+    Route::post('/removeusergame', 'AccountController@removeUserGame');
     Route::get('/usergames', 'AccountController@showUserGameData');
     Route::get('/queuegames', 'AccountController@showQueueGames');
+
+
     Route::post('/queue', 'AccountController@queue');
     Route::get('/lounge/{id}', 'AccountController@lounge');
     Route::get('/exitlounge', 'AccountController@exitLounge');
