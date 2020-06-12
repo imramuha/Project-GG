@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GameOptionsTableSeeder::class);
         $this->call(UserGameDataTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
     }
 }

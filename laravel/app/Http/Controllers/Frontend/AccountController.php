@@ -545,5 +545,26 @@ class AccountController extends Controller
 
         return response()->json($message);
     }
+
+    public function nightmode (Request $request) {
+        // first create settings else if exists!
+        // then update
+
+        //$mode = $request->input('mode');
+        $mode = false;
+
+        $setting = Setting::where('user_id', "=", auth()->user()->id)->first();
+
+        if($setting) {
+            Setting::where('user_id', '=', auth()->user()->id)->update(array(
+                'nightmode' => $mode,
+            ));
+        } else {
+            $settings = Setting::create([
+                'user_id' => auth()->user()->id,
+                'nightmode' => $mode,
+            ]);
+        }
+    }
     
 }

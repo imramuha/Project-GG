@@ -15,7 +15,9 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->boolean('nightmode')->default(True);
             $table->timestamps();
+            $table->integer('user_id')->unsigned()->nullable()->unique();
         });
     }
 

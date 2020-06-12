@@ -72,6 +72,8 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
 
     Route::post('/messaging/auth', 'AccountController@messagingAuth');
+
+    Route::post('/mode', 'AccountController@nightmode');
 });
 
 

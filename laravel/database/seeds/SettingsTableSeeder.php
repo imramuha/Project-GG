@@ -12,5 +12,9 @@ class SettingsTableSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('settings')->insert([
+            'user_id' => '3',
+            'nightmode' => true,
+        ]);
     }
 }
