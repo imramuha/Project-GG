@@ -16,7 +16,7 @@
                 <button type="button" class="logoutButton" @click="logout">Logout</button>
             </div>
         </div>
-        <div class="content">
+        <div v-if="contentActive" class="content">
             <ProfileHeader />
             <div class="contentNav">
                 <template>
@@ -31,6 +31,9 @@
                 <!--<p v-else>Loading posts</p>-->
             </div>
         </div>
+        <div v-else class="overscreen">
+            <h1>Overscreen</h1>
+        </div>
         <div class="sidecontent">
             <div class="sidecontentHeader">
                 <div class="sidecontentNotifications">
@@ -40,7 +43,7 @@
             <div class="sidecontentFunction">
                 <form>
                     <input type="text" placeholder="Search a player.." name="search" />
-                    <button type="submit">
+                    <button type="button" @click="search">
                         <i class="fa fa-search"></i>
                     </button>
                 </form>
@@ -75,7 +78,8 @@ export default {
             // isLoading: true,
             items: [],
             mainComponent: Feed,
-            emit: "feed"
+            emit: "feed",
+            contentActive: true,
         };
     },
     methods: {
@@ -101,6 +105,14 @@ export default {
         },
         logout() {
             this.$store.dispatch("logout");
+        },
+        search() {
+           
+            if(this.contentActive == true) {
+                this.contentActive = false;
+            } else {
+                this.contentActive = true;
+            }
         }
     }
 };

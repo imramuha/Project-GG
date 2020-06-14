@@ -1,0 +1,10 @@
+.overscreen {
+    display: flex;
+    background-color: $sand;
+    flex-grow: 10;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 7px;
+    width: 100%;
+    height: 100%;
+}
