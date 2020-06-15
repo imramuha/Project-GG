@@ -1,4 +1,4 @@
-.overscreen {
+.overscreenContainer {
     display: flex;
     background-color: $sand;
     flex-grow: 10;
@@ -7,4 +7,12 @@
     padding: 7px;
     width: 100%;
     height: 100%;
+    background-color: $midnightL;
+    .overscreen {
+        border-radius: 2px;
+        padding: 7px;
+        box-shadow: 0 0 3px $midnightH;
+        height: 100%;
+        width: 100%;
+    }
 }

@@ -30,7 +30,7 @@ import { getPost, postComment } from "@/services/forum.api";
 
 export default {
   components: { CommentCard },
-  props: ["id"],
+  props: ["data"],
   data() {
     return {
       post: [],
@@ -41,8 +41,9 @@ export default {
     };
   },
   async mounted() {
+
     try {
-      const response = await getPost(this.id);
+      const response = await getPost(this.data);
       this.post = response.data[0];
       this.comments = response.data[0].comments;
       this.likes = this.post.liked_posts.length

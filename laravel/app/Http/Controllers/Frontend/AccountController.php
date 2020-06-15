@@ -84,10 +84,10 @@ class AccountController extends Controller
     /* 
     * search for users
     */
-    public function searchUser (Request $request) {
-        $searchTerm = $request->input('search');
+    public function searchUsers (Request $request) {
+        $searchTerm = $request->input('searchTerm');
 
-        $users = User::search($searchTerm)->get();
+        $users = User::where('username','LIKE','%'.$searchTerm.'%')->get();
 
         return response()->json(['users' => $users]);
     }

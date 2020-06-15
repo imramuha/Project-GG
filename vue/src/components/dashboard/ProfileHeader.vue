@@ -24,9 +24,9 @@
                     <p>{{ user.status.name }}</p>
                 </div>
                 <div class="userDataRight">
-                    <router-link to="/useredit">
+                    <a v-on:click="onEditClick" to="/useredit">
                         <button>EDIT</button>
-                    </router-link>
+                    </a>
                 </div>
             </div>
 
@@ -65,6 +65,17 @@ export default {
             });
         } catch (error) {
             console.log(error);
+        }
+    },
+    methods: {
+        onEditClick() {
+            let value = {
+                component: "UserEdit"
+            }
+            this.emitToOverscreen(value);
+        },
+        emitToOverscreen(value) {
+            this.$emit("emitToOverscreen", value);
         }
     }
 };

@@ -2,22 +2,28 @@
     <div class="dashboard">
         <div class="sidenav">
             <div class="sidenavLogo">
-              <img src="@/assets/images/logo.svg" />
+                <img src="@/assets/images/logo.svg" />
             </div>
             <!--<router-link to="/user" class="button">Lobby</router-link>-->
-            <button type="button" class="logoutButton" @click="queue">
-                Queue up
-            </button>
+            <button type="button" class="logoutButton" @click="queue">Queue up</button>
             <div class="sidenavButtons">
-                <router-link to="/"><i class="fas fa-home"></i></router-link>
-                <router-link to="/dashboard"><i class="fas fa-tachometer-alt"></i></router-link>
-                <router-link to="/forum" class="button"><i class="far fa-comment-alt"></i></router-link>
-                <router-link to="/user" class="button"><i class="fas fa-cog"></i></router-link>
+                <router-link to="/">
+                    <i class="fas fa-home"></i>
+                </router-link>
+                <router-link to="/dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                </router-link>
+                <router-link to="/forum" class="button">
+                    <i class="far fa-comment-alt"></i>
+                </router-link>
+                <router-link to="/user" class="button">
+                    <i class="fas fa-cog"></i>
+                </router-link>
                 <button type="button" class="logoutButton" @click="logout">Logout</button>
             </div>
         </div>
         <div v-if="contentActive" class="content">
-            <ProfileHeader />
+            <ProfileHeader v-on:emitToOverscreen="onOverscreenClick" />
             <div class="contentNav">
                 <template>
                     <DashboardNav v-on:emitToDashboard="onDashboardNavClick" />
@@ -26,24 +32,36 @@
             <div class="contentMain">
                 <!-- TBD loading/api call loader <template v-if="!isLoading">-->
                 <template>
-                    <component :is="mainComponent"></component>
+                    <component v-on:emitToOverscreen="onOverscreenClick" :is="mainComponent"></component>
                 </template>
                 <!--<p v-else>Loading posts</p>-->
             </div>
         </div>
-        <div v-else class="overscreen">
-            <h1>Overscreen</h1>
+        <div v-else class="overscreenContainer">
+            <div class="overscreen">
+                <h1>Overscreen</h1>
+                <!--<Searches
+                    v-for="searchedUser in searchedUsers"
+                    v-bind:key="searchedUser.id"
+                    :searchedUser="searchedUser"
+                />-->
+                 <template>
+                    <component :data="overscreenData" :is="overscreenComponent"></component>
+                </template>
+            </div>
         </div>
         <div class="sidecontent">
             <div class="sidecontentHeader">
                 <div class="sidecontentNotifications">
-                    <div class="notificationsEmpty">There are no notifications available.  emitting: {{ emit }}</div>
+                    <div
+                        class="notificationsEmpty"
+                    >There are no notifications available. emitting: {{ emit }}</div>
                 </div>
             </div>
             <div class="sidecontentFunction">
-                <form>
-                    <input type="text" placeholder="Search a player.." name="search" />
-                    <button type="button" @click="search">
+                <form @submit.prevent="search">
+                    <input type="text" placeholder="Search a player.."  v-model="searchTerm" />
+                    <button type="submit" >
                         <i class="fa fa-search"></i>
                     </button>
                 </form>
@@ -62,6 +80,8 @@ import Friendlist from "@/components/dashboard/Friendlist";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 
+import Searches from "@/components/overscreen/Searches";
+
 import Reviews from "@/components/dashboard/Reviews";
 import Inbox from "@/components/dashboard/Inbox";
 import Feed from "@/components/dashboard/Feed";
@@ -69,17 +89,40 @@ import Games from "@/components/dashboard/Games";
 import Posts from "@/components/dashboard/Posts";
 import News from "@/components/dashboard/News";
 
+import Post from "@/views/Post";
+import UserEdit from "@/views/UserEdit";
+import PostCreate from "@/views/PostCreate";
+
 import Queue from "@/components/Queue";
 
+import { searchUsers } from "@/services/user.api";
+
 export default {
-    components: { Posts, Games, Feed, News, Inbox, Queue, Reviews, Friendlist, DashboardNav, ProfileHeader },
+    components: {
+        Posts,
+        Post,
+        Games,
+        Feed,
+        News,
+        Inbox,
+        Queue,
+        Reviews,
+        Friendlist,
+        DashboardNav,
+        ProfileHeader,
+        Searches
+    },
     data() {
         return {
             // isLoading: true,
+            searchedUsers: [],
             items: [],
             mainComponent: Feed,
             emit: "feed",
             contentActive: true,
+            searchTerm: null,
+            overscreenComponent: null,
+            overscreenData: null,
         };
     },
     methods: {
@@ -101,19 +144,44 @@ export default {
             }
         },
         queue() {
-            this.mainComponent = Queue
+            this.mainComponent = Queue;
         },
         logout() {
             this.$store.dispatch("logout");
         },
-        search() {
-           
-            if(this.contentActive == true) {
+        async search() {
+            if (this.contentActive == true) {
                 this.contentActive = false;
+
+                let searchTerm = {
+                    searchTerm: this.searchTerm
+                };
+                try {
+                    let response = await searchUsers(searchTerm);
+
+                    this.searchedUsers = response.data.users;
+
+                    this.searchTerm = null;
+                } catch (error) {
+                    console.log(error);
+                }
             } else {
                 this.contentActive = true;
             }
-        }
+        },
+        onOverscreenClick(value) {
+            if(value.component === "PostCard") {
+                this.contentActive = false;
+                this.overscreenComponent = Post;
+                this.overscreenData = value.id;
+            } else if (value.component === "UserEdit") {
+                this.contentActive = false;
+                this.overscreenComponent = UserEdit;
+            } else if (value.component === "PostCreate") {
+                this.contentActive = false;
+                this.overscreenComponent = PostCreate;
+            }
+        },
     }
 };
 </script>

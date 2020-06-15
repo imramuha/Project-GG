@@ -1,18 +1,20 @@
 <template>
-  <div class="postsboard">
-    <div class="posts">
-      <PostCard
-        v-for="userpost in userposts"
-        v-bind:key="userpost.id"
-        :post="userpost"
-      />
+    <div class="postsboard">
+        <a  v-on:click="onCreateClick"><button>Create</button></a>
+        <div class="posts">
+            <PostCard
+                v-for="userpost in userposts"
+                v-bind:key="userpost.id"
+                :post="userpost"
+                v-on:emitToPosts="onPostCardClick"
+            />
+        </div>
+        <div class="postsNav">
+            <button>Previous</button>
+            <p>1 - 2 - 3 - 4</p>
+            <button>Next</button>
+        </div>
     </div>
-    <div class="postsNav">
-      <button>Previous</button>
-      <p>1 - 2 - 3 - 4</p>
-      <button>Next</button>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -22,45 +24,60 @@ import { getAllFriends } from "@/services/friend.api";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  components: { PostCard },
-  data() {
-    return {
-      isLoading: true,
-      userposts: [],
-    };
-  },
-  computed: {
-    ...mapGetters("Forum", ["getUserPosts"]),
-  },
-  methods: {
-    ...mapActions("Forum", ["fetchUserPosts"]),
-  },
+    components: { PostCard },
+    data() {
+        return {
+            isLoading: true,
+            userposts: [],
+            childMessage: [],
+        };
+    },
+    computed: {
+        ...mapGetters("Forum", ["getUserPosts"])
+    },
+    methods: {
+        ...mapActions("Forum", ["fetchUserPosts"]),
+        onPostCardClick(value) {
+            // this.emit = value;
 
-  async mounted() {
-    // Make network request if the data is empty
-    if (this.getUserPosts.length === 0) {
-      // set loading screen
-      this.isLoading = true;
-      // await this.fetchPosts();
+            this.emitToOverscreen(value);
+        },
+        onCreateClick() {
+            let value = {
+                component: "PostCreate"
+            }
+            this.emitToOverscreen(value);
+        },
+        emitToOverscreen(value) {
+            this.$emit("emitToOverscreen", value);
+        }
+    },
 
-      await this.fetchUserPosts();
+    async mounted() {
+        // Make network request if the data is empty
+        if (this.getUserPosts.length === 0) {
+            // set loading screen
+            this.isLoading = true;
+            // await this.fetchPosts();
 
-      this.userposts = this.getUserPosts;
+            await this.fetchUserPosts();
 
-      this.isLoading = false;
-    } else {
-      this.userposts = this.getUserPosts;
-      this.isLoading = false;
+            this.userposts = this.getUserPosts;
+
+            this.isLoading = false;
+        } else {
+            this.userposts = this.getUserPosts;
+            this.isLoading = false;
+        }
+
+        try {
+            const response = await getAllFriends();
+            this.friends = response.data;
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
-
-    try {
-      const response = await getAllFriends();
-      this.friends = response.data;
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  },
 };
 </script>
 

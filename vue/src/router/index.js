@@ -4,8 +4,7 @@ import Home from "../views/Home.vue";
 
 import Dashboard from "../views/Dashboard.vue";
 import Forum from "../views/Forum.vue";
-import Post from "../views/Post.vue";
-import PostInput from "../views/PostInput.vue";
+import PostCreate from "../views/PostCreate.vue";
 // forumpost
 
 import Register from "../views/Register.vue";
@@ -65,15 +64,9 @@ const router = new Router({
             props: true
         },
         {
-            path: "/post/:id",
-            name: "post",
-            component: Post,
-            props: true
-        },
-        {
             path: "/postcreate",
             name: "postcreate",
-            component: PostInput,
+            component: PostCreate,
             props: true
         }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="dashboardNav">
-    <button @click="feed"  :class="{ navButtonActive: isActive === 'feed'}" v-on:click="emitToDashboard">
+    <button @click="feed" :class="{ navButtonActive: isActive === 'feed'}" v-on:click="emitToDashboard">
       Feed
     </button>
     <button @click="inbox" :class="{ navButtonActive: isActive === 'inbox'}" v-on:click="emitToDashboard">
