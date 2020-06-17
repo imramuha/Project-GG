@@ -40,11 +40,6 @@
         <div v-else class="overscreenContainer">
             <div class="overscreen">
                 <h1>Overscreen</h1>
-                <!--<Searches
-                    v-for="searchedUser in searchedUsers"
-                    v-bind:key="searchedUser.id"
-                    :searchedUser="searchedUser"
-                />-->
                  <template>
                     <component :data="overscreenData" :is="overscreenComponent"></component>
                 </template>
@@ -59,16 +54,11 @@
                 </div>
             </div>
             <div class="sidecontentFunction">
-                <form @submit.prevent="search">
-                    <input type="text" placeholder="Search a player.."  v-model="searchTerm" />
-                    <button type="submit" >
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
+               <SearchInput v-on:emitToOverscreen="onOverscreenClick"/>
             </div>
             <div class="sidecontentFriendlist">
                 <template>
-                    <Friendlist />
+                    <Friendlist v-on:emitToOverscreen="onOverscreenClick" />
                 </template>
             </div>
         </div>
@@ -80,8 +70,6 @@ import Friendlist from "@/components/dashboard/Friendlist";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
 
-import Searches from "@/components/overscreen/Searches";
-
 import Reviews from "@/components/dashboard/Reviews";
 import Inbox from "@/components/dashboard/Inbox";
 import Feed from "@/components/dashboard/Feed";
@@ -89,13 +77,15 @@ import Games from "@/components/dashboard/Games";
 import Posts from "@/components/dashboard/Posts";
 import News from "@/components/dashboard/News";
 
+import SearchInput from "@/components/SearchInput";
+import UserSearch from "@/components/UserSearch";
+
 import Post from "@/views/Post";
 import UserEdit from "@/views/UserEdit";
 import PostCreate from "@/views/PostCreate";
+import Profile from "@/views/Profile";
 
 import Queue from "@/components/Queue";
-
-import { searchUsers } from "@/services/user.api";
 
 export default {
     components: {
@@ -110,17 +100,17 @@ export default {
         Friendlist,
         DashboardNav,
         ProfileHeader,
-        Searches
+        SearchInput,
+        UserSearch,
+        Profile
     },
     data() {
         return {
             // isLoading: true,
-            searchedUsers: [],
             items: [],
             mainComponent: Feed,
             emit: "feed",
             contentActive: true,
-            searchTerm: null,
             overscreenComponent: null,
             overscreenData: null,
         };
@@ -149,27 +139,8 @@ export default {
         logout() {
             this.$store.dispatch("logout");
         },
-        async search() {
-            if (this.contentActive == true) {
-                this.contentActive = false;
-
-                let searchTerm = {
-                    searchTerm: this.searchTerm
-                };
-                try {
-                    let response = await searchUsers(searchTerm);
-
-                    this.searchedUsers = response.data.users;
-
-                    this.searchTerm = null;
-                } catch (error) {
-                    console.log(error);
-                }
-            } else {
-                this.contentActive = true;
-            }
-        },
         onOverscreenClick(value) {
+            console.log(value);
             if(value.component === "PostCard") {
                 this.contentActive = false;
                 this.overscreenComponent = Post;
@@ -180,6 +151,14 @@ export default {
             } else if (value.component === "PostCreate") {
                 this.contentActive = false;
                 this.overscreenComponent = PostCreate;
+            } else if (value.component === "Profile") {
+                this.contentActive = false;
+                this.overscreenComponent = Profile;
+                this.overscreenData = value.id;
+            } else if (value.component === "UserSearch") {
+                this.contentActive = false;
+                this.overscreenComponent = UserSearch;
+                this.overscreenData = value.searchTerm;
             }
         },
     }

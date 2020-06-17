@@ -2,7 +2,8 @@
   <div class="friendlist">
     <div class="friendlistCategory">
       <h1 v-on:click="toggleOnline">
-        online ({{ onlineFriends.length }}) <span>{{ toggleIconOnline }}</span>
+        online ({{ onlineFriends.length }})
+        <span>{{ toggleIconOnline }}</span>
       </h1>
 
       <FriendlistCard
@@ -10,6 +11,7 @@
         v-for="friend in onlineFriends"
         v-bind:key="friend.id"
         :friend="friend"
+        v-on:emitToFriendlist="onFriendlistCardClick"
       />
     </div>
     <div class="friendlistCategory">
@@ -43,10 +45,16 @@ export default {
       showOnlineSection: true,
       showOfflineSection: false,
       toggleIconOnline: "-",
-      toggleIconOffline: "+"
+      toggleIconOffline: "+",
     };
   },
   methods: {
+    onFriendlistCardClick(value) {
+      this.emitToOverscreen(value);
+    },
+    emitToOverscreen(value) {
+      this.$emit("emitToOverscreen", value);
+    },
     toggleOnline() {
       this.showOnlineSection = !this.showOnlineSection;
       if (this.toggleIconOnline == "+") {
@@ -62,7 +70,7 @@ export default {
       } else {
         this.toggleIconOffline = "+";
       }
-    }
+    },
   },
   async mounted() {
     try {
@@ -70,7 +78,7 @@ export default {
       this.friends = response.data;
 
       // adds friends to either online of offline array :)
-      this.friends.forEach(item => {
+      this.friends.forEach((item) => {
         if (item.status.name == "online") {
           this.onlineFriends.push(item);
         }
@@ -83,7 +91,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
 </script>
 

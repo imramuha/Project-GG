@@ -1,7 +1,7 @@
 <template>
     <div class="postCard">
         <a
-            @click="postCard"
+            @click="onPostCardClick"
             v-on:click="emitToPosts"
         >
             <div class="postcardImg">
@@ -54,7 +54,7 @@ export default {
         ugg() {
             console.log("you just uGG'd this post :(");
         },
-        postCard() {
+        onPostCardClick() {
             this.childMessage = {
               component: "PostCard",
               id: this.post.id,

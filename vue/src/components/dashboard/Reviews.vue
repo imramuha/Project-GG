@@ -1,6 +1,10 @@
 <template>
     <div class="postsboard">
+        <a><button>Given</button></a>
+        <a><button>Received</button></a>
+
         <div class="posts">
+
             <ReviewCard v-for="userreview in userreviews" v-bind:key="userreview.id" :review="userreview" />
         </div>
         <div class="postsNav">
@@ -22,15 +26,16 @@ export default {
         return {
             isLoading: true,
             userreviews: [],
-            url: "/api/frontend/userreviews",
+            url_received: "/api/frontend/userreviews",
+            url_given: "/api/frontend/userpostedreviews",
             pagination: [],
         };
     },
     computed: {
-        ...mapGetters("Review", ["getUserReviews"])
+        ...mapGetters("Review", ["getUserReviews", "getUserPostedReviews"])
     },
     methods: {
-        ...mapActions("Review", ["fetchUserReviews"]),
+        ...mapActions("Review", ["fetchUserReviews", "fetchUserPostedReviews"]),
 
         createPagination(data) {
             let pagination = {
@@ -42,7 +47,6 @@ export default {
             this.pagination = pagination;
         },
         async fetchPaginatedReviews(url) {
-            console.log('hii')
             this.url = url;
 
             await this.fetchUserReviews(this.url);

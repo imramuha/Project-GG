@@ -1,6 +1,6 @@
 <template>
   <div class="friendlistCard">
-    <router-link :to="{ name: 'profile', params: { id: friend.id } }">
+    <a  @click="onProfileClick" v-on:click="emitToFriendlist">
       <div class="friendlistCardImg">
         <img src="https://placekitten.com/250/250" />
       </div>
@@ -12,7 +12,7 @@
         <p>{{ friend.status.name }}</p>
         <div class="statusCircle"></div>
       </div>
-    </router-link>
+    </a>
   </div>
 </template>
 
@@ -25,6 +25,24 @@ export default {
         return {};
       }
     }
+  },
+  data() {
+      return {
+          childMessage: null,
+      };
+  },
+  methods: {
+        onProfileClick() {
+            this.childMessage = {
+                component: "Profile",
+                id: this.friend.id
+            }
+                 
+            this.emitToFriendlist(this.childMessage);
+        },
+        emitToFriendlist(value) {
+            this.$emit("emitToFriendlist", value);
+        }
   }
 };
 </script>

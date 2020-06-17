@@ -4,15 +4,11 @@ import Home from "../views/Home.vue";
 
 import Dashboard from "../views/Dashboard.vue";
 import Forum from "../views/Forum.vue";
-import PostCreate from "../views/PostCreate.vue";
-// forumpost
 
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 
-import Profile from "../views/Profile.vue";
 import User from "../views/User.vue";
-import UserEdit from "../views/UserEdit.vue";
 
 Vue.use(Router);
 
@@ -52,24 +48,6 @@ const router = new Router({
             component: User,
             props: true
         },
-        {
-            path: "/useredit",
-            name: "useredit",
-            component: UserEdit,
-            props: true
-        }, {
-            path: "/profile/:id",
-            name: "profile",
-            component: Profile,
-            props: true
-        },
-        {
-            path: "/postcreate",
-            name: "postcreate",
-            component: PostCreate,
-            props: true
-        }
-
     ]
 });
 

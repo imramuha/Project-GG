@@ -31,7 +31,7 @@ import ReviewInput from "@/components/ReviewInput";
 
 export default {
   components: { ReviewInput },
-  props: ["id"],
+  props: ["data"],
   data() {
     return {
       friend: [],
@@ -41,7 +41,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await getFriend(this.id);
+      const response = await getFriend(this.data);
       this.friend = response.data.user[0];
       console.log(response.data)
       console.log(this.friend);
@@ -51,7 +51,7 @@ export default {
       console.log(error);
     }
      try {
-      const response = await getRelation(this.id);
+      const response = await getRelation(this.data);
       console.log(response);
       this.relation = response.data[0];
       console.log(this.relation)

@@ -29,7 +29,7 @@ export default {
         return {
             isLoading: true,
             userposts: [],
-            childMessage: [],
+         
         };
     },
     computed: {
