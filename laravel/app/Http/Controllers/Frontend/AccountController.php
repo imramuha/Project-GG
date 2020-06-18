@@ -12,6 +12,7 @@ use App\Models\Status;
 use App\Models\Comment;
 use App\Models\Review;
 use App\Models\UserGameData;
+use App\Models\Data;
 use App\Models\Game;
 use App\Models\Message;
 
@@ -319,6 +320,28 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
+    /*
+    *  Get all games that aren't linked to the user
+    */
+
+    public function getUserGamesUnadded() {
+        $user_id = auth()->id();
+
+        // get all game id's connected to the user
+        $user_game_data = UserGameData::where('user_id', '=', auth()->user()->id)->get();
+        
+        $game_ids_array = array();
+
+        foreach($user_game_data as $data) {
+            array_push($game_ids_array, $data->game_id);
+        }
+
+        // find all games but the ones user already has added
+        $games_unadded = Game::whereNotIn("id", $game_ids_array)->get();
+
+        return $games_unadded;
+      }
+
         /*
     *  user adds games to their collection
     */
@@ -329,34 +352,26 @@ class AccountController extends Controller
         $game_id = $request->input('game_id');
         $user_id = auth()->id();
 
-        if($request->input('data_id')) {
-            // update it            
-            Data::where('id', '=', $id)->update(array(
-                'username' => $request->input('username'),
-                'data' => $request->input('data'),
-            ));
-            return array(['response' => 'Your game data was updated.']);
-        } else {
-            // create it
-            $data = Data::create([
-                'username' => $request->input('username'),
-                'data' => $request->input('data')
-            ]);
-    
-            $gameUserData = GameUserData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
 
-            if($gameUserData) {
-                return array(['response' => 'This game user data exist.']);
-            } else {
-                // Create a new gameuserdata
-                $newGameUserData = GameUserDat::create([
-                    'data_id' => $data->id,
-                    'user_id' => $user_id,
-                    "game_id" => $game_id,
-                ]);
-                return array(['response' => 'Game user data was created.']);
-            }
-        }
+        $data = Data::create([
+            'username' => $request->input('username'),
+            'data' => $request->input('data')
+        ]);
+
+        //$gameUserData = GameUserData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
+
+        //($gameUserData) {
+        //   return array(['response' => 'This game user data exist.']);
+        //} else {
+            // Create a new gameuserdata
+        $newGameUserData = UserGameData::create([
+            'data_id' => $data->id,
+            'user_id' => $user_id,
+            "game_id" => $game_id,
+        ]);
+        return array(['response' => 'Game user data was created.']);
+        //}
+        
     }
 
     /*
@@ -368,12 +383,16 @@ class AccountController extends Controller
         $game_id = $request->input('game_id');
         $user_id = auth()->id();
 
-        $gameUserData = GameUserData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
+
+        $gameUserData = UserGameData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
         $data_id = $gameUserData->data_id;
+
         $gameUserData->delete();
-        
-        $data = Data::where('data_id', "=", $data_id)->first();
-        $data->delete();
+
+        if($data_id) {        
+            $data = Data::where('id', "=", $data_id)->first();
+            $data->delete();
+        }
     }
 
 

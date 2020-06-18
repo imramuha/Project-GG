@@ -1,6 +1,6 @@
 <template>
     <div class="postsboard">
-        <a  v-on:click="onCreateClick"><button>Create</button></a>
+        <a  v-on:click="onClickCreate"><button>Create</button></a>
         <div class="posts">
             <PostCard
                 v-for="userpost in userposts"
@@ -42,7 +42,7 @@ export default {
 
             this.emitToOverscreen(value);
         },
-        onCreateClick() {
+        onClickCreate() {
             let value = {
                 component: "PostCreate"
             }

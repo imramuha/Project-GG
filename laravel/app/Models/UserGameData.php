@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserGameData extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'data_id',
+        'game_id',
+    ];
     /**
      * Get the post of this user
      */

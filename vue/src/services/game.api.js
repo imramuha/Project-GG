@@ -1,8 +1,15 @@
 import httpClient from "./httpClient";
 
-// const USER_END_POINT = "/api/frontend/usergames";
+const REMOVE_USER_GAME_END_POINT = "/api/frontend/removeusergame";
+const UNADDED_USER_GAMES_END_POINT = "/api/frontend/usergamesunadded";
+const ADD_USER_GAME_END_POINT = "/api/frontend/addusergame";
 
 const getUserGames = url => httpClient.get(url);
 
+const removeUserGame = id => httpClient.post(REMOVE_USER_GAME_END_POINT, id)
 
-export { getUserGames };
+const getUserGamesUnadded = () => httpClient.get(UNADDED_USER_GAMES_END_POINT);
+
+const addUserGame = data => httpClient.post(ADD_USER_GAME_END_POINT, data)
+
+export { getUserGames, removeUserGame, getUserGamesUnadded, addUserGame };

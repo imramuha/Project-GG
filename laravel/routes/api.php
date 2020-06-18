@@ -58,6 +58,9 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     Route::post('/addusergame', 'AccountController@addUserGame');
     Route::post('/removeusergame', 'AccountController@removeUserGame');
+    Route::get('/usergamesunadded', 'AccountController@getUserGamesUnadded');
+
+    
     Route::get('/usergames', 'AccountController@showUserGameData');
     Route::get('/queuegames', 'AccountController@showQueueGames');
 

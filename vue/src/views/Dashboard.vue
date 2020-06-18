@@ -84,6 +84,7 @@ import Post from "@/views/Post";
 import UserEdit from "@/views/UserEdit";
 import PostCreate from "@/views/PostCreate";
 import Profile from "@/views/Profile";
+import UserGameAdd from "@/views/UserGameAdd"
 
 import Queue from "@/components/Queue";
 
@@ -102,6 +103,7 @@ export default {
         ProfileHeader,
         SearchInput,
         UserSearch,
+        UserGameAdd,
         Profile
     },
     data() {
@@ -159,6 +161,9 @@ export default {
                 this.contentActive = false;
                 this.overscreenComponent = UserSearch;
                 this.overscreenData = value.searchTerm;
+            } else if (value.component === "UserGameAdd") {
+                this.contentActive = false;
+                this.overscreenComponent = UserGameAdd;
             }
         },
     }

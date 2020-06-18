@@ -1,5 +1,6 @@
 <template>
     <div class="postsboard">
+        <a v-on:click="onClickAdd"><button>Add</button></a>
         <div class="posts">
             <GameCard v-for="usergame in usergames" v-bind:key="usergame.id" :game="usergame" />
         </div>
@@ -48,6 +49,15 @@ export default {
             await this.fetchUserGames(this.url);
             this.usergames = this.getUserGames.data;
             this.createPagination(this.getUserGames)
+        },
+        onClickAdd() {
+            let value = {
+                component: "UserGameAdd"
+            }
+            this.emitToOverscreen(value);
+        },
+        emitToOverscreen(value) {
+            this.$emit("emitToOverscreen", value);
         }
     },
 

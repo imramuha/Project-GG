@@ -1,6 +1,6 @@
 <template>
   <div class="postCard">
-    <router-link :to="{ name: 'post', params: { id: game.id } }"
+    <a @click="removeUserGame" 
       >
       <div class="postcardImg">
         <img src="https://placekitten.com/250/250" />
@@ -16,10 +16,15 @@
         </p>
         </div>
       </div>
-    </router-link>
+    </a>
   </div>
 </template>
+
 <script>
+
+import { removeUserGame } from "@/services/game.api";
+
+
 export default {
   name: "GameCard",
   props: {
@@ -30,6 +35,20 @@ export default {
       },
     },
   },
+  methods: {
+     async removeUserGame() {
+      let data = {
+        game_id: this.game.game.id,
+      }
+      try {
+        let response = await removeUserGame(data);
+        console.log(response);
+
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
 };
 </script>
 <style scoped></style>
