@@ -1,15 +1,15 @@
 <template>
-  <div class="postCard">
+  <div class="reviewCard">
     <router-link :to="{ name: 'post', params: { id: review.id } }"
       >
-      <div class="postcardImg">
+      <div class="reviewCardImg">
         <img src="https://placekitten.com/250/250" />
       </div>
-      <div class="postcardContent">
-        <div class="postcardContentHeader">
+      <div class="reviewCardContent">
+        <div class="reviewCardContentHeader">
           <h1>{{ review.reviewer_id }}</h1>
         </div>
-        <div class="postcardContentBody">
+        <div class="reviewCardContentBody">
        <p>{{ review.comment }}</p>
         <p>
           {{ review.score }} 

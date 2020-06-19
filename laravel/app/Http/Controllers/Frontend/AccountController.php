@@ -206,7 +206,7 @@ class AccountController extends Controller
     */
     public function showPosts () {
 
-        $posts = Post::get();
+        $posts = Post::likedposts("user_id", auth()->id())->get();
         return response()->json($posts);
     }
 
@@ -215,7 +215,12 @@ class AccountController extends Controller
     */
     public function showUserPosts () {
      
-        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts')->get();
+        $posts = Post::where('user_id', '=', auth()->id())->with(
+            array('likedPosts' => function($query)
+            {
+                $query->where('user_id', auth()->id());
+            })        
+        )->get();
         return response()->json($posts);
     }
 
@@ -242,13 +247,13 @@ class AccountController extends Controller
         // if post is liked -> delete it like else create a like
         if($likedPost) {
             $likedPost->delete();
-            return $likedPost;
+            return array(["succes"=>"your post has been unliked", "post" => $likedPost]);
         } else {
             $like = LikedPost::create([
                 'user_id' => $user_id,
                 'post_id' => $post_id,
             ]);
-            return $like;
+            return array(["succes"=>"your post has been liked", "post" => $like]);
         }
     }
 

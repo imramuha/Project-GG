@@ -6,6 +6,19 @@
         box-sizing: border-box;
         padding: 7px;
         border-right: $melt;
+        .queueButton {
+            width: auto;
+            height: 75px;
+            border: 3px solid $melt;
+            border-radius: 50px;
+            background-color: $midnightL;
+            color: $melt;
+            &:hover {
+                color: $snow;
+                border-color: $snow;
+                transform: 0.3s;
+            }
+        }
         .sidenavButtons {
             display: flex;
             flex-wrap: wrap;

@@ -5,7 +5,7 @@
                 <img src="@/assets/images/logo.svg" />
             </div>
             <!--<router-link to="/user" class="button">Lobby</router-link>-->
-            <button type="button" class="logoutButton" @click="queue">Queue up</button>
+            <button type="button" class="queueButton" @click="queue">Queue</button>
             <div class="sidenavButtons">
                 <router-link to="/">
                     <i class="fas fa-home"></i>

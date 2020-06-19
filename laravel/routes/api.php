@@ -50,7 +50,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/posts', 'AccountController@showPosts');
     Route::get('/post/{id}', 'AccountController@showPost');
     Route::post('/post/create', 'AccountController@createPost');
-    Route::post('/post/like', 'AccountController@likePost');
+    Route::post('/postlike', 'AccountController@likePost');
 
     Route::post('/post/comment', 'AccountController@createComment');
 

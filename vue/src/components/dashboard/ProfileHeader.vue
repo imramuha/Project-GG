@@ -25,7 +25,7 @@
                 </div>
                 <div class="userDataRight">
                     <a v-on:click="onEditClick" to="/useredit">
-                        <button>EDIT</button>
+                        <button>Edit</button>
                     </a>
                 </div>
             </div>

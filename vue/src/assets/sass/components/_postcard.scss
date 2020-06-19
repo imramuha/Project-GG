@@ -99,12 +99,17 @@
             }
         }
         
-        .postsNav {
+        .postsFooter {
             height: 10%;
             display: flex;
             padding: 7px;
-            justify-content: center;
-            align-items: center;
+        }
+        
+        .postsNav,
+        .postsFooterButtons {
+            display: flex;
+            justify-content: flex-end;
+            flex: 2;
             button {
                 border: 2px solid $melt;
                 border-radius: 20px;
@@ -112,16 +117,23 @@
                 font-size: 11px;
                 color: $melt;
                 background-color: $midnightL;
-                width: 100px;
-                border-radius: 20px;
-                //margin-top: 10px;
+                border-radius: 5px;
+                min-width: 100px;
+                height: 33px;
                 &:hover {
-                    text-decoration: none;
-                    cursor: pointer;
                     color: $snow;
+                    border-color: $snow;
+                    transition: 0.3s;
                 }
             }
+        }
+        
+        .postsFooterButtons {
+            flex: 1;
+        }
+        
+        .postsNav {
             p {
-                margin: 0px 10px;
+                margin: 8px 15px;
             }
         }

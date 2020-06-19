@@ -1,6 +1,5 @@
 <template>
     <div class="postsboard">
-        <a  v-on:click="onClickCreate"><button>Create</button></a>
         <div class="posts">
             <PostCard
                 v-for="userpost in userposts"
@@ -9,10 +8,15 @@
                 v-on:emitToPosts="onPostCardClick"
             />
         </div>
+        <div class="postsFooter">
         <div class="postsNav">
             <button>Previous</button>
             <p>1 - 2 - 3 - 4</p>
             <button>Next</button>
+        </div>
+        <div class="postsFooterButtons">
+              <a  v-on:click="onClickCreate"><button>Create</button></a>
+        </div>
         </div>
     </div>
 </template>
@@ -38,7 +42,7 @@ export default {
     methods: {
         ...mapActions("Forum", ["fetchUserPosts"]),
         onPostCardClick(value) {
-            // this.emit = value;
+            
 
             this.emitToOverscreen(value);
         },

@@ -1,0 +1,41 @@
+.gamesFooter {
+    height: 10%;
+    display: flex;
+    padding: 7px;
+}
+
+.gamesFooterButtons,
+.gamesPagination {
+    display: flex;
+    justify-content: flex-end;
+    flex: 2;
+    a:first-child {
+        margin-right: 10px;
+    }
+    button {
+        border: 2px solid $melt;
+        border-radius: 20px;
+        padding: 6px 20px;
+        font-size: 11px;
+        color: $melt;
+        background-color: $midnightL;
+        border-radius: 5px;
+        min-width: 100px;
+        height: 33px;
+        &:hover {
+            color: $snow;
+            border-color: $snow;
+            transition: 0.3s;
+        }
+    }
+}
+
+.gamesFooterButtons {
+    flex: 1;
+}
+
+.gamesPagination {
+    p {
+        margin: 8px 15px;
+    }
+}

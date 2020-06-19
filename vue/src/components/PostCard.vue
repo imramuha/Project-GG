@@ -12,7 +12,7 @@
                     <h1>{{ post.title }}</h1>
                 </div>
                 <div class="postcardContentBody">
-                    <p>{{ post.date }}</p>
+                    <p>{{ post.date }}02/05/2002 - {{ post.liked_posts.length }}</p>
                     <p>
                         This is the post content, that will be added later on during this
                         project
@@ -23,15 +23,21 @@
                     <p>Report</p>
                 </div>
             </div>
-            <div class="postcardStats">
+            <div v-if='post.liked_posts.length' class="postcardStats">
                 <button type="button" @click="gg">GG</button>
                 <p>{{ post.liked_posts.length }}</p>
-                <button type="button" @click="ugg">uGG</button>
+           </div>
+            <div v-else class="postcardStats">
+                <p>{{ post.liked_posts.length }}</p>
+                <button  type="button" @click="gg">uGG</button>
             </div>
         </a>
     </div>
 </template>
 <script>
+
+import { likePost } from "@/services/forum.api";
+
 export default {
     name: "PostCard",
     props: {
@@ -48,11 +54,18 @@ export default {
         };
     },
     methods: {
-        gg() {
+        async gg() {
             console.log("you just GG'd this post :)");
-        },
-        ugg() {
-            console.log("you just uGG'd this post :(");
+             let data = {
+              post_id: this.post.id,        
+            }
+            try {
+            let response = await likePost(data);
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
+
         },
         onPostCardClick() {
             this.childMessage = {
