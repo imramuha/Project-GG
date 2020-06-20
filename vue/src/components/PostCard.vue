@@ -1,13 +1,20 @@
 <template>
     <div class="postCard">
-        <a
+     
+            <div   @click="onPostCardClick"
+            v-on:click="emitToPosts"  class="postcardImg">
+              <div v-if="post.image">
+                        <img :src="post.image" />
+                </div>
+                <div v-else>
+                    <img src="@/assets/images/post.png" />
+                </div>
+            </div>
+            <div class="postcardContent">
+                   <a
             @click="onPostCardClick"
             v-on:click="emitToPosts"
         >
-            <div class="postcardImg">
-                <img :src="post.image" />
-            </div>
-            <div class="postcardContent">
                 <div class="postcardContentHeader">
                     <h1>{{ post.title }}</h1>
                 </div>
@@ -18,6 +25,7 @@
                         project
                     </p>
                 </div>
+                   </a>
                 <div class="postcardContentFooter">
                     <p>Comments (2)</p>
                     <p>Report</p>
@@ -31,7 +39,6 @@
                 <p>{{ post.liked_posts.length }}</p>
                 <button  type="button" @click="gg">uGG</button>
             </div>
-        </a>
     </div>
 </template>
 <script>

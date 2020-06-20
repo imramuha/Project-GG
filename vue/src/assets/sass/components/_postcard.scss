@@ -1,35 +1,32 @@
-        .postsboard {
-            height: 100%;
-            width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-        
-        .posts {
-            display: flex;
-            justify-content: space-between;
-            box-sizing: border-box;
-            color: $melt;
-            height: 90%;
-        }
-        
-        .postCard {
-            display: flex;
-            height: 100%;
-            overflow: hidden;
-            padding: 7px;
-            border-radius: 2px;
-            background-color: $midnight;
-            box-shadow: 0 0 3px $midnight;
-            &:not(:last-child) {
-                margin-right: 5px;
+            .postsboard {
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                overflow: hidden;
             }
-            width: 100%;
-            a {
+            
+            .posts {
                 display: flex;
+                justify-content: space-between;
+                box-sizing: border-box;
+                color: $melt;
+                height: 90%;
+            }
+            
+            .postCard {
+                display: flex;
+                height: 100%;
+                overflow: hidden;
+                padding: 7px;
+                border-radius: 2px;
+                background-color: $midnight;
+                box-shadow: 0 0 3px $midnight;
+                &:not(:last-child) {
+                    margin-right: 5px;
+                }
+                width: 100%;
                 flex-direction: column;
                 justify-content: space-between;
-                height: 100%;
                 .postcardImg {
                     img {
                         margin-bottom: 0px;
@@ -37,6 +34,7 @@
                         height: auto;
                         border-radius: 2px;
                     }
+                    cursor: pointer;
                 }
                 .postcardContent {
                     display: flex;
@@ -97,43 +95,42 @@
                     }
                 }
             }
-        }
-        
-        .postsFooter {
-            height: 10%;
-            display: flex;
-            padding: 7px;
-        }
-        
-        .postsNav,
-        .postsFooterButtons {
-            display: flex;
-            justify-content: flex-end;
-            flex: 2;
-            button {
-                border: 2px solid $melt;
-                border-radius: 20px;
-                padding: 6px 20px;
-                font-size: 11px;
-                color: $melt;
-                background-color: $midnightL;
-                border-radius: 5px;
-                min-width: 100px;
-                height: 33px;
-                &:hover {
-                    color: $snow;
-                    border-color: $snow;
-                    transition: 0.3s;
+            
+            .postsFooter {
+                height: 10%;
+                display: flex;
+                padding: 7px;
+            }
+            
+            .postsNav,
+            .postsFooterButtons {
+                display: flex;
+                justify-content: flex-end;
+                flex: 2;
+                button {
+                    border: 2px solid $melt;
+                    border-radius: 20px;
+                    padding: 6px 20px;
+                    font-size: 11px;
+                    color: $melt;
+                    background-color: $midnightL;
+                    border-radius: 5px;
+                    min-width: 100px;
+                    height: 33px;
+                    &:hover {
+                        color: $snow;
+                        border-color: $snow;
+                        transition: 0.3s;
+                    }
                 }
             }
-        }
-        
-        .postsFooterButtons {
-            flex: 1;
-        }
-        
-        .postsNav {
-            p {
-                margin: 8px 15px;
+            
+            .postsFooterButtons {
+                flex: 1;
             }
-        }
+            
+            .postsNav {
+                p {
+                    margin: 8px 15px;
+                }
+            }

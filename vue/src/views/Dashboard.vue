@@ -39,10 +39,11 @@
         </div>
         <div v-else class="overscreenContainer">
             <div class="overscreen">
-                <h1>Overscreen</h1>
+                <div class="overscreenContent">
                  <template>
                     <component :data="overscreenData" :is="overscreenComponent"></component>
                 </template>
+                </div>
             </div>
         </div>
         <div class="sidecontent">

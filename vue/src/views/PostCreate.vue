@@ -1,35 +1,35 @@
 <template>
-  <div>
-    <form class="review-form" @submit.prevent="onSubmit">
-      <p>
-        <label for="title">title:</label>
-        <input id="title" v-model="title" placeholder="title" />
-      </p>
-        <p>
-        <label for="subtitle">subtitle:</label>
-        <input id="subtitle" v-model="subtitle" placeholder="subtitle" />
-      </p>
-        <p>
-        <label for="text">text:</label>
-        <input id="text" v-model="text" placeholder="text" />
-      </p>
+  <div class="postForm">
+    <div class="postFormHeader">
+      <h1>CREATE A POST</h1>
+    </div>
+    <div class="postFormBody">
+    <form @submit.prevent="onSubmit">
+     
+        <label for="title">title</label>
+        <input id="title" v-model="title" />
+      
+        <label for="subtitle">subtitle</label>
+        <input id="subtitle" v-model="subtitle"/>
+    
+        <label for="text">text</label>
+        <input id="text" type="textarea" v-model="text" />
+  
 
       
-        <label for="image">image:</label>
-       <div v-if="!image">
-          <h2>Select an image</h2>
+      <label for="image">image</label>
+       <div class="postFormUpload" v-if="!image">
           <input accept="image/*" type="file" @change="onImageChange">
         </div>
-        <div v-else>
-          <img :src="image" />
-          <button @click="removeImage">Remove image</button>
+        <div class="postFormUpload" v-else>
+          <img class="postFormImage" :src="image" />
+          <button @click="removeImage">Remove</button>
         </div>
     
+        <button type="submit">Create</button>
 
-      <p>
-        <input type="submit" value="Submit" />
-      </p>
     </form>
+    </div>
   </div>
 </template>
 <script>

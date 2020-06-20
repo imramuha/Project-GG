@@ -1,9 +1,13 @@
 <template>
   <div class="reviewCard">
-    <router-link :to="{ name: 'post', params: { id: review.id } }"
-      >
       <div class="reviewCardImg">
-        <img src="https://placekitten.com/250/250" />
+         <div v-if="review.image">
+                        <img :src="review.image" />
+          </div>
+          <div v-else>
+              <img src="@/assets/images/profile.jpeg" />
+          </div>
+        Username/data
       </div>
       <div class="reviewCardContent">
         <div class="reviewCardContentHeader">
@@ -16,7 +20,7 @@
         </p> 
         </div>
       </div>
-    </router-link>
+ 
   </div>
 </template>
 <script>

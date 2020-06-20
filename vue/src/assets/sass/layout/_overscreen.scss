@@ -9,10 +9,27 @@
     height: 100%;
     background-color: $midnightL;
     .overscreen {
+        box-sizing: border-box;
         border-radius: 2px;
         padding: 7px;
         box-shadow: 0 0 3px $midnightH;
+        background-color: $midnightL;
         height: 100%;
         width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
+}
+
+.overscreenContent {
+    padding: 1px;
+    background-color: $midnight;
+    border-radius: 7px;
+    width: 60%;
+    height: 85%;
+    box-sizing: border-box;
+    box-shadow: 0 0 3px $midnightL;
 }

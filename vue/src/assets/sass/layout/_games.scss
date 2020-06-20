@@ -1,41 +1,63 @@
-.gamesFooter {
-    height: 10%;
-    display: flex;
-    padding: 7px;
-}
-
-.gamesFooterButtons,
-.gamesPagination {
-    display: flex;
-    justify-content: flex-end;
-    flex: 2;
-    a:first-child {
-        margin-right: 10px;
+    .gamesFooter {
+        height: 10%;
+        display: flex;
+        padding: 7px;
     }
-    button {
-        border: 2px solid $melt;
-        border-radius: 20px;
-        padding: 6px 20px;
-        font-size: 11px;
-        color: $melt;
-        background-color: $midnightL;
-        border-radius: 5px;
-        min-width: 100px;
-        height: 33px;
-        &:hover {
-            color: $snow;
-            border-color: $snow;
-            transition: 0.3s;
+    
+    .gamesFooterButtons,
+    .gamesPagination {
+        display: flex;
+        justify-content: flex-end;
+        flex: 2;
+        a:first-child {
+            margin-right: 10px;
+        }
+        button {
+            border: 2px solid $melt;
+            border-radius: 20px;
+            padding: 6px 20px;
+            font-size: 11px;
+            color: $melt;
+            background-color: $midnightL;
+            border-radius: 5px;
+            min-width: 100px;
+            height: 33px;
+            &:hover {
+                color: $snow;
+                border-color: $snow;
+                transition: 0.3s;
+            }
         }
     }
-}
-
-.gamesFooterButtons {
-    flex: 1;
-}
-
-.gamesPagination {
-    p {
-        margin: 8px 15px;
+    
+    .gamesFooterButtons {
+        flex: 1;
     }
-}
+    
+    .gamesPagination {
+        p {
+            margin: 8px 15px;
+        }
+    }
+    
+    .gameRemoveButton {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        button {
+            border: 2px solid $melt;
+            border-radius: 20px;
+            padding: 6px 20px;
+            font-size: 11px;
+            color: $melt;
+            background-color: $midnightL;
+            border-radius: 5px;
+            min-width: 100px;
+            text-align: center;
+            &:hover {
+                color: $snow;
+                border-color: $snow;
+                transition: 0.3s;
+            }
+        }
+    }

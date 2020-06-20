@@ -19,6 +19,9 @@ class CreateGameOptionsTable extends Migration
             $table->integer('option_id')->unsigned()->nullable();
             $table->timestamps();
         });
+
+        // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
+        DB::statement("ALTER TABLE games ADD image LONGBLOB");
     }
 
     /**
