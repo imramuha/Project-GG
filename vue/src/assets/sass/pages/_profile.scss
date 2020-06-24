@@ -1,0 +1,108 @@
+.profile {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .profileHeader {
+        //background-color: $candy;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        padding: 7px;
+        .profileHeaderView {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            .profileHeaderImage {
+                img {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 150px;
+                }
+            }
+            .profileHeaderScore {
+                background-color: $candy;
+                .profileHeaderScorebar {
+                    background-color: $paint;
+                }
+            }
+        }
+        .profileHeaderData {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: space-between;
+            p {
+                margin: 0px;
+            }
+        }
+        .profileHeaderButtons {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .profileHeaderReport {}
+            .profileHeaderRelation {}
+        }
+    }
+    .profileGames {
+        display: flex;
+        flex-grow: 1;
+        background-color: $paint;
+        padding: 7px;
+        .profileGameCard {
+            .profileGameCardImage {
+                img {
+                    width: 100px;
+                    height: 100px;
+                }
+                position: relative;
+                .profileGameCardName {
+                    background-color: $midnightL;
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    justify-content: center;
+                    text-align: center;
+                    font-size: 11px;
+                }
+            }
+            .profileGameCardUsername {
+                text-align: center;
+            }
+        }
+    }
+    .profileReviews {
+        display: flex;
+        flex-direction: row;
+        background-color: $melt;
+        padding: 7px;
+        .profileReviewCard {
+            flex-grow: 4;
+            display: flex;
+            flex-direction: row;
+            .profileReviewCardImage {
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+            .profileReviewCardUserInfo {
+                p {
+                    margin: 0px;
+                }
+            }
+            .profileReviewCardScore {
+                background-color: $candy;
+                p {
+                    margin: 0px;
+                }
+            }
+        }
+        .profileReviewInput {
+            flex-grow: 1;
+        }
+    }
+}

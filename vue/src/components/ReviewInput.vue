@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profileReviewInput">
     <form class="review-form" @submit.prevent="onSubmit">
       <p>
         <label for="comment">Comment:</label>
