@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div class="usersearch">
         <Searches
             v-for="searchedUser in searchedUsers"
             v-bind:key="searchedUser.id"
             :searchedUser="searchedUser"
+             v-on:emitToUserSearch="onSearchedUserCardClick"
         />
     </div>
 </template>
@@ -37,6 +38,14 @@ export default {
       } catch (error) {
           console.log(error);
       }
+    },
+    methods: {
+      onSearchedUserCardClick(value) {
+        this.emitToOverscreen(value);
+      },
+      emitToOverscreen(value) {
+        this.$emit("emitToOverscreen", value);
+      },
     }
 };
 </script>

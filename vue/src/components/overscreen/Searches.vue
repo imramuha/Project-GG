@@ -1,18 +1,19 @@
 <template>
     <div class="usersearches">
-        <div class="friendlistCard">
-            <router-link :to="{ name: 'profile', params: { id: searchedUser.id } }">
-                <div class="friendlistCardImg">
-                    <img :src="searchedUser.image" />
+        <div class="usersearchCard">
+                <div class="usersearchCardImage" v-if="searchedUser.image">
+                        <img :src="searchedUser.image" />
                 </div>
-                <div class="searchedUserlistCardUser">
+                <div class="usersearchCardImage" v-else>
+                    <img src="@/assets/images/profile.jpeg" />
+                </div>
+                <div class="usersearchCardUser">
                     <p>{{ searchedUser.username }}</p>
                     <p>{{ searchedUser.email }}</p>
                 </div>
-                <div class="friendlistCardStatus">
-                    <div class="statusCircle"></div>
+                <div class="usersearchCardLink">
+                    <a  @click="onProfileClick" v-on:click="emitToUserSearch">  <i class="fas fa-arrow-right"></i> </a>
                 </div>
-            </router-link>
         </div>
     </div>
 </template>
@@ -52,6 +53,19 @@ export default {
     } catch (error) {
       console.log(error);
     }*/
+    },
+    methods: {
+          onProfileClick() {
+            this.childMessage = {
+                component: "Profile",
+                id: this.searchedUser.id
+            }
+                 
+            this.emitToUserSearch(this.childMessage);
+        },
+        emitToUserSearch(value) {
+            this.$emit("emitToUserSearch", value);
+        }
     }
 };
 </script>

@@ -1,227 +1,234 @@
-        .dashboard {
-            background-color: $midnightH;
-            color: snow;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            box-sizing: border-box;
-        }
-        
-        .content {
-            display: flex;
-            background-color: $midnightL;
-            flex-grow: 10;
-            flex-direction: column;
-            box-sizing: border-box;
-            padding: 7px;
-            .contentHeader {
-                height: 22%;
-                background-color: $midnightL;
-                margin-bottom: 7px;
-                border-radius: 2px;
-                padding: 7px;
-                box-shadow: 0 0 3px $midnightH;
-                box-sizing: border-box;
-                display: flex;
-                width: 100%;
-                .userImage {
-                    background-color: $midnightH;
-                    padding: 7px;
-                    width: 25%;
-                    div {
-                        box-sizing: border-box;
-                        max-width: 100%;
-                        max-height: 100%;
-                        display: flex;
-                        a {
+                        .dashboard {
+                            background-color: $midnightH;
+                            color: snow;
+                            width: 100%;
+                            height: 100%;
                             display: flex;
-                            max-width: 100%;
-                            max-height: 100%;
-                            align-items: center;
-                            justify-content: center;
                             box-sizing: border-box;
-                            border-radius: 50%;
-                            img {
-                                border-radius: 50%;
-                                max-height: 100%;
-                                overflow: hidden;
-                                max-width: 100%;
-                            }
                         }
-                    }
-                }
-                .userDataContainer {
-                    background-color: $midnightH;
-                    padding: 7px;
-                    width: 75%;
-                    display: flex;
-                    flex-direction: column;
-                    h1,
-                    p {
-                        margin: 0px;
-                    }
-                    .userData {
-                        width: 100%;
-                        height: 75%;
-                        box-sizing: border-box;
-                        overflow: hidden;
-                        display: flex;
-                        flex-direction: row;
-                        p {
-                            color: $melt;
-                        }
-                        .userDataRight {
+                        
+                        .content {
                             display: flex;
-                            width: 35%;
-                            justify-content: end;
-                            button {
-                                border: 2px solid $melt;
-                                border-radius: 20px;
-                                padding: 6px 20px;
-                                font-size: 11px;
-                                color: $melt;
+                            background-color: $midnightL;
+                            flex-grow: 10;
+                            flex-direction: column;
+                            box-sizing: border-box;
+                            padding: 7px;
+                            .contentHeader {
+                                height: 22%;
                                 background-color: $midnightL;
-                                border-radius: 5px;
-                                &:hover {
-                                    color: $snow;
-                                    border-color: $snow;
-                                    transition: 0.3s;
+                                margin-bottom: 7px;
+                                border-radius: 2px;
+                                padding: 7px;
+                                box-shadow: 0 0 3px $midnightH;
+                                box-sizing: border-box;
+                                display: flex;
+                                width: 100%;
+                                .userImage {
+                                    background-color: $midnightH;
+                                    padding: 7px;
+                                    width: 25%;
+                                    div {
+                                        box-sizing: border-box;
+                                        max-width: 100%;
+                                        max-height: 100%;
+                                        display: flex;
+                                        img {
+                                            border-radius: 50%;
+                                            max-height: 100%;
+                                            overflow: hidden;
+                                            max-width: 100%;
+                                        }
+                                    }
+                                }
+                                .userDataContainer {
+                                    background-color: $midnightH;
+                                    padding: 7px;
+                                    width: 75%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    h1,
+                                    p {
+                                        margin: 0px;
+                                    }
+                                    .userData {
+                                        width: 100%;
+                                        height: 75%;
+                                        box-sizing: border-box;
+                                        overflow: hidden;
+                                        display: flex;
+                                        flex-direction: row;
+                                        p {
+                                            color: $melt;
+                                        }
+                                        .userDataRight {
+                                            display: flex;
+                                            width: 35%;
+                                            justify-content: end;
+                                            button {
+                                                border: 2px solid $melt;
+                                                border-radius: 20px;
+                                                padding: 6px 20px;
+                                                font-size: 11px;
+                                                color: $melt;
+                                                background-color: $midnightL;
+                                                border-radius: 5px;
+                                                &:hover {
+                                                    color: $snow;
+                                                    border-color: $snow;
+                                                    transition: 0.3s;
+                                                }
+                                            }
+                                        }
+                                        .userDataLeft {
+                                            width: 65%;
+                                        }
+                                    }
+                                    .userReviewScore {
+                                        display: flex;
+                                        height: 25%;
+                                        width: 100%;
+                                        border-radius: 5px;
+                                        text-align: center;
+                                        background-color: $candy;
+                                        .userReviewScoreBar {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            background-color: $slate;
+                                            font-weight: 600;
+                                            letter-spacing: 1px;
+                                            border-radius: 5px;
+                                        }
+                                    }
                                 }
                             }
+                            .contentNav {
+                                height: 8%;
+                                display: flex;
+                                padding: 7px;
+                                box-shadow: 0 0 3px $midnightH;
+                                box-sizing: border-box;
+                                .dashboardNav {
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    box-sizing: border-box;
+                                    button {
+                                        font-size: 13px;
+                                        font-weight: 600;
+                                        border-radius: 2px;
+                                        width: 100%;
+                                        background-color: inherit;
+                                        font-size: 11px;
+                                        color: $snow;
+                                        border: none;
+                                        //border: 1px solid $melt;
+                                        background-color: $midnight;
+                                        box-shadow: 0 0 3px $midnight;
+                                        text-transform: uppercase;
+                                        &:not(:last-child) {
+                                            margin-right: 5px;
+                                        }
+                                        &:hover {
+                                            color: $candy;
+                                        }
+                                    }
+                                    .navButtonActive {
+                                        background-color: $candy;
+                                        &:hover {
+                                            color: inherit;
+                                        }
+                                    }
+                                }
+                            }
+                            .contentMain {
+                                height: 70%;
+                                background-color: $midnightL;
+                                box-sizing: border-box;
+                                border-radius: 3px;
+                                padding: 7px;
+                                box-shadow: 0 0 3px $midnight;
+                            }
                         }
-                        .userDataLeft {
-                            width: 65%;
+                        
+                        .sidecontent {
+                            display: flex;
+                            flex-grow: 1;
+                            flex-direction: column;
+                            box-sizing: border-box;
+                            padding: 7px;
+                            background-color: $midnightL;
+                            .sidecontentHeader {
+                                height: 22%;
+                                background-color: $midnightL;
+                                padding: 7px;
+                                box-sizing: border-box;
+                                border-radius: 2px;
+                                box-shadow: 0 0 3px $midnightH;
+                                .sidecontentNotifications {
+                                    display: flex;
+                                    justify-content: center;
+                                    width: 100%;
+                                    height: 100%;
+                                    background-color: $midnightH;
+                                    box-shadow: 0 0 3px $midnightH;
+                                    border-radius: 2px;
+                                    padding: 7px;
+                                    .notificationsEmpty {
+                                        display: flex;
+                                        font-size: 13px;
+                                        color: $melt;
+                                        align-items: center;
+                                        justify-content: center;
+                                    }
+                                }
+                            }
+                            .sidecontentFunction {
+                                height: 8%;
+                                display: flex;
+                                justify-content: space-evenly;
+                                background-color: $midnightL;
+                                box-sizing: border-box;
+                                padding: 7px;
+                                align-items: center;
+                                justify-content: center;
+                                box-shadow: 0 0 3px $midnightH;
+                                .searchForm {
+                                    height: 100%;
+                                    form {
+                                        display: flex;
+                                        height: 100%;
+                                        width: 100%;
+                                        input {
+                                            color: $melt;
+                                            padding: 0 10px;
+                                            border: none;
+                                            background-color: $midnightH;
+                                            flex-grow: 7;
+                                            border-radius: 2px;
+                                            &:focus {
+                                                border: 1px solid $candy;
+                                            }
+                                        }
+                                        button {
+                                            flex-grow: 2.5;
+                                            background-color: $midnight;
+                                            border: none;
+                                            color: $snow;
+                                            border-radius: 2px;
+                                            &:hover {
+                                                color: $melt;
+                                                cursor: pointer;
+                                            }
+                                        }
+                                        box-shadow: 0 0 3px $midnightH;
+                                    }
+                                }
+                            }
+                            .sidecontentFriendlist {
+                                height: 70%;
+                                background-color: $mysteryL;
+                                box-shadow: 0 0 3px $midnightH;
+                            }
                         }
-                    }
-                    .userReviewScore {
-                        height: 25%;
-                        width: 100%;
-                    }
-                }
-            }
-            .contentNav {
-                height: 8%;
-                display: flex;
-                padding: 7px;
-                box-shadow: 0 0 3px $midnightH;
-                box-sizing: border-box;
-                .dashboardNav {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    box-sizing: border-box;
-                    button {
-                        font-size: 13px;
-                        font-weight: 600;
-                        border-radius: 2px;
-                        width: 100%;
-                        background-color: inherit;
-                        font-size: 11px;
-                        color: $snow;
-                        border: none;
-                        //border: 1px solid $melt;
-                        background-color: $midnight;
-                        box-shadow: 0 0 3px $midnight;
-                        text-transform: uppercase;
-                        &:not(:last-child) {
-                            margin-right: 5px;
-                        }
-                        &:hover {
-                            color: $candy;
-                        }
-                    }
-                    .navButtonActive {
-                        background-color: $candy;
-                        &:hover {
-                            color: inherit;
-                        }
-                    }
-                }
-            }
-            .contentMain {
-                height: 70%;
-                background-color: $midnightL;
-                box-sizing: border-box;
-                border-radius: 3px;
-                padding: 7px;
-                box-shadow: 0 0 3px $midnight;
-            }
-        }
-        
-        .sidecontent {
-            display: flex;
-            flex-grow: 1;
-            flex-direction: column;
-            box-sizing: border-box;
-            padding: 7px;
-            background-color: $midnightL;
-            .sidecontentHeader {
-                height: 22%;
-                background-color: $midnightL;
-                padding: 7px;
-                box-sizing: border-box;
-                border-radius: 2px;
-                box-shadow: 0 0 3px $midnightH;
-                .sidecontentNotifications {
-                    display: flex;
-                    justify-content: center;
-                    width: 100%;
-                    height: 100%;
-                    background-color: $midnightH;
-                    box-shadow: 0 0 3px $midnightH;
-                    border-radius: 2px;
-                    padding: 7px;
-                    .notificationsEmpty {
-                        display: flex;
-                        font-size: 13px;
-                        color: $melt;
-                        align-items: center;
-                        justify-content: center;
-                    }
-                }
-            }
-            .sidecontentFunction {
-                height: 8%;
-                display: flex;
-                justify-content: space-evenly;
-                background-color: $midnightL;
-                box-sizing: border-box;
-                padding: 7px 7px 0px;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 0 3px $midnightH;
-                form {
-                    display: flex;
-                    height: 86%;
-                    width: 100%;
-                    input {
-                        color: $melt;
-                        padding: 0 10px;
-                        border: none;
-                        background-color: $midnightH;
-                        flex-grow: 7;
-                        border-radius: 2px;
-                        &:focus {
-                            border: 1px solid $candy;
-                        }
-                    }
-                    button {
-                        flex-grow: 2.5;
-                        background-color: $midnight;
-                        border: none;
-                        color: $snow;
-                        border-radius: 2px;
-                        &:hover {
-                            color: $melt;
-                            cursor: pointer;
-                        }
-                    }
-                    box-shadow: 0 0 3px $midnightH;
-                }
-            }
-            .sidecontentFriendlist {
-                height: 70%;
-                background-color: $mysteryL;
-                box-shadow: 0 0 3px $midnightH;
-            }
-        }

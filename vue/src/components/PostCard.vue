@@ -31,13 +31,13 @@
                     <p>Report</p>
                 </div>
             </div>
-            <div v-if='post.liked_posts.length' class="postcardStats">
+            <div v-if='post.user_liked != true' class="postcardStats">
                 <button type="button" @click="gg">GG</button>
                 <p>{{ post.liked_posts.length }}</p>
            </div>
             <div v-else class="postcardStats">
                 <p>{{ post.liked_posts.length }}</p>
-                <button  type="button" @click="gg">uGG</button>
+                <button class="likeButtonActive" type="button" @click="gg">uGG</button>
             </div>
     </div>
 </template>
@@ -57,18 +57,38 @@ export default {
     },
     data() {
         return {
-            childMessage: ""
+            childMessage: "",
+            //toggleLike: "liked",
         };
     },
     methods: {
         async gg() {
-            console.log("you just GG'd this post :)");
-             let data = {
+            /*console.log("you just GG'd this post :)");
+
+            if (this.toggleLike == "liked") {
+                this.toggleLike = "";
+            } else {
+                this.toggleLike = "liked";
+            }*/
+
+            let data = {
               post_id: this.post.id,        
             }
             try {
-            let response = await likePost(data);
-                console.log(response);
+            await likePost(data).then(()=> {
+                
+                 // emit to parent
+                this.childMessage = {
+                    component: "remount"
+                }
+
+                console.log(this.childMessage);
+
+                this.emitToPosts();
+
+
+            });
+            
             } catch (error) {
                 console.log(error);
             }

@@ -33,3 +33,66 @@
     box-sizing: border-box;
     box-shadow: 0 0 3px $midnightL;
 }
+
+.usersearch {
+    width: 100%;
+    display: flex;
+    .usersearches {
+        display: flex;
+        flex-flow: row wrap;
+        flex-grow: 1;
+        padding: 3px 3px 3px 0px;
+        &:first-child {
+            padding-left: 3px;
+        }
+        .usersearchCard {
+            background-color: $midnightL;
+            box-shadow: 0 0 3px $midnightL;
+            flex: 1 1 auto;
+            height: 50px;
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .usersearchCardImage {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: auto;
+                    height: 36px;
+                    width: 36px;
+                    border-radius: 36px;
+                }
+            }
+            .usersearchCardUser {
+                color: $melt;
+                margin: 0px;
+                line-height: 0px;
+                font-size: 11px;
+                padding: 0px 7px;
+                display: flex;
+                flex-direction: column;
+                p:first-child {
+                    margin-bottom: 2px;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                    color: $snow;
+                    font-size: 15px;
+                }
+            }
+            .usersearchCardLink {
+                background-color: $midnightL;
+                color: $snow;
+                padding: 7px;
+                border-radius: 3px;
+                border: 1px solid $melt;
+                cursor: pointer;
+                &:hover {
+                    background-color: $candy;
+                    transition: 0.7s;
+                }
+            }
+        }
+    }
+}

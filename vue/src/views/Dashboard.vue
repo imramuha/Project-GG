@@ -41,7 +41,7 @@
             <div class="overscreen">
                 <div class="overscreenContent">
                  <template>
-                    <component :data="overscreenData" :is="overscreenComponent"></component>
+                    <component :data="overscreenData" :is="overscreenComponent" v-on:emitToOverscreen="onOverscreenClick"></component>
                 </template>
                 </div>
             </div>
@@ -155,6 +155,7 @@ export default {
                 this.contentActive = false;
                 this.overscreenComponent = PostCreate;
             } else if (value.component === "Profile") {
+                console.log("hello");
                 this.contentActive = false;
                 this.overscreenComponent = Profile;
                 this.overscreenData = value.id;

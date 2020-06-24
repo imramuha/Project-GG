@@ -24,7 +24,6 @@
 <script>
 import PostCard from "@/components/PostCard";
 
-import { getAllFriends } from "@/services/friend.api";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -41,10 +40,15 @@ export default {
     },
     methods: {
         ...mapActions("Forum", ["fetchUserPosts"]),
-        onPostCardClick(value) {
-            
+        async onPostCardClick(value) {
 
-            this.emitToOverscreen(value);
+            // when someone likes a post -> we recall our data
+            if(value.component == "remount") {
+                await this.fetchUserPosts();
+                this.userposts = this.getUserPosts;
+            } else {
+                this.emitToOverscreen(value);
+            }
         },
         onClickCreate() {
             let value = {
@@ -72,14 +76,6 @@ export default {
         } else {
             this.userposts = this.getUserPosts;
             this.isLoading = false;
-        }
-
-        try {
-            const response = await getAllFriends();
-            this.friends = response.data;
-            console.log(response.data);
-        } catch (error) {
-            console.log(error);
         }
     }
 };

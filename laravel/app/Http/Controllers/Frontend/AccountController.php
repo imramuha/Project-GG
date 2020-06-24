@@ -215,14 +215,41 @@ class AccountController extends Controller
     */
     public function showUserPosts () {
      
-        $posts = Post::where('user_id', '=', auth()->id())->with(
+       /*$posts = Post::where('user_id', '=', auth()->id())->with(
             array('likedPosts' => function($query)
             {
                 $query->where('user_id', auth()->id());
             })        
+        )->get();*/
+        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts'  
         )->get();
-        return response()->json($posts);
+
+        // check if user liked this post; if yes, send it.
+        foreach($posts as $post) {
+            foreach($post->likedPosts as $like) {
+                if($like->user_id === auth()->id()) {
+                    $post["user_liked"] = true;
+                }
+            }
+        }
+
+        return $posts;
     }
+
+           /*
+    * Get all likedposts by the logged in user
+    */
+    public function showUserLikedPosts () {
+     
+        $posts = Post::with(
+             array('likedPosts' => function($query)
+             {
+                 $query->where('user_id', auth()->id());
+             })        
+         )->get();
+
+         return $posts;
+     }
 
 
         /*

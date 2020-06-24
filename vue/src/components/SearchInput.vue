@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <form @submit.prevent="search">
+    <div class="searchForm">
+        <form @submit.prevent="search"> 
             <input type="text" placeholder="Search a player.." v-model="searchTerm" />
             <button type="submit">
                 <i class="fa fa-search"></i>

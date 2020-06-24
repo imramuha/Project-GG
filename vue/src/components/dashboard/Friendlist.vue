@@ -86,8 +86,6 @@ export default {
           this.offlineFriends.push(item);
         }
       });
-      //console.log(this.offlineFriends);
-      //console.log(this.onlineFriends);
     } catch (error) {
       console.log(error);
     }

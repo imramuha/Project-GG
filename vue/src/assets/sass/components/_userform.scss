@@ -71,7 +71,6 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
             border-radius: 3px;
             padding: 15px;
             font-weight: 600;
-            //margin-top: 22px;
             &:hover {
                 background-color: $candyL;
             }
@@ -85,15 +84,14 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    .userEditFormImage {
+        height: 50px;
+        width: auto;
+    }
     input {
         width: 100%;
     }
     button {
         width: 50%;
     }
-}
-
-.userEditFormImage {
-    height: 50px;
-    width: auto;
 }

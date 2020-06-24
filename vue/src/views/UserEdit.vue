@@ -5,25 +5,19 @@
         </div>
         <div class="userEditFormBody">
             <form @submit.prevent="onSubmit">
-                <p>
-                    <label for="email">email</label>
-                    <input id="email" v-model="email" />
-                </p>
+                <label for="email">email</label>
+                <input id="email" v-model="email" />
 
-                <label for="image">image:</label>
-                <div v-if="!image">
-                    <h2>Select an image</h2>
+                <label for="image">image</label>
+                <div class="userEditFormUpload" v-if="!image">
                     <input accept="image/*" type="file" @change="onImageChange" />
                 </div>
-                <div v-else>
+                <div class="userEditFormUpload" v-else>
                     <img class="userEditFormImage" :src="image" />
                     <button @click="removeImage">Remove image</button>
                 </div>
 
-                <p>
-                    <input type="submit" value="Submit" />
-                    <button href="#" variant="primary">cancel</button>
-                </p>
+                <button type="submit">Update</button>
             </form>
         </div>
     </div>

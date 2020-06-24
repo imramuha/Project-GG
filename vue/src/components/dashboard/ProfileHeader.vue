@@ -2,14 +2,10 @@
     <div class="contentHeader">
         <div class="userImage">
             <div v-if="user.image">
-                <router-link to="/user" class="button">
-                    <img :src="user.image" />
-                </router-link>
+                <img :src="user.image" />
             </div>
             <div v-else>
-                <router-link to="/user" class="button">
-                    <img src="@/assets/images/profile.jpeg" />
-                </router-link>
+                <img src="@/assets/images/profile.jpeg" />
             </div>
         </div>
 
@@ -31,7 +27,7 @@
             </div>
 
             <div class="userReviewScore">
-                <p>Your average review score out of 100: {{ reviewscore }}</p>
+                <div class="userReviewScoreBar" v-bind:style="{ height: '100%', width: reviewscore + '%' }"> {{ reviewscore}} %</div>
             </div>
         </div>
     </div>

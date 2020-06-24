@@ -8,7 +8,7 @@
         <p>{{ friend.username }}</p>
         <p>{{ friend.email }}</p>
       </div>
-      <div class="friendlistCardStatus">
+      <div class="friendlistCardStatus"> 
         <p>{{ friend.status.name }}</p>
         <div class="statusCircle"></div>
       </div>
