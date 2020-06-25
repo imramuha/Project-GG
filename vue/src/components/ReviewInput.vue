@@ -1,19 +1,13 @@
 <template>
   <div class="profileReviewInput">
-    <form class="review-form" @submit.prevent="onSubmit">
-      <p>
-        <label for="comment">Comment:</label>
-        <input id="comment" v-model="comment" placeholder="comment" />
-      </p>
+    <form @submit.prevent="onSubmit">
+        <label for="comment">Review</label>
+        <textarea id="comment" v-model="comment" placeholder="review ..." />
 
-      <p>
-        <label for="rating">Rating:</label>
-        <textarea id="rating" v-model="rating"></textarea>
-      </p>
+        <label for="rating">Rating</label>
+        <input id="rating" v-model="rating" placeholder="rating 1-100" />
 
-      <p>
-        <input type="submit" value="Submit" />
-      </p>
+        <button type="submit" value="Submit">Post</button>
     </form>
   </div>
 </template>

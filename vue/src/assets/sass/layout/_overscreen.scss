@@ -1,6 +1,5 @@
 .overscreenContainer {
     display: flex;
-    background-color: $sand;
     flex-grow: 10;
     flex-direction: column;
     box-sizing: border-box;
@@ -10,10 +9,6 @@
     background-color: $midnightL;
     .overscreen {
         box-sizing: border-box;
-        border-radius: 2px;
-        padding: 7px;
-        box-shadow: 0 0 3px $midnightH;
-        background-color: $midnightL;
         height: 100%;
         width: 100%;
         overflow: hidden;
@@ -21,17 +16,16 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        box-shadow: 0 0 3px $midnightH;
     }
 }
 
 .overscreenContent {
     padding: 1px;
-    background-color: $midnight;
-    border-radius: 7px;
-    width: 60%;
-    height: 85%;
+    border-radius: 3px;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    box-shadow: 0 0 3px $midnightL;
 }
 
 .usersearch {

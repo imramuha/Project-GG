@@ -1,11 +1,9 @@
 $form-title-font-sizes: ( null: 28px, sm: 35px, md: 43px, lg: 55px, xl: 65px, );
 $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
 .postForm {
-    background-color: $midnightH;
     height: 100%;
     overflow: hidden;
     padding: 30px;
-    border-radius: 10px;
 }
 
 .postFormHeader {

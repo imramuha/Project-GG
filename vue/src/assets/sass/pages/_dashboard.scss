@@ -91,6 +91,7 @@
                                         border-radius: 5px;
                                         text-align: center;
                                         background-color: $candy;
+                                        border: 2px solid $snow;
                                         .userReviewScoreBar {
                                             display: flex;
                                             align-items: center;
@@ -196,6 +197,7 @@
                                 box-shadow: 0 0 3px $midnightH;
                                 .searchForm {
                                     height: 100%;
+                                    width: 100%;
                                     form {
                                         display: flex;
                                         height: 100%;

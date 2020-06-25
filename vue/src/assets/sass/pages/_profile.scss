@@ -1,108 +1,249 @@
-.profile {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    .profileHeader {
-        //background-color: $candy;
+    .profile {
+        width: 100%;
+        height: 100%;
         display: flex;
-        flex-direction: row;
-        flex-grow: 1;
-        padding: 7px;
-        .profileHeaderView {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            flex-grow: 1;
-            .profileHeaderImage {
-                img {
-                    width: 150px;
-                    height: 150px;
-                    border-radius: 150px;
-                }
-            }
-            .profileHeaderScore {
-                background-color: $candy;
-                .profileHeaderScorebar {
-                    background-color: $paint;
-                }
-            }
-        }
-        .profileHeaderData {
-            display: flex;
-            flex-grow: 1;
-            flex-direction: column;
-            justify-content: space-between;
-            p {
-                margin: 0px;
-            }
-        }
-        .profileHeaderButtons {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            .profileHeaderReport {}
-            .profileHeaderRelation {}
-        }
-    }
-    .profileGames {
-        display: flex;
-        flex-grow: 1;
-        background-color: $paint;
-        padding: 7px;
-        .profileGameCard {
-            .profileGameCardImage {
-                img {
-                    width: 100px;
-                    height: 100px;
-                }
-                position: relative;
-                .profileGameCardName {
-                    background-color: $midnightL;
-                    position: absolute;
-                    bottom: 0;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    justify-content: center;
-                    text-align: center;
-                    font-size: 11px;
-                }
-            }
-            .profileGameCardUsername {
-                text-align: center;
-            }
-        }
-    }
-    .profileReviews {
-        display: flex;
-        flex-direction: row;
-        background-color: $melt;
-        padding: 7px;
-        .profileReviewCard {
-            flex-grow: 4;
+        flex-direction: column;
+        .profileHeader {
+            //background-color: $candy;
             display: flex;
             flex-direction: row;
-            .profileReviewCardImage {
-                img {
-                    width: 50px;
-                    height: 50px;
+            flex-grow: 1;
+            padding: 7px;
+            box-shadow: 0 0 3px $midnightH;
+            .profileHeaderView {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                flex-grow: 1;
+                max-width: 125px;
+                padding: 7px;
+                .profileHeaderImage {
+                    margin-bottom: 7px;
+                    img {
+                        width: 100%;
+                        height: auto;
+                        border-radius: 150px;
+                    }
                 }
             }
-            .profileReviewCardUserInfo {
-                p {
-                    margin: 0px;
+            .profileHeaderData {
+                display: flex;
+                flex-grow: 1;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 7px;
+                div {
+                    p {
+                        color: $melt;
+                        margin: 0px 0 7px;
+                        font-size: 13px;
+                        padding-left: 1px;
+                    }
+                    h1 {
+                        margin: 5px 5px 5px 0px;
+                        span {
+                            font-size: 17px;
+                            padding: 0px 7px;
+                            background-color: $slate;
+                            border-radius: 5px;
+                        }
+                    }
+                }
+                .profileHeaderScore {
+                    background-color: $candy;
+                    border-radius: 5px;
+                    border: 2px solid $snow;
+                    width: 100%;
+                    .profileHeaderScorebar {
+                        padding: 6px;
+                        text-align: center;
+                        background-color: $slate;
+                        border-radius: 5px;
+                        font-size: 11px;
+                    }
                 }
             }
-            .profileReviewCardScore {
-                background-color: $candy;
-                p {
-                    margin: 0px;
+            .profileHeaderButtons {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 7px;
+                .profileHeaderReport {
+                    display: flex;
+                    justify-content: end;
+                    button {
+                        border: 2px solid $melt;
+                        border-radius: 20px;
+                        padding: 7px 21px;
+                        font-size: 11px;
+                        color: $melt;
+                        background-color: $midnightL;
+                        border-radius: 5px;
+                        &:hover {
+                            color: $snow;
+                            border-color: $snow;
+                            transition: 0.5s;
+                        }
+                    }
+                }
+                .profileHeaderRelation {
+                    display: flex;
+                    justify-content: end;
+                    button {
+                        border: 2px solid $melt;
+                        border-radius: 20px;
+                        padding: 7px 21px;
+                        font-size: 11px;
+                        color: $melt;
+                        background-color: $midnightL;
+                        border-radius: 5px;
+                        box-shadow: 0 0 3px $midnightH;
+                        &:hover {
+                            color: $snow;
+                            border-color: $snow;
+                            transition: 0.5s;
+                        }
+                    }
                 }
             }
         }
-        .profileReviewInput {
+        .profileGames {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-grow: 1;
+            padding: 14px;
+            box-shadow: 0 0 3px $midnightH;
+            .profileGamesNav {
+                width: 5%;
+                background-color: $candy;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                border-radius: 3px;
+                height: 95%;
+                &:hover {
+                    background-color: $candyL;
+                    transition: 0.5s;
+                }
+            }
+            .profileGameCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .profileGameCardImage {
+                    img {
+                        width: 100px;
+                        height: auto;
+                        max-height: 125px;
+                        border-radius: 2px;
+                    }
+                    position: relative;
+                    .profileGameCardName {
+                        background-color: $midnightL;
+                        position: absolute;
+                        bottom: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        justify-content: center;
+                        text-align: center;
+                        font-size: 11px;
+                    }
+                }
+                .profileGameCardUsername {
+                    border-radius: 2px;
+                    text-align: center;
+                    background-color: $slate;
+                    font-weight: 600;
+                    font-size: 13px;
+                    padding: 7px;
+                }
+            }
+        }
+        .profileReviews {
+            display: flex;
+            flex-direction: row;
+            padding: 14px;
+            box-shadow: 0 0 3px $midnightH;
+            .profileReviewCard {
+                padding: 3px;
+                background-color: $midnightL;
+                flex-grow: 4;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 7px;
+                max-height: 40px;
+                width: 100%;
+                border-radius: 3px;
+                .profileReviewCardImage {
+                    img {
+                        border-radius: 25px;
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+                .profileReviewCardUserInfo {
+                    p {
+                        margin: 0px;
+                        font-size: 11px;
+                    }
+                }
+                .profileReviewCardScore {
+                    background-color: $candy;
+                    padding: 7px 5px;
+                    p {
+                        font-size: 11px;
+                        font-weight: 600;
+                        margin: 0px;
+                    }
+                }
+            }
+            .profileReviewInput {
+                flex-grow: 1;
+                height: 100%;
+                padding-left: 7px;
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    label {
+                        color: $melt;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        font-size: 13px;
+                    }
+                    label:last-child {
+                        margin-top: 20px;
+                    }
+                    input,
+                    textarea {
+                        color: snow;
+                        border-radius: 3px;
+                        background-color: $midnightH;
+                        border: 1px solid $midnight;
+                        padding: 7px;
+                        &:focus {
+                            border: 1px solid $candy;
+                        }
+                    }
+                    button {
+                        background-color: $candy;
+                        color: $snow;
+                        border: none;
+                        border-radius: 3px;
+                        padding: 7px;
+                        font-weight: 600;
+                        margin-top: 5px;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: $candyL
+                        }
+                    }
+                }
+            }
         }
     }
-}

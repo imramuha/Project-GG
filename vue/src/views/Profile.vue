@@ -8,18 +8,19 @@
                 <div class="profileHeaderImage" v-else>
                     <img src="@/assets/images/profile.jpeg" />
                 </div>
-                <div class="profileHeaderScore">
+            </div>
+            <div class="profileHeaderData">
+                <div>
+                    <h1>{{ friend.username }} <span>{{ this.relation.name }}</span></h1>
+                    <p>{{ friend.email }}</p>               
+                    <p>BIO: {{ friend.id }}</p>
+                </div>
+                 <div class="profileHeaderScore">
                     <div
                         class="profileHeaderScorebar"
                         v-bind:style="{ height: '100%', width: reviewscore + '%' }"
                     >{{ reviewscore}} %</div>
                 </div>
-            </div>
-            <div class="profileHeaderData">
-                <p>{{ friend.id }}</p>
-                <p>{{ friend.username }}</p>
-                <p>{{ friend.email }}</p>
-                <p>{{ this.relation.name }}</p>
             </div>
             <div class="profileHeaderButtons">
                 <div class="profileHeaderReport">
@@ -62,6 +63,8 @@
             </div>
         </div>
         <div class="profileGames">
+            <div class="profileGamesNav"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+</div>
             <div class="profileGameCard">
                 <div class="profileGameCardImage">
                     <img src="@/assets/images/profile.jpeg" />
@@ -69,6 +72,29 @@
                 </div>
                 <div class="profileGameCardUsername">Username</div>
             </div>
+             <div class="profileGameCard">
+                <div class="profileGameCardImage">
+                    <img src="@/assets/images/profile.jpeg" />
+                    <div class="profileGameCardName">Name of the game</div>
+                </div>
+                <div class="profileGameCardUsername">Username</div>
+            </div>
+                   <div class="profileGameCard">
+                <div class="profileGameCardImage">
+                    <img src="@/assets/images/profile.jpeg" />
+                    <div class="profileGameCardName">Name of the game</div>
+                </div>
+                <div class="profileGameCardUsername">Username</div>
+            </div>
+             <div class="profileGameCard">
+                <div class="profileGameCardImage">
+                    <img src="@/assets/images/profile.jpeg" />
+                    <div class="profileGameCardName">Name of the game</div>
+                </div>
+                <div class="profileGameCardUsername">Username</div>
+            </div>
+            <div class="profileGamesNav"><i class="fa fa-arrow-right" aria-hidden="true"></i>
+</div>
         </div>
         <div class="profileReviews">
             <div class="profileReviewCard">
@@ -76,10 +102,10 @@
                     <img src="@/assets/images/profile.jpeg" />
                 </div>
                 <div class="profileReviewCardUserInfo">
-                    <p>username</p>
-                    <p>comment</p>
+                    <p>username: <span>this is the comment.</span></p>
+                    
                 </div>
-                <div class="profileReviewCardScore"><p>score</p></div>
+                <div class="profileReviewCardScore"><p>68</p></div>
             </div>
 
             <ReviewInput :id="friend.id" />
