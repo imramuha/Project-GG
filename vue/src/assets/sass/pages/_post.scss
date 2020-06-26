@@ -1,0 +1,21 @@
+    .postPage {
+        display: flex;
+        flex-direction: column;
+        .postPageContentContainer {
+            display: flex;
+            width: 100%;
+            .postPageContent {
+                width: 70%;
+                p {
+                    overflow-wrap: break-word
+                }
+            }
+            .postPageImage {
+                width: 30%;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+    }

@@ -1,11 +1,41 @@
 <template>
-  <div>
-    <ul>
-      <li>{{ post.id }}</li>
-      <li>{{ post.title }}</li>
-      <li>{{ post.date }}</li>
-      <li>GG'd: {{ this.likes }}</li>
-    </ul>
+  <div class="postPage">
+    <div class="postPageContentContainer">
+    <div class="postPageContent">
+      <a @click="onPostCardClick" v-on:click="emitToPosts">
+        <div class="postcardContentHeader">
+          <h1>{{ post.title }}</h1>
+        </div>
+        <div class="postcardContentBody">
+          <p>{{ post.date }}02/05/2002 - {{ post.liked_posts.length }}</p>
+          <p>
+            This is the post content, that will be added later on during this
+            project
+          </p>
+        </div>
+      </a>
+      <div class="postcardContentFooter">
+        <p>Comments (2)</p>
+        <p>Report</p>
+      </div>
+    </div>
+      <div class="postPageImage">
+      <div v-if="post.image">
+        <img :src="post.image" />
+      </div>
+      <div v-else>
+        <img src="@/assets/images/post.png" />
+      </div>
+    </div>
+    </div>
+    <div v-if="post.user_liked != true" class="postcardStats">
+      <button type="button" @click="gg">GG</button>
+      <p>{{ post.liked_posts.length }}</p>
+    </div>
+    <div v-else class="postcardStats">
+      <p>{{ post.liked_posts.length }}</p>
+      <button class="likeButtonActive" type="button" @click="gg">uGG</button>
+    </div>
     <form class="comment-form" @submit.prevent="onSubmit">
       <p>
         <label for="comment">Comment:</label>
@@ -25,11 +55,11 @@
 </template>
 
 <script>
-import CommentCard from "@/components/CommentCard";
+//import CommentCard from "@/components/CommentCard";
 import { getPost, postComment } from "@/services/forum.api";
 
 export default {
-  components: { CommentCard },
+  //components: { CommentCard },
   props: ["data"],
   data() {
     return {
@@ -37,16 +67,15 @@ export default {
       comments: [],
       comment: null,
       user_id: null,
-      likes: null
+      likes: null,
     };
   },
   async mounted() {
-
     try {
       const response = await getPost(this.data);
       this.post = response.data[0];
       this.comments = response.data[0].comments;
-      this.likes = this.post.liked_posts.length
+      this.likes = this.post.liked_posts.length;
       console.log(this.post);
     } catch (error) {
       console.log(error);
@@ -56,7 +85,7 @@ export default {
     async onSubmit() {
       let comment = {
         post_id: this.post.id,
-        comment: this.comment
+        comment: this.comment,
       };
       try {
         let response = await postComment(comment);
@@ -70,8 +99,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
