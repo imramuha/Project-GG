@@ -1,21 +1,77 @@
-    .postPage {
-        display: flex;
-        flex-direction: column;
-        .postPageContentContainer {
+        .postPage {
             display: flex;
-            width: 100%;
-            .postPageContent {
-                width: 70%;
-                p {
-                    overflow-wrap: break-word
+            flex-direction: column;
+            height: 100%;
+            //justify-content: space-between;
+            padding: 7px;
+            .postPageContentContainer {
+                display: flex;
+                width: 100%;
+                .postPageContent {
+                    width: 70%;
+                    p {
+                        overflow-wrap: break-word
+                    }
+                    .postPageContentFooter {
+                        display: flex;
+                    }
+                }
+                .postPageImage {
+                    width: 30%;
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
                 }
             }
-            .postPageImage {
-                width: 30%;
-                img {
-                    width: 100%;
-                    height: auto;
+            .postPageCommentsContainer {
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                align-items: flex-end;
+                form {
+                    width: 30%;
+                    padding: 7px;
+                    display: flex;
+                    flex-direction: column;
+                    label {
+                        color: $melt;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        font-size: 13px;
+                        margin-bottom: 5px;
+                    }
+                    input {
+                        color: snow;
+                        border-radius: 3px;
+                        background-color: $midnightH;
+                        border: 1px solid $midnight;
+                        padding: 7px;
+                        &:focus {
+                            border: 1px solid $candy;
+                        }
+                    }
+                    button {
+                        background-color: $candy;
+                        color: $snow;
+                        border: none;
+                        border-radius: 3px;
+                        padding: 7px;
+                        font-weight: 600;
+                        margin-top: 10px;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: $candyL
+                        }
+                    }
+                }
+                .postPageComments {
+                    width: 70%;
+                    padding: 7px;
+                    .commentCard {
+                        width: 100%;
+                    }
                 }
             }
         }
-    }

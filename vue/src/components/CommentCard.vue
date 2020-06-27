@@ -1,11 +1,7 @@
 <template>
-  <div class="post-card">
-    <b-card-group rows>
-      <b-card-title
-        >Comment by {{ comment.user.username }}:
-        {{ comment.comment }}</b-card-title
-      >
-    </b-card-group>
+  <div class="commentCard">
+        Comment by {{ comment.user.username }}:
+        {{ comment.comment }}
   </div>
 </template>
 <script>

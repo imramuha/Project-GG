@@ -13,9 +13,9 @@
                 <router-link to="/dashboard">
                     <i class="fas fa-tachometer-alt"></i>
                 </router-link>
-                <router-link to="/forum" class="button">
+                <a @click="onOverscreenClick(forum)" class="button">
                     <i class="far fa-comment-alt"></i>
-                </router-link>
+                </a>
                 <router-link to="/user" class="button">
                     <i class="fas fa-cog"></i>
                 </router-link>
@@ -85,6 +85,7 @@ import Post from "@/views/Post";
 import UserEdit from "@/views/UserEdit";
 import PostCreate from "@/views/PostCreate";
 import Profile from "@/views/Profile";
+import Forum from "@/views/Forum";
 import UserGameAdd from "@/views/UserGameAdd"
 
 import Queue from "@/components/Queue";
@@ -105,7 +106,8 @@ export default {
         SearchInput,
         UserSearch,
         UserGameAdd,
-        Profile
+        Profile,
+        Forum
     },
     data() {
         return {
@@ -116,6 +118,7 @@ export default {
             contentActive: true,
             overscreenComponent: null,
             overscreenData: null,
+            forum: "forum",
         };
     },
     methods: {
@@ -166,6 +169,9 @@ export default {
             } else if (value.component === "UserGameAdd") {
                 this.contentActive = false;
                 this.overscreenComponent = UserGameAdd;
+            } else if (value === "forum") {
+                this.contentActive = false;
+                this.overscreenComponent = Forum;
             }
         },
     }

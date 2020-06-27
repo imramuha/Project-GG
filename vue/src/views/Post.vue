@@ -1,65 +1,67 @@
 <template>
   <div class="postPage">
     <div class="postPageContentContainer">
-    <div class="postPageContent">
-      <a @click="onPostCardClick" v-on:click="emitToPosts">
-        <div class="postcardContentHeader">
+      <div class="postPageContent">
+        <div class="postPageContentHeader">
           <h1>{{ post.title }}</h1>
         </div>
-        <div class="postcardContentBody">
-          <p>{{ post.date }}02/05/2002 - {{ post.liked_posts.length }}</p>
+        <div class="postPageContentBody">
+          <p>{{ post.date }}02/05/2002</p>
           <p>
             This is the post content, that will be added later on during this
             project
           </p>
         </div>
-      </a>
-      <div class="postcardContentFooter">
-        <p>Comments (2)</p>
-        <p>Report</p>
+        <div class="postPageContentFooter">
+          <div v-if="post.user_liked != true">
+            <button type="button" @click="gg">GG</button>
+            <p>{{ post.liked_posts.length }}</p>
+          </div>
+          <div v-else>
+            <p>{{ post.liked_posts.length }}</p>
+            <button class="likeButtonActive" type="button" @click="gg">
+              uGG
+            </button>
+          </div>
+          <p>Comments (2)</p>
+          <p>Likes({{ post.liked_posts.length }})</p>
+          <button>Report</button>
+        </div>
       </div>
-    </div>
       <div class="postPageImage">
-      <div v-if="post.image">
-        <img :src="post.image" />
+        <div v-if="post.image">
+          <img :src="post.image" />
+        </div>
+        <div v-else>
+          <img src="@/assets/images/post.png" />
+        </div>
       </div>
-      <div v-else>
-        <img src="@/assets/images/post.png" />
+    </div>
+    <div class="postPageCommentsContainer">
+      <div class="postPageComments">
+        <CommentCard
+          v-for="comment in comments"
+          v-bind:key="comment.id"
+          :comment="comment"
+        />
       </div>
-    </div>
-    </div>
-    <div v-if="post.user_liked != true" class="postcardStats">
-      <button type="button" @click="gg">GG</button>
-      <p>{{ post.liked_posts.length }}</p>
-    </div>
-    <div v-else class="postcardStats">
-      <p>{{ post.liked_posts.length }}</p>
-      <button class="likeButtonActive" type="button" @click="gg">uGG</button>
-    </div>
-    <form class="comment-form" @submit.prevent="onSubmit">
-      <p>
-        <label for="comment">Comment:</label>
-        <input id="comment" v-model="comment" placeholder="comment" />
-      </p>
+      <form @submit.prevent="onSubmit">      
+          <label for="comment">Comment</label>
+          <input id="comment" v-model="comment" />     
 
-      <p>
-        <input type="submit" value="Submit" />
-      </p>
-    </form>
-    <CommentCard
-      v-for="comment in comments"
-      v-bind:key="comment.id"
-      :comment="comment"
-    />
+          <button type="submit">Comment</button>
+        
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-//import CommentCard from "@/components/CommentCard";
+import CommentCard from "@/components/CommentCard";
 import { getPost, postComment } from "@/services/forum.api";
 
 export default {
-  //components: { CommentCard },
+  components: { CommentCard },
   props: ["data"],
   data() {
     return {
@@ -75,6 +77,7 @@ export default {
       const response = await getPost(this.data);
       this.post = response.data[0];
       this.comments = response.data[0].comments;
+      console.log(this.comments);
       this.likes = this.post.liked_posts.length;
       console.log(this.post);
     } catch (error) {

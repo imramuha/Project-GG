@@ -1,0 +1,32 @@
+.forumContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 7px;
+    .forumSort {
+        height: 10%;
+        width: 100%;
+        display: flex;
+        background-color: $midnight;
+        padding: 7px;
+        margin-bottom: 5px;
+        border-radius: 3px;
+        button {
+            border: 2px solid #b9b9b9;
+            border-radius: 20px;
+            padding: 6px 20px;
+            font-size: 11px;
+            color: #b9b9b9;
+            background-color: #333333;
+            width: 100%;
+            border-radius: 5px;
+        }
+    }
+    .forumPosts {
+        height: 90%;
+        background-color: $midnight;
+        padding: 7px;
+        border-radius: 3px
+    }
+}

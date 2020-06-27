@@ -29,6 +29,7 @@
     @import 'pages/_dashboard';
     @import 'pages/_profile';
     @import 'pages/_post';
+    @import 'pages/_forum';
     //@import 'themes/theme';
     //@import 'themes/admin';
     html {
@@ -42,6 +43,7 @@
     h5,
     h6 {
         font-family: 'Lato', sans-serif;
+        margin: 0px;
     }
     
     a {

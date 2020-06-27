@@ -1,10 +1,17 @@
 <template>
-  <div>
-    <h1>Forum</h1>
-    <template v-if="!isLoading">
-      <PostCard v-for="post in posts" v-bind:key="post.id" :post="post" />
-    </template>
-    <p v-else>Loading posts</p>
+  <div class="forumContainer">
+    <div class="forumSort">
+      <button>New</button>
+      <button>Top</button>
+      <button>Liked</button>
+    </div>
+    <div class="forumPosts">
+      <p>Forum posts</p>
+      <template v-if="!isLoading">
+        <PostCard v-for="post in posts" v-bind:key="post.id" :post="post" />
+      </template>
+      <p v-else>Loading posts</p>
+    </div>
   </div>
 </template>
 
