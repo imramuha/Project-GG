@@ -147,7 +147,7 @@ export default {
         },
         onOverscreenClick(value) {
             console.log(value);
-            if(value.component === "PostCard") {
+            if(value.component === "PostCard" || value.component === "ForumPostCard" ) {
                 this.contentActive = false;
                 this.overscreenComponent = Post;
                 this.overscreenData = value.id;

@@ -207,7 +207,7 @@ class AccountController extends Controller
     */
     public function showPosts () {
 
-        $posts = Post::likedposts("user_id", auth()->id())->get();
+        $posts = Post::with('likedPosts')->/*orderBy('created_at', 'desc')->*/get();
         return response()->json($posts);
     }
 

@@ -4,7 +4,7 @@
             v-for="searchedUser in searchedUsers"
             v-bind:key="searchedUser.id"
             :searchedUser="searchedUser"
-             v-on:emitToUserSearch="onSearchedUserCardClick"
+            v-on:emitToUserSearch="onSearchedUserCardClick"
         />
     </div>
 </template>
