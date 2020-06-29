@@ -7,7 +7,80 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-size: 50px;
+    .landingsPageBody {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 90%;
+        width: 100%;
+        font-weight: 100;
+        text-align: center;
+        .landingsPageBodyContent {
+            display: flex;
+            flex-direction: column;
+            //justify-content: center;
+            align-items: center;
+            a {
+                margin: 0px;
+                button {
+                    background-color: $candy;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 2px;
+                    padding: 7px 21px;
+                    font-weight: 400;
+                    letter-spacing: 3px;
+                    font-size: 17px;
+                    cursor: pointer;
+                    margin-bottom: 1.5px;
+                    &:hover {
+                        background-color: $candyL;
+                        transition: 0.1s;
+                        margin-top: 1.5px;
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+            h1 {
+                font-size: 50px;
+                word-spacing: 5px;
+                max-width: 720px;
+                margin-top: 50px;
+            }
+            p {
+                color: $melt;
+                max-width: 575px;
+                font-size: 15px;
+                font-weight: 400;
+                margin: 20px 0;
+            }
+        }
+        .landingsPageBodyIcons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            //img
+            div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $melt;
+                height: auto;
+                width: 20%;
+            }
+        }
+    }
+    .landingsPageFooter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 10%;
+        width: 100%;
+        p {
+            font-size: 11px;
+            color: $melt;
+        }
+    }
     a {
         color: $candy;
         margin: 20px;

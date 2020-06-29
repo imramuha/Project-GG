@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import httpClient from "@/services/httpClient";
 
 import Forum from "@/store/modules/forum.module";
 import Game from "@/store/modules/game.module";
@@ -8,7 +9,7 @@ import Review from "@/store/modules/review.module";
 
 Vue.use(Vuex);
 
-import Pusher from "pusher-js"
+import Pusher from "pusher-js";
 
 export default new Vuex.Store({
     state: {
@@ -17,10 +18,15 @@ export default new Vuex.Store({
     mutations: {
         SET_USER_DATA(state, userData) {
             state.user = userData;
+
             localStorage.setItem("user", JSON.stringify(userData));
+
             axios.defaults.headers.common[
                 "Authorization"
             ] = `Bearer ${userData.token}`;
+
+
+
         },
         LOGOUT() {
             localStorage.removeItem("user");
@@ -30,7 +36,6 @@ export default new Vuex.Store({
         ACTIVATE_PUSHER(userData) {
             Pusher.logToConsole = true;
 
-            console.log(userData.user.token);
             console.log('pusher')
 
             window.pusher = new Pusher('c8af74134473385784fa', {
@@ -58,6 +63,17 @@ export default new Vuex.Store({
                 .post("http://127.0.0.1:8000/api/auth/login", credentials)
                 .then(({ data }) => {
                     commit("SET_USER_DATA", data);
+                    console.log(data.token);
+
+                    console.log('02315646548987');
+
+                    // set the headers for our httpshelper
+                    const authInterceptor = config => {
+                        config.headers["Authorization"] = `Bearer ${data.token}`;
+                        return config;
+                    };
+
+                    httpClient.interceptors.request.use(authInterceptor);
                 });
         },
         logout({ commit }) {

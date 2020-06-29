@@ -1,10 +1,19 @@
 <template>
-  <div class="landingsPage" v-if="!loggedIn">
-    <p>
-      To use this app you'll need to
-      <router-link to="/login">Login</router-link>or
-      <router-link to="/register">Register</router-link>
-    </p>
+  <div class="landingsPage">
+    <div class="landingsPageBody">
+        <div class="landingsPageBodyContent">
+      <h1>A use this app you'll need to</h1>
+      <p>subtitle for now it'll change once we get some more info :), subtitle for now it'll change once we get some more info :), subtitle for now it'll change once we get some more info :)</p>
+      <router-link to="/register"><button>Join</button></router-link>
+        </div>
+      <div class="landingsPageBodyIcons">
+        <div>icon 1</div>
+         <div>icon 2</div>
+          <div>icon 3</div>
+           <div>icon 4</div>
+      </div>
+    </div>
+    <div class="landingsPageFooter"><p>class of 2020</p></div>
   </div>
 </template>
 

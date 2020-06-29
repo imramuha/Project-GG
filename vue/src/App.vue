@@ -8,19 +8,17 @@
 <script>
 //import Navigation from "@/components/Navigation";
 import AppNav from "@/components/AppNav";
-import "@/assets/js/main.js";
 
 export default {
   
   components: {
-    //Navigation
     AppNav
   }
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/sass/main.scss";
+
 
 
 html {

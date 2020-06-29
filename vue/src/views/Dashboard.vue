@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import httpClient from "@/services/httpClient";
 import Friendlist from "@/components/dashboard/Friendlist";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";

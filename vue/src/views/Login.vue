@@ -15,14 +15,14 @@
           Don't have an account?
           <router-link to="/register">Register</router-link>
         </p>
-        <p>{{ error }}</p>
+        <!--<p>{{ error }}</p>-->
       </form>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import httpClient from "@/services/httpClient";
 
 export default {
   data() {
@@ -39,7 +39,8 @@ export default {
           password: this.password
         })
         .then(() => {
-          this.$router.push({ name: "dashboard" });
+          this.$router.push('dashboard');
+          //httpClient;
         })
         .catch(err => {
           this.error = err.response.data.error;

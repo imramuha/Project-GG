@@ -2,61 +2,16 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/store";
-import httpClient from "./services/httpClient";
-//import pusher from "./services/pusher";
+//import httpClient from "@/services/httpClient";
 import axios from "axios";
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
-// TEMP
-/*
-
-import VueEcho from 'vue-echo';
-Vue.use(VueEcho, {
-    authEndpoint: 'http://127.0.0.1:8000/api/broadcasting/auth',
-    broadcaster: 'pusher',
-    key: 'c8af74134473385784fa',
-    cluster: 'eu',
-    forceTLS: true,
-    encrypted: true,
-    auth: {
-        headers: {
-            Authorization: `Bearer ${user.token}`,
-
-        }
-    },
-}) 
-import Echo from "laravel-echo"
-import Pusher from "pusher-js"
-
-
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'c8af74134473385784fa',
-    cluster: 'eu',
-    forceTLS: true,
-    encrypted: true,
-    auth: {
-        headers: {
-            Authorization: `Bearer ${user.token}`,
-
-        }
-    },
-});
-
-window.Pusher = require('pusher-js');
-
-Pusher.log = function(message) {
-    window.console.log(message)
-}; *
-*/
-
-Vue.config.productionTip = false;
 
 new Vue({
     router,
     store,
-    httpClient,
+    //httpClient,
     created() {
         const userString = localStorage.getItem("user"); // grab user data from local storage
         if (userString) {

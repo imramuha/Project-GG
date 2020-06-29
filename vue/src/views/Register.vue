@@ -25,9 +25,9 @@
           <router-link to="/login">Login</router-link>
         </p>
 
-        <ul>
+        <!--<ul>
           <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
-        </ul>
+        </ul>-->
       </form>
     </div>
   </div>

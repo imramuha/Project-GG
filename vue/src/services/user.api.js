@@ -10,5 +10,4 @@ const getMe = () => httpClient.get(END_POINT);
 const editUser = data => httpClient.post(EDIT_END_POINT, data);
 
 const searchUsers = data => httpClient.post(SEARCH_END_POINT, data);
-
 export { getMe, editUser, searchUsers };
