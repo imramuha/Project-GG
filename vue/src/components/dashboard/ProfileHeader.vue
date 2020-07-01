@@ -17,7 +17,7 @@
                         Likes to swim a lot
                         <!--{{ user.line }}-->
                     </p>
-                    <p>{{ user.status.name }}</p>
+                   <p>Online</p>
                 </div>
                 <div class="userDataRight">
                     <a v-on:click="onEditClick" to="/useredit">

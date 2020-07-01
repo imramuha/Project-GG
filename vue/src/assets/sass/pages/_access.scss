@@ -16,6 +16,7 @@
         h1 {
             @include font-size($access-title-font-sizes);
             line-height: 10px;
+            margin: 20px 0px 30px;
         }
         a {
             color: $candy;

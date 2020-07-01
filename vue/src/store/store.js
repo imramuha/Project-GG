@@ -21,11 +21,12 @@ export default new Vuex.Store({
 
             localStorage.setItem("user", JSON.stringify(userData));
 
-            axios.defaults.headers.common[
-                "Authorization"
-            ] = `Bearer ${userData.token}`;
+            const authInterceptor = config => {
+                config.headers["Authorization"] = `Bearer ${userData.token}`;
+                return config;
+            };
 
-
+            httpClient.interceptors.request.use(authInterceptor);
 
         },
         LOGOUT() {
@@ -63,17 +64,6 @@ export default new Vuex.Store({
                 .post("http://127.0.0.1:8000/api/auth/login", credentials)
                 .then(({ data }) => {
                     commit("SET_USER_DATA", data);
-                    console.log(data.token);
-
-                    console.log('02315646548987');
-
-                    // set the headers for our httpshelper
-                    const authInterceptor = config => {
-                        config.headers["Authorization"] = `Bearer ${data.token}`;
-                        return config;
-                    };
-
-                    httpClient.interceptors.request.use(authInterceptor);
                 });
         },
         logout({ commit }) {
