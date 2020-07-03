@@ -7,6 +7,9 @@ import Dashboard from "../views/Dashboard.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 
+import Terms from "../views/Terms.vue";
+import Privacy from "../views/Privacy.vue";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -38,6 +41,17 @@ const router = new Router({
             meta: {
                 hideForAuth: true
             }
+        },
+        {
+            path: "/terms",
+            name: "terms",
+            component: Terms,
+
+        },
+        {
+            path: "/privacy",
+            name: "privacy",
+            component: Privacy
         }
     ]
 });

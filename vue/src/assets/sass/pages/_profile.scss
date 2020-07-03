@@ -206,9 +206,11 @@
                 flex-grow: 1;
                 height: 100%;
                 padding-left: 7px;
+                display: flex;
                 form {
                     display: flex;
                     flex-direction: column;
+                    justify-content: space-evenly;
                     label {
                         color: $melt;
                         font-weight: 600;
@@ -226,8 +228,19 @@
                         background-color: $midnightH;
                         border: 1px solid $midnight;
                         padding: 7px;
+                        margin-bottom: 7px;
                         &:focus {
                             border: 1px solid $candy;
+                        }
+                    }
+                    input {
+                        padding: 0px;
+                        &::-moz-range-thumb {
+                            width: 15px;
+                            height: 15px;
+                            border: none;
+                            background: $candy;
+                            cursor: pointer;
                         }
                     }
                     button {
@@ -237,7 +250,6 @@
                         border-radius: 3px;
                         padding: 7px;
                         font-weight: 600;
-                        margin-top: 5px;
                         cursor: pointer;
                         &:hover {
                             background-color: $candyL

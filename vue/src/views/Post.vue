@@ -59,6 +59,7 @@
 <script>
 import CommentCard from "@/components/CommentCard";
 import { getPost, postComment } from "@/services/forum.api";
+import { likePost } from "@/services/forum.api";
 
 export default {
   components: { CommentCard },
@@ -75,8 +76,8 @@ export default {
   async mounted() {
     try {
       const response = await getPost(this.data);
-      this.post = response.data[0];
-      this.comments = response.data[0].comments;
+      this.post = response.data;
+      this.comments = response.data.comments;
       console.log(this.comments);
       this.likes = this.post.liked_posts.length;
       console.log(this.post);
@@ -103,6 +104,28 @@ export default {
         console.log(error);
       }
     },
+      async gg() {
+
+            let data = {
+              post_id: this.post.id,        
+            }
+            
+            try {
+            await likePost(data).then(()=> {
+                
+               
+
+                getPost(this.post.id).then((response) => {
+                  console.log('this');
+                  this.post = response.data;
+                });
+            });
+            
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
   },
 };
 </script>

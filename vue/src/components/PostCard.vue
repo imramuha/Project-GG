@@ -63,17 +63,11 @@ export default {
     },
     methods: {
         async gg() {
-            /*console.log("you just GG'd this post :)");
-
-            if (this.toggleLike == "liked") {
-                this.toggleLike = "";
-            } else {
-                this.toggleLike = "liked";
-            }*/
 
             let data = {
               post_id: this.post.id,        
             }
+            
             try {
             await likePost(data).then(()=> {
                 

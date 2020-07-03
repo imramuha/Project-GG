@@ -215,13 +215,6 @@ class AccountController extends Controller
     * Get all users except the logged one in ^^
     */
     public function showUserPosts () {
-     
-       /*$posts = Post::where('user_id', '=', auth()->id())->with(
-            array('likedPosts' => function($query)
-            {
-                $query->where('user_id', auth()->id());
-            })        
-        )->get();*/
         $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts'  
         )->get();
 
@@ -257,7 +250,15 @@ class AccountController extends Controller
     * Get all users except the logged one in ^^
     */
     public function showPost ($id) {
-        $post = Post::where('id', '=', $id)->with("comments", "comments.user", "likedPosts")->get();
+        $post = Post::where('id', '=', $id)->with("comments", "comments.user", "likedPosts")->first();
+
+        // check if user liked this post; if yes, send it.
+        foreach($post->likedPosts as $like) {
+            if($like->user_id === auth()->id()) {
+                $post["user_liked"] = true;
+            }
+        }
+        
         return response()->json($post);
     }
 
@@ -301,15 +302,23 @@ class AccountController extends Controller
     */
 
     public function postReview(Request $request) {
-        
-        $review = Review::create([
-            'comment' => $request->input('comment'),
-            'score' => $request->input('rating'),
-            'user_id' => $request->input('id'),
-            'reviewer_id' => auth()->user()->id,
-        ]);
 
-        $response = array('response' => 'Your review has been posted!', 'succes' => true);
+        $review_exists = Review::where('user_id', '=', $request->input('id'))->where('reviewer_id', '=', auth()->user()->id)->first();
+
+        // checks if the user already has reviewed, if yes, they cn't if not they can
+        if($review_exists) {
+            //return $review_exists;
+            $response = array('response' => "You've already reviewed this user before!", 'succes' => false);
+        } else {
+            $review = Review::create([
+                'comment' => $request->input('comment'),
+                'score' => $request->input('rating'),
+                'user_id' => $request->input('id'),
+                'reviewer_id' => auth()->user()->id,
+            ]);
+    
+            $response = array('response' => 'Your review has been posted!', 'succes' => true);
+        }
         return $response;
     }
 

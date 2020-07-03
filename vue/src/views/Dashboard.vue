@@ -2,7 +2,7 @@
     <div class="dashboard">
         <div class="sidenav">
             <div class="sidenavLogo">
-                <img src="@/assets/images/logo.svg" />
+                <router-link to='/'><img src="@/assets/images/logo.svg" /></router-link>
             </div>
             <!--<router-link to="/user" class="button">Lobby</router-link>-->
             <button type="button" class="queueButton" @click="queue">Queue</button>
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import httpClient from "@/services/httpClient";
+// import httpClient from "@/services/httpClient";
 import Friendlist from "@/components/dashboard/Friendlist";
 import DashboardNav from "@/components/dashboard/DashboardNav";
 import ProfileHeader from "@/components/dashboard/ProfileHeader";
@@ -148,7 +148,7 @@ export default {
         },
         onOverscreenClick(value) {
             console.log(value);
-            if(value.component === "PostCard" || value.component === "ForumPostCard" ) {
+            if(value.component === "PostCard" || value.component === "ForumPostCard") {
                 this.contentActive = false;
                 this.overscreenComponent = Post;
                 this.overscreenData = value.id;
