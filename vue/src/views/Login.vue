@@ -2,7 +2,13 @@
   <div class="accessContainer">
     <div class="accessForm">
       <h1>Welcome back!</h1>
-      <form @submit.prevent="login">
+      <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
+        </ul>
+      </p>
+      <form v-on:submit.prevent="login">
         <label for="email">Email</label>
         <input v-model="email" type="email" name="email" value />
 
@@ -10,12 +16,11 @@
         <input v-model="password" type="password" name="password" value />
         <p><router-link to="/">Forgot your password?</router-link></p>
 
-        <button type="submit" name="button">Login</button>
+        <button type="submit" >Login</button>
         <p>
           Don't have an account?
           <router-link to="/register">Register</router-link>
         </p>
-        <!--<p>{{ error }}</p>-->
       </form>
     </div>
   </div>
@@ -28,25 +33,38 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      errors: [],
     };
   },
   methods: {
     login() {
-      this.$store
-        .dispatch("login", {
-          email: this.email,
-          password: this.password
-        })
-        .then(() => {
-          this.$router.push('dashboard');
-          //httpClient;
-        })
-        .catch(err => {
-          this.error = err.response.data.error;
-          console.log(this.error);
-        });
+      this.errors = [];
+
+      if(!this.email) {
+          this.errors.push('Email is required!');
+
+      } if(!this.password) {
+          this.errors.push('Password is also required!');
+
+      } else {
+        console.log('h')
+        this.$store
+          .dispatch("login", {
+            email: this.email,
+            password: this.password
+          })
+          .then(() => {
+            console.log('hi')
+            this.$router.push('dashboard');
+          })
+          .catch(error => {
+            this.errors.push(error);
+          })    
+        }
+
     }
+    
   }
 };
 </script>

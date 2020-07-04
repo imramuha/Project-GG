@@ -14,6 +14,7 @@ class RegisterController extends Controller
     // REGISTER THE USER/CREATE A USER
     
     if(!$token = auth() -> attempt($request->only('email', 'password'))) {
+        // validation
         return response(null, 401);
     }
 

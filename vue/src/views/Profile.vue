@@ -63,49 +63,17 @@
             </div>
         </div>
         <div class="profileGames">
-            <div class="profileGamesNav"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-</div>
-            <div class="profileGameCard">
-                <div class="profileGameCardImage">
-                    <img src="@/assets/images/profile.jpeg" />
-                    <div class="profileGameCardName">Name of the game</div>
-                </div>
-                <div class="profileGameCardUsername">Username</div>
-            </div>
-             <div class="profileGameCard">
-                <div class="profileGameCardImage">
-                    <img src="@/assets/images/profile.jpeg" />
-                    <div class="profileGameCardName">Name of the game</div>
-                </div>
-                <div class="profileGameCardUsername">Username</div>
-            </div>
-                   <div class="profileGameCard">
-                <div class="profileGameCardImage">
-                    <img src="@/assets/images/profile.jpeg" />
-                    <div class="profileGameCardName">Name of the game</div>
-                </div>
-                <div class="profileGameCardUsername">Username</div>
-            </div>
-             <div class="profileGameCard">
-                <div class="profileGameCardImage">
-                    <img src="@/assets/images/profile.jpeg" />
-                    <div class="profileGameCardName">Name of the game</div>
-                </div>
-                <div class="profileGameCardUsername">Username</div>
-            </div>
-            <div class="profileGamesNav"><i class="fa fa-arrow-right" aria-hidden="true"></i>
-</div>
+            <div class="profileGamesNav"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+            <ProfileGameCard v-for="game in games"
+          v-bind:key="game.id"
+          :game="game" />
+            <div class="profileGamesNav"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
         </div>
         <div class="profileReviews">
-            <div class="profileReviewCard">
-                <div class="profileReviewCardImage">
-                    <img src="@/assets/images/profile.jpeg" />
-                </div>
-                <div class="profileReviewCardUserInfo">
-                    <p>username: <span>this is the comment.</span></p>
-                    
-                </div>
-                <div class="profileReviewCardScore"><p>68</p></div>
+            <div class="profileReviewsSection">
+            <ProfileReviewCard  v-for="review in reviews"
+          v-bind:key="review.id"
+          :review="review" />
             </div>
 
             <ReviewInput :id="friend.id" />
@@ -115,28 +83,30 @@
 
 <script>
 import { getFriend, getRelation } from "@/services/friend.api";
+import { getProfileGames } from "@/services/game.api";
+import { getProfileReviews } from "@/services/review.api";
 
 import ReviewInput from "@/components/ReviewInput";
+import ProfileGameCard from "@/components/profile/ProfileGameCard";
+import ProfileReviewCard from "@/components/profile/ProfileReviewCard";
 
 export default {
-    components: { ReviewInput },
+    components: { ReviewInput, ProfileGameCard, ProfileReviewCard },
     props: ["data"],
     data() {
         return {
             friend: [],
             relation: [],
             activeButton: "",
-            reviewscore: 0
+            reviewscore: 0,
+            reviews: [],
+            games: [],
         };
     },
     async mounted() {
         try {
             const response = await getFriend(this.data);
             this.friend = response.data.user[0];
-            console.log(response.data);
-
-            console.log(this.friend);
-            console.log(this.reviewscore);
 
             var score = 0;
 
@@ -162,6 +132,21 @@ export default {
             console.log(this.activeButton);
 
             //console.log(this.friend.id);
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+        
+            const response = await getProfileReviews(this.friend.id);
+            this.reviews = response.data.data
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+            const response = await getProfileGames(this.friend.id);
+            this.games = response.data.data
+            console.log(response.data);
+
         } catch (error) {
             console.log(error);
         }

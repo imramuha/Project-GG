@@ -19,7 +19,12 @@ class CreateGamesTable extends Migration
             $table->string('option');
             $table->timestamps();
         });
+
+        // once the table is created use a raw query to ALTER it and add the MEDIUMBLOB
+        DB::statement("ALTER TABLE games ADD image LONGBLOB");
     }
+
+    
 
     /**
      * Reverse the migrations.

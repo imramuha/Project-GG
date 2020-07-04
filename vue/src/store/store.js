@@ -13,7 +13,8 @@ import Pusher from "pusher-js";
 
 export default new Vuex.Store({
     state: {
-        user: null
+        user: null,
+        errors: [],
     },
     mutations: {
         SET_USER_DATA(state, userData) {
@@ -55,16 +56,19 @@ export default new Vuex.Store({
             return axios
                 .post("http://127.0.0.1:8000/api/auth/register", credentials)
                 .then(({ data }) => {
-                    console.log("user data is", data);
                     commit("SET_USER_DATA", data);
                 });
         },
         login({ commit }, credentials) {
-            return axios
-                .post("http://127.0.0.1:8000/api/auth/login", credentials)
-                .then(({ data }) => {
-                    commit("SET_USER_DATA", data);
-                });
+            return new Promise((resolve, reject) => {
+                axios.post("http://127.0.0.1:8000/api/auth/login", credentials)
+                    .then(({ data }) => {
+                        console.log('""""é"')
+                        resolve(commit("SET_USER_DATA", data.token));
+                    }).catch((error) => {
+                        reject(error.response.data.errors)
+                    });
+            })
         },
         logout({ commit }) {
             commit("LOGOUT");

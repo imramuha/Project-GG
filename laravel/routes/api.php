@@ -45,6 +45,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     Route::post('/user/review', 'AccountController@postReview');
     Route::get('/userreviews', 'AccountController@showUserReviews');
+    Route::get('/profilereviews/{id}', 'AccountController@showProfileReviews');
     Route::get('/userpostedreviews', 'AccountController@showPostedReviews');
 
     Route::get('/posts', 'AccountController@showPosts');
@@ -62,6 +63,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
 
     
     Route::get('/usergames', 'AccountController@showUserGameData');
+    Route::get('/profilegames/{id}', 'AccountController@showProfileGameData');
     Route::get('/queuegames', 'AccountController@showQueueGames');
 
 

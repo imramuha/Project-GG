@@ -362,6 +362,14 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
+     /*
+    * Get all logged in users game data
+    */
+    public function showProfileGameData ($id) {
+        $data = UserGameData::where('user_id', '=', $id)->with("game", "data")->paginate(8);
+        return response()->json($data);
+    }
+
     /*
     *  Get all games that aren't linked to the user
     */
@@ -444,6 +452,15 @@ class AccountController extends Controller
     public function showUserReviews () {
 
         $data = Review::where('user_id', '=', auth()->user()->id)->paginate(4);
+        return response()->json($data);
+    }
+
+    /*
+    * Get all logged in users receiven-reviews
+    */
+    public function showProfileReviews ($id) {
+
+        $data = Review::where('user_id', '=', $id)->with('reviewer')->paginate(4);
         return response()->json($data);
     }
 
