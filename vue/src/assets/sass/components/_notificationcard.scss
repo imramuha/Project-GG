@@ -1,15 +1,15 @@
-        .notificationCard {
+    .notificationCard {
+        .notificationContent {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
             background-color: $midnightL;
-            border-radius: 3px;
-            margin-bottom: 7px;
             font-size: 11px;
             color: $melt;
             padding: 6.3px;
             border-left: 5px solid $paint;
+            border-radius: 1px;
             svg {
                 color: $slate;
             }
@@ -19,3 +19,13 @@
                 }
             }
         }
+        .slider {
+            height: 1px;
+            margin-bottom: 6.3px;
+            border-radius: 3px;
+            background-color: $paint;
+            width: 100%;
+            -webkit-transition: width 10s ease;
+            transition: width 10s ease;
+        }
+    }

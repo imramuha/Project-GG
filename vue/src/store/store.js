@@ -38,10 +38,7 @@ export default new Vuex.Store({
             }
         },
         REMOVE_NOTIFICATION(state, index) {
-            console.log(state.notifications);
-            console.log(index);
             state.notifications.splice(index, 1);
-            //state.notifications.$delete(notification)
         },
         LOGOUT() {
             localStorage.removeItem("user");
