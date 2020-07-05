@@ -1,11 +1,11 @@
 <template>
-      <div class="profileGameCard">
-        <div class="profileGameCardImage">
-            <img src="@/assets/images/profile.jpeg" />
-            <div class="profileGameCardName">{{game.game.name}}</div>
-        </div>
-        <div class="profileGameCardUsername">{{game.data.username}}</div>
+  <div class="profileGameCard">
+    <div class="profileGameCardImage">
+      <img src="@/assets/images/profile.jpeg" />
+      <div class="profileGameCardName">{{ game.game.name }}</div>
     </div>
+    <div class="profileGameCardUsername">{{ game.data.username }}</div>
+  </div>
 </template>
 <script>
 export default {
@@ -15,9 +15,9 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 <style scoped></style>

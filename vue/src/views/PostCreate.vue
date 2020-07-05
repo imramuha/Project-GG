@@ -2,6 +2,12 @@
   <div class="postForm">
     <div class="postFormHeader">
       <h1>CREATE A POST</h1>
+      <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
+        </ul>
+      </p>
     </div>
     <div class="postFormBody">
     <form @submit.prevent="onSubmit">
@@ -43,6 +49,7 @@ export default {
       subtitle: null,
       text: null,
       image: '',
+      errors: [],
     };
   },
   methods: {
@@ -59,22 +66,39 @@ export default {
             'Content-Type': 'multipart/form-data'
         }
       }
-
-      console.log(this.image)
-
       try {
-        let response = await createPost(post, config);
-        console.log(post);
-        console.log(response);
+        this.errors = [];
+        if(!this.title) {
+          this.errors.push('Title is required!');
 
-        this.title = null;
-        this.subtitle = null;
-        this.text = null;
-        this.image = null;
+        } if(!this.subtitle) {
+            this.errors.push('Subtitle or Subject is also required!');
 
-        //console.log(this.friend.id);
-      } catch (error) {
-        console.log(error);
+        } if(!this.text) {
+            this.errors.push('Please enter some text to your post.');
+
+        } else if (this.title && this.subtitle && this.text) {
+          let response = await createPost(post, config);
+
+          console.log(response)
+          this.title = null;
+          this.subtitle = null;
+          this.text = null;
+          this.image = null;
+          
+        }
+      } catch (errors) {
+        let err = errors.response.data.errors;
+        console.log(errors);
+         if(err.title) {
+            this.errors.push(err.title[0] )
+          }
+          if(err.subtitle) {
+            this.errors.push(err.subtitle[0] )
+          }
+           if(err.text) {
+            this.errors.push(err.text[0] )
+          }
       }
     },
     onImageChange(e) {

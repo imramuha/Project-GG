@@ -337,8 +337,13 @@ class AccountController extends Controller
     public function createPost(Request $request) {
 
         $image = base64_encode($request->input('image'));
-
         $user_id = auth()->user()->id;
+
+        $this->validate(request(), [
+            'title' => 'required|max:64|min:16',
+            'subtitle' => 'required|min:16|max:48',
+            'text' => 'required|min:16|max:128'
+        ]);
 
         $post = Post::create([
             'title' => $request->input('title'),
@@ -443,6 +448,8 @@ class AccountController extends Controller
             $data = Data::where('id', "=", $data_id)->first();
             $data->delete();
         }
+
+        return  array(['response' => 'Unfavorited a game.']);
     }
 
 

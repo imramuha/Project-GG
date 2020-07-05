@@ -8,8 +8,15 @@ use Auth;
 
 class LoginController extends Controller
 {
-    //    // siging
+    //validating and signing in
     public function __invoke (Request $request) {
+
+        $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+
         if(!$token = auth() -> attempt($request->only('email', 'password'))) {
             return response(['errors' => 'Either the email or password is incorrect.'], 401);
         }

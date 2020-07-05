@@ -45,12 +45,11 @@
           :comment="comment"
         />
       </div>
-      <form @submit.prevent="onSubmit">      
-          <label for="comment">Comment</label>
-          <input id="comment" v-model="comment" />     
+      <form @submit.prevent="onSubmit">
+        <label for="comment">Comment</label>
+        <input id="comment" v-model="comment" />
 
-          <button type="submit">Comment</button>
-        
+        <button type="submit">Comment</button>
       </form>
     </div>
   </div>
@@ -70,7 +69,7 @@ export default {
       comments: [],
       comment: null,
       user_id: null,
-      likes: null,
+      likes: null
     };
   },
   async mounted() {
@@ -89,7 +88,7 @@ export default {
     async onSubmit() {
       let comment = {
         post_id: this.post.id,
-        comment: this.comment,
+        comment: this.comment
       };
       try {
         let response = await postComment(comment);
@@ -104,29 +103,23 @@ export default {
         console.log(error);
       }
     },
-      async gg() {
+    async gg() {
+      let data = {
+        post_id: this.post.id
+      };
 
-            let data = {
-              post_id: this.post.id,        
-            }
-            
-            try {
-            await likePost(data).then(()=> {
-                
-               
-
-                getPost(this.post.id).then((response) => {
-                  console.log('this');
-                  this.post = response.data;
-                });
-            });
-            
-            } catch (error) {
-                console.log(error);
-            }
-
-        }
-  },
+      try {
+        await likePost(data).then(() => {
+          getPost(this.post.id).then(response => {
+            console.log("this");
+            this.post = response.data;
+          });
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 

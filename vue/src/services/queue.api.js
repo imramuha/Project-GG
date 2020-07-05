@@ -6,7 +6,6 @@ const QUEUE_END_POINT = "/api/frontend/queue";
 const LOUNGE_END_POINT = "/api/frontend/lounge/";
 const EXIT_LOUNGE_END_POINT = "/api/frontend/exitlounge";
 
-
 const getQueueGames = () => httpClient.get(END_POINT);
 
 const queue = data => httpClient.post(QUEUE_END_POINT, data);

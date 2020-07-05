@@ -26,12 +26,12 @@ export default {
       messages: [],
       friends: [],
       // change this
-      user: [],
+      user: []
     };
   },
   mounted() {
     try {
-      getMe().then((response) => {
+      getMe().then(response => {
         this.user = response;
 
         /* global pusher */
@@ -39,13 +39,13 @@ export default {
           `private-messages${this.user.data.user[0].id}`
         );
 
-        channel.bind("NewMessage", (data) => {
+        channel.bind("NewMessage", data => {
           //console.log(data);
           this.handleIncoming(data);
         });
       });
 
-      getAllFriends().then((response) => {
+      getAllFriends().then(response => {
         this.friends = response.data;
       });
     } catch (error) {
@@ -73,8 +73,8 @@ export default {
         this.saveNewMessage(data);
         this.message.push(data);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

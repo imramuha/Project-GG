@@ -6,39 +6,39 @@
 import { getUserGames } from "@/services/game.api";
 
 const state = {
-    usergames: [],
+  usergames: []
 };
 
 const getters = {
-    // care - name
-    getUserGames(state) {
-        return state.usergames;
-    }
+  // care - name
+  getUserGames(state) {
+    return state.usergames;
+  }
 };
 
 const actions = {
-    async fetchUserGames({ commit }, url) {
-        try {
-            const response = await getUserGames(url);
-            //console.log(response);
-            commit("SET_USER_GAMES", response.data);
-        } catch (error) {
-            // handle the error here
-            console.log(error);
-        }
+  async fetchUserGames({ commit }, url) {
+    try {
+      const response = await getUserGames(url);
+      //console.log(response);
+      commit("SET_USER_GAMES", response.data);
+    } catch (error) {
+      // handle the error here
+      console.log(error);
     }
+  }
 };
 
 const mutations = {
-    SET_USER_GAMES(state, data) {
-        state.usergames = data;
-    }
+  SET_USER_GAMES(state, data) {
+    state.usergames = data;
+  }
 };
 
 export default {
-    namespaced: true,
-    state,
-    getters,
-    actions,
-    mutations
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations
 };

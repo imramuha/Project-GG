@@ -1,7 +1,7 @@
 <template>
   <div class="commentCard">
-        Comment by {{ comment.user.username }}:
-        {{ comment.comment }}
+    Comment by {{ comment.user.username }}:
+    {{ comment.comment }}
   </div>
 </template>
 <script>

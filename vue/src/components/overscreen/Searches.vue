@@ -1,41 +1,44 @@
 <template>
-    <div class="usersearches">
-        <div class="usersearchCard">
-                <div class="usersearchCardImage" v-if="searchedUser.image">
-                        <img :src="searchedUser.image" />
-                </div>
-                <div class="usersearchCardImage" v-else>
-                    <img src="@/assets/images/profile.jpeg" />
-                </div>
-                <div class="usersearchCardUser">
-                    <p>{{ searchedUser.username }}</p>
-                    <p>{{ searchedUser.email }}</p>
-                </div>
-                <div class="usersearchCardLink">onForumPostCardClick
-                    <a  @click="onProfileClick" v-on:click="emitToUserSearch">  <i class="fas fa-arrow-right"></i> </a>
-                </div>
-        </div>
+  <div class="usersearches">
+    <div class="usersearchCard">
+      <div class="usersearchCardImage" v-if="searchedUser.image">
+        <img :src="searchedUser.image" />
+      </div>
+      <div class="usersearchCardImage" v-else>
+        <img src="@/assets/images/profile.jpeg" />
+      </div>
+      <div class="usersearchCardUser">
+        <p>{{ searchedUser.username }}</p>
+        <p>{{ searchedUser.email }}</p>
+      </div>
+      <div class="usersearchCardLink">
+        onForumPostCardClick
+        <a @click="onProfileClick" v-on:click="emitToUserSearch">
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    props: {
-        searchedUser: {
-            type: Object,
-            default: () => {
-                return {};
-            }
-        }
-    },
-    data() {
-        return {
-            users: []
-        };
-    },
+  props: {
+    searchedUser: {
+      type: Object,
+      default: () => {
+        return {};
+      }
+    }
+  },
+  data() {
+    return {
+      users: []
+    };
+  },
 
-    async mounted() {
-        /* try {
+  async mounted() {
+    /* try {
       const response = await getAllFriends();
       this.friends = response.data;
 
@@ -53,20 +56,20 @@ export default {
     } catch (error) {
       console.log(error);
     }*/
+  },
+  methods: {
+    onProfileClick() {
+      this.childMessage = {
+        component: "Profile",
+        id: this.searchedUser.id
+      };
+
+      this.emitToUserSearch(this.childMessage);
     },
-    methods: {
-          onProfileClick() {
-            this.childMessage = {
-                component: "Profile",
-                id: this.searchedUser.id
-            }
-                 
-            this.emitToUserSearch(this.childMessage);
-        },
-        emitToUserSearch(value) {
-            this.$emit("emitToUserSearch", value);
-        }
+    emitToUserSearch(value) {
+      this.$emit("emitToUserSearch", value);
     }
+  }
 };
 </script>
 

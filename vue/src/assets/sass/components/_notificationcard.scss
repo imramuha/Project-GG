@@ -1,0 +1,21 @@
+        .notificationCard {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            background-color: $midnightL;
+            border-radius: 3px;
+            margin-bottom: 7px;
+            font-size: 11px;
+            color: $melt;
+            padding: 6.3px;
+            border-left: 5px solid $paint;
+            svg {
+                color: $slate;
+            }
+            a {
+                svg {
+                    color: $melt;
+                }
+            }
+        }

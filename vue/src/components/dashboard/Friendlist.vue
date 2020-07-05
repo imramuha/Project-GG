@@ -45,7 +45,7 @@ export default {
       showOnlineSection: true,
       showOfflineSection: false,
       toggleIconOnline: "-",
-      toggleIconOffline: "+",
+      toggleIconOffline: "+"
     };
   },
   methods: {
@@ -70,7 +70,7 @@ export default {
       } else {
         this.toggleIconOffline = "+";
       }
-    },
+    }
   },
   async mounted() {
     try {
@@ -78,7 +78,7 @@ export default {
       this.friends = response.data;
 
       // adds friends to either online of offline array :)
-      this.friends.forEach((item) => {
+      this.friends.forEach(item => {
         if (item.status.name == "online") {
           this.onlineFriends.push(item);
         }
@@ -89,7 +89,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };
 </script>
 

@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="landingsPageFooter">
-      <router-link to='/privacy'>Privacy Policy</router-link>
+      <router-link to="/privacy">Privacy Policy</router-link>
       <router-link to="/terms">Terms & Conditions</router-link>
     </div>
   </div>
@@ -29,7 +29,7 @@ import { authComputed } from "../store/helpers.js";
 
 export default {
   computed: {
-    ...authComputed,
-  },
+    ...authComputed
+  }
 };
 </script>

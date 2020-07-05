@@ -56,14 +56,14 @@ export default {
       queuegames: [],
       firstOption: "",
       secondOption: "",
-      lobby: "",
+      lobby: ""
     };
   },
   computed: {
     option: function() {
       console.log(this.queuegames[this.firstOption]);
       return this.queuegames[this.firstOption];
-    },
+    }
   },
   methods: {
     async lounge() {
@@ -76,11 +76,11 @@ export default {
         code:
           this.firstOption +
           "-" +
-          this.queuegames[this.firstOption].options[this.secondOption].id,
+          this.queuegames[this.firstOption].options[this.secondOption].id
       };
       this.lobby = lounge;
       try {
-        await queue(lounge).then((response) => {
+        await queue(lounge).then(response => {
           console.log(response.data.data);
           this.lobby.id = response.data.data;
           console.log(this.lobby.id);
@@ -96,7 +96,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
   async mounted() {
     try {
@@ -107,7 +107,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };
 </script>
 

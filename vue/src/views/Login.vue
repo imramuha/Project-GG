@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import httpClient from "@/services/httpClient";
+//import httpClient from "@/services/httpClient";
 
 export default {
   data() {
@@ -47,19 +47,18 @@ export default {
       } if(!this.password) {
           this.errors.push('Password is also required!');
 
-      } else {
-        console.log('h')
+      } else if (this.email && this.password) {
         this.$store
           .dispatch("login", {
             email: this.email,
             password: this.password
           })
           .then(() => {
-            console.log('hi')
             this.$router.push('dashboard');
           })
-          .catch(error => {
-            this.errors.push(error);
+          .catch(errors => {
+            console.log(errors);
+            this.errors.push(errors);
           })    
         }
 

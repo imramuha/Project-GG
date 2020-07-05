@@ -1,6 +1,6 @@
 <template>
   <div class="friendlistCard">
-    <a  @click="onProfileClick" v-on:click="emitToFriendlist">
+    <a @click="onProfileClick" v-on:click="emitToFriendlist">
       <div class="friendlistCardImg">
         <img src="https://placekitten.com/250/250" />
       </div>
@@ -8,7 +8,7 @@
         <p>{{ friend.username }}</p>
         <p>{{ friend.email }}</p>
       </div>
-      <div class="friendlistCardStatus"> 
+      <div class="friendlistCardStatus">
         <p>{{ friend.status.name }}</p>
         <div class="statusCircle"></div>
       </div>
@@ -27,22 +27,22 @@ export default {
     }
   },
   data() {
-      return {
-          childMessage: null,
-      };
+    return {
+      childMessage: null
+    };
   },
   methods: {
-        onProfileClick() {
-            this.childMessage = {
-                component: "Profile",
-                id: this.friend.id
-            }
-                 
-            this.emitToFriendlist(this.childMessage);
-        },
-        emitToFriendlist(value) {
-            this.$emit("emitToFriendlist", value);
-        }
+    onProfileClick() {
+      this.childMessage = {
+        component: "Profile",
+        id: this.friend.id
+      };
+
+      this.emitToFriendlist(this.childMessage);
+    },
+    emitToFriendlist(value) {
+      this.$emit("emitToFriendlist", value);
+    }
   }
 };
 </script>

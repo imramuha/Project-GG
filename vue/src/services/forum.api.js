@@ -18,7 +18,8 @@ const getPost = id => httpClient.get(POST_END_POINT + id);
 
 const postComment = data => httpClient.post(COMMENT_END_POINT, data);
 
-const createPost = (data, config) => httpClient.post(CREATE_END_POINT, data, config);
+const createPost = (data, config) =>
+  httpClient.post(CREATE_END_POINT, data, config);
 
 const likePost = data => httpClient.post(LIKE_POST_END_POINT, data);
 
@@ -27,4 +28,11 @@ const likePost = data => httpClient.post(LIKE_POST_END_POINT, data);
 // maybe more than one..
 // const createUser = (username, password) => httpClient.post(END_POINT, { username, password });
 
-export { getAllPosts, getUserPosts, getPost, postComment, createPost, likePost };
+export {
+  getAllPosts,
+  getUserPosts,
+  getPost,
+  postComment,
+  createPost,
+  likePost
+};

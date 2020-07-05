@@ -108,6 +108,7 @@ $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         }
         &:first-child>p {
             margin-top: 10px;
+            color: $melt;
             b {
                 color: $candy;
             }

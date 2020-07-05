@@ -13,70 +13,69 @@ import Privacy from "../views/Privacy.vue";
 Vue.use(Router);
 
 const router = new Router({
-    mode: "history",
-    base: process.env.BASE_URL,
-    routes: [{
-            path: "/",
-            name: "home",
-            component: Home
-        },
-        {
-            path: "/dashboard",
-            name: "dashboard",
-            component: Dashboard,
-            meta: { requiresAuth: true }
-        },
-        {
-            path: "/register",
-            name: "register",
-            component: Register,
-            meta: {
-                hideForAuth: true
-            }
-        },
-        {
-            path: "/login",
-            name: "login",
-            component: Login,
-            meta: {
-                hideForAuth: true
-            }
-        },
-        {
-            path: "/terms",
-            name: "terms",
-            component: Terms,
-
-        },
-        {
-            path: "/privacy",
-            name: "privacy",
-            component: Privacy
-        }
-    ]
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Home
+    },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: Dashboard,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: Register,
+      meta: {
+        hideForAuth: true
+      }
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+      meta: {
+        hideForAuth: true
+      }
+    },
+    {
+      path: "/terms",
+      name: "terms",
+      component: Terms
+    },
+    {
+      path: "/privacy",
+      name: "privacy",
+      component: Privacy
+    }
+  ]
 });
 
 // if our route authentication and is not logged in we need to redirect them to home
 router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem("user");
+  const loggedIn = localStorage.getItem("user");
 
-    if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
-        next("/");
-    } else {
-        next();
-    }
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next("/");
+  } else {
+    next();
+  }
 
-    if (to.matched.some(record => record.meta.hideForAuth)) {
-        if (loggedIn) {
-            next({ path: '/dashboard' });
-        } else {
-            next();
-        }
+  if (to.matched.some(record => record.meta.hideForAuth)) {
+    if (loggedIn) {
+      next({ path: "/dashboard" });
     } else {
-        next();
+      next();
     }
+  } else {
+    next();
+  }
 });
-
 
 /* 
 ADD A 404 PAGE -> check out the documentation (history mode^)

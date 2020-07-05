@@ -10,7 +10,6 @@
 import AppNav from "@/components/AppNav";
 
 export default {
-  
   components: {
     AppNav
   }
@@ -18,9 +17,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-
-
 html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
