@@ -41,7 +41,7 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::post('/userstatus', 'AccountController@userStatus');
 
     Route::get('/relation/{id}', 'AccountController@showRelation');
-    Route::post('/createrelation', 'AccountController@createRelation');
+    Route::post('/updaterelation', 'AccountController@updateRelation');
 
     Route::post('/user/review', 'AccountController@postReview');
     Route::get('/userreviews', 'AccountController@showUserReviews');

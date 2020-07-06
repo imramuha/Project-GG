@@ -31,54 +31,39 @@
           <button>Report</button>
         </div>
         <div class="profileHeaderRelation">
-          <button v-if="this.activeButton == ''" href="#" variant="primary">
-            Friend
+          <button @click="update('friends')" v-if="this.activeButton == ''">
+            + Friend
           </button>
           <button
+            @click="update('cancel')"
             v-if="this.activeButton == 'pending_first_second'"
-            href="#"
-            variant="primary"
-          >
-            Sent request
-          </button>
-          <button
-            v-if="this.activeButton == 'pending_first_second'"
-            href="#"
-            variant="primary"
           >
             Cancel request
           </button>
           <button
-            v-if="this.activeButton == 'pending_second_first'"
-            href="#"
-            variant="primary"
+            @click="update('accept')"
+             v-if="this.activeButton == 'pending_second_first'"
           >
             Accept request
           </button>
           <button
+            @click="update('deny')"
             v-if="this.activeButton == 'pending_second_first'"
-            href="#"
-            variant="primary"
           >
             Deny request
           </button>
-          <button
-            v-if="this.activeButton == 'friends'"
-            href="#"
-            variant="primary"
-          >
+          <button @click="update('unfriend')" v-if="this.activeButton == 'friends'">
             Unfriend
           </button>
-          <button v-if="this.activeButton == ''" href="#" variant="primary">
+          <button @click="update('block')" v-if="this.activeButton == 'block_second_first' || this.activeButton == ''">
             Block
           </button>
           <button
+            @click="update('unblock')"
             v-if="
               this.activeButton == 'block_first_second' ||
-                !this.activeButton == 'block_both'
+                this.activeButton == 'block_both' || this.activeButton == 'block_second_first'
             "
-            href="#"
-            variant="primary"
           >
             Unblock
           </button>
@@ -114,6 +99,7 @@
 
 <script>
 import { getFriend, getRelation } from "@/services/friend.api";
+import { updateRelation } from "@/services/user.api";
 import { getProfileGames } from "@/services/game.api";
 import { getProfileReviews } from "@/services/review.api";
 
@@ -131,8 +117,25 @@ export default {
       activeButton: "",
       reviewscore: 0,
       reviews: [],
-      games: []
+      games: [],
     };
+  },
+  methods: {
+    async update(data) {
+      // make a call and send the data ->
+      let relationData = {
+        relation: data,
+        profile_id: this.friend.id
+      };
+      try {
+        await updateRelation(relationData).then((response) => {
+          console.log(response);
+        });
+
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   async mounted() {
     try {
@@ -179,7 +182,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
 </script>
 

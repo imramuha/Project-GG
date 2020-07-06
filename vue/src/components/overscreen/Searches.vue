@@ -12,7 +12,6 @@
         <p>{{ searchedUser.email }}</p>
       </div>
       <div class="usersearchCardLink">
-        onForumPostCardClick
         <a @click="onProfileClick" v-on:click="emitToUserSearch">
           <i class="fas fa-arrow-right"></i>
         </a>

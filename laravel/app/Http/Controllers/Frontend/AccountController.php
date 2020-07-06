@@ -163,43 +163,118 @@ class AccountController extends Controller
     }
 
     /*
-    *  createRelation
+    *  update or create an existing relation relation
     */
-    public function createRelation (Request $request) {
+    public function updateRelation (Request $request) {
         
+        
+        // looks for relations name and gets the relation id
         $relation = Relation::where('name', $request->input('relation'))->first();  
-        $relation_id = $relation->id;
+        if($relation) {
+            $relation_id = $relation->id;   
+        } else {
+            $relation_id = null;
+        }
 
+        // looks for the profile that we're currently visiting
         $profile = User::find($request->input('profile_id'));
         $profile_id = $request->input('profile_id');
 
+        // gets data of the authenticated user
         $user_id = auth()->user()->id;      
         $user = User::find(auth()->id());
 
-        // depending on what kind of relation is found => do the following. ^ clean it up by higher/lower users id <>
-        if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach()) {
+        // find a better solution for this
+        $first_second_pending_relation_id = 1;
+        $second_first_pending_relation_id = 2;
+        $both_friend_relation_id = 3;
+        $both_block_relation_id = 6;
+        $first_second_block_relation_id = 4;
+        $second_first_block_relation_id = 5;
             
-            // THIS detaches the logged in user/profile id's relation!!!!
-            // next step is recreating that relationship -> attach
-            // Also works -> this makes the new relation
-            $user->relationOne()->attach($relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$logged_id]);
-            
-            return array(["response"=>"relation One was succesfully updated."]);
-        
-        } else if ( $user->relationTwo()->wherePivot('user_id_one', $profile_id)->wherePivot("user_id_two", auth()->id())->detach()) {
+        if($user_id < $profile_id) {
 
-            // THIS WORKS ??? REPPL
-            $user->relationTwo()->attach($relation_id, ['user_id_one'=>$profile->id, "user_id_two"=>$logged_id]);
+            // BLOCKING SECTION
+            // first second / second first
+            if($request->input('relation') === "friends") {
+                $user->relationOne()->attach( $first_second_pending_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                return array(['response' => 'Friend request has been sent.']);
 
-            return array(["response"=>"relation two was succesfully updated."]);
+            // both friends
+            } else if ($request->input('relation') === "accept" ) {
+                if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_pending_relation_id)->first()) {
+                    $user->relationOne()->attach($both_friend_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                    return array(['response' => 'You accepted the friend request.']);
+                } else {
+                    return array(['response' => 'No request for you to accept.']);
+                }
+            // remove the friendship request
+            } else if($request->input('relation') === "unfriend" || $request->input('relation') === "deny" || $request->input('relation') === "cancel") {
+                $user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach();
+                return array(['response' => 'Cancelled the request.']);
+            } else if($request->input('relation') === "block") {
+                // block user -> first_second unless second_first exists -> then both_block
+                if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
+                    $user->relationOne()->attach($both_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                    return array(['response' => 'You just blocked the user.']);
+                } else {
+                    $user->relationOne()->attach($first_second_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                    return array(['response' => 'User has been blocked.']);
+                }
+            } else if ($request->input('relation') === "unblock") {
 
+                // if both_block exists -> change it to second first else unblock
+                if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $both_block_relation_id)->detach()) {
+                    $user->relationOne()->attach($second_first_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                    return array(['response' => 'You just unblocked the user.']);
+                } else {
+                    $user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach();
+                    return array(['response' => 'User has been unblocked.']);
+                }
+            }
         } else {
-            // THIS IS ALSO IMPORTANT WHEN CREATING THE RELATION!!!!
-            // depending on which id (user or profile id is higher !! we either do relationOne attach or relationTwo attach)
-            return array(['response' => 'No relation was found']);
-        }
-    }
+                // BLOCKING SECTION <
+                if($request->input('relation') === "friends") {
+                    $user->relationTwo()->attach( $second_first_pending_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile->id]);
+                    return array(['response' => 'Friend request has been sent.']);
+    
+                // both friends
+                } else if ($request->input('relation') === "accept" ) {
+                    if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->wherePivot('relation_id', $first_second_pending_relation_id)->first()) {
+                        $user->relationTwo()->attach($both_friend_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
+                        return array(['response' => 'You accepted the friend request.']);
+                    } else {
+                        return array(['response' => 'No request for you to accept.']);
+                    }          
+                // remove the friendship request
+                } else if($request->input('relation') === "deny" || $request->input('relation') === "cancel" || $request->input('relation') === "unfriend") {
+                    $user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->detach();
+                    return array(['response' => 'Cancelled the request.']);
 
+                } else if($request->input('relation') === "block") {
+                // block user -> first_second unless second_first exists -> then both_block
+                if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
+                    $user->relationTwo()->attach($both_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
+                    return array(['response' => 'You just blocked the user.']);
+                    
+                } else {
+                    $user->relationTwo()->attach($second_first_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
+                    return array(['response' => 'User has been blocked.']);
+                }                
+            } else if ($request->input('relation') === "unblock") {
+                // if both_block exists -> change it to second first else unblock
+                if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $both_block_relation_id)->detach()) {
+                    $user->relationTwo()->attach($first_second_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
+                    return array(['response' => 'You just unblocked the user.']);
+                    // check why this happens if button is pressed twice unblock/block
+                } else {
+                    $user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->detach();
+                    return array(['response' => 'User has been unblocked.']);
+                }
+            }
+        }
+        
+    }
 
 
     /*
