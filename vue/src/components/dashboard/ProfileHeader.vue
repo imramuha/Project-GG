@@ -17,7 +17,7 @@
             Likes to swim a lot
             <!--{{ user.line }}-->
           </p>
-          <p>Online</p>
+          <p v-if="user.status">{{ user.status.name }}</p>
         </div>
         <div class="userDataRight">
           <a v-on:click="onEditClick" to="/useredit">
@@ -53,7 +53,6 @@ export default {
     try {
       await getMe().then(response => {
         this.user = response.data.user[0];
-        console.log(this.user);
 
         var score = 0;
 

@@ -96,7 +96,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function status()
     {
-        return $this->belongsTo('App\Status', 'status_id');
+        return $this->belongsTo('App\Models\Status', 'status_id');
     }
 
 

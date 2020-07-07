@@ -40,10 +40,40 @@ export default new Vuex.Store({
         REMOVE_NOTIFICATION(state, index) {
             state.notifications.splice(index, 1);
         },
+        USER_ONLINE(state) {
+
+            let online = {
+                token: state.user.token,
+                status: 'online'
+            }
+
+            axios.post("http://127.0.0.1:8000/api/frontend/userstatus", online).then(({ data }) => {
+                    console.log(data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        USER_OFFLINE(state) {
+
+            let offline = {
+                token: state.user.token,
+                status: 'offline'
+            }
+
+            axios.post("http://127.0.0.1:8000/api/frontend/userstatus", offline).then(({ data }) => {
+                    console.log(data)
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
         LOGOUT() {
-            localStorage.removeItem("user");
+            // change user stats to offline through pusher
+            // global pusher */
             // forced refresh
-            location.reload();
+            localStorage.removeItem("user");
         },
         ACTIVATE_PUSHER(userData) {
             Pusher.logToConsole = true;
@@ -51,7 +81,7 @@ export default new Vuex.Store({
             console.log("pusher");
 
             window.pusher = new Pusher("c8af74134473385784fa", {
-                authEndpoint: "http://127.0.0.1:8000/api/frontend/messaging/auth",
+                authEndpoint: "http://127.0.0.1:8000/api/frontend/pusher/auth",
                 cluster: "eu",
                 auth: {
                     headers: {
@@ -80,7 +110,7 @@ export default new Vuex.Store({
                 axios
                     .post("http://127.0.0.1:8000/api/auth/login", credentials)
                     .then(({ data }) => {
-                        resolve(commit("SET_USER_DATA", data.token));
+                        resolve(commit("SET_USER_DATA", data.token), commit("USER_ONLINE"));
                     })
                     .catch(error => {
                         reject(error.response.data.errors);
@@ -96,6 +126,7 @@ export default new Vuex.Store({
         },
         logout({ commit }) {
             commit("LOGOUT");
+            commit("USER_OFFLINE");
         }
     },
     getters: {

@@ -38,8 +38,6 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/userpost/delete/{id}', 'AccountController@deleteUserPost');
     Route::post('/searchusers', 'AccountController@searchUsers');
 
-    Route::post('/userstatus', 'AccountController@userStatus');
-
     Route::get('/relation/{id}', 'AccountController@showRelation');
     Route::post('/updaterelation', 'AccountController@updateRelation');
 
@@ -75,8 +73,9 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/conversation/{id}', 'AccountController@showMessagesFor');
     Route::post('/conversation/send', 'AccountController@sendMessageTo');
 
-
-    Route::post('/messaging/auth', 'AccountController@messagingAuth');
+    // pusher/real time 
+    Route::post('/pusher/auth', 'AccountController@pusherAuth');
+    Route::post('/userstatus', 'AccountController@userStatus');
 
     Route::post('/mode', 'AccountController@nightmode');
 });

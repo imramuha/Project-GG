@@ -169,7 +169,9 @@ export default {
       this.mainComponent = Queue;
     },
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push('/');
+      });
     },
     onOverscreenClick(value) {
       console.log(value);

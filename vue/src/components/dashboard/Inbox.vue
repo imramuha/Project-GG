@@ -68,9 +68,9 @@ export default {
       this.messages.push(text);
     },
     handleIncoming(data) {
-      console.log("hi");
       if (this.selectedFriend && data.from == this.selectedFriend.id) {
         this.saveNewMessage(data);
+        // messages?
         this.message.push(data);
       }
     }

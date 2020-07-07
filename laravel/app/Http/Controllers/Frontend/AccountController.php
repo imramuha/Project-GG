@@ -64,6 +64,26 @@ class AccountController extends Controller
         return $response;
     }
 
+    /*
+    * Updates user status
+    */
+    public function userStatus (Request $request) {
+
+        $status_name = $request->input('status');
+        $status = Status::where('name', "=", $status_name)->first();
+
+        
+        User::where('id', '=', auth()->id())->update(array(
+            'status_id' => $status->id,
+        ));
+
+        // for now disabled
+        //$this->pusher->trigger('private-statuses-'.$request->token, 'UserStatus', $status_name);
+
+
+        return response()->json($status_name);
+    }
+
         /*
     * Get all users except the logged one in ^^
     */
@@ -94,35 +114,9 @@ class AccountController extends Controller
         return response()->json(['users' => $users]);
     }
 
-
-    public function userStatus (Request $request) {
-
-        $status_name = $request->input('status');
-        $status = Status::where('name', "=", $status_name)->first();
-
-        
-        User::where('id', '=', auth()->id())->update(array(
-            'status_id' => $status->id,
-        ));
-
-        return array(['response' => 'The status has been updated.']);
-        // this function changes the user status
-        // whenever they log in
-        // log out
-        // stay afk
-        // <ingame class=""></ingame>
-        // change their own status to offline/online
-        // to do: when user logs in onlin
-        // when logs out -> offline
-        // user can set status themselves too
-        /*      User::where('id', '=', $id)->update(array(
-            'email' => $request->input('email'),
-            'image' => $request->input('image'),
-        ));
-*/
-    }
-
-    // determine the authenticated user's relation with the opened user :)
+    /* 
+    * determine the authenticated user's relation with the opened user :)
+    */
     public function showRelation($id) {
 
         // TODO:: !! WHILE REGISTEING FRIENDSHIP WE NEED TO ADD requesters ID ON user_id_one in relation_user ELSE on user_id_two
@@ -379,11 +373,16 @@ class AccountController extends Controller
     public function postReview(Request $request) {
 
         $review_exists = Review::where('user_id', '=', $request->input('id'))->where('reviewer_id', '=', auth()->user()->id)->first();
+        
+        $this->validate(request(), [
+            'comment' => 'required|min:16|max:64',
+            'rating' => 'required|integer|between:0,100'
+        ]);
 
         // checks if the user already has reviewed, if yes, they cn't if not they can
         if($review_exists) {
             //return $review_exists;
-            $response = array('response' => "You've already reviewed this user before!", 'succes' => false);
+            $response = response(['errors' => ['error' => ["You already reviewed this user before."], "message" => "You can't review the same person twice."]], 422);
         } else {
             $review = Review::create([
                 'comment' => $request->input('comment'),
@@ -482,18 +481,19 @@ class AccountController extends Controller
         $game_id = $request->input('game_id');
         $user_id = auth()->id();
 
+        $this->validate(request(), [
+            'game_id' => 'required|integer',
+            'username' => 'required|min:1|max:32',
+            'data' => 'max:64'
+        ]);
+
 
         $data = Data::create([
             'username' => $request->input('username'),
             'data' => $request->input('data')
         ]);
 
-        //$gameUserData = GameUserData::where('game_id', "=", $game_id)->where('user_id', "=", $user_id)->first();
-
-        //($gameUserData) {
-        //   return array(['response' => 'This game user data exist.']);
-        //} else {
-            // Create a new gameuserdata
+        // Create a new gameuserdata
         $newGameUserData = UserGameData::create([
             'data_id' => $data->id,
             'user_id' => $user_id,
@@ -671,7 +671,7 @@ class AccountController extends Controller
         return response()->json($messages);
     }
 
-    public function messagingAuth(Request $request)
+    public function pusherAuth(Request $request)
     {
 
         if(!auth()->user()) {
