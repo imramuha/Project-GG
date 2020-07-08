@@ -1,5 +1,6 @@
 <template>
   <div class="messagersList">
+    <h1>Friends</h1>
     <ul>
       <li
         v-for="(friend, index) in friends"
@@ -7,6 +8,12 @@
         @click="selectedFriend(index, friend)"
         :class="{ selected: index == selected }"
       >
+        <div v-if="friend.image">
+          <img :src="friend.image" />
+        </div>
+        <div v-else>
+          <img src="@/assets/images/profile.jpeg" />
+        </div>
         <p>{{ friend.username }}</p>
       </li>
     </ul>

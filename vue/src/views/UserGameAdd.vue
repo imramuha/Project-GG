@@ -23,10 +23,10 @@
         </select>
 
         <label for="username">Username</label>
-        <input id="username" v-model="username" />
+        <input id="username" v-model="username" placeholder="username or gamertag"/>
 
         <label for="data">Extra info</label>
-        <input id="data" v-model="data" />
+        <input id="data" v-model="data" placeholder="any extra info" />
 
         <button type="submit">Add</button>
       </form>

@@ -58,13 +58,14 @@
     <div class="sidecontent">
       <div class="sidecontentHeader">
         <div class="sidecontentNotifications">
-            <div v-if='this.getNotifications.length'>
-            <NotificationCard    
-            v-for="(notification, index) in this.getNotifications"
-            v-bind:key="index"
-            :index="index"
-            :notification="notification" />
-            </div>
+          <div v-if="this.getNotifications.length">
+            <NotificationCard
+              v-for="(notification, index) in this.getNotifications"
+              v-bind:key="index"
+              :index="index"
+              :notification="notification"
+            />
+          </div>
           <div v-else class="notificationsEmpty">
             There are no notifications available. emitting: {{ emit }}
           </div>
@@ -110,7 +111,6 @@ import Queue from "@/components/Queue";
 
 import { mapGetters } from "vuex";
 
-
 export default {
   components: {
     Posts,
@@ -129,9 +129,9 @@ export default {
     UserSearch,
     UserGameAdd,
     Profile,
-    Forum,
+    Forum
   },
-   computed: {
+  computed: {
     ...mapGetters(["getNotifications"])
   },
   data() {
@@ -143,7 +143,7 @@ export default {
       contentActive: true,
       overscreenComponent: null,
       overscreenData: null,
-      forum: "forum",
+      forum: "forum"
       //notification: true,
     };
   },
@@ -170,7 +170,7 @@ export default {
     },
     logout() {
       this.$store.dispatch("logout").then(() => {
-        this.$router.push('/');
+        this.$router.push("/");
       });
     },
     onOverscreenClick(value) {
@@ -204,8 +204,8 @@ export default {
         this.contentActive = false;
         this.overscreenComponent = Forum;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

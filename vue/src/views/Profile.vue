@@ -42,7 +42,7 @@
           </button>
           <button
             @click="update('accept')"
-             v-if="this.activeButton == 'pending_second_first'"
+            v-if="this.activeButton == 'pending_second_first'"
           >
             Accept request
           </button>
@@ -52,17 +52,27 @@
           >
             Deny request
           </button>
-          <button @click="update('unfriend')" v-if="this.activeButton == 'friends'">
+          <button
+            @click="update('unfriend')"
+            v-if="this.activeButton == 'friends'"
+          >
             Unfriend
           </button>
-          <button @click="update('block')" v-if="this.activeButton == 'block_second_first' || this.activeButton == ''">
+          <button
+            @click="update('block')"
+            v-if="
+              this.activeButton == 'block_second_first' ||
+                this.activeButton == ''
+            "
+          >
             Block
           </button>
           <button
             @click="update('unblock')"
             v-if="
               this.activeButton == 'block_first_second' ||
-                this.activeButton == 'block_both' || this.activeButton == 'block_second_first'
+                this.activeButton == 'block_both' ||
+                this.activeButton == 'block_second_first'
             "
           >
             Unblock
@@ -117,7 +127,7 @@ export default {
       activeButton: "",
       reviewscore: 0,
       reviews: [],
-      games: [],
+      games: []
     };
   },
   methods: {
@@ -128,14 +138,13 @@ export default {
         profile_id: this.friend.id
       };
       try {
-        await updateRelation(relationData).then((response) => {
+        await updateRelation(relationData).then(response => {
           console.log(response);
         });
-
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
   async mounted() {
     try {
@@ -182,7 +191,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };
 </script>
 

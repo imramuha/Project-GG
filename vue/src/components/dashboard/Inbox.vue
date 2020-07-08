@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Conversation from "@/components/Conversation";
-import MessagersList from "@/components/MessagersList";
+import Conversation from "@/components/inbox/Conversation";
+import MessagersList from "@/components/inbox/MessagersList";
 
 import { getAllFriends } from "@/services/friend.api";
 import { getConversation } from "@/services/inbox.api";

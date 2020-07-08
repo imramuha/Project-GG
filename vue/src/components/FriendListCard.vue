@@ -1,9 +1,12 @@
 <template>
   <div class="friendlistCard">
     <a @click="onProfileClick" v-on:click="emitToFriendlist">
-      <div class="friendlistCardImg">
-        <img src="https://placekitten.com/250/250" />
-      </div>
+       <div v-if="friend.image" class="friendlistCardImg" >
+          <img :src="friend.image" />
+        </div>
+        <div v-else class="friendlistCardImg">
+          <img src="@/assets/images/profile.jpeg" />
+        </div>
       <div class="friendlistCardUser">
         <p>{{ friend.username }}</p>
         <p>{{ friend.email }}</p>

@@ -1,7 +1,12 @@
 <template>
   <div class="searchForm">
     <form @submit.prevent="search">
-      <input type="text" placeholder="Search a player.." v-model="searchTerm" required />
+      <input
+        type="text"
+        placeholder="Search a player.."
+        v-model="searchTerm"
+        required
+      />
       <button type="submit">
         <i class="fa fa-search"></i>
       </button>

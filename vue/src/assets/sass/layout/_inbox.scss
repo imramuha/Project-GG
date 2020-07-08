@@ -2,6 +2,10 @@
     height: 100%;
     width: 100%;
     display: flex;
+    //padding: 7px;
+    border-radius: 3px;
+    background-color: $midnight;
+    box-shadow: 0 0 3px $midnightH;
 }
 
 .conversation {
@@ -9,10 +13,50 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    h1 {
-        margin: 0px;
+    .conversationHeader {
+        width: 100%;
+        padding: 7px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
         background-color: $midnightH;
         color: $snow;
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 25px;
+                height: 25px;
+                margin-right: 14px;
+            }
+        }
+        .conversationUserOffline {
+            span {
+                background-color: $melt;
+            }
+        }
+        .conversationUserOnline {
+            span {
+                background-color: $slate;
+            }
+        }
+        h1 {
+            color: $melt;
+            margin: 0px;
+            font-size: 21px;
+            span {
+                color: $snow;
+                margin: 0px 14px;
+                border-radius: 3px;
+                background-color: $paint;
+                padding: 1px 21px;
+                font-size: 17px;
+                font-weight: 200;
+                letter-spacing: 2px;
+            }
+        }
     }
 }
 
@@ -20,45 +64,130 @@
     height: 100%;
     background-color: $midnight;
     overflow-y: scroll;
-    padding: 5px;
+    padding: 7px;
     ul {
+        padding: 14px;
         list-style-type: none;
-        .messagereceived {
-            text-align: right;
-            background-color: $midnightL;
+        li {
+            width: 75%;
+            margin-bottom: 3px;
+            padding: 7px;
+            border-radius: 3px;
+            display: flex;
+            flex-direction: row;
+            .messageIcon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 14px;
+                }
+            }
+            .messageText {
+                display: flex;
+                flex-direction: column;
+                p {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 1px;
+                }
+                span {
+                    font-weight: 600;
+                    color: $melt;
+                    font-size: 9px;
+                }
+            }
         }
         .messagesent {
-            background-color: $candy;
+            display: flex;
+            text-align: right;
+            background-color: $paint;
+            flex-direction: row-reverse;
+            margin-left: auto;
+            .messageIcon {
+                img {
+                    margin-left: 14px;
+                    margin-right: 0px;
+                }
+            }
+            .messageText {
+                p {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 1px;
+                }
+                span {
+                    color: $midnightH;
+                }
+            }
+        }
+        .messagereceived {
+            background-color: $midnightL;
         }
     }
 }
 
 .messageComposer {
+    box-sizing: border-box;
     textarea {
+        box-sizing: border-box;
+        padding: 0px;
+        margin: 0px;
         width: 100%;
         resize: none;
-        background-color: transparent;
-        border-color: $snow;
+        border: solid 1px $midnight;
         color: $snow;
+        background-color: $midnightH;
         border-radius: 2px;
         padding: 7px;
+        &:focus {
+            border-color: $candy;
+        }
     }
 }
 
 .messagersList {
     flex: 2;
     overflow-y: scroll;
-    border-left: 1px solid $candy;
+    border-left: 0.5px solid $midnightL;
+    background-color: $midnightL;
+    padding: 7px;
+    h1 {
+        color: $melt;
+    }
     ul {
         list-style-type: none;
         padding-left: 0px;
+        margin: 0px;
+        width: 100%;
         li {
-            max-height: 100px;
-            background-color: $candy;
+            color: $melt;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 15px;
+            border-radius: 3px;
+            margin: 14px 0px;
+            padding: 7px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            background-color: $midnight;
             cursor: pointer;
+            div {
+                display: flex;
+            }
+            img {
+                margin-right: 14px;
+                width: 15px;
+                height: 15px;
+                border-radius: 15px;
+            }
         }
         li.selected {
-            background-color: $sand;
+            color: $snow;
+            background-color: $paint;
         }
     }
 }

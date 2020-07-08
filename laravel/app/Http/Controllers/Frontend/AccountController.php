@@ -484,7 +484,7 @@ class AccountController extends Controller
         $this->validate(request(), [
             'game_id' => 'required|integer',
             'username' => 'required|min:1|max:32',
-            'data' => 'max:64'
+            'data' => 'required|min:8|max:64'
         ]);
 
 
