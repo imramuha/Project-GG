@@ -28,7 +28,7 @@
       </div>
       <div class="profileHeaderButtons">
         <div class="profileHeaderReport">
-          <button>Report</button>
+          <button disabled>Report</button>
         </div>
         <div class="profileHeaderRelation">
           <button @click="update('friends')" v-if="this.activeButton == ''">

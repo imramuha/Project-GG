@@ -1,44 +1,45 @@
 <template>
   <div class="postPage">
     <div class="postPageContentContainer">
-      <div class="postPageContent">
-        <div class="postPageContentHeader">
-          <h1>{{ post.title }}</h1>
+      <div class="postPageContentHeader">
+        <div class="postPageContent">
+          <h1>{{ post.title }}<span>[ by <span>{{ post.user.username}}</span> created at <span>{{ post.created_at | formatDateTime }}</span> ]</span></h1>
+          <h2>{{ post.subtitle }}</h2>
+          <p> {{ post.text }} </p>
+        
         </div>
-        <div class="postPageContentBody">
-          <p>{{ post.date }}02/05/2002</p>
-          <p>
-            This is the post content, that will be added later on during this
-            project
-          </p>
-        </div>
-        <div class="postPageContentFooter">
-          <div v-if="post.user_liked != true">
-            <button type="button" @click="gg">GG</button>
-            <p>{{ post.liked_posts.length }}</p>
+        <div class="postPageImage">
+          <div v-if="post.image">
+            <img :src="post.image" />
           </div>
           <div v-else>
-            <p>{{ post.liked_posts.length }}</p>
-            <button class="likeButtonActive" type="button" @click="gg">
+            <img src="@/assets/images/post.png" />
+          </div>
+        </div>
+      </div>
+      <div class="postPageContentFooter">
+        <div class="postPageContentFooterButtons">
+          <p>
+            Likes [ <span>{{ post.liked_posts.length }}</span> ]
+          </p>
+          <p>
+            Comments [ <span>{{ comments.length }}</span> ]
+          </p>
+                    <button class="postPageReport" disabled>Report</button>
+          <div class="postPageLike" v-if="post.user_liked != true">
+            <button type="button" @click="gg">GG</button>
+          </div>
+          <div class="postPageUnlike" v-else>
+            <button type="button" @click="gg">
               uGG
             </button>
           </div>
-          <p>Comments (2)</p>
-          <p>Likes({{ post.liked_posts.length }})</p>
-          <button>Report</button>
-        </div>
-      </div>
-      <div class="postPageImage">
-        <div v-if="post.image">
-          <img :src="post.image" />
-        </div>
-        <div v-else>
-          <img src="@/assets/images/post.png" />
         </div>
       </div>
     </div>
     <div class="postPageCommentsContainer">
       <div class="postPageComments">
+        <h1>Comments</h1>
         <CommentCard
           v-for="comment in comments"
           v-bind:key="comment.id"
@@ -69,7 +70,7 @@ export default {
       comments: [],
       comment: null,
       user_id: null,
-      likes: null
+      likes: null,
     };
   },
   async mounted() {
@@ -88,7 +89,7 @@ export default {
     async onSubmit() {
       let comment = {
         post_id: this.post.id,
-        comment: this.comment
+        comment: this.comment,
       };
       try {
         let response = await postComment(comment);
@@ -105,12 +106,12 @@ export default {
     },
     async gg() {
       let data = {
-        post_id: this.post.id
+        post_id: this.post.id,
       };
 
       try {
         await likePost(data).then(() => {
-          getPost(this.post.id).then(response => {
+          getPost(this.post.id).then((response) => {
             console.log("this");
             this.post = response.data;
           });
@@ -118,8 +119,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

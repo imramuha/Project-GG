@@ -10,11 +10,19 @@ import "@fortawesome/fontawesome-free/js/all.js";
 
 import moment from "moment";
 
-Vue.filter("formatDate", function(value) {
+Vue.filter("formatDateTime", function(value) {
     if (value) {
         return moment(String(value)).format("MM/DD/YYYY - hh:mm");
     }
 });
+
+
+Vue.filter("formatDate", function(value) {
+    if (value) {
+        return moment(String(value)).format("MM/DD/YYYY");
+    }
+});
+
 
 new Vue({
     router,

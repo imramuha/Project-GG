@@ -118,6 +118,15 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Reviews::class);
     }
 
+            //
+    /**
+     * Get the category that the product belongs to.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Reviews::class);
+    }
+
 
         /**
      * get the comments the belong to this user

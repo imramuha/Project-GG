@@ -16,6 +16,14 @@ class Post extends Model
     ];
 
     /**
+     * Get the post of this user
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    /**
      * get the comments the belong to this post
      */
     public function comments()

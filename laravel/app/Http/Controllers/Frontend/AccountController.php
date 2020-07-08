@@ -319,7 +319,7 @@ class AccountController extends Controller
     * Get all users except the logged one in ^^
     */
     public function showPost ($id) {
-        $post = Post::where('id', '=', $id)->with("comments", "comments.user", "likedPosts")->first();
+        $post = Post::where('id', '=', $id)->with("user","comments", "comments.user", "likedPosts")->first();
 
         // check if user liked this post; if yes, send it.
         foreach($post->likedPosts as $like) {

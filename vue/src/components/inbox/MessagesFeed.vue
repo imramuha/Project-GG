@@ -15,7 +15,7 @@
           </div>
           <div class="messageText">
             <p>{{ message.text }}</p>
-            <span>{{ message.created_at | formatDate }}</span>
+            <span>{{ message.created_at | formatDateTime }}</span>
           </div>
        
       </li>

@@ -1,7 +1,12 @@
 <template>
   <div class="commentCard">
-    Comment by {{ comment.user.username }}:
-    {{ comment.comment }}
+    <div class="commentCardImage" v-if="comment.user.image">
+        <img :src="comment.user.image" />
+      </div>
+      <div  class="commentCardImage" v-else>
+        <img src="@/assets/images/post.png" />
+      </div>
+    <p><span>{{ comment.user.username }} <span>{{ comment.created_at | formatDate }}</span></span>{{ comment.comment }}</p>
   </div>
 </template>
 <script>
