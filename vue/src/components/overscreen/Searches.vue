@@ -9,7 +9,6 @@
       </div>
       <div class="usersearchCardUser">
         <p>{{ searchedUser.username }}</p>
-        <p>{{ searchedUser.email }}</p>
       </div>
       <div class="usersearchCardLink">
         <a @click="onProfileClick" v-on:click="emitToUserSearch">

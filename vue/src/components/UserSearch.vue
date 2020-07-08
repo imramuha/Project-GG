@@ -1,11 +1,15 @@
 <template>
-  <div class="usersearch">
+  <div v-if="searchedUsers.length" class="usersearch">
+    <h1>User(s)</h1>
     <Searches
       v-for="searchedUser in searchedUsers"
       v-bind:key="searchedUser.id"
       :searchedUser="searchedUser"
       v-on:emitToUserSearch="onSearchedUserCardClick"
     />
+  </div>
+  <div v-else class="usersearch">
+    <h1>No users were found.</h1>
   </div>
 </template>
 

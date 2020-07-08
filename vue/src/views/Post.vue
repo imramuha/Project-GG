@@ -47,8 +47,15 @@
         />
       </div>
       <form @submit.prevent="onSubmit">
-        <label for="comment">Comment</label>
+        <label for="comment">Comment</label>        
         <input id="comment" v-model="comment" />
+
+        <p v-if="errors.length">
+          <b>Please correct the following error(s):</b>
+          <ul>
+            <li v-for="error in errors" v-bind:key="error" >- {{ error }}</li>
+          </ul>
+        </p>
 
         <button type="submit">Comment</button>
       </form>
@@ -71,6 +78,7 @@ export default {
       comment: null,
       user_id: null,
       likes: null,
+      errors: [],
     };
   },
   async mounted() {
@@ -92,16 +100,23 @@ export default {
         comment: this.comment,
       };
       try {
-        let response = await postComment(comment);
-        console.log(comment);
-        console.log(response);
+        this.errors = [];
+        if(!this.comment) {
+            this.errors.push('Please you have to add a comment.');
+
+        } else if (this.comment) {
+          await postComment(comment);
 
         this.comment = null;
         this.post_id = null;
-
+          
+        }
         //console.log(this.friend.id);
-      } catch (error) {
-        console.log(error);
+      } catch (errors) {
+         let err = errors.response.data.errors;
+         if(err.comment) {
+            this.errors.push(err.comment[0] )
+          }
       }
     },
     async gg() {

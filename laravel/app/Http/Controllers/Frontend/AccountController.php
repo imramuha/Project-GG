@@ -398,6 +398,10 @@ class AccountController extends Controller
 
     public function createComment(Request $request) {
 
+        $this->validate(request(), [
+            'comment' => 'required|min:2|max:64',
+        ]);
+
         $comment = Comment::create([
             'comment' => $request->input('comment'),
             'user_id' => auth()->user()->id,
