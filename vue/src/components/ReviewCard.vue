@@ -1,23 +1,37 @@
 <template>
   <div class="reviewCard">
-    <div class="reviewCardImg">
-      <div v-if="review.image">
-        <img :src="review.image" />
-      </div>
-      <div v-else>
-        <img src="@/assets/images/profile.jpeg" />
-      </div>
-      Username/data
-    </div>
-    <div class="reviewCardContent">
+    <div v-if="review.image" class="reviewCardImage">
+      <img :src="review.image" />
+
       <div class="reviewCardContentHeader">
-        <h1>{{ review.reviewer_id }}</h1>
-      </div>
-      <div class="reviewCardContentBody">
+        <h1>
+          {{ review.reviewer_id
+          }}<span>{{ review.created_at | formatDateTime }}</span>
+        </h1>
         <p>{{ review.comment }}</p>
-        <p>
-          {{ review.score }}
-        </p>
+      </div>
+      <div v-if="review.score <= 49" class="reviewCardContentBody">
+        <p class="reviewCarsScoreRed">{{ review.score }}</p>
+      </div>
+      <div v-else class="reviewCardContentBody">
+        <p class="reviewCardScoreGreen">{{ review.score }}</p>
+      </div>
+    </div>
+    <div v-else class="reviewCardImage">
+      <img src="@/assets/images/profile.jpeg" />
+
+      <div class="reviewCardContentHeader">
+        <h1>
+          {{ review.reviewer_id
+          }}<span>{{ review.created_at | formatDateTime }}</span>
+        </h1>
+        <p>{{ review.comment }}</p>
+      </div>
+      <div v-if="review.score <= 49" class="reviewCardContentBody">
+        <p class="reviewCardScoreRed">{{ review.score }}</p>
+      </div>
+      <div v-else class="reviewCardContentBody">
+        <p class="reviewCardScoreGreen">{{ review.score }}</p>
       </div>
     </div>
   </div>
@@ -30,9 +44,9 @@ export default {
       type: Object,
       default: () => {
         return {};
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 <style scoped></style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="postsboard">
-    <div class="posts">
+  <div class="gamesContainer">
+    <div class="games">
       <GameCard
         v-for="usergame in usergames"
         v-bind:key="usergame.id"

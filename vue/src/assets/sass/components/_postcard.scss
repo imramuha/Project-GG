@@ -3,11 +3,13 @@
                 width: 100%;
                 box-sizing: border-box;
                 overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
             }
             
             .posts {
                 display: flex;
-                justify-content: space-between;
                 box-sizing: border-box;
                 color: $melt;
                 height: 90%;
@@ -15,19 +17,22 @@
             
             .postCard {
                 display: flex;
+                flex-direction: column;
                 height: 100%;
+                width: 100%;
                 overflow: hidden;
                 padding: 7px;
                 border-radius: 2px;
                 background-color: $midnight;
                 box-shadow: 0 0 3px $midnight;
+                max-width: 25%;
                 &:not(:last-child) {
-                    margin-right: 5px;
+                    margin-right: 7px;
                 }
-                width: 100%;
-                flex-direction: column;
-                justify-content: space-between;
                 .postcardImg {
+                    max-height: 50%;
+                    overflow: hidden;
+                    margin-bottom: 7px;
                     img {
                         margin-bottom: 0px;
                         width: 100%;
@@ -40,6 +45,7 @@
                     display: flex;
                     justify-content: space-between;
                     flex-direction: column;
+                    margin-top: auto;
                     .postcardContentHeader {
                         h1 {
                             color: $snow;
@@ -57,7 +63,7 @@
                         p:nth-child(1) {
                             color: $melt;
                             font-size: 11px;
-                            margin: 0px;
+                            margin-bottom: 7px;
                         }
                     }
                     .postcardContentFooter {
@@ -78,14 +84,16 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    margin-top: 7px;
                     button {
                         font-size: 11px;
                         height: auto;
                         color: $melt;
                         background-color: $midnightL;
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50px;
+                        width: 35px;
+                        height: 35px;
+                        padding: 7px;
+                        border-radius: 3px;
                         border: 2px solid $snow;
                         &:hover {
                             text-decoration: none;

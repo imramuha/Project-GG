@@ -6,6 +6,12 @@
         v-bind:key="userreview.id"
         :review="userreview"
       />
+         <ReviewCard
+        v-for="userreview in userreviews"
+        v-bind:key="userreview.id"
+        :review="userreview"
+      />
+      
     </div>
     <div v-else class="reviews">
       <ReviewCard
