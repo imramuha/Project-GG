@@ -147,6 +147,7 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.data)
     try {
       const response = await getFriend(this.data);
       this.friend = response.data.user[0];

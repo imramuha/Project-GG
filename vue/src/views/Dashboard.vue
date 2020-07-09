@@ -10,9 +10,9 @@
         <router-link to="/">
           <i class="fas fa-home"></i>
         </router-link>
-        <router-link to="/dashboard">
+         <a @click="onDashboardNavClick('feed')" class="button">
           <i class="fas fa-tachometer-alt"></i>
-        </router-link>
+         </a>
         <a @click="onOverscreenClick(forum)" class="button">
           <i class="far fa-comment-alt"></i>
         </a>
@@ -48,6 +48,7 @@
           <template>
             <component
               :data="overscreenData"
+              :key="overscreenData"
               :is="overscreenComponent"
               v-on:emitToOverscreen="onOverscreenClick"
             ></component>
@@ -174,7 +175,8 @@ export default {
       });
     },
     onOverscreenClick(value) {
-      console.log(value);
+      console.log(value.component);
+      // clear the overscreen if someone else is pressed..
       if (
         value.component === "PostCard" ||
         value.component === "ForumPostCard"
@@ -182,25 +184,26 @@ export default {
         this.contentActive = false;
         this.overscreenComponent = Post;
         this.overscreenData = value.id;
-      } else if (value.component === "UserEdit") {
+      }  if (value.component === "UserEdit") {
         this.contentActive = false;
         this.overscreenComponent = UserEdit;
-      } else if (value.component === "PostCreate") {
+      }  if (value.component === "PostCreate") {
         this.contentActive = false;
         this.overscreenComponent = PostCreate;
-      } else if (value.component === "Profile") {
-        console.log("hello");
+      }  if (value.component === "Profile") {
+        console.log('hieze');
+        console.log(value.id);
         this.contentActive = false;
         this.overscreenComponent = Profile;
         this.overscreenData = value.id;
-      } else if (value.component === "UserSearch") {
+      }  if (value.component === "UserSearch") {
         this.contentActive = false;
         this.overscreenComponent = UserSearch;
         this.overscreenData = value.searchTerm;
-      } else if (value.component === "UserGameAdd") {
+      }  if (value.component === "UserGameAdd") {
         this.contentActive = false;
         this.overscreenComponent = UserGameAdd;
-      } else if (value === "forum") {
+      }  if (value === "forum") {
         this.contentActive = false;
         this.overscreenComponent = Forum;
       }

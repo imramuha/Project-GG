@@ -24,6 +24,7 @@
         v-for="friend in offlineFriends"
         v-bind:key="friend.id"
         :friend="friend"
+        v-on:emitToFriendlist="onFriendlistCardClick"
       />
     </div>
   </div>

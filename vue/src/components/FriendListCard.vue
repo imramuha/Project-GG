@@ -11,9 +11,13 @@
         <p>{{ friend.username }}</p>
         <p>{{ friend.email }}</p>
       </div>
-      <div class="friendlistCardStatus">
-        <p>{{ friend.status.name }}</p>
+      <div v-if="friend.status.name == 'online'" class="friendlistCardStatus">
+        <!--<p>{{ friend.status.name }}</p>-->
         <div class="statusCircle"></div>
+      </div>
+       <div v-else class="friendlistCardStatus">
+        <!--<p>{{ friend.status.name }}</p>-->
+        <div class="statusCircleOffline"></div>
       </div>
     </a>
   </div>
@@ -40,7 +44,6 @@ export default {
         component: "Profile",
         id: this.friend.id
       };
-
       this.emitToFriendlist(this.childMessage);
     },
     emitToFriendlist(value) {
