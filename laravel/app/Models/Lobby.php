@@ -15,6 +15,8 @@ class Lobby extends Model
     protected $fillable = [
         'name',
         'code',
+        'created_at',
+        'updated_at',
     ];
         /**
      * get the comments the belong to this user

@@ -1,0 +1,57 @@
+.feed {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    .feedNews {
+        display: flex;
+        flex-direction: column;
+        background-color: $midnightH;
+        width: 75%;
+        height: 100%;
+        border-radius: 3px;
+        margin-right: 7px;
+        padding: 7px;
+    }
+    .feedHistory {
+        display: flex;
+        flex-direction: column;
+        background-color: $midnightH;
+        width: 25%;
+        height: 100%;
+        border-radius: 3px;
+        padding: 7px;
+        ul {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+            li {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: left;
+                height: 10%;
+                padding: 7px;
+                font-size: 10px;
+                border-radius: 3px;
+                color: $snow;
+                background-color: $midnightL;
+                opacity: 0.8;
+                border-left: 3px solid $slate;
+                span {
+                    text-align: right;
+                    font-size: 9px;
+                    margin-bottom: 1px;
+                    color: $melt;
+                }
+                &:not(:last-child) {
+                    margin-bottom: 7px;
+                }
+            }
+        }
+    }
+}

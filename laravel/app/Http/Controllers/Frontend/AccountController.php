@@ -570,16 +570,17 @@ class AccountController extends Controller
 
     public function queue(Request $request) {
 
+    
         // checks if a lobby with similar code/name exists else create
         $lobby = Lobby::firstOrCreate([
             'name' => $request->input('name'),
             'code' => $request->input('code')
         ]);
 
-
         // checks if a new lobby was creates
         if($lobby->wasRecentlyCreated) {
-            
+
+        
             // attaches user to that newly created lobby/pivot
             $user_id = auth()->user()->id;
             $lobby->users()->attach($user_id);
@@ -588,13 +589,19 @@ class AccountController extends Controller
             return $response;
 
         } else {
+            // else join
+
             // checks if the user already has a lobby -> sends that lobby id to the lounge
             if(!$lobby->users()->wherePivot('user_id','=',  auth()->user()->id)->count() > 0) {
 
+                // means use already has a lobby;
+               
                 // gets the lobby and checks how many users it has
                 $lobbyId = $lobby->id;
-                $users = $lobby->users()->wherePivot('lobby_id','=', $lobbyId)->get();
-                if(count($users) < 5) {
+              
+                
+                $users = $lobby->users()->wherePivot('lobby_id','=', $lobbyId)->count();
+                if($users < 5) {
 
                     // attaches user to that newly created lobby/pivot
                     $user_id = auth()->user()->id;
@@ -606,7 +613,10 @@ class AccountController extends Controller
                     // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
                 }
             } else {
+                
+                // get the lobby and return it :) -> keep returning until the played leaves it
                 return array('response' => 'user already has a lobby.', "succes" => true, "data" => $lobby->id);
+            
             } 
         } 
     }
