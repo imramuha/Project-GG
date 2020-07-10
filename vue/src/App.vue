@@ -1,5 +1,14 @@
 <template>
   <div class="app">
+    <div class="wrapper">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
     <AppNav />
     <router-view class="page" />
   </div>
@@ -11,8 +20,8 @@ import AppNav from "@/components/AppNav";
 
 export default {
   components: {
-    AppNav
-  }
+    AppNav,
+  },
 };
 </script>
 

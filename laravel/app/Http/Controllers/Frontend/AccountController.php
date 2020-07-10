@@ -537,7 +537,7 @@ class AccountController extends Controller
     */
     public function showUserReviews () {
 
-        $data = Review::where('user_id', '=', auth()->user()->id)->paginate(4);
+        $data = Review::where('user_id', '=', auth()->user()->id)->with('user')->paginate(4);
         return response()->json($data);
     }
 
@@ -546,7 +546,7 @@ class AccountController extends Controller
     */
     public function showProfileReviews ($id) {
 
-        $data = Review::where('user_id', '=', $id)->with('reviewer')->paginate(4);
+        $data = Review::where('user_id', '=', $id)->with('user')->paginate(4);
         return response()->json($data);
     }
 
@@ -555,7 +555,7 @@ class AccountController extends Controller
     */
     public function showPostedReviews () {
 
-        $data = Review::where('reviewer_id', '=', auth()->user()->id)->paginate(4);
+        $data = Review::where('reviewer_id', '=', auth()->user()->id)->with('reviewer')->paginate(4);
         return response()->json($data);
     }
 
