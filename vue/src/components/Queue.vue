@@ -1,44 +1,63 @@
 <template>
-  <div class="queue">
-    <h1>Queue component</h1>
-    <label for="firstOption">Games</label>
-    <br />
-    <select v-model="firstOption" :selected="0">
-      <option disabled value>Select your game</option>
-      <option
-        v-for="(queuegame, index) in queuegames"
-        v-bind:key="queuegame.id"
-        :value="index"
-        >{{ queuegame.name }}</option
-      >
-    </select>
-    <br />
-    <label for="firstOption">Options</label>
-    <br />
-    <select
-      v-model="secondOption"
-      :selected="0"
-      v-if="this.queuegames[firstOption]"
-    >
-      <option disabled value>Select your option</option>
-      <option
-        v-for="(option, index) in queuegames[firstOption].options"
-        v-bind:key="option.id"
-        :value="index"
-        >{{ option.name }}</option
-      >
-    </select>
-    <br />
-    <button type="button" class="logoutButton" @click="lounge">
-      Queue up/Enter Longue
-    </button>
-    <template>
-      <component
-        :lobby="lobby"
-        v-bind:key="lobby.id"
-        :is="mainComponent"
-      ></component>
-    </template>
+  <div class="queuelounge">
+    <div class="queue">
+      <div class="queueHeader"><p>QUEUE</p></div>
+      <div class="queueBody">
+        <div class="queueForm">
+          <div class="queueGames">
+            <label for="firstOption">Games</label>
+            <select v-model="firstOption" :selected="0">
+              <option disabled value>Select your game</option>
+              <option
+                v-for="(queuegame, index) in queuegames"
+                v-bind:key="queuegame.id"
+                :value="index"
+                >{{ queuegame.name }}</option
+              >
+            </select>
+          </div>
+
+          <div class="queueOptions">
+            <label for="firstOption">Options</label>
+            <select
+              v-model="secondOption"
+              :selected="0"
+              v-if="this.queuegames[firstOption]"
+            >
+              <option disabled value>Select your option</option>
+              <option
+                v-for="(option, index) in queuegames[firstOption].options"
+                v-bind:key="option.id"
+                :value="index"
+                >{{ option.name }}</option
+              >
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="queueUp">
+        <button type="button" class="logoutButton" @click="lounge">
+          JOIN
+        </button>
+      </div>
+    </div>
+
+    <div class="lounge">
+      <div class="loungeHeader"><p>LOUNGE</p></div>
+      <div class="loungeBody">
+        <template>
+          <component
+            :lobby="lobby"
+            v-bind:key="lobby.id"
+            :is="mainComponent"
+          ></component>
+        </template>
+      </div>
+      <div class="loungeButtons">
+        <button>REVEAL</button>
+        <button>LEAVE</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,14 +75,14 @@ export default {
       queuegames: [],
       firstOption: "",
       secondOption: "",
-      lobby: ""
+      lobby: "",
     };
   },
   computed: {
     option: function() {
       console.log(this.queuegames[this.firstOption]);
       return this.queuegames[this.firstOption];
-    }
+    },
   },
   methods: {
     async lounge() {
@@ -76,11 +95,11 @@ export default {
         code:
           this.firstOption +
           "-" +
-          this.queuegames[this.firstOption].options[this.secondOption].id
+          this.queuegames[this.firstOption].options[this.secondOption].id,
       };
       this.lobby = lounge;
       try {
-        await queue(lounge).then(response => {
+        await queue(lounge).then((response) => {
           console.log(response.data.data);
           this.lobby.id = response.data.data;
           console.log(this.lobby.id);
@@ -96,7 +115,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
   async mounted() {
     try {
@@ -107,7 +126,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
 </script>
 

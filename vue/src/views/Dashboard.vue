@@ -1,27 +1,30 @@
 <template>
   <div class="dashboard">
-    <div class="sidenav">
-      <div class="sidenavLogo">
-        <router-link to="/"><img src="@/assets/images/logo.svg"/></router-link>
-      </div>
-      <!--<router-link to="/user" class="button">Lobby</router-link>-->
-      <button type="button" class="queueButton" @click="queue">Queue</button>
-      <div class="sidenavButtons">
-        <router-link to="/">
-          <i class="fas fa-home"></i>
-        </router-link>
-         <a @click="onDashboardNavClick('feed')" class="button">
-          <i class="fas fa-tachometer-alt"></i>
-         </a>
-        <a @click="onOverscreenClick(forum)" class="button">
-          <i class="far fa-comment-alt"></i>
-        </a>
-        <router-link to="/user" class="button">
-          <i class="fas fa-cog"></i>
-        </router-link>
-        <button type="button" class="logoutButton" @click="logout">
-          Logout
-        </button>
+    <div class="sidenavContainer">
+      <div class="sidenav">
+        <div class="sidenavLogo">
+          <router-link to="/"><img src="@/assets/images/logo.svg"/></router-link>
+        </div>
+        <!--<router-link to="/user" class="button">Lobby</router-link>-->
+        <button type="button" class="queueButton" @click="queue" title="Queue up"><i class="fa fa-gamepad" aria-hidden="true"></i>
+</button>
+        <div class="sidenavButtons">
+          <router-link to="/">
+            <i class="fas fa-home"></i>
+          </router-link>
+          <a @click="onDashboardNavClick('feed')" class="button">
+            <i class="fas fa-tachometer-alt"></i>
+          </a>
+          <a @click="onOverscreenClick(forum)" class="button">
+            <i class="far fa-comment-alt"></i>
+          </a>
+          <router-link to="/user" class="button">
+            <i class="fas fa-cog"></i>
+          </router-link>
+          <button type="button" class="logoutButton" @click="logout">
+            Logout
+          </button>
+        </div>
       </div>
     </div>
     <div v-if="contentActive" class="content">

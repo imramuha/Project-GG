@@ -22,8 +22,8 @@
             class="profileHeaderScorebar"
             v-bind:style="{ height: '100%', width: reviewscore + '%' }"
           >
-            {{ reviewscore }} %
           </div>
+          <div class="profileHeaderScorePercentage">{{ reviewscore }}%</div>
         </div>
       </div>
       <div class="profileHeaderButtons">
@@ -32,7 +32,7 @@
         </div>
         <div class="profileHeaderRelation">
           <button @click="update('friends')" v-if="this.activeButton == ''">
-            + Friend
+            Add Friend
           </button>
           <button
             @click="update('cancel')"
