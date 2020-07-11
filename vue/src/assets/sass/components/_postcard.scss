@@ -111,10 +111,10 @@
             .postsFooter {
                 height: 10%;
                 display: flex;
-                padding: 7px;
+                padding: 7px 0px;
             }
             
-            .postsNav,
+            .postsPagination,
             .postsFooterButtons {
                 display: flex;
                 justify-content: flex-end;
@@ -141,8 +141,15 @@
                 flex: 1;
             }
             
-            .postsNav {
+            .postsPagination {
                 p {
-                    margin: 8px 15px;
+                    margin: 0px 14px;
+                    font-size: 11px;
+                    color: $melt;
+                    span {
+                        font-weight: 600;
+                        color: $paint;
+                        font-size: 21px
+                    }
                 }
             }

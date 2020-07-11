@@ -133,6 +133,13 @@
 
 .reviewsPagination {
     p {
-        margin: 8px 15px;
+        margin: 0px 14px;
+        font-size: 11px;
+        color: $melt;
+        span {
+            font-weight: 600;
+            color: $paint;
+            font-size: 21px
+        }
     }
 }

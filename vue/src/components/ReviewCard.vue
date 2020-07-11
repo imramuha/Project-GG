@@ -58,7 +58,7 @@
 
       <div class="reviewCardContentHeader">
         <h1>
-          {{ review.reviewer.username }}
+          {{ review.user.username }}
           <span>{{ review.created_at | formatDate }}</span>
         </h1>
         <p>{{ review.comment }}</p>

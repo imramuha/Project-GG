@@ -15,7 +15,7 @@
         >
           Previous
         </button>
-        <p>Page {{ pagination.currentPage }} of {{ pagination.lastPage }}</p>
+        <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
         <button
           v-on:click="fetchPaginatedGames(pagination.nextPage)"
           :disabled="!pagination.nextPage"
@@ -62,8 +62,8 @@ export default {
       };
       this.pagination = pagination;
     },
+
     async fetchPaginatedGames(url) {
-      console.log("hii");
       this.url = url;
 
       await this.fetchUserGames(this.url);
@@ -82,8 +82,7 @@ export default {
   },
 
   async mounted() {
-    // Make network request if the data is empty
-    console.log(this.getUserGames);
+    console.log(this.getUserGames.length);
     if (this.getUserGames.length === 0) {
       await this.fetchUserGames(this.url);
 

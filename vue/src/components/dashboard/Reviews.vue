@@ -7,7 +7,7 @@
         :review="userreview"
       />      
     </div>
-    <div v-else class="reviews">
+    <div v-else-if="this.mode === 'given'" class="reviews">
       <ReviewCard
         v-for="userpostedreview in userpostedreviews"
         v-bind:key="userpostedreview.id"
@@ -16,17 +16,32 @@
     </div>
 
     <div class="reviewsFooter">
-      <div class="reviewsPagination">
+      <div v-if="this.mode === 'received'" class="reviewsPagination">
         <button
           v-on:click="fetchPaginatedReviews(pagination.prevPage)"
           :disabled="!pagination.prevPage"
         >
           Previous
         </button>
-        <p>Page {{ pagination.currentPage }} of {{ pagination.lastPage }}</p>
+        <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
         <button
           v-on:click="fetchPaginatedReviews(pagination.nextPage)"
           :disabled="!pagination.nextPage"
+        >
+          Next
+        </button>
+      </div>
+       <div v-else-if="this.mode === 'given'" class="reviewsPagination">
+        <button
+          v-on:click="fetchPaginatedPostedReviews(postedPagination.prevPage)"
+          :disabled="!postedPagination.prevPage"
+        >
+          Previous
+        </button>
+        <p>Page <span>{{ postedPagination.currentPage }}</span> of <span>{{ postedPagination.lastPage }}</span></p>
+        <button
+          v-on:click="fetchPaginatedPostedReviews(postedPagination.nextPage)"
+          :disabled="!postedPagination.nextPage"
         >
           Next
         </button>
@@ -64,6 +79,7 @@ export default {
       url_received: "/api/frontend/userreviews",
       url_given: "/api/frontend/userpostedreviews",
       pagination: [],
+      postedPagination: [],
       mode: "received",
       isActive: "received"
     };
@@ -83,6 +99,16 @@ export default {
       };
       this.pagination = pagination;
     },
+    createPostedPagination(data) {
+      let pagination = {
+        currentPage: data.current_page,
+        lastPage: data.last_page,
+        nextPage: data.next_page_url,
+        prevPage: data.prev_page_url
+      };
+      this.postedPagination = pagination;
+    },
+
     async fetchPaginatedReviews(url) {
       this.url_received = url;
       console.log(this.url_received);
@@ -96,7 +122,7 @@ export default {
 
       await this.fetchUserPostedReviews(this.url_given);
       this.userpostedreviews = this.getUserPostedReviews.data;
-      this.createPagination(this.getUserPostedReviews);
+      this.createPostedPagination(this.getUserPostedReviews);
     },
     given() {
       this.mode = "given";
@@ -125,10 +151,10 @@ export default {
       await this.fetchUserPostedReviews(this.url_given);
 
       this.userpostedreviews = this.getUserPostedReviews.data;
-      this.createPagination(this.getUserPostedReviews);
+      this.createPostedPagination(this.getUserPostedReviews);
     } else {
       this.userpostedreviews = this.getUserPostedReviews.data;
-      this.createPagination(this.userpostedreviews);
+      this.createPostedPagination(this.userpostedreviews);
     }
   }
 };

@@ -78,14 +78,24 @@ export default {
             this.errors.push('Please enter some text to your post.');
 
         } else if (this.title && this.subtitle && this.text) {
-          let response = await createPost(post, config);
+          await createPost(post, config).then((response) => {
+            this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              //this.$router.push('dashboard');
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
 
-          console.log(response)
-          this.title = null;
-          this.subtitle = null;
-          this.text = null;
-          this.image = null;
-          
+            
+            this.title = null;
+            this.subtitle = null;
+            this.text = null;
+            this.image = null;
+          })          
         }
       } catch (errors) {
         let err = errors.response.data.errors;

@@ -105,10 +105,21 @@ export default {
             this.errors.push('Please you have to add a comment.');
 
         } else if (this.comment) {
-          await postComment(comment);
-
-        this.comment = null;
-        this.post_id = null;
+          await postComment(comment).then((response)=> {
+            this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              //this.$router.push('dashboard');
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
+            
+            this.comment = null;
+            this.post_id = null;
+          });
           
         }
         //console.log(this.friend.id);
@@ -125,9 +136,19 @@ export default {
       };
 
       try {
-        await likePost(data).then(() => {
+        await likePost(data).then((response) => {
+          this.$store
+          .dispatch("notification", {
+            message: response.data[0].response,
+          })
+          .then(() => {
+            //this.$router.push('dashboard');
+          })
+          .catch((errors) => {
+            console.log(errors);
+          });
+
           getPost(this.post.id).then((response) => {
-            console.log("this");
             this.post = response.data;
           });
         });

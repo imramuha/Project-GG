@@ -18,9 +18,9 @@
           <a @click="onOverscreenClick(forum)" class="button">
             <i class="far fa-comment-alt"></i>
           </a>
-          <router-link to="/user" class="button">
+          <a  type="button" class="button" @click="settings" title="Settings and preferences">
             <i class="fas fa-cog"></i>
-          </router-link>
+          </a>
           <button type="button" class="logoutButton" @click="logout">
             Logout
           </button>
@@ -62,6 +62,7 @@
     <div class="sidecontent">
       <div class="sidecontentHeader">
         <div class="sidecontentNotifications">
+          {{ this.getNotifications.length}}
           <div v-if="this.getNotifications.length">
             <NotificationCard
               v-for="(notification, index) in this.getNotifications"
@@ -112,6 +113,7 @@ import Forum from "@/views/Forum";
 import UserGameAdd from "@/views/UserGameAdd";
 
 import Queue from "@/components/Queue";
+import Settings from "@/components/Settings";
 
 import { mapGetters } from "vuex";
 
@@ -172,6 +174,9 @@ export default {
     queue() {
       this.mainComponent = Queue;
     },
+    settings() {
+      this.mainComponent = Settings;
+    },
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
@@ -194,8 +199,6 @@ export default {
         this.contentActive = false;
         this.overscreenComponent = PostCreate;
       }  if (value.component === "Profile") {
-        console.log('hieze');
-        console.log(value.id);
         this.contentActive = false;
         this.overscreenComponent = Profile;
         this.overscreenData = value.id;

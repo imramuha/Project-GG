@@ -23,7 +23,7 @@
             v-bind:style="{ height: '100%', width: reviewscore + '%' }"
           >
           </div>
-          <div class="profileHeaderScorePercentage">{{ reviewscore }}%</div>
+          <div class="profileHeaderScorePercentage">{{ reviewscore.toFixed(2) }}%</div>
         </div>
       </div>
       <div class="profileHeaderButtons">
@@ -139,7 +139,16 @@ export default {
       };
       try {
         await updateRelation(relationData).then(response => {
-          console.log(response);
+            this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              //this.$router.push('dashboard');
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
         });
       } catch (error) {
         console.log(error);

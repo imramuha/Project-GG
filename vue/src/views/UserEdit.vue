@@ -31,12 +31,12 @@ export default {
     return {
       user: [],
       email: null,
-      image: null
+      image: null,
     };
   },
   async mounted() {
     try {
-      await getMe().then(response => {
+      await getMe().then((response) => {
         this.email = response.data.user[0].email;
         this.image = response.data.user[0].image;
 
@@ -51,16 +51,24 @@ export default {
     async onSubmit() {
       let userData = {
         email: this.email,
-        image: this.image
+        image: this.image,
       };
 
       try {
-        let response = await editUser(userData);
-        console.log(response);
-
-        this.email = null;
-        this.image = null;
-
+        await editUser(userData).then((response) => {
+          this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              //this.$router.push('dashboard');
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
+          this.email = null;
+          this.image = null;
+        });
         //console.log(this.friend.id);
       } catch (error) {
         console.log(error);
@@ -75,15 +83,15 @@ export default {
     createImage(file) {
       let reader = new FileReader();
       let vm = this;
-      reader.onload = e => {
+      reader.onload = (e) => {
         vm.image = e.target.result;
       };
       reader.readAsDataURL(file);
     },
     removeImage: function() {
       this.image = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

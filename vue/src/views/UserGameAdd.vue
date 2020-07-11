@@ -65,11 +65,23 @@ export default {
           data: this.data
         };
 
-        await addUserGame(userGameData).then(() => {
+        await addUserGame(userGameData).then((response) => {
+          this.$store
+          .dispatch("notification", {
+            message: response.data[0].response,
+          })
+          .then(() => {
+            //this.$router.push('dashboard');
+          })
+          .catch((errors) => {
+            console.log(errors);
+          });
+
           this.username = null;
           this.data = null;
-          }).catch((errors) => {
-            const err = errors.response.data.errors;
+
+        }).catch((errors) => {
+          const err = errors.response.data.errors;
           if(err.game_id) {
             this.errors.push('You have to select a game.')
           } if(err.username) {

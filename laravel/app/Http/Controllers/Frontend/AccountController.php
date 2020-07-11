@@ -60,7 +60,7 @@ class AccountController extends Controller
             'image' => $request->input('image'),
         ));
 
-        $response = array('response' => 'Your profile has been updated.', 'succes' => true);
+        $response = array(['response' => 'Updated your profile.', 'succes' => true]);
         return $response;
     }
 
@@ -192,78 +192,78 @@ class AccountController extends Controller
             // first second / second first
             if($request->input('relation') === "friends") {
                 $user->relationOne()->attach( $first_second_pending_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
-                return array(['response' => 'Friend request has been sent.']);
+                return array(['response' => 'Sent friend request.']);
 
             // both friends
             } else if ($request->input('relation') === "accept" ) {
                 if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_pending_relation_id)->first()) {
                     $user->relationOne()->attach($both_friend_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
-                    return array(['response' => 'You accepted the friend request.']);
+                    return array(['response' => 'Accepted friend request.']);
                 } else {
                     return array(['response' => 'No request for you to accept.']);
                 }
             // remove the friendship request
             } else if($request->input('relation') === "unfriend" || $request->input('relation') === "deny" || $request->input('relation') === "cancel") {
                 $user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach();
-                return array(['response' => 'Cancelled the request.']);
+                return array(['response' => 'Removed friend request.']);
             } else if($request->input('relation') === "block") {
                 // block user -> first_second unless second_first exists -> then both_block
                 if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
                     $user->relationOne()->attach($both_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
-                    return array(['response' => 'You just blocked the user.']);
+                    return array(['response' => 'Blocked a user.']);
                 } else {
                     $user->relationOne()->attach($first_second_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
-                    return array(['response' => 'User has been blocked.']);
+                    return array(['response' => 'Blocked a user.']);
                 }
             } else if ($request->input('relation') === "unblock") {
 
                 // if both_block exists -> change it to second first else unblock
                 if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $both_block_relation_id)->detach()) {
                     $user->relationOne()->attach($second_first_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
-                    return array(['response' => 'You just unblocked the user.']);
+                    return array(['response' => 'Unblocked a user.']);
                 } else {
                     $user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach();
-                    return array(['response' => 'User has been unblocked.']);
+                    return array(['response' => 'Unblocked a user.']);
                 }
             }
         } else {
                 // BLOCKING SECTION <
                 if($request->input('relation') === "friends") {
                     $user->relationTwo()->attach( $second_first_pending_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile->id]);
-                    return array(['response' => 'Friend request has been sent.']);
+                    return array(['response' => 'Sent friend request.']);
     
                 // both friends
                 } else if ($request->input('relation') === "accept" ) {
                     if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->wherePivot('relation_id', $first_second_pending_relation_id)->first()) {
                         $user->relationTwo()->attach($both_friend_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
-                        return array(['response' => 'You accepted the friend request.']);
+                        return array(['response' => 'Accepted friend request.']);
                     } else {
-                        return array(['response' => 'No request for you to accept.']);
+                        return array(['response' => 'Nothing to accept.']);
                     }          
                 // remove the friendship request
                 } else if($request->input('relation') === "deny" || $request->input('relation') === "cancel" || $request->input('relation') === "unfriend") {
                     $user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->detach();
-                    return array(['response' => 'Cancelled the request.']);
+                    return array(['response' => 'Removed friend request.']);
 
                 } else if($request->input('relation') === "block") {
                 // block user -> first_second unless second_first exists -> then both_block
                 if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
                     $user->relationTwo()->attach($both_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
-                    return array(['response' => 'You just blocked the user.']);
+                    return array(['response' => 'Blocked a user.']);
                     
                 } else {
                     $user->relationTwo()->attach($second_first_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
-                    return array(['response' => 'User has been blocked.']);
+                    return array(['response' => 'Blocked a user.']);
                 }                
             } else if ($request->input('relation') === "unblock") {
                 // if both_block exists -> change it to second first else unblock
                 if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $both_block_relation_id)->detach()) {
                     $user->relationTwo()->attach($first_second_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
-                    return array(['response' => 'You just unblocked the user.']);
+                    return array(['response' => 'Unblocked a user.']);
                     // check why this happens if button is pressed twice unblock/block
                 } else {
                     $user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->detach();
-                    return array(['response' => 'User has been unblocked.']);
+                    return array(['response' => 'Unblocked a user.']);
                 }
             }
         }
@@ -285,7 +285,7 @@ class AccountController extends Controller
     */
     public function showUserPosts () {
         $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts'  
-        )->get();
+        )->paginate(5);
 
         // check if user liked this post; if yes, send it.
         foreach($posts as $post) {
@@ -342,16 +342,16 @@ class AccountController extends Controller
         // check if the user likes the following/sent post id
         $likedPost = LikedPost::where('user_id', '=', $user_id)->where('post_id', "=", $post_id)->first();
 
-        // if post is liked -> delete it like else create a like
+        // if post is liked -> delete it else create a like
         if($likedPost) {
             $likedPost->delete();
-            return array(["succes"=>"your post has been unliked", "post" => $likedPost]);
+            return array(["response"=>"Unliked a post."]);
         } else {
             $like = LikedPost::create([
                 'user_id' => $user_id,
                 'post_id' => $post_id,
             ]);
-            return array(["succes"=>"your post has been liked", "post" => $like]);
+            return array(["response"=>"Liked a post."]);
         }
     }
 
@@ -391,7 +391,7 @@ class AccountController extends Controller
                 'reviewer_id' => auth()->user()->id,
             ]);
     
-            $response = array('response' => 'Your review has been posted!', 'succes' => true);
+            $response = array(['response' => 'Posted a review.', 'succes' => true]);
         }
         return $response;
     }
@@ -408,7 +408,7 @@ class AccountController extends Controller
             'post_id' => $request->input('post_id'),
         ]);
 
-        $response = array('response' => 'Your comment has been posted!', 'succes' => true);
+        $response = array(['response' => 'Commented on a post.', 'succes' => true]);
         return $response;
     }
 
@@ -431,8 +431,7 @@ class AccountController extends Controller
             'user_id' => $user_id,
         ]);
 
-        return $post;
-        $response = array('response' => 'Your comment has been posted!', 'succes' => true);
+        $response = array(['response' => 'Created a post.', 'succes' => true]);
         return $response;
     }
 
@@ -503,9 +502,7 @@ class AccountController extends Controller
             'user_id' => $user_id,
             "game_id" => $game_id,
         ]);
-        return array(['response' => 'Game user data was created.']);
-        //}
-        
+        return array(['response' => 'Games was favorited.']);
     }
 
     /*
@@ -537,7 +534,7 @@ class AccountController extends Controller
     */
     public function showUserReviews () {
 
-        $data = Review::where('user_id', '=', auth()->user()->id)->with('user')->paginate(4);
+        $data = Review::where('user_id', '=', auth()->user()->id)->with('reviewer')->paginate(8);
         return response()->json($data);
     }
 
@@ -546,16 +543,16 @@ class AccountController extends Controller
     */
     public function showProfileReviews ($id) {
 
-        $data = Review::where('user_id', '=', $id)->with('user')->paginate(4);
+        $data = Review::where('user_id', '=', $id)->with('reviewer')->paginate(8);
         return response()->json($data);
     }
 
        /*
-    * Get all logged in users receiven-reviews
+    * Get all logged in users given-reviews
     */
     public function showPostedReviews () {
 
-        $data = Review::where('reviewer_id', '=', auth()->user()->id)->with('reviewer')->paginate(4);
+        $data = Review::where('reviewer_id', '=', auth()->user()->id)->with('user')->paginate(8);
         return response()->json($data);
     }
 

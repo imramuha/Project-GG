@@ -55,7 +55,17 @@ export default {
           rating: this.rating
         };
      
-          await reviewUser(userReview).then(() => {
+          await reviewUser(userReview).then((response) => {
+            this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              //this.$router.push('dashboard');
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
             this.comment = null;
             this.rating = null;
           }).catch((errors) => {
