@@ -2,25 +2,41 @@ $form-title-font-sizes: ( null: 28px, sm: 35px, md: 43px, lg: 55px, xl: 65px, );
 $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
 .userEditForm {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
     padding: 30px;
 }
 
 .userEditFormHeader {
     padding: 7px;
-    height: 15%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     h1 {
         @include font-size($form-title-font-sizes);
         letter-spacing: 5px;
     }
+    ul {
+        padding: 0;
+        list-style-type: none;
+        margin: 0px;
+    }
+    &:first-child>p {
+        margin-top: 10px;
+        color: $melt;
+        font-size: 13px;
+        b {
+            color: $candy;
+        }
+    }
 }
 
 .userEditFormBody {
     padding: 7px;
-    height: 85%;
     box-sizing: border-box;
     display: flex;
     align-items: center;

@@ -53,6 +53,11 @@ class AccountController extends Controller
 
     public function editUser (Request $request) {
 
+        $this->validate(request(), [
+            'email' => 'required|unique:users|email',
+            'image' => 'required'
+        ]);
+
         $id = auth()->user()->id;
 
         User::where('id', '=', $id)->update(array(
@@ -448,7 +453,7 @@ class AccountController extends Controller
     * Get all logged in users game data
     */
     public function showProfileGameData ($id) {
-        $data = UserGameData::where('user_id', '=', $id)->with("game", "data")->paginate(8);
+        $data = UserGameData::where('user_id', '=', $id)->with("game", "data")->paginate(5);
         return response()->json($data);
     }
 
@@ -543,7 +548,7 @@ class AccountController extends Controller
     */
     public function showProfileReviews ($id) {
 
-        $data = Review::where('user_id', '=', $id)->with('reviewer')->paginate(8);
+        $data = Review::where('user_id', '=', $id)->with('reviewer')->paginate(5);
         return response()->json($data);
     }
 

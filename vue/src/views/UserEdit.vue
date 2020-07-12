@@ -2,6 +2,12 @@
   <div class="userEditForm">
     <div class="userEditFormHeader">
       <h1>EDIT PROFILE</h1>
+       <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
+        </ul>
+      </p>
     </div>
     <div class="userEditFormBody">
       <form @submit.prevent="onSubmit">
@@ -32,6 +38,7 @@ export default {
       user: [],
       email: null,
       image: null,
+      errors: [],
     };
   },
   async mounted() {
@@ -55,23 +62,38 @@ export default {
       };
 
       try {
-        await editUser(userData).then((response) => {
-          this.$store
-            .dispatch("notification", {
-              message: response.data[0].response,
-            })
-            .then(() => {
-              //this.$router.push('dashboard');
-            })
-            .catch((errors) => {
-              console.log(errors);
-            });
-          this.email = null;
-          this.image = null;
+        this.errors = [];
+        if(!this.email) {
+          this.errors.push('Email is required!');
+
+        } if(!this.image) {
+            this.errors.push('Please insert an image!');
+
+        } else if (this.image && this.email) {
+          await editUser(userData).then((response) => {
+            this.$store
+              .dispatch("notification", {
+                message: response.data[0].response,
+              })
+              .then(() => {
+                //this.$router.push('dashboard');
+              })
+              .catch((errors) => {
+                console.log(errors);
+              });
+            this.email = null;
+            this.image = null;
         });
-        //console.log(this.friend.id);
-      } catch (error) {
-        console.log(error);
+      }
+
+      } catch (errors) {
+        let err = errors.response.data.errors;
+         if(err.email) {
+            this.errors.push(err.email[0] )
+          }
+          if(err.image) {
+            this.errors.push(err.image[0] )
+          }
       }
     },
     onImageChange(e) {

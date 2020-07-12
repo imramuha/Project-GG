@@ -19,7 +19,7 @@
         <button
           v-on:click="fetchPaginatedGames(pagination.nextPage)"
           :disabled="!pagination.nextPage"
-        >
+        > 
           Next
         </button>
       </div>

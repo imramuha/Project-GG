@@ -11,7 +11,7 @@
     >
     <router-link
       class="loginButton"
-      v-if="!loggedIn && this.$route.path == '/login'"
+      v-if="!loggedIn && this.$route.path == '/register'"
       to="/register"
       >Register</router-link
     >

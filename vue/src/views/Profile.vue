@@ -21,9 +21,10 @@
           <div
             class="profileHeaderScorebar"
             v-bind:style="{ height: '100%', width: reviewscore + '%' }"
-          >
+          ></div>
+          <div class="profileHeaderScorePercentage">
+            {{ reviewscore.toFixed(2) }}%
           </div>
-          <div class="profileHeaderScorePercentage">{{ reviewscore.toFixed(2) }}%</div>
         </div>
       </div>
       <div class="profileHeaderButtons">
@@ -82,7 +83,12 @@
     </div>
     <div class="profileGames">
       <div class="profileGamesNav">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <button
+          v-on:click="fetchPaginatedGames(games_pagination.prevPage)"
+          :disabled="!games_pagination.prevPage"
+        >
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
       </div>
       <ProfileGameCard
         v-for="game in games"
@@ -90,16 +96,37 @@
         :game="game"
       />
       <div class="profileGamesNav">
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        <button
+          v-on:click="fetchPaginatedGames(games_pagination.nextPage)"
+          :disabled="!games_pagination.nextPage"
+        >
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
     <div class="profileReviews">
       <div class="profileReviewsSection">
+        <div class="profileReviewsNav">
+          <button
+            v-on:click="fetchPaginatedReviews(reviews_pagination.prevPage)"
+            :disabled="!reviews_pagination.prevPage"
+          >
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+          </button>
+        </div>
         <ProfileReviewCard
           v-for="review in reviews"
           v-bind:key="review.id"
           :review="review"
         />
+        <div class="profileReviewsNav">
+          <button
+            v-on:click="fetchPaginatedReviews(reviews_pagination.nextPage)"
+            :disabled="!reviews_pagination.nextPage"
+          >
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
 
       <ReviewInput :id="friend.id" />
@@ -110,8 +137,8 @@
 <script>
 import { getFriend, getRelation } from "@/services/friend.api";
 import { updateRelation } from "@/services/user.api";
-import { getProfileGames } from "@/services/game.api";
-import { getProfileReviews } from "@/services/review.api";
+
+import { mapActions, mapGetters } from "vuex";
 
 import ReviewInput from "@/components/ReviewInput";
 import ProfileGameCard from "@/components/profile/ProfileGameCard";
@@ -127,19 +154,68 @@ export default {
       activeButton: "",
       reviewscore: 0,
       reviews: [],
-      games: []
+      reviews_url: "/api/frontend/profilereviews/",
+      reviews_pagination: [],
+      games: [],
+      games_url: "/api/frontend/profilegames/",
+      games_pagination: [],
     };
   },
+  computed: {
+    ...mapGetters("Game", ["getProfileGames"]),
+    ...mapGetters("Review", ["getProfileReviews"]),
+  },
   methods: {
+    ...mapActions("Game", ["fetchProfileGames"]),
+    ...mapActions("Review", ["fetchProfileReviews"]),
+
+    createGamesPagination(data) {
+      let pagination = {
+        currentPage: data.current_page,
+        lastPage: data.last_page,
+        nextPage: data.next_page_url,
+        prevPage: data.prev_page_url,
+      };
+      this.games_pagination = pagination;
+    },
+    createReviewsPagination(data) {
+      let pagination = {
+        currentPage: data.current_page,
+        lastPage: data.last_page,
+        nextPage: data.next_page_url,
+        prevPage: data.prev_page_url,
+      };
+      this.reviews_pagination = pagination;
+    },
+    async fetchPaginatedGames(url) {
+      this.games_url = url;
+      console.log(url);
+
+      console.log(this.games_url);
+
+      await this.fetchProfileGames(this.games_url);
+      this.games = this.getProfileGames.data;
+      this.createGamesPagination(this.getProfileGames);
+    },
+    async fetchPaginatedReviews(url) {
+      this.reviews_url = url;
+      console.log(url);
+
+      console.log(this.reviews_url);
+
+      await this.fetchProfileReviews(this.reviews_url);
+      this.reviews = this.getProfileReviews.data;
+      this.createReviewsPagination(this.getProfileReviews);
+    },
     async update(data) {
       // make a call and send the data ->
       let relationData = {
         relation: data,
-        profile_id: this.friend.id
+        profile_id: this.friend.id,
       };
       try {
-        await updateRelation(relationData).then(response => {
-            this.$store
+        await updateRelation(relationData).then((response) => {
+          this.$store
             .dispatch("notification", {
               message: response.data[0].response,
             })
@@ -153,10 +229,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
   async mounted() {
-    console.log(this.data)
     try {
       const response = await getFriend(this.data);
       this.friend = response.data.user[0];
@@ -188,20 +263,32 @@ export default {
     } catch (error) {
       console.log(error);
     }
-    try {
-      const response = await getProfileReviews(this.friend.id);
-      this.reviews = response.data.data;
-    } catch (error) {
-      console.log(error);
+
+    if (this.getProfileReviews.length == 0) {
+      let url = this.reviews_url + this.friend.id;
+      await this.fetchProfileReviews(url);
+
+      this.reviews = this.getProfileReviews.data;
+      console.log(this.reviews);
+      this.createReviewsPagination(this.getProfileReviews);
+    } else {
+      this.reviews = this.getProfileReviews.data;
+      this.createReviewsPagination(this.getProfileReviews);
+      //this.createGamesPagination(this.reviews);
     }
-    try {
-      const response = await getProfileGames(this.friend.id);
-      this.games = response.data.data;
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
+
+    if (this.getProfileGames.length == 0) {
+      let url = this.games_url + this.friend.id;
+      await this.fetchProfileGames(url);
+
+      this.games = this.getProfileGames.data;
+      this.createGamesPagination(this.getProfileGames);
+    } else {
+      this.games = this.getProfileGames.data;
+      // this.createGamesPagination(this.getgames);
+      this.createGamesPagination(this.getProfileGames);
     }
-  }
+  },
 };
 </script>
 

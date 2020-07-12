@@ -1,302 +1,353 @@
-        .profile {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            .profileHeader {
-                display: flex;
-                flex-direction: row;
-                padding: 7px;
-                box-shadow: 0 0 3px $midnightH;
+            .profile {
+                width: 100%;
                 height: 100%;
-                .profileHeaderView {
-                    display: flex;
-                    flex-direction: column;
-                    padding: 7px;
-                    .profileHeaderImage {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        img {
-                            width: 125px;
-                            height: auto;
-                            //max-height: 125px;
-                            border-radius: 3px;
-                        }
-                    }
-                }
-                .profileHeaderData {
-                    display: flex;
-                    width: 100%;
-                    justify-content: space-between;
-                    flex-direction: column;
-                    padding: 7px;
-                    div {
-                        p {
-                            color: $melt;
-                            margin: 0px 0 7px;
-                            font-size: 13px;
-                            padding-left: 1px;
-                        }
-                        h1 {
-                            margin: 5px 5px 5px 0px;
-                            span {
-                                margin-left: 7px;
-                                font-size: 17px;
-                                padding: 0px 7px;
-                                background-color: $slate;
-                                border-radius: 5px;
-                            }
-                        }
-                    }
-                    .profileHeaderScore {
-                        display: flex;
-                        margin-left: auto;
-                        position: relative;
-                        width: 100%;
-                        border-radius: 3px;
-                        background-color: $candy;
-                        border: 2px solid $snow;
-                        height: 30px;
-                        .profileHeaderScorebar {
-                            background-color: $slate;
-                        }
-                        .profileHeaderScorePercentage {
-                            font-size: 15px;
-                            padding: 3px;
-                            font-weight: 600;
-                            letter-spacing: 1px;
-                            position: absolute;
-                            left: 50%;
-                            //top: 25%;
-                        }
-                    }
-                }
-                .profileHeaderButtons {
-                    width: 100%;
-                    display: flex;
-                    margin-left: auto;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    padding: 7px;
-                    .profileHeaderReport {
-                        display: flex;
-                        justify-content: flex-end;
-                        button {
-                            border: 2px solid $melt;
-                            border-radius: 20px;
-                            padding: 7px 21px;
-                            font-size: 11px;
-                            color: $melt;
-                            background-color: $midnightL;
-                            border-radius: 5px;
-                            width: 100%;
-                            max-width: 100px;
-                            &:hover {
-                                color: $snow;
-                                border-color: $snow;
-                                transition: 0.5s;
-                            }
-                        }
-                    }
-                    .profileHeaderRelation {
-                        display: flex;
-                        justify-content: flex-end;
-                        button {
-                            border: 2px solid snow;
-                            border-radius: 3px;
-                            padding: 7px;
-                            margin: 0px 0px 0 7px;
-                            width: 100%;
-                            font-size: 11px;
-                            color: $snow;
-                            background-color: $candy;
-                            border-radius: 5px;
-                            box-shadow: 0 0 3px $midnightH;
-                            max-width: 100px;
-                            &:hover {
-                                color: $snow;
-                                border-color: $snow;
-                                background-color: $candyL;
-                                transition: 0.5s;
-                            }
-                        }
-                    }
-                }
-            }
-            .profileGames {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 14px;
-                box-shadow: 0 0 3px $midnightH;
-                height: 100%;
-                .profileGamesNav {
-                    width: 5%;
-                    background-color: $candy;
+                flex-direction: column;
+                .profileHeader {
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                    border-radius: 3px;
-                    height: 95%;
-                    &:hover {
-                        background-color: $candyL;
-                        transition: 0.5s;
-                    }
-                }
-                .profileGameCard {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    .profileGameCardImage {
-                        img {
-                            width: 100px;
-                            height: auto;
-                            max-height: 125px;
-                            border-radius: 2px;
-                        }
-                        position: relative;
-                        .profileGameCardName {
-                            background-color: $midnightL;
-                            position: absolute;
-                            bottom: 0;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            justify-content: center;
-                            text-align: center;
-                            font-size: 11px;
-                        }
-                    }
-                    .profileGameCardUsername {
-                        border-radius: 2px;
-                        text-align: center;
-                        background-color: $slate;
-                        font-weight: 600;
-                        font-size: 13px;
+                    flex-direction: row;
+                    padding: 7px;
+                    box-shadow: 0 0 3px $midnightH;
+                    height: 100%;
+                    .profileHeaderView {
+                        display: flex;
+                        flex-direction: column;
                         padding: 7px;
-                    }
-                }
-            }
-            .profileReviews {
-                display: flex;
-                height: 100%;
-                flex-direction: row;
-                padding: 14px;
-                box-shadow: 0 0 3px $midnightH;
-                .profileReviewsSection {
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
-                    .profileReviewCard {
-                        width: 100%;
-                        margin-bottom: 3px;
-                        background-color: $midnight;
-                        flex-grow: 4;
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        text-align: left;
-                        align-items: center;
-                        padding: 7px;
-                        max-height: 40px;
-                        border-radius: 3px;
-                        .profileReviewCardImage {
+                        .profileHeaderImage {
                             display: flex;
+                            justify-content: center;
                             align-items: center;
                             img {
-                                border-radius: 25px;
-                                width: 25px;
-                                height: 25px;
+                                width: 125px;
+                                height: auto;
+                                //max-height: 125px;
+                                border-radius: 3px;
                             }
                         }
-                        .profileReviewCardUserInfo {
+                    }
+                    .profileHeaderData {
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                        flex-direction: column;
+                        padding: 7px;
+                        div {
                             p {
-                                margin: 0px;
-                                font-size: 11px;
+                                color: $melt;
+                                margin: 0px 0 7px;
+                                font-size: 13px;
+                                padding-left: 1px;
+                            }
+                            h1 {
+                                margin: 5px 5px 5px 0px;
                                 span {
-                                    color: $melt;
+                                    margin-left: 7px;
+                                    font-size: 17px;
+                                    padding: 0px 7px;
+                                    background-color: $slate;
+                                    border-radius: 5px;
                                 }
                             }
                         }
-                        .profileReviewCardScore {
+                        .profileHeaderScore {
+                            display: flex;
+                            margin-left: auto;
+                            position: relative;
+                            width: 100%;
+                            border-radius: 3px;
                             background-color: $candy;
-                            padding: 7px 5px;
-                            p {
-                                font-size: 11px;
+                            border: 2px solid $snow;
+                            height: 30px;
+                            .profileHeaderScorebar {
+                                background-color: $slate;
+                            }
+                            .profileHeaderScorePercentage {
+                                font-size: 15px;
+                                padding: 3px;
                                 font-weight: 600;
-                                margin: 0px;
+                                letter-spacing: 1px;
+                                position: absolute;
+                                left: 50%;
+                                //top: 25%;
+                            }
+                        }
+                    }
+                    .profileHeaderButtons {
+                        width: 100%;
+                        display: flex;
+                        margin-left: auto;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        padding: 7px;
+                        .profileHeaderReport {
+                            display: flex;
+                            justify-content: flex-end;
+                            button {
+                                border: 2px solid $melt;
+                                border-radius: 20px;
+                                padding: 7px 21px;
+                                font-size: 11px;
+                                color: $melt;
+                                background-color: $midnightL;
+                                border-radius: 5px;
+                                width: 100%;
+                                max-width: 100px;
+                                &:hover {
+                                    color: $snow;
+                                    border-color: $snow;
+                                    transition: 0.5s;
+                                }
+                            }
+                        }
+                        .profileHeaderRelation {
+                            display: flex;
+                            justify-content: flex-end;
+                            button {
+                                border: 2px solid snow;
+                                border-radius: 3px;
+                                padding: 7px;
+                                margin: 0px 0px 0 7px;
+                                width: 100%;
+                                font-size: 11px;
+                                color: $snow;
+                                background-color: $candy;
+                                border-radius: 5px;
+                                box-shadow: 0 0 3px $midnightH;
+                                max-width: 100px;
+                                &:hover {
+                                    color: $snow;
+                                    border-color: $snow;
+                                    background-color: $candyL;
+                                    transition: 0.5s;
+                                }
                             }
                         }
                     }
                 }
-                .profileReviewInput {
-                    flex-grow: 1;
-                    height: 100%;
-                    padding-left: 7px;
+                .profileGames {
                     display: flex;
-                    form {
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 14px;
+                    box-shadow: 0 0 3px $midnightH;
+                    height: 100%;
+                    .profileGamesNav {
+                        padding: 7px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 95%;
+                        button {
+                            border: none;
+                            cursor: pointer;
+                            background-color: $candy;
+                            width: 100%;
+                            height: 100%;
+                            color: $snow;
+                            border-radius: 3px;
+                            &:disabled {
+                                background-color: $midnight;
+                                color: $melt;
+                                cursor: not-allowed;
+                                &:hover {
+                                    background-color: $midnight;
+                                    color: $melt;
+                                }
+                            }
+                            &:hover {
+                                background-color: $candyL;
+                                transition: 0.5s;
+                            }
+                        }
+                    }
+                    .profileGameCard {
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        ul {
-                            padding: 0;
-                            list-style-type: none;
-                            margin: 0px;
-                        }
-                        &:first-child>p {
-                            font-size: 10px;
-                            margin: 3px 0px 8px;
-                            color: $melt;
-                            b {
-                                color: $candy;
+                        .profileGameCardImage {
+                            img {
+                                width: 100px;
+                                height: auto;
+                                max-height: 125px;
+                                border-radius: 2px;
+                            }
+                            position: relative;
+                            .profileGameCardName {
+                                background-color: $midnightL;
+                                position: absolute;
+                                bottom: 0;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                justify-content: center;
+                                text-align: center;
+                                font-size: 11px;
                             }
                         }
-                        label {
-                            color: $melt;
+                        .profileGameCardUsername {
+                            border-radius: 2px;
+                            text-align: center;
+                            background-color: $slate;
                             font-weight: 600;
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
                             font-size: 13px;
-                        }
-                        label:last-child {
-                            margin-top: 20px;
-                        }
-                        input,
-                        textarea {
-                            color: snow;
-                            border-radius: 3px;
-                            background-color: $midnightH;
-                            border: 1px solid $midnight;
                             padding: 7px;
-                            margin-bottom: 7px;
-                            &:focus {
-                                border: 1px solid $candy;
+                        }
+                    }
+                }
+                .profileReviews {
+                    display: flex;
+                    height: 100%;
+                    flex-direction: row;
+                    padding: 14px;
+                    box-shadow: 0 0 3px $midnightH;
+                    .profileReviewsSection {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        .profileReviewCard {
+                            width: 100%;
+                            margin-bottom: 3px;
+                            background-color: $midnight;
+                            flex-grow: 4;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            text-align: left;
+                            align-items: center;
+                            padding: 7px;
+                            max-height: 40px;
+                            border-radius: 3px;
+                            .profileReviewCardImage {
+                                display: flex;
+                                align-items: center;
+                                img {
+                                    border-radius: 25px;
+                                    width: 25px;
+                                    height: 25px;
+                                }
+                            }
+                            .profileReviewCardUserInfo {
+                                p {
+                                    margin: 0px;
+                                    font-size: 11px;
+                                    span {
+                                        color: $melt;
+                                    }
+                                }
+                            }
+                            .profileReviewCardScore {
+                                background-color: $candy;
+                                padding: 7px 5px;
+                                p {
+                                    font-size: 11px;
+                                    font-weight: 600;
+                                    margin: 0px;
+                                }
                             }
                         }
-                        input {
-                            padding: 0px;
-                            &::-moz-range-thumb {
-                                width: 15px;
-                                height: 15px;
+                        .profileReviewsNav {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            margin: 7px 0px;
+                            &:first-child {
+                                margin-top: 0px;
+                            }
+                            &:last-child {
+                                margin-bottom: 0px;
+                            }
+                            button {
+                                padding: 7px;
+                                height: 100%;
                                 border: none;
-                                background: $candy;
                                 cursor: pointer;
+                                background-color: $candy;
+                                width: 100%;
+                                height: 100%;
+                                color: $snow;
+                                border-radius: 3px;
+                                &:disabled {
+                                    background-color: $midnight;
+                                    color: $melt;
+                                    cursor: not-allowed;
+                                    &:hover {
+                                        background-color: $midnight;
+                                        color: $melt;
+                                    }
+                                }
+                                &:hover {
+                                    background-color: $candyL;
+                                    transition: 0.5s;
+                                }
                             }
                         }
-                        button {
-                            background-color: $candy;
-                            color: $snow;
-                            border: none;
-                            border-radius: 3px;
-                            padding: 7px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            &:hover {
-                                background-color: $candyL;
+                    }
+                    .profileReviewInput {
+                        flex-grow: 1;
+                        height: 100%;
+                        padding-left: 7px;
+                        display: flex;
+                        form {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            ul {
+                                padding: 0;
+                                list-style-type: none;
+                                margin: 0px;
+                            }
+                            &:first-child>p {
+                                font-size: 10px;
+                                margin: 3px 0px 8px;
+                                color: $melt;
+                                b {
+                                    color: $candy;
+                                }
+                            }
+                            label {
+                                color: $melt;
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                letter-spacing: 0.5px;
+                                font-size: 13px;
+                            }
+                            label:last-child {
+                                margin-top: 20px;
+                            }
+                            input,
+                            textarea {
+                                color: snow;
+                                border-radius: 3px;
+                                background-color: $midnightH;
+                                border: 1px solid $midnight;
+                                padding: 7px;
+                                margin-bottom: 7px;
+                                &:focus {
+                                    border: 1px solid $candy;
+                                }
+                            }
+                            input {
+                                padding: 0px;
+                                &::-moz-range-thumb {
+                                    width: 15px;
+                                    height: 15px;
+                                    border: none;
+                                    background: $candy;
+                                    cursor: pointer;
+                                }
+                            }
+                            button {
+                                background-color: $candy;
+                                color: $snow;
+                                border: none;
+                                border-radius: 3px;
+                                padding: 7px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                &:hover {
+                                    background-color: $candyL;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
