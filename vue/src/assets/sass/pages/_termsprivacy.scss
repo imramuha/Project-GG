@@ -1,0 +1,99 @@
+.terms,
+.privacy {
+    color: $melt;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .content {
+        padding: 105px 35px 35px;
+        width: 75%;
+    }
+    .toc {
+        display: flex;
+        position: fixed;
+        justify-content: center;
+        flex-direction: column;
+        padding: 105px 21px 21px;
+        width: 25%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        //z-index: -50;
+        h2 {
+            color: $snow;
+            margin: 0px;
+        }
+        ol {
+            padding: 21px;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            margin: 0px;
+            li {
+                margin-bottom: 7px;
+                ol {
+                    color: $melt;
+                    padding: 0px;
+                    margin: 5px 0px 0px;
+                    font-size: 9px;
+                    li {
+                        margin: 7px;
+                    }
+                    li a {
+                        color: $melt;
+                        font-size: 9px;
+                    }
+                }
+            }
+            li a {
+                letter-spacing: 0.5px;
+                font-size: 11px;
+                color: $melt;
+                font-weight: 700;
+                &:hover {
+                    color: $candy;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    h1 {
+        color: $snow;
+        &:first-child {
+            line-height: 21px;
+        }
+    }
+    h2 {
+        color: $melt;
+        margin: 14px 0 3px;
+    }
+    h3 {}
+    blockquote {
+        font-size: 11px;
+    }
+    p {
+        color: $melt;
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+    ol,
+    ul {
+        font-size: 13px;
+        margin: 0px;
+    }
+    .homeButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $snow;
+        background-color: $candy;
+        padding: 7px 21px;
+        border: 3px solid $snow;
+        border-radius: 3px;
+        margin-top: auto;
+        &:hover {
+            transition: 0.5s;
+            background-color: $candyL;
+        }
+    }
+}

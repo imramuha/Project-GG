@@ -76,7 +76,7 @@ export default {
                 message: response.data[0].response,
               })
               .then(() => {
-                //this.$router.push('dashboard');
+                this.emitToDashboard('feed')
               })
               .catch((errors) => {
                 console.log(errors);
@@ -113,6 +113,9 @@ export default {
     removeImage: function() {
       this.image = "";
     },
+    emitToDashboard(component) {
+      this.$emit("emitToDashboard", component);
+    }
   },
 };
 </script>

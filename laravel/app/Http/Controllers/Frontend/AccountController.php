@@ -587,14 +587,14 @@ class AccountController extends Controller
             $user_id = auth()->user()->id;
             $lobby->users()->attach($user_id);
                         
-            $response = array('response' => 'You just entered the Lounge', 'succes' => true);
+            $response = array('response' => 'Entered the lounge', 'succes' => true);
             return $response;
 
         } else {
             // else join
+            $user = User::find(auth()->user()->id);
 
-            // checks if the user already has a lobby -> sends that lobby id to the lounge
-            if(!$lobby->users()->wherePivot('user_id','=',  auth()->user()->id)->count() > 0) {
+            if(!$user->lobbies()->wherePivot('user_id','=',  auth()->user()->id)->count()) {
 
                 // means use already has a lobby;
                
@@ -609,15 +609,15 @@ class AccountController extends Controller
                     $user_id = auth()->user()->id;
                     $lobby->users()->attach($user_id);
 
-                    return array('response' => 'This lobby already exists, user has been added to the lobby', 'succes' => true, 'data' => $lobby->id);
+                    return array('response' => 'Added to existing lounge', 'data' => $lobby->id);
                 } else {
-                    return array('response' => 'Lobby is full create a new one', 'succes' => true, 'data' => $lobby->id);
+                    return array('response' => 'Lobby is full', 'data' => $lobby->id);
                     // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
                 }
             } else {
                 
                 // get the lobby and return it :) -> keep returning until the played leaves it
-                return array('response' => 'user already has a lobby.', "succes" => true, "data" => $lobby->id);
+                return array('response' => 'Already in a lobby', "data" => $lobby->id);
             
             } 
         } 

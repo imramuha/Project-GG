@@ -12,7 +12,7 @@
           <router-link to="/">
             <i class="fas fa-home"></i>
           </router-link>
-          <a @click="onDashboardNavClick('feed')" class="button">
+          <a @click="onDashboardNavClick('feed')" class="button"> 
             <i class="fas fa-tachometer-alt"></i>
           </a>
           <a @click="onOverscreenClick(forum)" class="button">
@@ -54,6 +54,7 @@
               :key="overscreenData"
               :is="overscreenComponent"
               v-on:emitToOverscreen="onOverscreenClick"
+              v-on:emitToDashboard="onDashboardNavClick"
             ></component>
           </template>
         </div>
@@ -62,7 +63,6 @@
     <div class="sidecontent">
       <div class="sidecontentHeader">
         <div class="sidecontentNotifications">
-          {{ this.getNotifications.length}}
           <div v-if="this.getNotifications.length">
             <NotificationCard
               v-for="(notification, index) in this.getNotifications"
@@ -156,18 +156,22 @@ export default {
   methods: {
     // Triggered when `childtodashboard` event is emitted by the child. <---- needs cleaning
     onDashboardNavClick(value) {
+      console.log(value);
       this.emit = value;
       if (value == "feed") {
+        this.contentActive = true;
         this.mainComponent = Feed;
       } else if (value == "inbox") {
         this.mainComponent = Inbox;
       } else if (value == "news") {
         this.mainComponent = News;
       } else if (value == "games") {
+         this.contentActive = true;
         this.mainComponent = Games;
       } else if (value == "reviews") {
         this.mainComponent = Reviews;
       } else if (value == "posts") {
+        this.contentActive = true;
         this.mainComponent = Posts;
       }
     },

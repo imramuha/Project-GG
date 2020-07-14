@@ -43,7 +43,7 @@ export default {
       this.removeNotification(index);
     },
     width() {
-      this.styleObject.width = "0%";
+      this.styleObject.width = "0%"; 
     }
   },
   mounted() {

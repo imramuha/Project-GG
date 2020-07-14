@@ -71,12 +71,14 @@ export default {
             message: response.data[0].response,
           })
           .then(() => {
+            this.emitToDashboard('games')
             //this.$router.push('dashboard');
           })
           .catch((errors) => {
             console.log(errors);
           });
 
+this.game_id = null
           this.username = null;
           this.data = null;
 
@@ -85,12 +87,15 @@ export default {
           if(err.game_id) {
             this.errors.push('You have to select a game.')
           } if(err.username) {
-            this.errors.push( err.username[0])
+            this.errors.push( err.username[0] )
           } if(err.data) {
-            this.errors.push(err.data[0])
+            this.errors.push( err.data[0] )
           }   
         });
       }
+    },
+    emitToDashboard(component) {
+      this.$emit("emitToDashboard", component);
     }
   },
   async mounted() {

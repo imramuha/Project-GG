@@ -1,6 +1,6 @@
 <template>
   <div class="queuelounge">
-    <div class="queue">
+    <div v-if="!this.mainComponent == Lounge" class="queue">
       <div class="queueHeader"><p>QUEUE</p></div>
       <div class="queueBody">
         <div class="queueForm">
@@ -34,6 +34,14 @@
             </select>
           </div>
         </div>
+        <div class="queueErrors">
+         <p v-if="errors.length">
+            <b>Please correct the following error(s):</b>
+            <ul>
+              <li v-for="error in errors" v-bind:key="error" >- {{ error }}</li>
+            </ul>
+          </p>
+        </div>
       </div>
       <div class="queueUp">
         <button type="button" class="logoutButton" @click="lounge">
@@ -42,7 +50,7 @@
       </div>
     </div>
 
-    <div class="lounge">
+    <div v-if="this.mainComponent == Lounge" class="lounge">
       <div class="loungeHeader"><p>LOUNGE</p></div>
       <div class="loungeBody">
         <!--<template>
@@ -73,7 +81,7 @@
               <h1>Peeka<span>P13Ka</span></h1>
               <p>I am almost bronze lol, so close</p>
             </div>
-          </div>
+          </div> 
           <div class="loungeBodyUsersCard">
             <img src="@/assets/images/profile.jpeg" />
             <div class="loungeBodyUsersCardContent">
@@ -140,6 +148,7 @@ export default {
       firstOption: "",
       secondOption: "",
       lobby: "",
+      errors: [],
     };
   },
   computed: {
@@ -150,35 +159,64 @@ export default {
   },
   methods: {
     async lounge() {
-      let lounge = {
-        name:
-          this.queuegames[this.firstOption].name +
-          " [" +
-          this.queuegames[this.firstOption].options[this.secondOption].name +
-          "]",
-        code:
-          this.firstOption +
-          "-" +
-          this.queuegames[this.firstOption].options[this.secondOption].id,
-      };
-      this.lobby = lounge;
+      this.errors = [];
       try {
-        await queue(lounge).then((response) => {
-          console.log(response.data.data);
-          this.lobby.id = response.data.data;
-          console.log(this.lobby.id);
-          if (this.mainComponent == null) {
-            this.mainComponent = Lounge;
-          } else {
-            this.mainComponent = null;
-          }
-        });
+        if(!this.queuegames[this.firstOption]) {
+            this.errors.push('Please select a game!');
+        } if (!this.queuegames[this.firstOption].options[this.secondOption]) {
+            this.errors.push('Please select an option');
+        } else {
 
-        this.name = null;
-        this.code = null;
-      } catch (error) {
-        console.log(error);
+          let loungeName = this.queuegames[this.firstOption].name + " [" + this.queuegames[this.firstOption].options[this.secondOption].name + "]";
+          let loungeCode = this.firstOption + "-" + this.queuegames[this.firstOption].options[this.secondOption].id;
+
+          let lounge = {
+            name: loungeName,
+            code: loungeCode,
+          };
+
+          this.lobby = lounge;
+
+          await queue(lounge).then((response) => {
+            console.log(response.data);
+            this.$store
+            .dispatch("notification", {
+              message: response.data.response,
+            })
+            .then(() => {
+              //this.emitToDashboard('posts')
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
+
+            this.lobby.id = response.data.data;
+
+            this.name = null;
+            this.code = null;
+
+            // the lounge component is visible to do:
+            if (this.mainComponent == null) {
+              this.mainComponent = Lounge;
+            } else {
+              this.mainComponent = null;
+            }
+
+          });
+        }
+      } catch (errors) {
+          let err = errors.response.data.errors;
+          console.log(errors);
+          if(err.name) {
+            this.errors.push(err.name[0] )
+          }
+          if(err.code) {
+            this.errors.push(err.code[0] )
+          }
       }
+
+
+
     },
   },
   async mounted() {

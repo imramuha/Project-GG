@@ -6,7 +6,7 @@
       <button>Liked</button>
     </div>
     <div class="forumPosts">
-      <p>Forum posts</p>
+      <p>Forum posts (under construction)</p>
       <template>
         <ForumPostCard
           v-on:emitToForum="emitToOverscreen"

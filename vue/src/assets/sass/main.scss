@@ -27,7 +27,7 @@
     @import 'components/_notificationcard';
     @import 'components/_userform';
     @import 'components/_forumpostcard';
-    @import 'components/_settings'; //@import 'components/slider';
+    //@import 'components/slider';
     //@import 'pages/home';
     @import 'pages/_landingspage';
     @import 'pages/_access';
@@ -35,6 +35,8 @@
     @import 'pages/_profile';
     @import 'pages/_post';
     @import 'pages/_forum';
+    @import 'pages/_termsprivacy';
+    @import 'pages/_settings';
     //@import 'themes/theme';
     //@import 'themes/admin';
     html {
