@@ -11,6 +11,8 @@ Vue.use(Vuex);
 
 import Pusher from "pusher-js";
 
+const api = process.env.VUE_APP_BASE_URL;
+
 export default new Vuex.Store({
     state: {
         user: null,
@@ -62,7 +64,7 @@ export default new Vuex.Store({
             };
 
             axios
-                .post("http://127.0.0.1:8000/api/frontend/userstatus", online)
+                .post(api + "/api/frontend/userstatus", online)
                 .then(({ data }) => {
                     console.log(data);
                 })
@@ -77,7 +79,7 @@ export default new Vuex.Store({
             };
 
             axios
-                .post("http://127.0.0.1:8000/api/frontend/userstatus", offline)
+                .post(api + "/api/frontend/userstatus", offline)
                 .then(({ data }) => {
                     console.log(data);
                 })
@@ -97,7 +99,7 @@ export default new Vuex.Store({
             console.log("pusher");
 
             window.pusher = new Pusher("c8af74134473385784fa", {
-                authEndpoint: "http://127.0.0.1:8000/api/frontend/pusher/auth",
+                authEndpoint: api + "/api/frontend/pusher/auth",
                 cluster: "eu",
                 auth: {
                     headers: {
@@ -111,7 +113,7 @@ export default new Vuex.Store({
         register({ commit }, credentials) {
             return new Promise((resolve, reject) => {
                 axios
-                    .post("http://127.0.0.1:8000/api/auth/register", credentials)
+                    .post(api + "/api/auth/register", credentials)
                     .then(({ data }) => {
                         resolve(
                             commit("SET_USER_DATA", data.token),
@@ -127,7 +129,7 @@ export default new Vuex.Store({
         login({ commit }, credentials) {
             return new Promise((resolve, reject) => {
                 axios
-                    .post("http://127.0.0.1:8000/api/auth/login", credentials)
+                    .post(api + "/api/auth/login", credentials)
                     .then(({ data }) => {
                         resolve(
                             commit("SET_USER_DATA", data.token),
