@@ -3,8 +3,13 @@
     <div class="feedNews">Feed component {{ data }}</div>
     <div class="feedHistory">
       <ul v-if="this.getHistoryNotifications.length">
-        <li v-for="(historyNotification, index) in this.getHistoryNotifications" :key="index"><span>{{historyNotification.time}}</span>{{historyNotification.message}}</li>
-
+        <li
+          v-for="(historyNotification, index) in this.getHistoryNotifications"
+          :key="index"
+        >
+          <span>{{ historyNotification.time }}</span
+          >{{ historyNotification.message }}
+        </li>
       </ul>
       <div v-else class="feedNotificationsEmpty">
         No history available
@@ -14,7 +19,6 @@
 </template>
 
 <script>
-
 import { mapGetters } from "vuex";
 
 export default {
@@ -24,8 +28,8 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   computed: {
     ...mapGetters(["getHistoryNotifications"])

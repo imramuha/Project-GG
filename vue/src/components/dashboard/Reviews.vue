@@ -5,7 +5,7 @@
         v-for="userreview in userreviews"
         v-bind:key="userreview.id"
         :review="userreview"
-      />      
+      />
     </div>
     <div v-else-if="this.mode === 'given'" class="reviews">
       <ReviewCard
@@ -23,7 +23,10 @@
         >
           <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
-        <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
+        <p>
+          Page <span>{{ pagination.currentPage }}</span> of
+          <span>{{ pagination.lastPage }}</span>
+        </p>
         <button
           v-on:click="fetchPaginatedReviews(pagination.nextPage)"
           :disabled="!pagination.nextPage"
@@ -31,14 +34,17 @@
           <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
-       <div v-else-if="this.mode === 'given'" class="reviewsPagination">
+      <div v-else-if="this.mode === 'given'" class="reviewsPagination">
         <button
           v-on:click="fetchPaginatedPostedReviews(postedPagination.prevPage)"
           :disabled="!postedPagination.prevPage"
         >
           <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
-        <p>Page <span>{{ postedPagination.currentPage }}</span> of <span>{{ postedPagination.lastPage }}</span></p>
+        <p>
+          Page <span>{{ postedPagination.currentPage }}</span> of
+          <span>{{ postedPagination.lastPage }}</span>
+        </p>
         <button
           v-on:click="fetchPaginatedPostedReviews(postedPagination.nextPage)"
           :disabled="!postedPagination.nextPage"
@@ -57,7 +63,7 @@
           :class="{ reviewsHeaderActive: isActive === 'given' }"
           @click="given"
         >
-          <button>Given</button> 
+          <button>Given</button>
         </a>
       </div>
     </div>

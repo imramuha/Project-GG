@@ -158,12 +158,12 @@ export default {
       reviews_pagination: [],
       games: [],
       games_url: "/api/frontend/profilegames/",
-      games_pagination: [],
+      games_pagination: []
     };
   },
   computed: {
     ...mapGetters("Game", ["getProfileGames"]),
-    ...mapGetters("Review", ["getProfileReviews"]),
+    ...mapGetters("Review", ["getProfileReviews"])
   },
   methods: {
     ...mapActions("Game", ["fetchProfileGames"]),
@@ -174,7 +174,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.games_pagination = pagination;
     },
@@ -183,7 +183,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.reviews_pagination = pagination;
     },
@@ -211,25 +211,25 @@ export default {
       // make a call and send the data ->
       let relationData = {
         relation: data,
-        profile_id: this.friend.id,
+        profile_id: this.friend.id
       };
       try {
-        await updateRelation(relationData).then((response) => {
+        await updateRelation(relationData).then(response => {
           this.$store
             .dispatch("notification", {
-              message: response.data[0].response,
+              message: response.data[0].response
             })
             .then(() => {
               //this.$router.push('dashboard');
             })
-            .catch((errors) => {
+            .catch(errors => {
               console.log(errors);
             });
         });
       } catch (error) {
         console.log(error);
       }
-    },
+    }
   },
   async mounted() {
     try {
@@ -288,7 +288,7 @@ export default {
       // this.createGamesPagination(this.getgames);
       this.createGamesPagination(this.getProfileGames);
     }
-  },
+  }
 };
 </script>
 

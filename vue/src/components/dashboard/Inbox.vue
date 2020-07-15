@@ -40,7 +40,7 @@ export default {
         );
 
         channel.bind("NewMessage", data => {
-          //console.log(data);
+          console.log(data);
           this.handleIncoming(data);
         });
       });

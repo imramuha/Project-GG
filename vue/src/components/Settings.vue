@@ -3,7 +3,12 @@
     <h1>Settings & Preferences</h1>
     <div class="settingsBody">
       <h2>
-        <span>Nightmode<span>Enable or disable it to change the theme to either day- or nightmode.</span></span>
+        <span
+          >Nightmode<span
+            >Enable or disable it to change the theme to either day- or
+            nightmode.</span
+          ></span
+        >
         <span
           ><label class="switch">
             <input type="checkbox" @change="update()" v-model="nightmode"/>
@@ -11,7 +16,11 @@
         ></span>
       </h2>
       <h2>
-         <span>Anonymity<span>Whether or not if other should be able to see your data.</span></span>
+        <span
+          >Anonymity<span
+            >Whether or not if other should be able to see your data.</span
+          ></span
+        >
         <span
           ><label class="switch">
             <input type="checkbox" @change="update()" v-model="anonymity" />
@@ -19,7 +28,11 @@
         ></span>
       </h2>
       <h2>
-        <span>Voice<span>Whether or not if you prefer using voice chat.</span></span>
+        <span
+          >Voice<span
+            >Whether or not if you prefer using voice chat.</span
+          ></span
+        >
         <span
           ><label class="switch">
             <input type="checkbox" @change="update()" v-model="voice" />
@@ -27,10 +40,18 @@
         ></span>
       </h2>
       <h2>
-        <span>Language(s)<span>Language(s) you speak or your preferred ones.</span></span>
+        <span
+          >Language(s)<span
+            >Language(s) you speak or your preferred ones.</span
+          ></span
+        >
       </h2>
       <h2>
-        <span>Timezone(s)<span>Timezone(s) that you prefer or most likely to play at.</span></span>
+        <span
+          >Timezone(s)<span
+            >Timezone(s) that you prefer or most likely to play at.</span
+          ></span
+        >
       </h2>
     </div>
   </div>
@@ -44,7 +65,7 @@ export default {
     return {
       nightmode: false,
       anonymity: false,
-      voice: false,
+      voice: false
     };
   },
   methods: {
@@ -52,41 +73,41 @@ export default {
       let settings = {
         nightmode: this.nightmode,
         anonymity: this.anonymity,
-        voice: this.voice,
+        voice: this.voice
       };
       console.log(settings);
 
-      await editUserSettings(settings).then((response) => {
+      await editUserSettings(settings).then(response => {
         console.log(response);
         this.$store
           .dispatch("notification", {
-            message: response.data[0].response,
+            message: response.data[0].response
           })
           .then(() => {
             //this.$router.push('dashboard');
           })
-          .catch((errors) => {
+          .catch(errors => {
             console.log(errors);
           });
       });
-    },
+    }
   },
   async mounted() {
-      const response = await getUserSettings();
-      console.log(response.data);
-      if (!response.data.length) {
-        console.log("this goes");
-        this.nightmode = false;
-        this.anonymity = false;
-        this.voice = false;
-      } else {
-        console.log(response.data[0]);
-        this.nightmode = response.data[0].nightmode;
-        this.anonymity = response.data[0].anonymity;
-        this.voice = response.data[0].voice;
-        console.log("this goes 2", this.nightmode, this.anonymity, this.voice);
-      }
+    const response = await getUserSettings();
+    console.log(response.data);
+    if (!response.data.length) {
+      console.log("this goes");
+      this.nightmode = false;
+      this.anonymity = false;
+      this.voice = false;
+    } else {
+      console.log(response.data[0]);
+      this.nightmode = response.data[0].nightmode;
+      this.anonymity = response.data[0].anonymity;
+      this.voice = response.data[0].voice;
+      console.log("this goes 2", this.nightmode, this.anonymity, this.voice);
     }
+  }
 };
 </script>
 

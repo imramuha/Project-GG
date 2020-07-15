@@ -3,22 +3,35 @@
     <div class="sidenavContainer">
       <div class="sidenav">
         <div class="sidenavLogo">
-          <router-link to="/"><img src="@/assets/images/logo.svg"/></router-link>
+          <router-link to="/"
+            ><img src="@/assets/images/logo.svg"
+          /></router-link>
         </div>
         <!--<router-link to="/user" class="button">Lobby</router-link>-->
-        <button type="button" class="queueButton" @click="queue" title="Queue up"><i class="fa fa-gamepad" aria-hidden="true"></i>
-</button>
+        <button
+          type="button"
+          class="queueButton"
+          @click="queue"
+          title="Queue up"
+        >
+          <i class="fa fa-gamepad" aria-hidden="true"></i>
+        </button>
         <div class="sidenavButtons">
           <router-link to="/">
             <i class="fas fa-home"></i>
           </router-link>
-          <a @click="onDashboardNavClick('feed')" class="button"> 
+          <a @click="onDashboardNavClick('feed')" class="button">
             <i class="fas fa-tachometer-alt"></i>
           </a>
           <a @click="onOverscreenClick(forum)" class="button">
             <i class="far fa-comment-alt"></i>
           </a>
-          <a  type="button" class="button" @click="settings" title="Settings and preferences">
+          <a
+            type="button"
+            class="button"
+            @click="settings"
+            title="Settings and preferences"
+          >
             <i class="fas fa-cog"></i>
           </a>
           <button type="button" class="logoutButton" @click="logout">
@@ -166,7 +179,7 @@ export default {
       } else if (value == "news") {
         this.mainComponent = News;
       } else if (value == "games") {
-         this.contentActive = true;
+        this.contentActive = true;
         this.mainComponent = Games;
       } else if (value == "reviews") {
         this.mainComponent = Reviews;
@@ -196,24 +209,30 @@ export default {
         this.contentActive = false;
         this.overscreenComponent = Post;
         this.overscreenData = value.id;
-      }  if (value.component === "UserEdit") {
+      }
+      if (value.component === "UserEdit") {
         this.contentActive = false;
         this.overscreenComponent = UserEdit;
-      }  if (value.component === "PostCreate") {
+      }
+      if (value.component === "PostCreate") {
         this.contentActive = false;
         this.overscreenComponent = PostCreate;
-      }  if (value.component === "Profile") {
+      }
+      if (value.component === "Profile") {
         this.contentActive = false;
         this.overscreenComponent = Profile;
         this.overscreenData = value.id;
-      }  if (value.component === "UserSearch") {
+      }
+      if (value.component === "UserSearch") {
         this.contentActive = false;
         this.overscreenComponent = UserSearch;
         this.overscreenData = value.searchTerm;
-      }  if (value.component === "UserGameAdd") {
+      }
+      if (value.component === "UserGameAdd") {
         this.contentActive = false;
         this.overscreenComponent = UserGameAdd;
-      }  if (value === "forum") {
+      }
+      if (value === "forum") {
         this.contentActive = false;
         this.overscreenComponent = Forum;
       }

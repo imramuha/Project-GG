@@ -20,8 +20,8 @@ import AppNav from "@/components/AppNav";
 
 export default {
   components: {
-    AppNav,
-  },
+    AppNav
+  }
 };
 </script>
 

@@ -13,14 +13,17 @@
           v-on:click="fetchPaginatedGames(pagination.prevPage)"
           :disabled="!pagination.prevPage"
         >
-           <i class="fa fa-arrow-left" aria-hidden="true" />
+          <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
-        <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
+        <p>
+          Page <span>{{ pagination.currentPage }}</span> of
+          <span>{{ pagination.lastPage }}</span>
+        </p>
         <button
           v-on:click="fetchPaginatedGames(pagination.nextPage)"
           :disabled="!pagination.nextPage"
-        > 
-            <i class="fa fa-arrow-right" aria-hidden="true" />
+        >
+          <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
       <div class="gamesFooterButtons">

@@ -14,14 +14,17 @@
           v-on:click="fetchPaginatedPosts(pagination.prevPage)"
           :disabled="!pagination.prevPage"
         >
-            <i class="fa fa-arrow-left" aria-hidden="true" />
+          <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
-        <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
+        <p>
+          Page <span>{{ pagination.currentPage }}</span> of
+          <span>{{ pagination.lastPage }}</span>
+        </p>
         <button
           v-on:click="fetchPaginatedPosts(pagination.nextPage)"
           :disabled="!pagination.nextPage"
         >
-              <i class="fa fa-arrow-right" aria-hidden="true" />
+          <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
       <div class="postsFooterButtons">
@@ -45,16 +48,16 @@ export default {
       isLoading: true,
       userposts: [],
       pagination: [],
-      url: "/api/frontend/userposts",
+      url: "/api/frontend/userposts"
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getUserPosts"]),
+    ...mapGetters("Forum", ["getUserPosts"])
   },
   methods: {
     ...mapActions("Forum", ["fetchUserPosts"]),
 
-     createPagination(data) {
+    createPagination(data) {
       let pagination = {
         currentPage: data.current_page,
         lastPage: data.last_page,
@@ -65,7 +68,7 @@ export default {
     },
 
     async fetchPaginatedPosts(url) {
-      console.log('hii')
+      console.log("hii");
       this.url = url;
 
       await this.fetchUserPosts(this.url);
@@ -85,13 +88,13 @@ export default {
 
     onClickCreate() {
       let value = {
-        component: "PostCreate",
+        component: "PostCreate"
       };
       this.emitToOverscreen(value);
     },
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    },
+    }
   },
 
   async mounted() {
@@ -101,12 +104,11 @@ export default {
 
       this.userposts = this.getUserPosts.data;
       this.createPagination(this.getUserPosts);
-
     } else {
       this.userposts = this.getUserPosts.data;
       this.createPagination(this.userposts);
     }
-  },
+  }
 };
 </script>
 

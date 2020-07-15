@@ -29,17 +29,17 @@ export default {
   components: { ForumPostCard },
   data() {
     return {
-      posts: [],
+      posts: []
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"]),
+    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"])
   },
   methods: {
     ...mapActions("Forum", [
       "fetchNewPosts",
       "fetchTopPosts",
-      "fetchLikedPosts",
+      "fetchLikedPosts"
     ]),
 
     async sortPosts(value) {
@@ -61,7 +61,7 @@ export default {
 
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    },
+    }
   },
   async mounted() {
     await this.fetchNewPosts();
@@ -69,6 +69,6 @@ export default {
     await this.fetchLikedPosts();
     this.posts = this.getNewPosts.data;
     console.log(this.posts);
-  },
+  }
 };
 </script>

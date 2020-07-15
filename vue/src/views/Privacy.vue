@@ -45,7 +45,10 @@
       <h2 id="information">1. WHAT INFORMATION DO WE COLLECT?</h2>
 
       <p>
-        <b>In Short: Personal information you disclose to us. We collect information that you provide to us.</b>
+        <b
+          >In Short: Personal information you disclose to us. We collect
+          information that you provide to us.</b
+        >
       </p>
 
       <p>
@@ -386,10 +389,8 @@
       <h2 id="contact">8. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</h2>
 
       <p>
-        
-          If you have questions or comments about this notice, you may email us
-          at <b>admin@projectgg.com</b>.
-        
+        If you have questions or comments about this notice, you may email us at
+        <b>admin@projectgg.com</b>.
       </p>
 
       <h2 id="data">
@@ -438,7 +439,9 @@
           >
         </li>
       </ol>
-      <router-link class="homeButton" to="/"><i class="fas fa-home"></i></router-link>
+      <router-link class="homeButton" to="/"
+        ><i class="fas fa-home"></i
+      ></router-link>
     </div>
   </div>
 </template>

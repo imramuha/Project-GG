@@ -637,7 +637,7 @@ class AccountController extends Controller
             'code' => $request->input('code')
         ]);
 
-        // checks if a new lobby was creates
+        // checks if a new lobby was created
         if($lobby->wasRecentlyCreated) {
 
         
@@ -683,7 +683,11 @@ class AccountController extends Controller
 
     public function lounge($id) {
 
-        $lobby = Lobby::where('id', $id)->with('users')->get();
+        $lobby = Lobby::where('id', $id)->with('users')->first();
+
+        // triggers the real time event
+        $this->pusher->trigger('private-lounge'.$lobby->code, 'NewLounge', $lobby);
+
         return response()->json($lobby);
 
     }

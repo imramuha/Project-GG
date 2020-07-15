@@ -21,7 +21,10 @@
         <div class="gameCardContent">
           <div class="gameCardContentHeader">
             <h1>{{ game.game.name }}</h1>
-                <p><span>{{ game.data.username }}</span> [ <i class="fa fa-desktop" aria-hidden="true"></i> ] </p>
+            <p>
+              <span>{{ game.data.username }}</span> [
+              <i class="fa fa-desktop" aria-hidden="true"></i> ]
+            </p>
           </div>
           <div class="gameCardContentBody">
             <p>{{ game.data.data }}</p>
@@ -46,32 +49,32 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   methods: {
     async removeUserGame() {
       let data = {
-        game_id: this.game.game.id,
+        game_id: this.game.game.id
       };
       try {
-        await removeUserGame(data).then((response) => {
+        await removeUserGame(data).then(response => {
           this.$store
             .dispatch("notification", {
-              message: response.data[0].response,
+              message: response.data[0].response
             })
             .then(() => {
               //this.$router.push('dashboard');
             })
-            .catch((errors) => {
+            .catch(errors => {
               console.log(errors);
             });
         });
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped></style>

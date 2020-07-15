@@ -27,7 +27,9 @@
     <MessageComposer @send="sendMessage" />
   </div>
   <div class="conversation" v-else>
-    <p class="conversationEmpty">Please select a friend from the friendlist to chat with</p>
+    <p class="conversationEmpty">
+      Please select a friend from the friendlist to chat with
+    </p>
   </div>
 </template>
 

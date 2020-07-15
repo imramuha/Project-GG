@@ -6,18 +6,16 @@
         :class="`message${message.to == friend.id ? 'sent' : 'received'}`"
         :key="message.id"
       >
-
-          <div class="messageIcon" v-if="friend.image">
-            <img :src="friend.image" />
-          </div>
-          <div class="messageIcon" v-else>
-            <img src="@/assets/images/profile.jpeg" />
-          </div>
-          <div class="messageText">
-            <p>{{ message.text }}</p>
-            <span>{{ message.created_at | formatDateTime }}</span>
-          </div>
-       
+        <div class="messageIcon" v-if="friend.image">
+          <img :src="friend.image" />
+        </div>
+        <div class="messageIcon" v-else>
+          <img src="@/assets/images/profile.jpeg" />
+        </div>
+        <div class="messageText">
+          <p>{{ message.text }}</p>
+          <span>{{ message.created_at | formatDateTime }}</span>
+        </div>
       </li>
     </ul>
   </div>

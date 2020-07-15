@@ -30,9 +30,10 @@
         <div
           class="userReviewScoreBar"
           v-bind:style="{ height: '100%', width: reviewscore + '%' }"
-        >
+        ></div>
+        <div class="userReviewScorePercentage">
+          {{ reviewscore.toFixed(2) }} %
         </div>
-        <div class="userReviewScorePercentage">{{ reviewscore.toFixed(2)  }} %</div>
       </div>
     </div>
   </div>
