@@ -21,14 +21,14 @@
           v-on:click="fetchPaginatedReviews(pagination.prevPage)"
           :disabled="!pagination.prevPage"
         >
-          Previous
+          <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
         <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
         <button
           v-on:click="fetchPaginatedReviews(pagination.nextPage)"
           :disabled="!pagination.nextPage"
         >
-          Next
+          <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
        <div v-else-if="this.mode === 'given'" class="reviewsPagination">
@@ -36,14 +36,14 @@
           v-on:click="fetchPaginatedPostedReviews(postedPagination.prevPage)"
           :disabled="!postedPagination.prevPage"
         >
-          Previous
+          <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
         <p>Page <span>{{ postedPagination.currentPage }}</span> of <span>{{ postedPagination.lastPage }}</span></p>
         <button
           v-on:click="fetchPaginatedPostedReviews(postedPagination.nextPage)"
           :disabled="!postedPagination.nextPage"
         >
-          Next
+          <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
       <div class="reviewsHeader">
@@ -57,7 +57,7 @@
           :class="{ reviewsHeaderActive: isActive === 'given' }"
           @click="given"
         >
-          <button>Given</button>
+          <button>Given</button> 
         </a>
       </div>
     </div>

@@ -24,9 +24,9 @@
                                 box-sizing: border-box;
                                 display: flex;
                                 width: 100%;
-                                &:hover {
+                                /*&:hover {
                                     box-shadow: 0 0 3px $candy;
-                                }
+                                }*/
                                 .userImage {
                                     display: flex;
                                     background-color: $midnightH;
@@ -73,6 +73,7 @@
                                             width: 35%;
                                             justify-content: flex-end;
                                             button {
+                                                cursor: pointer;
                                                 border: 2px solid $melt;
                                                 border-radius: 3px;
                                                 padding: 7px 21px;
@@ -130,6 +131,7 @@
                                     justify-content: space-between;
                                     box-sizing: border-box;
                                     button {
+                                        cursor: pointer;
                                         font-size: 13px;
                                         font-weight: 600;
                                         border-radius: 2px;

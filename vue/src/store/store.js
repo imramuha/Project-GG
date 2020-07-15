@@ -77,7 +77,6 @@ export default new Vuex.Store({
                 token: state.user.token,
                 status: "offline"
             };
-
             axios
                 .post(api + "/api/frontend/userstatus", offline)
                 .then(({ data }) => {
@@ -87,11 +86,9 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
-        LOGOUT() {
-            // change user stats to offline through pusher
-            // global pusher */
-            // forced refresh
+        LOGOUT(state) {
             localStorage.removeItem("user");
+            state.user = null;
         },
         ACTIVATE_PUSHER(userData) {
             Pusher.logToConsole = true;
@@ -149,13 +146,13 @@ export default new Vuex.Store({
             commit("REMOVE_NOTIFICATION", index);
         },
         logout({ commit }) {
-            commit("LOGOUT");
             commit("USER_OFFLINE");
+            commit("LOGOUT");
         }
     },
     getters: {
         loggedIn(state) {
-            return !!state.user;
+            return state.user;
         },
         getNotifications(state) {
             return state.notifications;

@@ -14,7 +14,7 @@
           <h1>{{ post.title }}</h1>
         </div>
         <div class="forumPostcardContentBody">
-          <p>{{ post.date }}02/05/2002 - {{ post.liked_posts.length }}</p>
+          <p>{{ post.date }}02/05/2002</p>
           <p>
             This is the post content, that will be added later on during this
             project

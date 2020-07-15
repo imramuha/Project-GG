@@ -438,7 +438,7 @@
           >
         </li>
       </ol>
-      <a class="homeButton" href="/"><i class="fas fa-home"></i></a>
+      <router-link class="homeButton" to="/"><i class="fas fa-home"></i></router-link>
     </div>
   </div>
 </template>

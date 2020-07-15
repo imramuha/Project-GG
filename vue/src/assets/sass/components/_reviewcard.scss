@@ -90,6 +90,8 @@
 .reviewsFooter {
     height: 10%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 7px 0px;
 }
 
@@ -97,30 +99,48 @@
 .reviewsPagination {
     display: flex;
     justify-content: flex-end;
-    flex: 2;
     a:first-child {
         margin-right: 10px;
     }
     button {
-        border: 2px solid $melt;
-        border-radius: 20px;
-        padding: 6px 20px;
-        font-size: 11px;
-        color: $melt;
-        background-color: $midnightL;
-        border-radius: 5px;
-        min-width: 100px;
+        border: none;
+        font-size: 21px;
+        color: $paint;
+        background-color: transparent;
         height: 33px;
+        cursor: pointer;
+        &:disabled {
+            color: $melt;
+            cursor: not-allowed;
+            &:hover {
+                background-color: $midnight;
+                color: $melt;
+            }
+        }
         &:hover {
-            color: $snow;
-            border-color: $snow;
+            color: $paintL;
             transition: 0.3s;
         }
     }
 }
 
 .reviewsHeader {
-    flex: 1;
+    button {
+        border: 2px solid $melt;
+        font-size: 21px;
+        color: $melt;
+        background-color: $midnightL;
+        border-radius: 5px;
+        height: 33px;
+        font-size: 11px;
+        min-width: 100px;
+        &:hover {
+            color: $snow;
+            border-color: $snow;
+            //background-color: $midnight;
+            transition: 0.3s;
+        }
+    }
 }
 
 .reviewsHeaderActive {
@@ -132,14 +152,21 @@
 }
 
 .reviewsPagination {
+    width: 100%;
+    justify-content: center;
+    margin-left: 200px;
     p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 0px 14px;
         font-size: 11px;
         color: $melt;
         span {
+            margin: 0 3px;
             font-weight: 600;
             color: $paint;
-            font-size: 21px
+            font-size: 16px
         }
     }
 }

@@ -153,4 +153,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany('App\Models\Lobby', 'lobby_users');
     }
+
+    public function setting()
+    {
+        return $this->belongsTo('App\Models\Setting');
+    }
 }

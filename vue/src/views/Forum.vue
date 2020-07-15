@@ -1,12 +1,14 @@
 <template>
   <div class="forumContainer">
     <div class="forumSort">
-      <button class="forumButtonActive">New</button>
-      <button>Top</button>
-      <button>Liked</button>
+      <button class="forumButtonActive" v-on:click="sortPosts('new')">
+        New
+      </button>
+      <button v-on:click="sortPosts('top')">Top</button>
+      <button v-on:click="sortPosts('liked')">Liked</button>
     </div>
     <div class="forumPosts">
-      <p>Forum posts (under construction)</p>
+      <h1>Forum -- !!! (under construction) !!! --</h1>
       <template>
         <ForumPostCard
           v-on:emitToForum="emitToOverscreen"
@@ -27,25 +29,46 @@ export default {
   components: { ForumPostCard },
   data() {
     return {
-      //isLoading: true,
-      posts: []
+      posts: [],
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getPosts"])
+    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"]),
   },
   methods: {
-    ...mapActions("Forum", ["fetchPosts"]),
-    emitToOverscreen(value) {
-      console.log("hi");
+    ...mapActions("Forum", [
+      "fetchNewPosts",
+      "fetchTopPosts",
+      "fetchLikedPosts",
+    ]),
+
+    async sortPosts(value) {
       console.log(value);
+      if (value === "new") {
+        await this.fetchNewPosts().then(() => {
+          this.posts = this.getNewPosts.data;
+        });
+      } else if (value === "top") {
+        this.fetchTopPosts().then(() => {
+          this.posts = this.getTopPosts.data;
+        });
+      } else if (value === "liked") {
+        this.fetchLikedPosts().then(() => {
+          this.posts = this.getLikedPosts;
+        });
+      }
+    },
+
+    emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    }
+    },
   },
   async mounted() {
-    await this.fetchPosts();
-    this.posts = this.getPosts;
+    await this.fetchNewPosts();
+    await this.fetchTopPosts();
+    await this.fetchLikedPosts();
+    this.posts = this.getNewPosts.data;
     console.log(this.posts);
-  }
+  },
 };
 </script>

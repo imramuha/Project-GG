@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // sends https links instead of http
+        $this->app['request']->server->set('HTTPS','on');
     }
 }

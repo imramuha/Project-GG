@@ -15,6 +15,8 @@ class SettingsTableSeeder extends Seeder
         DB::table('settings')->insert([
             'user_id' => '3',
             'nightmode' => true,
+            'anonymity' => true,
+            'voice' => false,
         ]);
     }
 }

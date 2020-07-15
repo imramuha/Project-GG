@@ -14,14 +14,14 @@
           v-on:click="fetchPaginatedPosts(pagination.prevPage)"
           :disabled="!pagination.prevPage"
         >
-          Previous
+            <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
         <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
         <button
           v-on:click="fetchPaginatedPosts(pagination.nextPage)"
           :disabled="!pagination.nextPage"
         >
-          Next
+              <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
       <div class="postsFooterButtons">

@@ -13,14 +13,14 @@
           v-on:click="fetchPaginatedGames(pagination.prevPage)"
           :disabled="!pagination.prevPage"
         >
-          Previous
+           <i class="fa fa-arrow-left" aria-hidden="true" />
         </button>
         <p>Page <span>{{ pagination.currentPage }}</span> of <span>{{ pagination.lastPage }}</span></p>
         <button
           v-on:click="fetchPaginatedGames(pagination.nextPage)"
           :disabled="!pagination.nextPage"
         > 
-          Next
+            <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
       <div class="gamesFooterButtons">
@@ -54,6 +54,7 @@ export default {
     ...mapActions("Game", ["fetchUserGames"]),
 
     createPagination(data) {
+      console.log(data);
       let pagination = {
         currentPage: data.current_page,
         lastPage: data.last_page,
@@ -64,6 +65,7 @@ export default {
     },
 
     async fetchPaginatedGames(url) {
+      console.log(url);
       this.url = url;
 
       await this.fetchUserGames(this.url);

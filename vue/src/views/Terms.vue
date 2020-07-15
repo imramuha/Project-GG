@@ -12,13 +12,13 @@
           >These Terms of Use constitute a legally binding agreement made
           between you, whether personally or on behalf of an entity (“you”) and
           Project GG ("Company", “we”, “us”, or “our”), concerning your access
-          to and use of the www.project.gg website as well as any other media form,
-          media channel, mobile website or mobile application related, linked,
-          or otherwise connected thereto (collectively, the “Site”). You agree
-          that by accessing the Site, you have read, understood, and agreed to
-          be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF
-          THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE
-          SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.</b
+          to and use of the www.project.gg website as well as any other media
+          form, media channel, mobile website or mobile application related,
+          linked, or otherwise connected thereto (collectively, the “Site”). You
+          agree that by accessing the Site, you have read, understood, and
+          agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE
+          WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM
+          USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.</b
         >
       </p>
 
@@ -191,13 +191,12 @@
           or regulation.
         </li>
       </ol>
-     
-     
+
       <p>
         <b
-          ><br>Any use of the Site in violation of the foregoing violates these
-          Terms of Use and may result in, among other things, termination or
-          suspension of your rights to use the Site.</b
+          ><br />Any use of the Site in violation of the foregoing violates
+          these Terms of Use and may result in, among other things, termination
+          or suspension of your rights to use the Site.</b
         >
       </p>
 
@@ -440,7 +439,9 @@
         against us arising from any such loss or corruption of such data.
       </p>
 
-      <h2 id="signatures">ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES</h2>
+      <h2 id="signatures">
+        ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES
+      </h2>
 
       <p>
         Visiting the Site, sending us emails, and completing online forms
@@ -484,8 +485,8 @@
 
       <h2 id="contact">CONTACT US</h2>
       <p>
-          If you have questions or comments about this notice, you may email us
-          at <b>admin@projectgg.com</b>.
+        If you have questions or comments about this notice, you may email us at
+        <b>admin@projectgg.com</b>.
       </p>
     </div>
     <div class="toc">
@@ -546,7 +547,9 @@
           <a href="#contact">CONTACT US </a>
         </li>
       </ol>
-      <a class="homeButton" href="/"><i class="fas fa-home"></i></a>
+      <router-link class="homeButton" to="/"
+        ><i class="fas fa-home"></i
+      ></router-link>
     </div>
   </div>
 </template>

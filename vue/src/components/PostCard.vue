@@ -14,10 +14,9 @@
           <h1>{{ post.title }}</h1>
         </div>
         <div class="postcardContentBody">
-          <p>{{ post.date }}02/05/2002 - {{ post.liked_posts.length }}</p>
+          <p>{{ post.created_at ||formatDate }} - {{ post.liked_posts.length }}</p>
           <p>
-            This is the post content, that will be added later on during this
-            project
+            {{ post.subtitle }}
           </p>
         </div>
       </a>

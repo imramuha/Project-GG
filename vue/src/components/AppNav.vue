@@ -5,13 +5,15 @@
     /></router-link>
     <router-link
       class="loginButton"
-      v-if="!loggedIn && this.$route.path !== '/login'"
+      v-if="!loggedIn && this.$route.path === '/' ||
+          this.$route.path === '/register'
+      "
       to="/login"
       >Login</router-link
     >
     <router-link
       class="loginButton"
-      v-if="!loggedIn && this.$route.path == '/register'"
+      v-if="!loggedIn && this.$route.path === '/login'"
       to="/register"
       >Register</router-link
     >
@@ -22,8 +24,8 @@
 import { authComputed } from "../store/helpers.js";
 export default {
   computed: {
-    ...authComputed
-  }
+    ...authComputed,
+  },
 };
 </script>
 

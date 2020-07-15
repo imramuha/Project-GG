@@ -38,6 +38,9 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/userpost/delete/{id}', 'AccountController@deleteUserPost');
     Route::post('/searchusers', 'AccountController@searchUsers');
 
+    Route::get('/usersettings', 'AccountController@showUserSettings');
+    Route::post('/usersettingsedit', 'AccountController@editUserSettings');
+
     Route::get('/relation/{id}', 'AccountController@showRelation');
     Route::post('/updaterelation', 'AccountController@updateRelation');
 
@@ -46,7 +49,9 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::get('/profilereviews/{id}', 'AccountController@showProfileReviews');
     Route::get('/userpostedreviews', 'AccountController@showPostedReviews');
 
-    Route::get('/posts', 'AccountController@showPosts');
+    Route::get('/postsnew', 'AccountController@showNewPosts');
+    Route::get('/poststop', 'AccountController@showTopPosts');
+    Route::get('/postsliked', 'AccountController@showLikedPosts');
     Route::get('/post/{id}', 'AccountController@showPost');
     Route::post('/post/create', 'AccountController@createPost');
     Route::post('/postlike', 'AccountController@likePost');

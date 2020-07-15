@@ -7,23 +7,35 @@
     padding: 7px;
     background-color: $midnight;
     .settingsBody {
-        padding: 21px;
+        width: 100%;
+        height: 100%;
+        padding: 7px;
     }
     h1 {
         color: $melt;
         font-size: 35px;
+        padding: 7px;
     }
     h2 {
         display: flex;
-        width: 100%;
         justify-content: space-between;
         flex-direction: row;
-        font-size: 35px;
-        margin-bottom: 21px;
+        align-items: center;
+        background-color: $midnightH;
+        border: 1px solid $midnight;
+        padding: 14px;
+        border-radius: 3px;
+        font-size: 27px;
         color: $snow;
         span {
-            color: $melt;
+            display: flex;
+            flex-direction: column;
             //margin-left: auto;
+            span {
+                font-weight: 400;
+                font-size: 11px;
+                color: $melt;
+            }
         }
     }
     .switch {
@@ -60,10 +72,10 @@
         transition: .4s;
     }
     input:checked+.slider {
-        background-color: $paint;
+        background-color: $candy;
     }
     input:focus+.slider {
-        box-shadow: 0 0 1px $paint;
+        box-shadow: 0 0 1px $candy;
     }
     input:checked+.slider:before {
         -webkit-transform: translateX(26px);

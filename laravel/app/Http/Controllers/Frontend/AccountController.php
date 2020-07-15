@@ -15,6 +15,7 @@ use App\Models\UserGameData;
 use App\Models\Data;
 use App\Models\Game;
 use App\Models\Message;
+use App\Models\Setting;
 
 use App\Models\Relation;
 
@@ -106,7 +107,33 @@ class AccountController extends Controller
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
 
+    public function showUserSettings () {
+        
+        $settings = Setting::where('user_id', '=', auth()->id())->get();
 
+        return response()->json($settings);
+    }
+
+    public function editUserSettings (Request $request) {
+        $settings =  Setting::where('user_id', '=', auth()->id())->first();
+
+        if($settings) {
+            $settings->update(array(
+                'nightmode' => $request->input('nightmode'),
+                'anonymity' => $request->input('anonymity'),
+                'voice' => $request->input('voice'),
+            ));
+            return array(['response' => 'Updated settings & preferences.']);
+        } else {
+            Setting::create(array(
+                'user_id' => auth()->id(),
+                'nightmode' => $request->input('nightmode'),
+                'anonymity' => $request->input('anonymity'),
+                'voice' => $request->input('voice'),
+            ));
+            return array(['response' => 'Created settings & preferences.']);
+        }
+    }
     
     /* 
     * search for users
@@ -279,10 +306,41 @@ class AccountController extends Controller
     /*
     * Get all users except the logged one in ^^
     */
-    public function showPosts () {
+    public function showNewPosts () {
 
-        $posts = Post::with('likedPosts')->/*orderBy('created_at', 'desc')->*/get();
+        $posts = Post::with('likedPosts')->orderBy('created_at', 'asc')->paginate(5);;
         return response()->json($posts);
+    }
+
+        /*
+    * Get all users except the logged one in ^^
+    */
+    public function showTopPosts () {
+
+        $posts = Post::with('likedposts')->withCount('likedPosts')->orderBy('liked_posts_count', 'desc')->paginate(5);
+        return response()->json($posts);
+    }
+
+        /*
+    * Get all users except the logged one in ^^
+    */
+    public function showLikedPosts () {
+
+        $posts = Post::with('likedPosts')->paginate(10);
+
+        // check if user liked this post; if yes, send it.
+        foreach($posts as $key => $post) {
+            foreach($post->likedPosts as $key => $like) {
+                if($like->user_id === auth()->id()) {
+                    $post["user_liked"] = true;
+                }
+            }
+        }
+
+        $liked_posts = $posts->where('user_liked', "=", true);
+        return $liked_posts;
+        
+        return response()->json($liked_posts);
     }
 
          /*

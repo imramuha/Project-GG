@@ -3,31 +3,57 @@
  */
 
 // import the api endpoints
-import { getAllPosts, getUserPosts } from "@/services/forum.api";
+import { getNewPosts, getTopPosts, getLikedPosts, getUserPosts } from "@/services/forum.api";
 
 const state = {
-    posts: [],
+    newposts: [],
+    topposts: [],
+    likedposts: [],
     userposts: []
 };
 
 const getters = {
-    getPosts(state) {
-        return state.posts;
+    getNewPosts(state) {
+        return state.newposts;
     },
-    // care - name
+    getTopPosts(state) {
+        return state.topposts;
+    },
+    getLikedPosts(state) {
+        return state.likedposts;
+    },
     getUserPosts(state) {
         return state.userposts;
     }
 };
 
 const actions = {
-    async fetchPosts({ commit }) {
+    async fetchNewPosts({ commit }) {
         try {
-            const response = await getAllPosts();
+            const response = await getNewPosts();
             console.log(response);
-            commit("SET_POSTS", response.data);
+            commit("SET_NEW_POSTS", response.data);
         } catch (error) {
             // handle the error here
+            console.log(error);
+        }
+    },
+    async fetchTopPosts({ commit }) {
+        try {
+            const response = await getTopPosts();
+            console.log(response);
+            commit("SET_TOP_POSTS", response.data);
+        } catch (error) {
+            // handle the error here
+            console.log(error);
+        }
+    },
+    async fetchLikedPosts({ commit }) {
+        try {
+            const response = await getLikedPosts();
+            console.log(response);
+            commit("SET_LIKED_POSTS", response.data);
+        } catch (error) {
             console.log(error);
         }
     },
@@ -44,8 +70,14 @@ const actions = {
 };
 
 const mutations = {
-    SET_POSTS(state, data) {
-        state.posts = data;
+    SET_NEW_POSTS(state, data) {
+        state.newposts = data;
+    },
+    SET_TOP_POSTS(state, data) {
+        state.topposts = data;
+    },
+    SET_LIKED_POSTS(state, data) {
+        state.likedposts = data;
     },
     SET_USER_POSTS(state, data) {
         state.userposts = data;
