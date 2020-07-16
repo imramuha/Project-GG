@@ -16,7 +16,7 @@
         background-color: $midnight;
         color: $snow;
         font-size: 12px;
-        margin: 0 0 5px;
+        margin: 0 0 7px;
         &:hover {
             cursor: pointer;
             span {
@@ -30,11 +30,12 @@
 }
 
 .friendlistCard {
-    background-color: $midnight;
+    background-color: $midnightH;
     font-size: 11px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     box-shadow: 0 0 3px $midnightH;
     padding: 7px;
+    border-radius: 2px;
     .friendlistCardImg {
         flex-grow: 1;
         display: flex;

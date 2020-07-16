@@ -56,6 +56,8 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::post('/post/create', 'AccountController@createPost');
     Route::post('/postlike', 'AccountController@likePost');
 
+    Route::get('/news', 'AccountController@getNews');
+
     Route::post('/post/comment', 'AccountController@createComment');
 
     Route::get('/friends', 'AccountController@showFriends');

@@ -1,256 +1,253 @@
-                        .dashboard {
-                            background-color: $midnightH;
-                            color: $snow;
-                            width: 100vw;
-                            height: 100vh;
-                            display: flex;
-                            box-sizing: border-box;
-                        }
-                        
-                        .content {
-                            display: flex;
-                            background-color: $midnightL;
-                            width: 100%;
-                            flex-direction: column;
-                            box-sizing: border-box;
-                            padding: 7px;
-                            .contentHeader {
-                                height: 22%;
-                                background-color: $midnightL;
-                                margin-bottom: 7px;
-                                border-radius: 3px;
-                                padding: 7px;
-                                box-shadow: 0 0 3px $midnightH;
-                                box-sizing: border-box;
+                            .dashboard {
+                                background-color: $midnightH;
+                                color: $snow;
+                                width: 100vw;
+                                height: 100vh;
                                 display: flex;
+                                box-sizing: border-box;
+                            }
+                            
+                            .content {
+                                display: flex;
+                                background-color: $midnightL;
                                 width: 100%;
-                                /*&:hover {
+                                flex-direction: column;
+                                box-sizing: border-box;
+                                padding: 7px;
+                                .contentHeader {
+                                    height: 22%;
+                                    min-height: 22%;
+                                    background-color: $midnightH;
+                                    margin-bottom: 7px;
+                                    border-radius: 3px;
+                                    padding: 7px;
+                                    box-shadow: 0 0 3px $midnightH;
+                                    box-sizing: border-box;
+                                    display: flex;
+                                    width: 100%;
+                                    /*&:hover {
                                     box-shadow: 0 0 3px $candy;
                                 }*/
-                                .userImage {
-                                    display: flex;
-                                    background-color: $midnightH;
-                                    padding: 7px;
-                                    width: 25%;
-                                    border-radius: 3px;
-                                    div {
-                                        box-sizing: border-box;
+                                    .userImage {
                                         display: flex;
+                                        padding: 7px;
+                                        border-radius: 3px;
                                         img {
                                             border-radius: 3px;
-                                            height: auto;
-                                            width: 100%;
-                                            max-height: 100%;
-                                            max-width: 150px;
-                                            min-width: 100px;
+                                            height: 100%;
+                                            width: auto;
                                             overflow: hidden;
                                         }
                                     }
-                                }
-                                .userDataContainer {
-                                    width: 75%;
-                                    background-color: $midnightH;
-                                    padding: 7px;
-                                    width: 100%;
-                                    display: flex;
-                                    flex-direction: column;
-                                    h1,
-                                    p {
-                                        margin: 0px;
-                                    }
-                                    .userData {
+                                    .userDataContainer {
+                                        width: 75%;
+                                        background-color: $midnightH;
+                                        padding: 7px;
                                         width: 100%;
-                                        height: 75%;
-                                        box-sizing: border-box;
-                                        overflow: hidden;
                                         display: flex;
-                                        flex-direction: row;
+                                        flex-direction: column;
+                                        h1,
                                         p {
-                                            color: $melt;
+                                            margin: 0px;
                                         }
-                                        .userDataRight {
+                                        .userData {
+                                            width: 100%;
+                                            height: 75%;
+                                            box-sizing: border-box;
+                                            overflow: hidden;
                                             display: flex;
-                                            width: 35%;
-                                            justify-content: flex-end;
-                                            button {
-                                                cursor: pointer;
-                                                border: 2px solid $melt;
-                                                border-radius: 3px;
-                                                padding: 7px 21px;
-                                                font-size: 11px;
+                                            flex-direction: row;
+                                            p {
                                                 color: $melt;
-                                                background-color: $midnightL;
-                                                border-radius: 5px;
-                                                &:hover {
-                                                    color: $snow;
-                                                    border-color: $snow;
-                                                    transition: 0.3s;
+                                            }
+                                            .userDataRight {
+                                                display: flex;
+                                                width: 35%;
+                                                justify-content: flex-end;
+                                                button {
+                                                    cursor: pointer;
+                                                    border: 2px solid $melt;
+                                                    border-radius: 2px;
+                                                    padding: 7px 21px;
+                                                    font-size: 11px;
+                                                    color: $melt;
+                                                    background-color: $midnightL;
+                                                    border-radius: 5px;
+                                                    &:hover {
+                                                        color: $snow;
+                                                        border-color: $snow;
+                                                        transition: 0.3s;
+                                                    }
                                                 }
                                             }
+                                            .userDataLeft {
+                                                width: 65%;
+                                            }
                                         }
-                                        .userDataLeft {
-                                            width: 65%;
-                                        }
-                                    }
-                                    .userReviewScore {
-                                        display: flex;
-                                        margin-left: auto;
-                                        position: relative;
-                                        height: 25%;
-                                        width: 100%;
-                                        border-radius: 3px;
-                                        background-color: $candy;
-                                        border: 2px solid $snow;
-                                        .userReviewScoreBar {
-                                            background-color: $slate;
-                                        }
-                                        .userReviewScorePercentage {
+                                        .userReviewScore {
                                             display: flex;
-                                            align-items: center;
-                                            font-size: 15px;
-                                            padding: 3px;
-                                            font-weight: 600;
-                                            letter-spacing: 1px;
-                                            position: absolute;
-                                            left: 50%;
-                                            //top: 25%;
+                                            margin-left: auto;
+                                            position: relative;
+                                            height: 25%;
+                                            width: 100%;
+                                            border-radius: 3px;
+                                            background-color: $candy;
+                                            border: 2px solid $snow;
+                                            .userReviewScoreBar {
+                                                background-color: $slate;
+                                            }
+                                            .userReviewScorePercentage {
+                                                display: flex;
+                                                align-items: center;
+                                                font-size: 15px;
+                                                padding: 3px;
+                                                font-weight: 600;
+                                                letter-spacing: 1px;
+                                                position: absolute;
+                                                left: 50%;
+                                                //top: 25%;
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            .contentNav {
-                                height: 8%;
-                                display: flex;
-                                padding: 7px;
-                                box-shadow: 0 0 3px $midnightH;
-                                box-sizing: border-box;
-                                margin-bottom: 7px;
-                                .dashboardNav {
-                                    width: 100%;
+                                .contentNav {
+                                    height: 8%;
+                                    min-height: 8%;
                                     display: flex;
-                                    justify-content: space-between;
-                                    box-sizing: border-box;
-                                    button {
-                                        cursor: pointer;
-                                        font-size: 13px;
-                                        font-weight: 600;
-                                        border-radius: 2px;
-                                        width: 100%;
-                                        background-color: inherit;
-                                        font-size: 11px;
-                                        color: $snow;
-                                        border: none;
-                                        //border: 1px solid $melt;
-                                        background-color: $midnight;
-                                        box-shadow: 0 0 3px $midnight;
-                                        text-transform: uppercase;
-                                        &:not(:last-child) {
-                                            margin-right: 7px;
-                                        }
-                                        &:hover {
-                                            color: $candy;
-                                        }
-                                    }
-                                    .navButtonActive {
-                                        background-color: $candy;
-                                        &:hover {
-                                            color: inherit;
-                                        }
-                                    }
-                                }
-                            }
-                            .contentMain {
-                                height: 70%;
-                                background-color: $midnightL;
-                                box-sizing: border-box;
-                                border-radius: 3px;
-                                padding: 7px;
-                                box-shadow: 0 0 3px $midnightH;
-                            }
-                        }
-                        
-                        .sidecontent {
-                            display: flex;
-                            flex-direction: column;
-                            box-sizing: border-box;
-                            padding: 7px;
-                            background-color: $midnightL;
-                            max-width: 25%;
-                            .sidecontentHeader {
-                                height: 22%;
-                                background-color: $midnightL;
-                                padding: 7px;
-                                box-sizing: border-box;
-                                border-radius: 3px;
-                                box-shadow: 0 0 3px $midnightH;
-                                .sidecontentNotifications {
-                                    display: flex;
-                                    flex-direction: column;
-                                    //justify-content: space-around;
-                                    overflow: hidden;
-                                    width: 100%;
-                                    height: 100%;
-                                    background-color: $midnightH;
-                                    box-shadow: 0 0 3px $midnightH;
-                                    border-radius: 2px;
                                     padding: 7px;
-                                    .notificationsEmpty {
-                                        height: 100%;
+                                    box-shadow: 0 0 3px $midnightH;
+                                    box-sizing: border-box;
+                                    margin-bottom: 7px;
+                                    .dashboardNav {
+                                        width: 100%;
                                         display: flex;
-                                        font-size: 13px;
-                                        color: $melt;
-                                        text-align: center;
-                                        align-items: center;
-                                        justify-content: center;
+                                        justify-content: space-between;
+                                        box-sizing: border-box;
+                                        button {
+                                            cursor: pointer;
+                                            font-size: 13px;
+                                            font-weight: 600;
+                                            border-radius: 2px;
+                                            width: 100%;
+                                            background-color: inherit;
+                                            font-size: 11px;
+                                            color: $snow;
+                                            border: none;
+                                            //border: 1px solid $melt;
+                                            background-color: $midnight;
+                                            box-shadow: 0 0 3px $midnight;
+                                            text-transform: uppercase;
+                                            &:not(:last-child) {
+                                                margin-right: 7px;
+                                            }
+                                            &:hover {
+                                                color: $candy;
+                                            }
+                                        }
+                                        .navButtonActive {
+                                            background-color: $candy;
+                                            &:hover {
+                                                color: inherit;
+                                            }
+                                        }
                                     }
                                 }
+                                .contentMain {
+                                    height: 70%;
+                                    background-color: $midnightL;
+                                    box-sizing: border-box;
+                                    border-radius: 3px;
+                                    padding: 7px;
+                                    box-shadow: 0 0 3px $midnightH;
+                                }
                             }
-                            .sidecontentFunction {
-                                height: 8%;
+                            
+                            .sidecontent {
                                 display: flex;
-                                justify-content: space-evenly;
-                                background-color: $midnightL;
+                                flex-direction: column;
                                 box-sizing: border-box;
                                 padding: 7px;
-                                align-items: center;
-                                justify-content: center;
-                                box-shadow: 0 0 3px $midnightH;
-                                .searchForm {
-                                    height: 100%;
-                                    width: 100%;
-                                    form {
+                                background-color: $midnightL;
+                                max-width: 25%;
+                                .sidecontentHeader {
+                                    height: 22%;
+                                    min-height: 22%;
+                                    background-color: $midnightL;
+                                    //padding: 7px;
+                                    box-sizing: border-box;
+                                    border-radius: 3px;
+                                    box-shadow: 0 0 3px $midnightH;
+                                    margin-bottom: 7px;
+                                    .sidecontentNotifications {
                                         display: flex;
-                                        height: 100%;
+                                        flex-direction: column;
+                                        //justify-content: space-around;
+                                        overflow: hidden;
                                         width: 100%;
-                                        input {
-                                            color: $melt;
-                                            padding: 0 10px;
-                                            border: none;
-                                            background-color: $midnightH;
-                                            flex-grow: 7;
-                                            border-radius: 2px;
-                                            &:focus {
-                                                border: 1px solid $candy;
-                                            }
-                                        }
-                                        button {
-                                            flex-grow: 2.5;
-                                            background-color: $midnight;
-                                            border: none;
-                                            color: $snow;
-                                            border-radius: 2px;
-                                            &:hover {
-                                                color: $melt;
-                                                cursor: pointer;
-                                            }
-                                        }
+                                        height: 100%;
+                                        background-color: $midnightH;
                                         box-shadow: 0 0 3px $midnightH;
+                                        border-radius: 2px;
+                                        padding: 7px;
+                                        .notificationsEmpty {
+                                            height: 100%;
+                                            display: flex;
+                                            font-size: 13px;
+                                            color: $melt;
+                                            text-align: center;
+                                            align-items: center;
+                                            justify-content: center;
+                                        }
                                     }
                                 }
+                                .sidecontentFunction {
+                                    height: 8%;
+                                    min-height: 8%;
+                                    display: flex;
+                                    justify-content: space-evenly;
+                                    background-color: $midnightL;
+                                    box-sizing: border-box;
+                                    padding: 7px;
+                                    align-items: center;
+                                    justify-content: center;
+                                    box-shadow: 0 0 3px $midnightH;
+                                    margin-bottom: 7px;
+                                    .searchForm {
+                                        height: 100%;
+                                        width: 100%;
+                                        form {
+                                            display: flex;
+                                            height: 100%;
+                                            width: 100%;
+                                            input {
+                                                color: $melt;
+                                                padding: 0 7px;
+                                                border: none;
+                                                background-color: $midnightH;
+                                                flex-grow: 7;
+                                                border-radius: 1px;
+                                                &:focus {
+                                                    border: 1px solid $candy;
+                                                }
+                                            }
+                                            button {
+                                                flex-grow: 2.5;
+                                                background-color: $midnight;
+                                                border: none;
+                                                color: $snow;
+                                                border-radius: 1px;
+                                                &:hover {
+                                                    color: $melt;
+                                                    cursor: pointer;
+                                                }
+                                            }
+                                            box-shadow: 0 0 3px $midnightH;
+                                        }
+                                    }
+                                }
+                                .sidecontentFriendlist {
+                                    height: 70%;
+                                    background-color: $mysteryL;
+                                    box-shadow: 0 0 3px $midnightH;
+                                }
                             }
-                            .sidecontentFriendlist {
-                                height: 70%;
-                                background-color: $mysteryL;
-                                box-shadow: 0 0 3px $midnightH;
-                            }
-                        }

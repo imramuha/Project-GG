@@ -1,14 +1,27 @@
 <template>
   <div class="forumContainer">
     <div class="forumSort">
-      <button class="forumButtonActive" v-on:click="sortPosts('new')">
+      <h1>Forum</h1>
+      <button
+        :class="{ forumButtonActive: active === 'new' }"
+        v-on:click="sortPosts('new')"
+      >
         New
       </button>
-      <button v-on:click="sortPosts('top')">Top</button>
-      <button v-on:click="sortPosts('liked')">Liked</button>
+      <button
+        :class="{ forumButtonActive: active === 'top' }"
+        v-on:click="sortPosts('top')"
+      >
+        Top liked
+      </button>
+      <button
+        :class="{ forumButtonActive: active === 'liked' }"
+        v-on:click="sortPosts('liked')"
+      >
+        Your likes
+      </button>
     </div>
     <div class="forumPosts">
-      <h1>Forum -- !!! (under construction) !!! --</h1>
       <template>
         <ForumPostCard
           v-on:emitToForum="emitToOverscreen"
@@ -29,17 +42,18 @@ export default {
   components: { ForumPostCard },
   data() {
     return {
-      posts: []
+      posts: [],
+      active: "new",
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"])
+    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"]),
   },
   methods: {
     ...mapActions("Forum", [
       "fetchNewPosts",
       "fetchTopPosts",
-      "fetchLikedPosts"
+      "fetchLikedPosts",
     ]),
 
     async sortPosts(value) {
@@ -48,20 +62,44 @@ export default {
         await this.fetchNewPosts().then(() => {
           this.posts = this.getNewPosts.data;
         });
+        this.active = "new";
       } else if (value === "top") {
         this.fetchTopPosts().then(() => {
           this.posts = this.getTopPosts.data;
         });
+        this.active = "top";
+        console.log(this.active);
       } else if (value === "liked") {
         this.fetchLikedPosts().then(() => {
           this.posts = this.getLikedPosts;
         });
+        this.active = "liked";
       }
     },
 
-    emitToOverscreen(value) {
-      this.$emit("emitToOverscreen", value);
-    }
+    async emitToOverscreen(value) {
+      console.log(value);
+      // when someone likes a post -> we recall our data
+      if (value.component == "remount" && this.active == "new") {
+        await this.fetchNewPosts().then(() => {
+          this.posts = this.getNewPosts.data;
+        });
+        this.active = "new";
+      } else if (value.component == "remount" && this.active == "top") {
+        this.fetchTopPosts().then(() => {
+          this.posts = this.getTopPosts.data;
+        });
+        this.active = "top";
+        console.log(this.active);
+      } else if (value.component == "remount" && this.active == "liked") {
+        this.fetchLikedPosts().then(() => {
+          this.posts = this.getLikedPosts;
+        });
+        this.active = "liked";
+      } else {
+        this.emitToOverscreen(value);
+      }
+    },
   },
   async mounted() {
     await this.fetchNewPosts();
@@ -69,6 +107,6 @@ export default {
     await this.fetchLikedPosts();
     this.posts = this.getNewPosts.data;
     console.log(this.posts);
-  }
+  },
 };
 </script>

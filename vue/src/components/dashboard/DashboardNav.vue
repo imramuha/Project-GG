@@ -55,9 +55,6 @@ export default {
       this.childMessage = "inbox";
       this.isActive = "inbox";
     },
-    /*news() {
-      this.childMessage = "news";
-    },*/
     games() {
       this.childMessage = "games";
       this.isActive = "games";

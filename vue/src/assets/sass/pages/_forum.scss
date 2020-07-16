@@ -1,51 +1,166 @@
-.forumContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    // DES
-    //padding: 7px;
-    .forumSort {
-        height: 10%;
-        width: 100%;
+    .forumContainer {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 7px;
-        border-radius: 3px;
-        -webkit-box-shadow: 0 0 3px $midnightH;
-        box-shadow: 0 0 3px $midnightH;
-        button {
-            font-weight: 600;
-            border-radius: 2px;
-            width: 100%;
-            background-color: inherit;
-            font-size: 11px;
-            color: $snow;
-            border: none;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        .forumSort {
+            h1 {
+                width: 100%;
+                color: $melt;
+                text-align: center;
+            }
             height: 100%;
-            background-color: $midnight;
-            text-transform: uppercase;
-            margin-right: 5px;
-            &:last-child {
-                margin-right: 0px;
+            min-height: 10%;
+            max-height: 10%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px;
+            border-radius: 3px;
+            -webkit-box-shadow: 0 0 3px $midnightH;
+            box-shadow: 0 0 3px $midnightH;
+            button {
+                cursor: pointer;
+                font-weight: 600;
+                border-radius: 2px;
+                width: 100%;
+                background-color: inherit;
+                font-size: 11px;
+                color: $snow;
+                border: none;
+                height: 100%;
+                background-color: $midnight;
+                text-transform: uppercase;
+                margin-right: 5px;
+                &:last-child {
+                    margin-right: 0px;
+                }
+                &:hover {
+                    color: $candy;
+                }
             }
-            &:hover {
-                color: $candy;
+            .forumButtonActive {
+                background-color: $candy;
+                &:hover {
+                    color: inherit;
+                }
             }
         }
-        .forumButtonActive {
-            background-color: $candy;
-            &:hover {
-                color: inherit;
+        .forumPosts {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: 90%;
+            box-shadow: 0 0 3px $midnightH;
+            padding: 7px;
+            border-radius: 3px;
+            .forumPostCard {
+                display: flex;
+                height: 100%;
+                max-height: 20%;
+                background-color: $midnightH;
+                box-shadow: 0 0 3px $midnight;
+                border-radius: 3px;
+                padding: 7px;
+                &:not(:last-child) {
+                    margin-bottom: 7px;
+                }
+                overflow: hidden;
+                .forumPostCardImage {
+                    height: 100%;
+                    margin-right: 7px;
+                    img {
+                        height: 100%;
+                        width: auto;
+                    }
+                }
+                .forumPostcardContent {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    width: 100%;
+                    a {
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                        .forumPostcardContentHeader {
+                            margin-bottom: 14px;
+                            h1 {
+                                display: flex;
+                                flex-direction: column;
+                                font-size: 21px;
+                                span {
+                                    letter-spacing: 1px;
+                                    color: $melt;
+                                    font-size: 11px;
+                                    font-weight: 400;
+                                    letter-spacing: 1px;
+                                    span {
+                                        font-size: 13px;
+                                        font-weight: 600;
+                                        color: $candy;
+                                    }
+                                }
+                            }
+                        }
+                        .forumPostcardContentBody {
+                            p {
+                                margin: 0px;
+                                font-size: 13px;
+                                color: $snow;
+                            }
+                        }
+                    }
+                    .forumPostcardContentFooter {
+                        display: flex;
+                        flex-direction: row;
+                        color: $melt;
+                        p {
+                            font-family: "Lato", sans-serif;
+                            letter-spacing: 1px;
+                            color: $melt;
+                            font-size: 11px;
+                            font-weight: 400;
+                        }
+                        p:first-child {
+                            margin-right: 21px;
+                        }
+                        p span:nth-child(1) {
+                            margin: 0 2px;
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: $candy;
+                        }
+                    }
+                }
+                .forumPostCardStats {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-left: auto;
+                    margin-right: 14px;
+                    button {
+                        font-size: 11px;
+                        height: auto;
+                        color: $melt;
+                        background-color: $midnightL;
+                        width: 35px;
+                        height: 35px;
+                        padding: 7px;
+                        border-radius: 3px;
+                        border: 2px solid $snow;
+                        &:hover {
+                            text-decoration: none;
+                            cursor: pointer;
+                            color: $snow;
+                        }
+                    }
+                    .likeButtonActive {
+                        background-color: $candy;
+                        color: $snow;
+                    }
+                }
             }
         }
     }
-    .forumPosts {
-        height: 90%;
-        -webkit-box-shadow: 0 0 3px $midnightH;
-        box-shadow: 0 0 3px $midnightH;
-        padding: 7px;
-        border-radius: 3px
-    }
-}

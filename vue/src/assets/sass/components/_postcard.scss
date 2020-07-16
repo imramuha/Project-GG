@@ -13,6 +13,11 @@
                 box-sizing: border-box;
                 color: $melt;
                 height: 90%;
+                .emptyPosts {
+                    width: 100%;
+                    margin-top: 70px;
+                    text-align: center;
+                }
             }
             
             .postCard {

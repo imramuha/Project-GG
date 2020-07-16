@@ -1,22 +1,23 @@
 <template>
   <div class="reviewsBoard">
-    <div v-if="this.mode === 'received'" class="reviews">
+    <div v-if="this.mode === 'received' && userreviews" class="reviews">
       <ReviewCard
         v-for="userreview in userreviews"
         v-bind:key="userreview.id"
         :review="userreview"
       />
     </div>
-    <div v-else-if="this.mode === 'given'" class="reviews">
+    <div v-else-if="this.mode === 'given' && userpostedreview" class="reviews">
       <ReviewCard
         v-for="userpostedreview in userpostedreviews"
         v-bind:key="userpostedreview.id"
         :review="userpostedreview"
       />
     </div>
+    <div v-else class="reviews"><h1 class="emptyReviews">Sorry, but there no reviews were found.</h1></div>
 
     <div class="reviewsFooter">
-      <div v-if="this.mode === 'received'" class="reviewsPagination">
+      <div v-if="this.mode === 'received' && pagination.lastPage > 1" class="reviewsPagination">
         <button
           v-on:click="fetchPaginatedReviews(pagination.prevPage)"
           :disabled="!pagination.prevPage"
@@ -34,7 +35,9 @@
           <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
-      <div v-else-if="this.mode === 'given'" class="reviewsPagination">
+
+
+      <div v-else-if="this.mode === 'given' && postedPagination.lastPage > 1" class="reviewsPagination">
         <button
           v-on:click="fetchPaginatedPostedReviews(postedPagination.prevPage)"
           :disabled="!postedPagination.prevPage"
@@ -52,6 +55,7 @@
           <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
+      <div class="reviewsPagination" v-else></div>
       <div class="reviewsHeader">
         <a
           :class="{ reviewsHeaderActive: isActive === 'received' }"

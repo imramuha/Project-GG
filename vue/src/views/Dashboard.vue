@@ -34,9 +34,9 @@
           >
             <i class="fas fa-cog"></i>
           </a>
-          <button type="button" class="logoutButton" @click="logout">
-            Logout
-          </button>
+          <a type="button" @click="logout">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
             />
           </div>
           <div v-else class="notificationsEmpty">
-            There are no notifications available. emitting: {{ emit }}
+            There are no notifications available.
           </div>
         </div>
       </div>

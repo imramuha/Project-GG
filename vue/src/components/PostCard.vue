@@ -15,7 +15,7 @@
         </div>
         <div class="postcardContentBody">
           <p>
-            {{ post.created_at || formatDate }} - {{ post.liked_posts.length }}
+            {{ post.created_at | formatDate }}
           </p>
           <p>
             {{ post.subtitle }}
@@ -23,8 +23,14 @@
         </div>
       </a>
       <div class="postcardContentFooter">
-        <p>Comments (2)</p>
-        <p>Report</p>
+        <p>
+          Likes (<span>{{ post.liked_posts.length }}</span
+          >)
+        </p>
+        <p>
+          Comments (<span>{{ post.comments.length }}</span
+          >)
+        </p>
       </div>
     </div>
     <div v-if="post.user_liked != true" class="postcardStats">
@@ -47,36 +53,36 @@ export default {
       type: Object,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      childMessage: ""
+      childMessage: "",
     };
   },
   methods: {
     async gg() {
       let data = {
-        post_id: this.post.id
+        post_id: this.post.id,
       };
 
       try {
-        await likePost(data).then(response => {
+        await likePost(data).then((response) => {
           this.$store
             .dispatch("notification", {
-              message: response.data[0].response
+              message: response.data[0].response,
             })
             .then(() => {
               //this.$router.push('dashboard');
             })
-            .catch(errors => {
+            .catch((errors) => {
               console.log(errors);
             });
 
           // emit to parent
           this.childMessage = {
-            component: "remount"
+            component: "remount",
           };
 
           console.log(this.childMessage);
@@ -90,13 +96,13 @@ export default {
     onPostCardClick() {
       this.childMessage = {
         component: "PostCard",
-        id: this.post.id
+        id: this.post.id,
       };
     },
     emitToPosts() {
       this.$emit("emitToPosts", this.childMessage);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped></style>

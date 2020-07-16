@@ -7,18 +7,22 @@
     padding: 7px;
     background-color: $midnight;
     .settingsBody {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         height: 100%;
-        padding: 7px;
+        //padding: 7px;
     }
     h1 {
         color: $melt;
         font-size: 35px;
         padding: 7px;
+        //height: 100%;
     }
     h2 {
         display: flex;
         justify-content: space-between;
+        height: 100%;
         flex-direction: row;
         align-items: center;
         background-color: $midnightH;

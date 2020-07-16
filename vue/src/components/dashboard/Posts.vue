@@ -1,6 +1,6 @@
 <template>
   <div class="postsboard">
-    <div class="posts">
+    <div v-if="userposts" class="posts">
       <PostCard
         v-for="userpost in userposts"
         :key="userpost.id"
@@ -8,8 +8,9 @@
         v-on:emitToPosts="onPostCardClick"
       />
     </div>
+    <div v-else class="posts"><h1 class="emptyPosts">Sorry, but no posts were found, try posting one.</h1></div>
     <div class="postsFooter">
-      <div class="postsPagination">
+      <div v-if="pagination.lastPage > 1" class="postsPagination">
         <button
           v-on:click="fetchPaginatedPosts(pagination.prevPage)"
           :disabled="!pagination.prevPage"
@@ -27,6 +28,7 @@
           <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
+      <div v-else class="postsPagination"></div>
       <div class="postsFooterButtons">
         <a v-on:click="onClickCreate">
           <button>Create</button>
@@ -48,11 +50,11 @@ export default {
       isLoading: true,
       userposts: [],
       pagination: [],
-      url: "/api/frontend/userposts"
+      url: "/api/frontend/userposts",
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getUserPosts"])
+    ...mapGetters("Forum", ["getUserPosts"]),
   },
   methods: {
     ...mapActions("Forum", ["fetchUserPosts"]),
@@ -62,13 +64,12 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url
+        prevPage: data.prev_page_url,
       };
       this.pagination = pagination;
     },
 
     async fetchPaginatedPosts(url) {
-      console.log("hii");
       this.url = url;
 
       await this.fetchUserPosts(this.url);
@@ -88,13 +89,13 @@ export default {
 
     onClickCreate() {
       let value = {
-        component: "PostCreate"
+        component: "PostCreate",
       };
       this.emitToOverscreen(value);
     },
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    }
+    },
   },
 
   async mounted() {
@@ -108,7 +109,7 @@ export default {
       this.userposts = this.getUserPosts.data;
       this.createPagination(this.userposts);
     }
-  }
+  },
 };
 </script>
 

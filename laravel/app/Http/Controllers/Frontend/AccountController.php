@@ -16,6 +16,7 @@ use App\Models\Data;
 use App\Models\Game;
 use App\Models\Message;
 use App\Models\Setting;
+use App\Models\News;
 
 use App\Models\Relation;
 
@@ -308,7 +309,17 @@ class AccountController extends Controller
     */
     public function showNewPosts () {
 
-        $posts = Post::with('likedPosts')->orderBy('created_at', 'asc')->paginate(5);;
+        $posts = Post::with('likedPosts', 'comments')->orderBy('created_at', 'asc')->paginate(5);
+
+        // check if user liked this post; if yes, send it.
+        foreach($posts as $key => $post) {
+            foreach($post->likedPosts as $key => $like) {
+                if($like->user_id === auth()->id()) {
+                    $post["user_liked"] = true;
+                }
+            }
+        }
+
         return response()->json($posts);
     }
 
@@ -317,7 +328,17 @@ class AccountController extends Controller
     */
     public function showTopPosts () {
 
-        $posts = Post::with('likedposts')->withCount('likedPosts')->orderBy('liked_posts_count', 'desc')->paginate(5);
+        $posts = Post::with('likedPosts', 'comments')->withCount('likedPosts')->orderBy('liked_posts_count', 'desc')->paginate(5);
+
+        // check if user liked this post; if yes, send it.
+        foreach($posts as $key => $post) {
+            foreach($post->likedPosts as $key => $like) {
+                if($like->user_id === auth()->id()) {
+                    $post["user_liked"] = true;
+                }
+            }
+        }
+
         return response()->json($posts);
     }
 
@@ -326,7 +347,7 @@ class AccountController extends Controller
     */
     public function showLikedPosts () {
 
-        $posts = Post::with('likedPosts')->paginate(10);
+        $posts = Post::with('likedPosts', 'comments')->paginate(10);
 
         // check if user liked this post; if yes, send it.
         foreach($posts as $key => $post) {
@@ -347,7 +368,7 @@ class AccountController extends Controller
     * Get all users except the logged one in ^^
     */
     public function showUserPosts () {
-        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts'  
+        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts', 'comments'  
         )->paginate(5);
 
         // check if user liked this post; if yes, send it.
@@ -550,7 +571,7 @@ class AccountController extends Controller
         $this->validate(request(), [
             'game_id' => 'required|integer',
             'username' => 'required|min:1|max:21',
-            'data' => 'required|min:8|max:32'
+            'data' => 'required|min:8|max:64'
         ]);
 
 
@@ -813,5 +834,14 @@ class AccountController extends Controller
             ]);
         }
     }
-    
+
+    /*
+    * NEWS
+    */
+    public function getNews () {
+
+        $news = News::with('user')->orderBy('created_at', 'asc')->limit(3)->get();
+       
+        return response()->json($news);
+    }
 }

@@ -1,14 +1,15 @@
 <template>
   <div class="gamesContainer">
-    <div class="games">
+    <div v-if="usergames" class="games">
       <GameCard
         v-for="usergame in usergames"
         v-bind:key="usergame.id"
         :game="usergame"
       />
     </div>
+    <div v-else class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
     <div class="gamesFooter">
-      <div class="gamesPagination">
+      <div v-if="pagination.lastPage > 1" class="gamesPagination">
         <button
           v-on:click="fetchPaginatedGames(pagination.prevPage)"
           :disabled="!pagination.prevPage"
@@ -25,6 +26,8 @@
         >
           <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
+      </div>
+      <div v-else class="gamesPagination">
       </div>
       <div class="gamesFooterButtons">
         <a v-on:click="onClickAdd">

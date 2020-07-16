@@ -1,12 +1,10 @@
 <template>
   <div class="contentHeader">
-    <div class="userImage">
-      <div v-if="user.image">
-        <img :src="user.image" />
-      </div>
-      <div v-else>
-        <img src="@/assets/images/profile.jpeg" />
-      </div>
+    <div class="userImage" v-if="user.image">
+      <img :src="user.image" />
+    </div>
+    <div class="userImage" v-else>
+      <img src="@/assets/images/profile.jpeg" />
     </div>
 
     <div class="userDataContainer">
@@ -47,12 +45,12 @@ export default {
   data() {
     return {
       user: [],
-      reviewscore: 0
+      reviewscore: 0,
     };
   },
   async mounted() {
     try {
-      await getMe().then(response => {
+      await getMe().then((response) => {
         this.user = response.data.user[0];
 
         var score = 0;
@@ -71,14 +69,14 @@ export default {
   methods: {
     onEditClick() {
       let value = {
-        component: "UserEdit"
+        component: "UserEdit",
       };
       this.emitToOverscreen(value);
     },
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    }
-  }
+    },
+  },
 };
 </script>
 

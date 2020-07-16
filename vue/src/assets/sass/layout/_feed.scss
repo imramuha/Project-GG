@@ -7,16 +7,83 @@
         display: flex;
         flex-direction: column;
         background-color: $midnightH;
+        box-shadow: 0 0 3px $midnightH;
         width: 75%;
         height: 100%;
         border-radius: 3px;
         margin-right: 7px;
-        padding: 7px;
+        padding: 21px;
+        .feedNewsHeader {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin-bottom: 21px;
+            h1 {
+                width: 100%;
+                margin-right: 21px;
+                color: $melt;
+            }
+            .newsButtonActive {
+                background-color: $midnightL;
+                &:hover {
+                    background-color: $midnight
+                }
+            }
+            .newsButtonDeactive {
+                background-color: $midnight;
+                &:hover {
+                    background-color: $midnightL
+                }
+            }
+            button {
+                box-shadow: 0 0 3px $midnightL;
+                border: none;
+                width: 100%;
+                max-width: 41px;
+                border-radius: 50%;
+                cursor: pointer;
+                &:not(:last-child) {
+                    margin-right: 21px;
+                }
+            }
+        }
+        .newsActive {
+            background-color: $midnight;
+            width: 100%;
+            height: 100%;
+            padding: 14px 14px;
+            box-shadow: 0 0 3px $midnightL;
+            h2 {
+                font-size: 28px;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 21px;
+                span {
+                    font-size: 11px;
+                    font-weight: 400;
+                    letter-spacing: 1.5px;
+                    color: $melt;
+                    span {
+                        color: $paint;
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+                }
+            }
+            p {
+                color: $melt;
+                font-size: 14px
+            }
+        }
+        .newsDeactive {
+            display: none;
+        }
     }
     .feedHistory {
         display: flex;
         flex-direction: column;
         background-color: $midnightH;
+        box-shadow: 0 0 3px $midnightH;
         width: 25%;
         height: 100%;
         border-radius: 3px;

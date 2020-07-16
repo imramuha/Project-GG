@@ -124,7 +124,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function posts()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Post::class);
     }
 
 
@@ -157,5 +157,14 @@ class User extends Authenticatable implements JWTSubject
     public function setting()
     {
         return $this->belongsTo('App\Models\Setting');
+    }
+
+      //
+    /**
+     * Get the category that the product belongs to.
+     */
+    public function news()
+    {
+        return $this->hasMany(News::class);
     }
 }
