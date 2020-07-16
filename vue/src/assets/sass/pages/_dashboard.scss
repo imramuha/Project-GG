@@ -32,10 +32,13 @@
                                         display: flex;
                                         padding: 7px;
                                         border-radius: 3px;
+                                        width: 150px;
+                                        overflow: hidde;
                                         img {
                                             border-radius: 3px;
                                             height: 100%;
                                             width: auto;
+                                            max-width: 150px;
                                             overflow: hidden;
                                         }
                                     }

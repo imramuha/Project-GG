@@ -17,24 +17,24 @@
           <i class="fa fa-gamepad" aria-hidden="true"></i>
         </button>
         <div class="sidenavButtons">
-          <router-link to="/">
+          <a @click="onDashboardNavClick('feed')" class="button" title="Dashboard">
+            <i class="fas fa-columns"></i>
+          </a>
+          <router-link to="/"  title="Home">
             <i class="fas fa-home"></i>
           </router-link>
-          <a @click="onDashboardNavClick('feed')" class="button">
-            <i class="fas fa-tachometer-alt"></i>
-          </a>
-          <a @click="onOverscreenClick(forum)" class="button">
-            <i class="far fa-comment-alt"></i>
+          <a @click="onOverscreenClick(forum)" class="button" title="Forum">
+            <i class="fas fa-object-group"></i>
           </a>
           <a
             type="button"
             class="button"
             @click="settings"
-            title="Settings and preferences"
+            title="Settings & Preferences"
           >
             <i class="fas fa-cog"></i>
           </a>
-          <a type="button" @click="logout">
+          <a type="button" @click="logout" title="Logout">
             <i class="fas fa-sign-out-alt"></i>
           </a>
         </div>
@@ -148,10 +148,10 @@ export default {
     UserSearch,
     UserGameAdd,
     Profile,
-    Forum
+    Forum,
   },
   computed: {
-    ...mapGetters(["getNotifications"])
+    ...mapGetters(["getNotifications"]),
   },
   data() {
     return {
@@ -162,7 +162,7 @@ export default {
       contentActive: true,
       overscreenComponent: null,
       overscreenData: null,
-      forum: "forum"
+      forum: "forum",
       //notification: true,
     };
   },
@@ -236,8 +236,8 @@ export default {
         this.contentActive = false;
         this.overscreenComponent = Forum;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
