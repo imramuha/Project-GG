@@ -704,7 +704,7 @@ class AccountController extends Controller
             $userLobbyId = $userLobby->lobbies[0]->id;       
 
             // finds the users active lobby
-            $lobby = Lobby::find($userLobbyId);
+            $lobby = Lobby::where('id', $userLobbyId)->with('users')->first();
 
             // detach that user from that lobby
             $user->lobbies()->wherePivot('user_id','=', auth()->user()->id)->detach();
@@ -719,10 +719,19 @@ class AccountController extends Controller
             if(!$length) {
                 // delete the lobby
                 Lobby::where('id', $userLobbyId)->delete();
+
+                // finds the lobby user is exited from
+                $lobbyExited = Lobby::where('id', $userLobbyId)->with('users')->first();
+                $this->pusher->trigger('private-lounge'.$lobby->code, 'NewLounge', $lobbyExited);
+
                 return response()->json(['response' => "your lobby has been cleared.", 'succes' => true]);
             }
-            
-            return response()->json(['response' => "User has exited the lobby.", 'succes' => true]);
+
+            // finds the lobby user is exited from
+            $lobbyExited = Lobby::where('id', $userLobbyId)->with('users')->first();
+
+            $this->pusher->trigger('private-lounge'.$lobby->code, 'NewLounge', $lobbyExited);
+            return response()->json(['response' => "User has exited the lobby."]);
         }
         return response()->json(['data' => "User was not in a lobby.", 'succes' => true]);
         // else 

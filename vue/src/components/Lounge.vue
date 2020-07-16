@@ -9,7 +9,7 @@
       <li>{{ loungeUser.username }}</li>
     </ul>
   </div>-->
-  <div class="lounge">
+  <div v-if="this.active" class="lounge">
     <div class="loungeHeader"><p>LOUNGE</p></div>
     <div class="loungeBody">
       <div class="loungeBodyUsers">
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="loungeBodyChat">
+      <div class="loungeBodyChat" disabled>
         <div class="loungeMessagesFeed">
           <ul>
             <li class="loungeMessageReceived">
@@ -40,7 +40,7 @@
                 />
               </div>
               <div class="loungeMessageText">
-                <p>i am doing greatg un</p>
+                <p>This part isn't finished yet</p>
                 <span>07/07/2020 - 09:16</span>
                 <span></span>
               </div>
@@ -52,7 +52,7 @@
                 />
               </div>
               <div class="loungeMessageText">
-                <p>i am doing greatg un</p>
+                <p>Still WIP ^^</p>
                 <span>07/07/2020 - 09:16</span>
               </div>
             </li>
@@ -64,8 +64,8 @@
       </div>
     </div>
     <div class="loungeButtons">
-      <button>REVEAL</button>
-      <button>LEAVE</button>
+      <button disabled>REVEAL</button>
+      <button @click="exitLounge">LEAVE</button>
     </div>
   </div>
 </template>
@@ -76,6 +76,7 @@ import { getLoungeData, exitLounge } from "@/services/queue.api";
 export default {
   data() {
     return {
+      active: true,
       lounge: "",
       loungeData: "",
       loungeUsers: [],
@@ -100,6 +101,11 @@ export default {
       }
     },
     handleIncoming(data) {
+      if(!data) {
+        this.active = false;
+      } else {
+        this.active = true;
+      }
       this.loungeData = data
       this.loungeUsers = data.users
     },
