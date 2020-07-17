@@ -1,13 +1,13 @@
 <template>
   <div class="reviewsBoard">
-    <div v-if="this.mode === 'received' && userreviews" class="reviews">
+    <div v-if="this.mode === 'received' && userreviews.length > 0" class="reviews">
       <ReviewCard
         v-for="userreview in userreviews"
         v-bind:key="userreview.id"
         :review="userreview"
       />
     </div>
-    <div v-else-if="this.mode === 'given' && userpostedreview" class="reviews">
+    <div v-else-if="this.mode === 'given' && userpostedreviews.length > 0" class="reviews">
       <ReviewCard
         v-for="userpostedreview in userpostedreviews"
         v-bind:key="userpostedreview.id"

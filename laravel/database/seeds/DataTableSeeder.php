@@ -14,14 +14,14 @@ class DataTableSeeder extends Seeder
         //
         DB::table('data')->insert([
             'username' => "Peeka",
-            'data' => "Bronze",
+            'data' => "Currently Iron and suffering",
         ]);
         DB::table('data')->insert([
             'username' => "Mr Penguin",
-            'data' => "Unranked",
+            'data' => "Unranked and slaying",
         ]);
         DB::table('data')->insert([
-            'username' => "Imosh",
+            'username' => "Muddy",
             'data' => "Platnium",
         ]);
         DB::table('data')->insert([
@@ -30,7 +30,7 @@ class DataTableSeeder extends Seeder
         ]);
         DB::table('data')->insert([
             'username' => "muddyk",
-            'data' => "",
+            'data' => "Kind of lost at it.",
         ]);
         DB::table('data')->insert([
             'username' => "Muddykipnew",
@@ -38,19 +38,15 @@ class DataTableSeeder extends Seeder
         ]);
         DB::table('data')->insert([
             'username' => "muddykyt",
-            'data' => "",
+            'data' => "It's starting to get difficult..",
         ]);
         DB::table('data')->insert([
             'username' => "MuddyKip",
-            'data' => "",
+            'data' => "Don't remember joining it tbh",
         ]);
         DB::table('data')->insert([
             'username' => "Muddykip",
-            'data' => "",
-        ]);
-        DB::table('data')->insert([
-            'username' => "Muddy#4874",
-            'data' => "",
+            'data' => "I like this game.",
         ]);
         DB::table('data')->insert([
             'username' => "Muddykip87",
@@ -58,7 +54,7 @@ class DataTableSeeder extends Seeder
         ]);
         DB::table('data')->insert([
             'username' => "Muddy_kip",
-            'data' => "",
+            'data' => "Whatever.. I just am bad.",
         ]);
         DB::table('data')->insert([
             'username' => "Muddykip",

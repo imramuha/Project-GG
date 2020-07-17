@@ -13,30 +13,30 @@ class NewsTableSeeder extends Seeder
     public function run()
     {
         DB::table('news')->insert([
-            "title"=> "News 1",
+            "title"=> "Game on",
             "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
-            "text"=> "Feb 22, 2022",
+            "text"=> "The gloves are on and we're ready to jump into this! Let's make a safe place for gamers that are hungry to find other gamers to play games with, let's make it happen!",
             "image"=> null,
             "user_id"=> 2,
         ]);
         DB::table('news')->insert([
-            "title"=> "News 2",
+            "title"=> "Gamers that cry",
             "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
-            "text"=> "March 4, 2022",
+            "text"=> "We're currently looking for gamers to test our beta version out. We would love to hear your cries and do our best to adjust and implment features to satisfy your needs.",
             "image"=> null,
             "user_id"=> 1,
         ]);
         DB::table('news')->insert([
-            "title"=> "News 3",
-            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
-            "text"=> "June 12, 2022",
+            "title"=> "Lobby & Lounge",
+            "created_at"=> Carbon::yesterday()->format('Y-m-d H:i:s'),
+            "text"=> "Implemented a system where users can queue up for games and join lounges with other players based on the criteria they used during their queue! Next up: implementing group chat system to that lounge!",
             "image"=> null,
             "user_id"=> 2,
         ]);
         DB::table('news')->insert([
-            "title"=> "news 4",
-            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
-            "text"=> "July 28, 2022",
+            "title"=> "So close to being launched!",
+            "created_at"=> Carbon::tomorrow()->format('Y-m-d H:i:s'),
+            "text"=> "Currently we're busy making sure everything works smoothly on launch, so a lot of testing and fixing, stay safe and keep tight everyone!",
             "image"=> null,
             "user_id"=> 3,
         ]);

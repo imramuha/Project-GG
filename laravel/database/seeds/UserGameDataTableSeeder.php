@@ -34,11 +34,6 @@ class UserGameDataTableSeeder extends Seeder
         ]);
         DB::table('user_game_data')->insert([
             'user_id' => 3,
-            'game_id' => 13,
-            'data_id' => 10,
-        ]);
-        DB::table('user_game_data')->insert([
-            'user_id' => 3,
             'game_id' => 4,
             'data_id' => 7,
         ]);

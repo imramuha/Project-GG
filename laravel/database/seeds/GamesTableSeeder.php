@@ -40,10 +40,6 @@ class GamesTableSeeder extends Seeder
             "option" => "Rank",
         ]);
         DB::table('games')->insert([
-            "name" => "Mobile Legends",
-            "option" => "Rank",
-        ]);
-        DB::table('games')->insert([
             "name" => "MineCraft",
             "option" => "Actitivty",
         ]);
@@ -53,10 +49,6 @@ class GamesTableSeeder extends Seeder
         ]);
         DB::table('games')->insert([
             "name" => "Dota 2",
-            "option" => "Rank",
-        ]);
-        DB::table('games')->insert([
-            "name" => "The Division 2",
             "option" => "Rank",
         ]);
         DB::table('games')->insert([

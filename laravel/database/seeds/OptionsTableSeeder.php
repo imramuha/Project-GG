@@ -51,5 +51,53 @@ class OptionsTableSeeder extends Seeder
         DB::table('options')->insert([
             "name" => "Chill",
         ]);
+        DB::table('options')->insert([
+            "name" => "Unranked",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Gold",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Master",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Unranked",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Gold",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Champion",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Unranked",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Gold",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Crystal",
+        ]);
+        DB::table('options')->insert([
+            "name" => "PVP",
+        ]);
+        DB::table('options')->insert([
+            "name" => "PVE",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Unranked",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Gold and above",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Unranked",
+        ]);
+        DB::table('options')->insert([//
+            "name" => "Gold and below",
+        ]);
+        DB::table('options')->insert([
+            "name" => "Platnium",
+        ]);
     }
 }

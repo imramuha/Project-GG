@@ -19,12 +19,6 @@ class UserRelationsTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('user_relations')->insert([
-            'relation_id' => 3,
-            'user_id_one' => 1,
-            'user_id_two' => 3,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('user_relations')->insert([
             'relation_id' => 4,
             'user_id_one' => 2,
             'user_id_two' => 3,
@@ -32,26 +26,44 @@ class UserRelationsTableSeeder extends Seeder
         ]);
         DB::table('user_relations')->insert([
             'relation_id' => 3,
-            'user_id_one' => 5,
-            'user_id_two' => 1,
+            'user_id_one' => 1,
+            'user_id_two' => 5,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('user_relations')->insert([
             'relation_id' => 3,
-            'user_id_one' => 4,
-            'user_id_two' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('user_relations')->insert([
-            'relation_id' => 3,
-            'user_id_one' => 4,
-            'user_id_two' => 3,
+            'user_id_one' => 1,
+            'user_id_two' => 4,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('user_relations')->insert([
             'relation_id' => 3,
             'user_id_one' => 3,
-            'user_id_two' => 5,
+            'user_id_two' => 4,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('user_relations')->insert([
+            'relation_id' => 3,
+            'user_id_one' => 3,
+            'user_id_two' => 7,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('user_relations')->insert([
+            'relation_id' => 3,
+            'user_id_one' => 5,
+            'user_id_two' => 8,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('user_relations')->insert([
+            'relation_id' => 3,
+            'user_id_one' => 5,
+            'user_id_two' => 6,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('user_relations')->insert([
+            'relation_id' => 3,
+            'user_id_one' => 4,
+            'user_id_two' => 8,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }

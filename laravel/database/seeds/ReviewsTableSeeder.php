@@ -12,28 +12,28 @@ class ReviewsTableSeeder extends Seeder
     public function run()
     {
         DB::table('reviews')->insert([
-            'comment' => "This is my reviews",
-            'score' => "22",
-            'user_id' => 3,
-            'reviewer_id' => 1,
-        ]);
-        DB::table('reviews')->insert([
-            'comment' => "This is my review 3",
+            'comment' => "I had fun playing with this player!!",
             'score' => "88",
-            'user_id' => 3,
-            'reviewer_id' => 2,
+            'user_id' => 7,
+            'reviewer_id' => 3,
         ]);
         DB::table('reviews')->insert([
-            'comment' => "This is my review 5",
+            'comment' => "Pretty chill, no drama, no nothing, just gameplay.",
             'score' => "68",
-            'user_id' => 3,
+            'user_id' => 8,
             'reviewer_id' => 5,
         ]);
         DB::table('reviews')->insert([
-            'comment' => "This is my review 4",
-            'score' => "55",
-            'user_id' => 3,
-            'reviewer_id' => 4,
+            'comment' => "We stomped on them 'nemies, they'll remember that forever :D",
+            'score' => "91",
+            'user_id' => 6,
+            'reviewer_id' => 5,
+        ]);
+        DB::table('reviews')->insert([
+            'comment' => "This guy loves to talk and he's quite funny too xD",
+            'score' => "81",
+            'user_id' => 4,
+            'reviewer_id' => 8,
         ]);
         
     }
