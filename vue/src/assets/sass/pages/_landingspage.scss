@@ -123,62 +123,70 @@
             width: 60px;
             height: 60px;
             background-color: transparent;
-            border: 7px solid $candy;
+            border: 7px solid $candyL;
             &:nth-child(1) {
                 top: 12%;
-                left: 42%;
+                left: 60%;
                 animation: animate 10s linear infinite;
             }
             &:nth-child(2) {
-                top: 35%;
-                left: 82%;
-                animation: animate 6s linear infinite;
+                top: 44.5%;
+                left: 89.5%;
+                height: 125px;
+                width: 125px;
+                border-width: 20px;
+                border-color: $paintH;
+                opacity: 0.3;
                 ;
             }
             &:nth-child(3) {
-                top: 82%;
-                left: 42%;
-                animation: animate 12s linear infinite;
+                top: 0%;
+                left: 0%;
+                animation: animate 10s linear infinite;
+                opacity: 0.1;
             }
             &:nth-child(4) {
-                top: 93%;
-                left: 82%;
-                animation: animate 8s linear infinite;
-                ;
+                top: 25%;
+                left: 36%;
+                opacity: 0.3;
             }
             &:nth-child(5) {
-                top: 22%;
-                left: 12%;
-                animation: animate 10s linear infinite;
+                top: 27.7%;
+                left: 29.3%;
+                height: 100px;
+                width: 100px;
+                border-width: 20px;
+                border-color: $sand;
+                opacity: 0.2;
             }
-            &:nth-child(6) {
-                top: 53%;
-                left: 1%;
-                animation: animate 6s linear infinite;
-                ;
-            }
-            &:nth-child(7) {
-                top: 35%;
-                left: 22%;
-                animation: animate 8s linear infinite;
-            }
-            &:nth-child(8) {
-                top: 20%;
-                left: 42%;
-                animation: animate 6s linear infinite;
-                ;
-            }
-            &:nth-child(9) {
-                top: 40%;
-                left: 92%;
-                animation: animate 4s linear infinite;
-            }
-            &:nth-child(10) {
-                top: 60%;
-                left: 62%;
-                animation: animate 15s linear infinite;
-                ;
-            }
+        }
+        .circle {
+            border: 7px solid $paint;
+            border-radius: 50%;
+        }
+        .triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 70px 115px 70px;
+            border-color: transparent transparent $snow transparent;
+        }
+        .triangle:before {
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            border-style: solid;
+            border-width: 0 42.5px 75px 42.5px;
+            border-color: transparent transparent $midnight transparent;
+            top: 25px;
+            left: -42.5px;
+        }
+        .x {
+            font-size: 800px;
+            margin: 0px;
+            color: $candyH;
+            border: none;
         }
     }
 }

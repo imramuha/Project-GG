@@ -2,11 +2,9 @@
   <div class="app">
     <div class="wrapper">
       <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div class="circle"></div>
+      <div class='triangle'></div>
+      <div class="x">&times;</div>
       <div></div>
     </div>
     <AppNav />
