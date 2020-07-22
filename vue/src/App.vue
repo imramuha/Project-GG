@@ -6,7 +6,9 @@
       <div class='triangle'></div>
       <div class="x">&times;</div>
       <div></div>
+      <div></div>
     </div>
+
     <AppNav />
     <router-view class="page" />
   </div>
@@ -15,10 +17,21 @@
 <script>
 //import Navigation from "@/components/Navigation";
 import AppNav from "@/components/AppNav";
+import "@/assets/sass/abstracts/_variables.scss";
 
 export default {
   components: {
     AppNav
+  },
+  data() {
+      return {
+          darkMode: false,
+      }
+  },
+  methods: {
+    toggle() {
+      this.darkMode = true;
+    }
   }
 };
 </script>

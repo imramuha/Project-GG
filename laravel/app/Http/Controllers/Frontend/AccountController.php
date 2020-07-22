@@ -118,12 +118,14 @@ class AccountController extends Controller
     public function editUserSettings (Request $request) {
         $settings =  Setting::where('user_id', '=', auth()->id())->first();
 
+
         if($settings) {
             $settings->update(array(
                 'nightmode' => $request->input('nightmode'),
                 'anonymity' => $request->input('anonymity'),
                 'voice' => $request->input('voice'),
             ));
+            return $settings;
             return array(['response' => 'Updated settings & preferences.']);
         } else {
             Setting::create(array(

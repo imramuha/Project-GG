@@ -1,6 +1,6 @@
 .landingsPage {
-    //background-color: $midnight;
-    color: $snow;
+    //background-color: var(--midnight);
+    color: var(--snow);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -23,7 +23,7 @@
             a {
                 margin: 0px;
                 button {
-                    background-color: $candy;
+                    background-color: var(--candy);
                     color: #ffffff;
                     border: none;
                     border-radius: 7px;
@@ -38,7 +38,7 @@
                         margin-left: 21px;
                     }*/
                     &:hover {
-                        background-color: $candyL;
+                        background-color: var(--candyL);
                         transition: 1s;
                         margin-top: 1.5px;
                         margin-bottom: 0px;
@@ -52,7 +52,7 @@
                 margin-top: 50px;
             }
             p {
-                color: $melt;
+                color: var(--melt);
                 max-width: 575px;
                 font-size: 14px;
                 font-weight: 400;
@@ -88,22 +88,22 @@
         width: 100%;
         a {
             font-size: 11px;
-            color: $melt;
+            color: var(--melt);
             font-weight: 400;
             letter-spacing: 1px;
             &:hover {
-                color: $candy;
+                color: var(--candy);
                 text-decoration: underline;
             }
         }
     }
     a {
-        color: $candy;
+        color: var(--candy);
         margin: 20px;
         font-weight: 600;
         &:hover {
             text-decoration: underline;
-            color: $candyL
+            color: var(--candyL);
         }
     }
 }
@@ -117,13 +117,13 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background-color: $midnight;
+        background-color: var(--midnight);
         div {
             position: absolute;
             width: 60px;
             height: 60px;
             background-color: transparent;
-            border: 7px solid $candyL;
+            border: 7px solid var(--candyL);
             &:nth-child(1) {
                 top: 12%;
                 left: 60%;
@@ -135,7 +135,7 @@
                 height: 125px;
                 width: 125px;
                 border-width: 20px;
-                border-color: $paintH;
+                border-color: var(--paintH);
                 opacity: 0.3;
                 ;
             }
@@ -156,12 +156,17 @@
                 height: 100px;
                 width: 100px;
                 border-width: 20px;
-                border-color: $sand;
+                border-color: var(--sand);
                 opacity: 0.2;
+            }
+            &:nth-child(6) {
+                top: 54.7%;
+                left: 11.3%;
+                animation: animate 8s linear infinite;
             }
         }
         .circle {
-            border: 7px solid $paint;
+            border: 7px solid var(--paint);
             border-radius: 50%;
         }
         .triangle {
@@ -169,7 +174,7 @@
             height: 0;
             border-style: solid;
             border-width: 0 70px 115px 70px;
-            border-color: transparent transparent $snow transparent;
+            border-color: transparent transparent var(--snow) transparent;
         }
         .triangle:before {
             content: "";
@@ -178,14 +183,14 @@
             position: absolute;
             border-style: solid;
             border-width: 0 42.5px 75px 42.5px;
-            border-color: transparent transparent $midnight transparent;
+            border-color: transparent transparent var(--midnight) transparent;
             top: 25px;
             left: -42.5px;
         }
         .x {
             font-size: 800px;
             margin: 0px;
-            color: $candyH;
+            color: var(--candyH);
             border: none;
         }
     }
@@ -204,6 +209,6 @@
 
 .terms,
 .privacy {
-    background-color: $midnight;
+    background-color: var(--midnight);
     height: 100%;
 }

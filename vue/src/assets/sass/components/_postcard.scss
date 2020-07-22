@@ -11,7 +11,7 @@
             .posts {
                 display: flex;
                 box-sizing: border-box;
-                color: $melt;
+                color: var(--melt);
                 height: 90%;
                 .emptyPosts {
                     width: 100%;
@@ -28,8 +28,8 @@
                 overflow: hidden;
                 padding: 7px;
                 border-radius: 2px;
-                background-color: $midnight;
-                box-shadow: 0 0 3px $midnight;
+                background-color: var(--midnight);
+                box-shadow: 0 0 3px var(--midnight);
                 max-width: 25%;
                 &:not(:last-child) {
                     margin-right: 7px;
@@ -53,7 +53,7 @@
                     margin-top: auto;
                     .postcardContentHeader {
                         h1 {
-                            color: $snow;
+                            color: var(--snow);
                             font-size: 15px;
                             height: 35px;
                             overflow: hidden;
@@ -63,10 +63,10 @@
                         p {
                             margin: 0px;
                             font-size: 13px;
-                            color: $snow;
+                            color: var(--snow);
                         }
                         p:nth-child(1) {
-                            color: $melt;
+                            color: var(--melt);
                             font-size: 11px;
                             margin-bottom: 7px;
                         }
@@ -77,11 +77,11 @@
                         flex-direction: row;
                         flex-grow: 1;
                         font-size: 9px;
-                        color: $candy;
+                        color: var(--candy);
                         font-weight: 600;
                         text-transform: uppercase;
                         p:nth-child(1) {
-                            color: $melt;
+                            color: var(--melt);
                         }
                     }
                 }
@@ -93,22 +93,22 @@
                     button {
                         font-size: 11px;
                         height: auto;
-                        color: $melt;
-                        background-color: $midnightL;
+                        color: var(--melt);
+                        background-color: var(--midnightL);
                         width: 35px;
                         height: 35px;
                         padding: 7px;
                         border-radius: 3px;
-                        border: 2px solid $snow;
+                        border: 2px solid var(--snow);
                         &:hover {
                             text-decoration: none;
                             cursor: pointer;
-                            color: $snow;
+                            color: var(--snow);
                         }
                     }
                     .likeButtonActive {
-                        background-color: $candy;
-                        color: $snow;
+                        background-color: var(--candy);
+                        color: var(--snow);
                     }
                 }
             }
@@ -128,20 +128,20 @@
                 button {
                     border: none;
                     font-size: 21px;
-                    color: $paint;
+                    color: var(--paint);
                     background-color: transparent;
                     height: 33px;
                     cursor: pointer;
                     &:disabled {
-                        color: $melt;
+                        color: var(--melt);
                         cursor: not-allowed;
                         &:hover {
-                            background-color: $midnight;
-                            color: $melt;
+                            background-color: var(--midnight);
+                            color: var(--melt);
                         }
                     }
                     &:hover {
-                        color: $paintL;
+                        color: var(--paintL);
                         transition: 0.3s;
                     }
                 }
@@ -149,18 +149,18 @@
             
             .postsFooterButtons {
                 button {
-                    border: 2px solid $melt;
+                    border: 2px solid var(--melt);
                     font-size: 21px;
-                    color: $melt;
-                    background-color: $midnightL;
+                    color: var(--melt);
+                    background-color: var(--midnightL);
                     border-radius: 5px;
                     height: 33px;
                     font-size: 11px;
                     min-width: 100px;
                     &:hover {
-                        color: $snow;
-                        border-color: $snow;
-                        //background-color: $midnight;
+                        color: var(--snow);
+                        border-color: var(--snow);
+                        //background-color: var(--midnight);
                         transition: 0.3s;
                     }
                 }
@@ -176,11 +176,11 @@
                     align-items: center;
                     margin: 0px 14px;
                     font-size: 11px;
-                    color: $melt;
+                    color: var(--melt);
                     span {
                         margin: 0 3px;
                         font-weight: 600;
-                        color: $paint;
+                        color: var(--paint);
                         font-size: 16px
                     }
                 }

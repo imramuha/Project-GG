@@ -11,7 +11,7 @@
     .games {
         display: flex;
         flex-wrap: wrap;
-        color: $melt;
+        color: var(--melt);
         overflow: hidden;
         justify-content: space-around;
         .emptyGames {
@@ -26,10 +26,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        background-color: $midnight;
+        background-color: var(--midnight);
         border-radius: 3px;
         padding: 7px;
-        box-shadow: 0 0 3px $midnightH;
+        box-shadow: 0 0 3px var(--midnightH);
         &:not(:nth-child(n+5)) {
             margin-bottom: 7px;
         }
@@ -55,7 +55,7 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            color: $snow;
+            color: var(--snow);
             font-size: 25px;
             margin-bottom: 7px;
         }
@@ -74,8 +74,8 @@
             padding: 7px;
             flex-direction: column;
             justify-content: flex-start;
-            background-color: $midnightL;
-            color: $snow;
+            background-color: var(--midnightL);
+            color: var(--snow);
             text-align: right;
             ;
             .gameCardContentHeader {
@@ -86,7 +86,7 @@
                 p {
                     span {
                         font-size: 14px;
-                        color: $paint;
+                        color: var(--paint);
                         font-weight: 600;
                         letter-spacing: 0.5px;
                     }
@@ -95,7 +95,7 @@
             .gameCardContentBody {
                 p {
                     font-size: 13px;
-                    color: $melt
+                    color: var(--melt)
                 }
             }
         }
@@ -114,21 +114,23 @@
         button {
             border-radius: 3px;
             text-align: center;
-            background-color: $candy;
-            color: $snow;
-            border: 2px solid $snow;
+            background-color: var(--candy);
+            color: var(--snow);
+            border: 2px solid var(--snow);
             text-transform: uppercase;
             font-weight: 600;
             font-size: 11px;
             padding: 7px;
             width: 100%;
             cursor: pointer;
-            box-shadow: 0 0 3px $midnightH;
+            box-shadow: 0 0 3px var(--midnightH);
             &:hover {
                 transition: 0.3s;
-                background-color: $candyL;
-                color: $snow;
-                border: 2px solid $snow;
+                background-color: var(--candyL);
+                color: var(--snow);
+                border: 2px solid var(--snow);
             }
         }
     }
+    
+    ;

@@ -65,32 +65,41 @@ export default {
     return {
       nightmode: false,
       anonymity: false,
-      voice: false
+      voice: false,
     };
   },
   methods: {
+    // is apparantly not really needed
+    conversion(value) {
+      if (value == true) {
+        return 1;
+      } else {
+        return 0;
+      }
+    },
     async update() {
+
       let settings = {
-        nightmode: this.nightmode,
+        nightmode: this.conversion(this.nightmode),
         anonymity: this.anonymity,
-        voice: this.voice
+        voice: this.voice,
       };
       console.log(settings);
 
-      await editUserSettings(settings).then(response => {
+      await editUserSettings(settings).then((response) => {
         console.log(response);
         this.$store
           .dispatch("notification", {
-            message: response.data[0].response
+            message: response.data[0].response,
           })
           .then(() => {
             //this.$router.push('dashboard');
           })
-          .catch(errors => {
+          .catch((errors) => {
             console.log(errors);
           });
       });
-    }
+    },
   },
   async mounted() {
     const response = await getUserSettings();
@@ -105,9 +114,21 @@ export default {
       this.nightmode = response.data[0].nightmode;
       this.anonymity = response.data[0].anonymity;
       this.voice = response.data[0].voice;
-      console.log("this goes 2", this.nightmode, this.anonymity, this.voice);
+      console.log(this.nightmode, this.anonymity, this.voice);
     }
-  }
+  },  
+  watch: {
+    nightmode: function () {
+          // add/remove class to/from html tag
+          let htmlElement = document.documentElement;
+
+          if (this.nightmode) {
+              htmlElement.setAttribute('theme', 'dark');
+          } else {
+              htmlElement.setAttribute('theme', 'light');
+          }
+      }
+  },
 };
 </script>
 

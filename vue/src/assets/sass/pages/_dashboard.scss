@@ -1,6 +1,6 @@
                             .dashboard {
-                                background-color: $midnightH;
-                                color: $snow;
+                                background-color: var(--midnightH);
+                                color: var(--snow);
                                 width: 100vw;
                                 height: 100vh;
                                 display: flex;
@@ -9,7 +9,7 @@
                             
                             .content {
                                 display: flex;
-                                background-color: $midnightL;
+                                background-color: var(--midnightL);
                                 width: 100%;
                                 flex-direction: column;
                                 box-sizing: border-box;
@@ -17,16 +17,16 @@
                                 .contentHeader {
                                     height: 22%;
                                     min-height: 22%;
-                                    background-color: $midnightH;
+                                    background-color: var(--midnightH);
                                     margin-bottom: 7px;
                                     border-radius: 3px;
                                     padding: 7px;
-                                    box-shadow: 0 0 3px $midnightH;
+                                    box-shadow: 0 0 3px var(--midnightH);
                                     box-sizing: border-box;
                                     display: flex;
                                     width: 100%;
                                     /*&:hover {
-                                    box-shadow: 0 0 3px $candy;
+                                    box-shadow: 0 0 3px var(--candy);
                                 }*/
                                     .userImage {
                                         display: flex;
@@ -44,7 +44,7 @@
                                     }
                                     .userDataContainer {
                                         width: 75%;
-                                        background-color: $midnightH;
+                                        background-color: var(--midnightH);
                                         padding: 7px;
                                         width: 100%;
                                         display: flex;
@@ -61,7 +61,7 @@
                                             display: flex;
                                             flex-direction: row;
                                             p {
-                                                color: $melt;
+                                                color: var(--melt);
                                             }
                                             .userDataRight {
                                                 display: flex;
@@ -69,16 +69,16 @@
                                                 justify-content: flex-end;
                                                 button {
                                                     cursor: pointer;
-                                                    border: 2px solid $melt;
+                                                    border: 2px solid var(--melt);
                                                     border-radius: 2px;
                                                     padding: 7px 21px;
                                                     font-size: 11px;
-                                                    color: $melt;
-                                                    background-color: $midnightL;
+                                                    color: var(--melt);
+                                                    background-color: var(--midnightL);
                                                     border-radius: 5px;
                                                     &:hover {
-                                                        color: $snow;
-                                                        border-color: $snow;
+                                                        color: var(--snow);
+                                                        border-color: var(--snow);
                                                         transition: 0.3s;
                                                     }
                                                 }
@@ -94,10 +94,10 @@
                                             height: 25%;
                                             width: 100%;
                                             border-radius: 3px;
-                                            background-color: $candy;
-                                            border: 2px solid $snow;
+                                            background-color: var(--candy);
+                                            border: 2px solid var(--snow);
                                             .userReviewScoreBar {
-                                                background-color: $slate;
+                                                background-color: var(--slate);
                                             }
                                             .userReviewScorePercentage {
                                                 display: flex;
@@ -118,7 +118,7 @@
                                     min-height: 8%;
                                     display: flex;
                                     padding: 7px;
-                                    box-shadow: 0 0 3px $midnightH;
+                                    box-shadow: 0 0 3px var(--midnightH);
                                     box-sizing: border-box;
                                     margin-bottom: 7px;
                                     .dashboardNav {
@@ -134,21 +134,21 @@
                                             width: 100%;
                                             background-color: inherit;
                                             font-size: 11px;
-                                            color: $snow;
+                                            color: var(--snow);
                                             border: none;
-                                            //border: 1px solid $melt;
-                                            background-color: $midnight;
-                                            box-shadow: 0 0 3px $midnight;
+                                            //border: 1px solid var(--melt);
+                                            background-color: var(--midnight);
+                                            box-shadow: 0 0 3px var(--midnight);
                                             text-transform: uppercase;
                                             &:not(:last-child) {
                                                 margin-right: 7px;
                                             }
                                             &:hover {
-                                                color: $candy;
+                                                color: var(--candy);
                                             }
                                         }
                                         .navButtonActive {
-                                            background-color: $candy;
+                                            background-color: var(--candy);
                                             &:hover {
                                                 color: inherit;
                                             }
@@ -157,11 +157,11 @@
                                 }
                                 .contentMain {
                                     height: 70%;
-                                    background-color: $midnightL;
+                                    background-color: var(--midnightL);
                                     box-sizing: border-box;
                                     border-radius: 3px;
                                     padding: 7px;
-                                    box-shadow: 0 0 3px $midnightH;
+                                    box-shadow: 0 0 3px var(--midnightH);
                                 }
                             }
                             
@@ -170,16 +170,16 @@
                                 flex-direction: column;
                                 box-sizing: border-box;
                                 padding: 7px;
-                                background-color: $midnightL;
+                                background-color: var(--midnightL);
                                 max-width: 25%;
                                 .sidecontentHeader {
                                     height: 22%;
                                     min-height: 22%;
-                                    background-color: $midnightL;
+                                    background-color: var(--midnightL);
                                     //padding: 7px;
                                     box-sizing: border-box;
                                     border-radius: 3px;
-                                    box-shadow: 0 0 3px $midnightH;
+                                    box-shadow: 0 0 3px var(--midnightH);
                                     margin-bottom: 7px;
                                     .sidecontentNotifications {
                                         display: flex;
@@ -188,15 +188,15 @@
                                         overflow: hidden;
                                         width: 100%;
                                         height: 100%;
-                                        background-color: $midnightH;
-                                        box-shadow: 0 0 3px $midnightH;
+                                        background-color: var(--midnightH);
+                                        box-shadow: 0 0 3px var(--midnightH);
                                         border-radius: 2px;
                                         padding: 7px;
                                         .notificationsEmpty {
                                             height: 100%;
                                             display: flex;
                                             font-size: 13px;
-                                            color: $melt;
+                                            color: var(--melt);
                                             text-align: center;
                                             align-items: center;
                                             justify-content: center;
@@ -208,12 +208,12 @@
                                     min-height: 8%;
                                     display: flex;
                                     justify-content: space-evenly;
-                                    background-color: $midnightL;
+                                    background-color: var(--midnightL);
                                     box-sizing: border-box;
                                     padding: 7px;
                                     align-items: center;
                                     justify-content: center;
-                                    box-shadow: 0 0 3px $midnightH;
+                                    box-shadow: 0 0 3px var(--midnightH);
                                     margin-bottom: 7px;
                                     .searchForm {
                                         height: 100%;
@@ -223,34 +223,34 @@
                                             height: 100%;
                                             width: 100%;
                                             input {
-                                                color: $melt;
+                                                color: var(--melt);
                                                 padding: 0 7px;
                                                 border: none;
-                                                background-color: $midnightH;
+                                                background-color: var(--midnightH);
                                                 flex-grow: 7;
                                                 border-radius: 1px;
                                                 &:focus {
-                                                    border: 1px solid $candy;
+                                                    border: 1px solid var(--candy);
                                                 }
                                             }
                                             button {
                                                 flex-grow: 2.5;
-                                                background-color: $midnight;
+                                                background-color: var(--midnight);
                                                 border: none;
-                                                color: $snow;
+                                                color: var(--snow);
                                                 border-radius: 1px;
                                                 &:hover {
-                                                    color: $melt;
+                                                    color: var(--melt);
                                                     cursor: pointer;
                                                 }
                                             }
-                                            box-shadow: 0 0 3px $midnightH;
+                                            box-shadow: 0 0 3px var(--midnightH);
                                         }
                                     }
                                 }
                                 .sidecontentFriendlist {
                                     height: 70%;
-                                    background-color: $mysteryL;
-                                    box-shadow: 0 0 3px $midnightH;
+                                    background-color: var(--mysteryL);
+                                    box-shadow: 0 0 3px var(--midnightH);
                                 }
                             }

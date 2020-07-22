@@ -5,8 +5,8 @@
 $access-title-font-sizes: ( null: 28px, sm: 35px, md: 43px, lg: 55px, xl: 65px, );
 $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
 .accessContainer {
-    //background-color: $midnight;
-    color: $snow;
+    //background-color: var(--midnight);
+    color: var(--snow);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -19,17 +19,17 @@ $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         margin: 20px 0px 30px;
     }
     a {
-        color: $candy;
+        color: var(--candy);
         text-decoration: none;
         &:hover {
             text-decoration: underline;
-            color: $candyL;
+            color: var(--candyL);
         }
     }
     p,
     label {
         @include font-size($access-p-font-sizes);
-        color: $melt;
+        color: var(--melt);
         margin: 0;
     }
     label {
@@ -68,13 +68,13 @@ $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         left: 0;
         height: 17px;
         width: 17px;
-        background-color: $midnight;
+        background-color: var(--midnight);
     }
     .container:hover input~.checkmark {
-        background-color: $snow;
+        background-color: var(--snow);
     }
     .container input:checked~.checkmark {
-        background-color: $candy;
+        background-color: var(--candy);
     }
     .checkmark:after {
         content: "";
@@ -98,7 +98,7 @@ $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
     .accessForm {
         display: flex;
         flex-direction: column;
-        background-color: $midnightL;
+        background-color: var(--midnightL);
         padding: 20px;
         border-radius: 5px;
         ul {
@@ -108,9 +108,9 @@ $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         }
         &:first-child>p {
             margin-top: 10px;
-            color: $melt;
+            color: var(--melt);
             b {
-                color: $candy;
+                color: var(--candy);
             }
         }
         &,
@@ -121,23 +121,23 @@ $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
             textarea {
                 color: snow;
                 border-radius: 3px;
-                background-color: $midnight;
-                border: 1px solid $midnightH;
+                background-color: var(--midnight);
+                border: 1px solid var(--midnightH);
                 padding: 15px;
                 &:focus {
-                    border-color: $candy;
+                    border-color: var(--candy);
                 }
             }
             button {
-                background-color: $candy;
-                color: $snow;
+                background-color: var(--candy);
+                color: var(--snow);
                 border: none;
                 border-radius: 3px;
                 padding: 15px;
                 font-weight: 600;
                 margin-top: 22px;
                 &:hover {
-                    background-color: $candyL;
+                    background-color: var(--candyL);
                 }
             }
         }

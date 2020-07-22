@@ -2,25 +2,25 @@
     height: 100%;
     padding: 7px;
     box-sizing: border-box;
-    background-color: $midnightL;
+    background-color: var(--midnightL);
 }
 
 .friendlistCategory {
     display: flex;
     flex-direction: column;
     h1 {
-        box-shadow: 0 0 3px $midnightH;
+        box-shadow: 0 0 3px var(--midnightH);
         text-transform: uppercase;
         border-radius: 2px;
         padding: 5px;
-        background-color: $midnight;
-        color: $snow;
+        background-color: var(--midnight);
+        color: var(--snow);
         font-size: 12px;
         margin: 0 0 7px;
         &:hover {
             cursor: pointer;
             span {
-                color: $melt;
+                color: var(--melt);
             }
         }
         span {
@@ -30,10 +30,10 @@
 }
 
 .friendlistCard {
-    background-color: $midnightH;
+    background-color: var(--midnightH);
     font-size: 11px;
     margin-bottom: 7px;
-    box-shadow: 0 0 3px $midnightH;
+    box-shadow: 0 0 3px var(--midnightH);
     padding: 7px;
     border-radius: 2px;
     .friendlistCardImg {
@@ -58,9 +58,9 @@
                 font-weight: 400;
                 font-size: 13px;
                 margin: 0px;
-                color: $paint;
+                color: var(--paint);
             }
-            color: $melt;
+            color: var(--melt);
         }
     }
     .friendlistCardStatus {
@@ -78,13 +78,13 @@
             height: 5px;
             margin-top: 3px;
             border-radius: 1px;
-            background-color: $slate;
+            background-color: var(--slate);
         }
         .statusCircleOffline {
-            background-color: $melt;
+            background-color: var(--melt);
         }
         p {
-            color: $melt;
+            color: var(--melt);
             font-size: 9px;
             letter-spacing: 0.5px;
             margin: 0px;

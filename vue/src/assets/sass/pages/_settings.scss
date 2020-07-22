@@ -5,7 +5,7 @@
     width: 100%;
     height: 100%;
     padding: 7px;
-    background-color: $midnight;
+    background-color: var(--midnight);
     .settingsBody {
         display: flex;
         flex-direction: column;
@@ -14,7 +14,7 @@
         //padding: 7px;
     }
     h1 {
-        color: $melt;
+        color: var(--melt);
         font-size: 35px;
         padding: 7px;
         //height: 100%;
@@ -25,12 +25,12 @@
         height: 100%;
         flex-direction: row;
         align-items: center;
-        background-color: $midnightH;
-        border: 1px solid $midnight;
+        background-color: var(--midnightH);
+        border: 1px solid var(--midnight);
         padding: 14px;
         border-radius: 3px;
         font-size: 27px;
-        color: $snow;
+        color: var(--snow);
         span {
             display: flex;
             flex-direction: column;
@@ -38,7 +38,7 @@
             span {
                 font-weight: 400;
                 font-size: 11px;
-                color: $melt;
+                color: var(--melt);
             }
         }
     }
@@ -60,7 +60,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: $melt;
+        background-color: var(--melt);
         -webkit-transition: .4s;
         transition: .4s;
     }
@@ -71,15 +71,15 @@
         width: 26px;
         left: 4px;
         bottom: 4px;
-        background-color: $snow;
+        background-color: var(--snow);
         -webkit-transition: .4s;
         transition: .4s;
     }
     input:checked+.slider {
-        background-color: $candy;
+        background-color: var(--candy);
     }
     input:focus+.slider {
-        box-shadow: 0 0 1px $candy;
+        box-shadow: 0 0 1px var(--candy);
     }
     input:checked+.slider:before {
         -webkit-transform: translateX(26px);

@@ -13,20 +13,20 @@
         button {
             border: none;
             font-size: 21px;
-            color: $paint;
+            color: var(--paint);
             background-color: transparent;
             height: 33px;
             cursor: pointer;
             &:disabled {
-                color: $melt;
+                color: var(--melt);
                 cursor: not-allowed;
                 &:hover {
-                    background-color: $midnight;
-                    color: $melt;
+                    background-color: var(--midnight);
+                    color: var(--melt);
                 }
             }
             &:hover {
-                color: $paintL;
+                color: var(--paintL);
                 transition: 0.3s;
             }
         }
@@ -34,18 +34,18 @@
     
     .gamesFooterButtons {
         button {
-            border: 2px solid $melt;
+            border: 2px solid var(--melt);
             font-size: 21px;
-            color: $melt;
-            background-color: $midnightL;
+            color: var(--melt);
+            background-color: var(--midnightL);
             border-radius: 5px;
             height: 33px;
             font-size: 11px;
             min-width: 100px;
             &:hover {
-                color: $snow;
-                border-color: $snow;
-                //background-color: $midnight;
+                color: var(--snow);
+                border-color: var(--snow);
+                //background-color: var(--midnight);
                 transition: 0.3s;
             }
         }
@@ -61,11 +61,11 @@
             align-items: center;
             margin: 0px 14px;
             font-size: 11px;
-            color: $melt;
+            color: var(--melt);
             span {
                 margin: 0 3px;
                 font-weight: 600;
-                color: $paint;
+                color: var(--paint);
                 font-size: 16px
             }
         }
@@ -76,18 +76,18 @@
         justify-content: center;
         margin-top: 15px;
         button {
-            border: 2px solid $melt;
+            border: 2px solid var(--melt);
             border-radius: 20px;
             padding: 6px 20px;
             font-size: 11px;
-            color: $melt;
-            background-color: $midnightL;
+            color: var(--melt);
+            background-color: var(--midnightL);
             border-radius: 5px;
             min-width: 100px;
             text-align: center;
             &:hover {
-                color: $snow;
-                border-color: $snow;
+                color: var(--snow);
+                border-color: var(--snow);
                 transition: 0.3s;
             }
         }

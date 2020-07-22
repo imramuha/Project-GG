@@ -4,8 +4,8 @@
     display: flex;
     //padding: 7px;
     border-radius: 3px;
-    background-color: $midnight;
-    box-shadow: 0 0 3px $midnightH;
+    background-color: var(--midnight);
+    box-shadow: 0 0 3px var(--midnightH);
 }
 
 .conversation {
@@ -28,8 +28,8 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        background-color: $midnightH;
-        color: $snow;
+        background-color: var(--midnightH);
+        color: var(--snow);
         div {
             display: flex;
             justify-content: center;
@@ -42,23 +42,23 @@
         }
         .conversationUserOffline {
             span {
-                background-color: $melt;
+                background-color: var(--melt);
             }
         }
         .conversationUserOnline {
             span {
-                background-color: $slate;
+                background-color: var(--slate);
             }
         }
         h1 {
-            color: $melt;
+            color: var(--melt);
             margin: 0px;
             font-size: 21px;
             span {
-                color: $snow;
+                color: var(--snow);
                 margin: 0px 14px;
                 border-radius: 3px;
-                background-color: $paint;
+                background-color: var(--paint);
                 padding: 1px 21px;
                 font-size: 17px;
                 font-weight: 200;
@@ -70,7 +70,7 @@
 
 .messagesFeed {
     height: 100%;
-    background-color: $midnight;
+    background-color: var(--midnight);
     overflow-y: scroll;
     padding: 7px;
     ul {
@@ -104,7 +104,7 @@
                 }
                 span {
                     font-weight: 600;
-                    color: $melt;
+                    color: var(--melt);
                     font-size: 9px;
                 }
             }
@@ -112,7 +112,7 @@
         .messagesent {
             display: flex;
             text-align: right;
-            background-color: $paint;
+            background-color: var(--paint);
             flex-direction: row-reverse;
             margin-left: auto;
             .messageIcon {
@@ -128,12 +128,12 @@
                     margin-bottom: 1px;
                 }
                 span {
-                    color: $midnightH;
+                    color: var(--midnightH);
                 }
             }
         }
         .messagereceived {
-            background-color: $midnightL;
+            background-color: var(--midnightL);
         }
     }
 }
@@ -146,13 +146,13 @@
         margin: 0px;
         width: 100%;
         resize: none;
-        border: solid 1px $midnight;
-        color: $snow;
-        background-color: $midnightH;
+        border: solid 1px var(--midnight);
+        color: var(--snow);
+        background-color: var(--midnightH);
         border-radius: 2px;
         padding: 7px;
         &:focus {
-            border-color: $candy;
+            border-color: var(--candy);
         }
     }
 }
@@ -160,11 +160,11 @@
 .messagersList {
     flex: 2;
     overflow-y: scroll;
-    border-left: 0.5px solid $midnightL;
-    background-color: $midnightL;
+    border-left: 0.5px solid var(--midnightL);
+    background-color: var(--midnightL);
     padding: 7px;
     h1 {
-        color: $melt;
+        color: var(--melt);
     }
     ul {
         list-style-type: none;
@@ -172,7 +172,7 @@
         margin: 0px;
         width: 100%;
         li {
-            color: $melt;
+            color: var(--melt);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -182,7 +182,7 @@
             padding: 7px;
             letter-spacing: 1px;
             font-weight: 600;
-            background-color: $midnight;
+            background-color: var(--midnight);
             cursor: pointer;
             div {
                 display: flex;
@@ -195,8 +195,8 @@
             }
         }
         li.selected {
-            color: $snow;
-            background-color: $paint;
+            color: var(--snow);
+            background-color: var(--paint);
         }
     }
 }

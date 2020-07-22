@@ -23,7 +23,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    background-color: $candy;
+                    background-color: var(--candy);
                     border-radius: 3px;
                     padding: 7px;
                     p {
@@ -38,7 +38,7 @@
                     height: 100%;
                     margin: 0 7px;
                     width: 100%;
-                    background-color: $midnight;
+                    background-color: var(--midnight);
                     padding: 7px;
                     border-radius: 3px;
                     .queueForm {
@@ -56,7 +56,7 @@
                         }
                         label {
                             font-size: 12px;
-                            color: $melt;
+                            color: var(--melt);
                             font-weight: 600;
                             text-transform: uppercase;
                             letter-spacing: 0.5px;
@@ -74,7 +74,7 @@
                             -webkit-appearance: none;
                             -moz-appearance: none;
                             &:focus {
-                                border-color: $candy;
+                                border-color: var(--candy);
                             }
                             &:first-child {
                                 margin-bottom: 7px;
@@ -95,12 +95,12 @@
                             margin: 0px;
                             li {
                                 font-weight: 400;
-                                color: $melt;
+                                color: var(--melt);
                                 @include font-size($form-p-font-sizes);
                             }
                         }
                         b {
-                            color: $candy;
+                            color: var(--candy);
                             @include font-size($form-p-font-sizes);
                         }
                     }
@@ -115,17 +115,17 @@
                         min-width: 100px;
                         width: 100%;
                         height: 100%;
-                        background-color: $slate;
-                        color: $snow;
+                        background-color: var(--slate);
+                        color: var(--snow);
                         border: none;
                         font-size: 18px;
                         letter-spacing: 2px;
                         font-weight: 600;
                         padding: 7px;
                         border-radius: 3px;
-                        box-shadow: 0 0 3px $midnight;
+                        box-shadow: 0 0 3px var(--midnight);
                         &:hover {
-                            background-color: $slateL;
+                            background-color: var(--slateL);
                         }
                     }
                 }
@@ -143,7 +143,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    background-color: $paint;
+                    background-color: var(--paint);
                     border-radius: 3px;
                     padding: 7px;
                     p {
@@ -165,7 +165,7 @@
                         flex-direction: column;
                         height: 100%;
                         width: 50%;
-                        //background-color: $midnight;
+                        //background-color: var(--midnight);
                         margin: 0 3.5px 0 0;
                         border-radius: 3px;
                         box-sizing: border-box;
@@ -179,7 +179,7 @@
                             justify-content: center;
                             align-items: center;
                             padding: 7px;
-                            background-color: $midnightH;
+                            background-color: var(--midnightH);
                             border-radius: 3px;
                             img {
                                 height: 40px;
@@ -193,18 +193,18 @@
                                 margin-right: auto;
                                 h1 {
                                     font-size: 28px;
-                                    color: $paint;
+                                    color: var(--paint);
                                     span {
                                         font-size: 21px;
-                                        background-color: $paint;
+                                        background-color: var(--paint);
                                         padding: 0px 7px;
-                                        color: $snow;
+                                        color: var(--snow);
                                         border-radius: 3px;
                                         margin-left: 7px;
                                     }
                                 }
                                 p {
-                                    color: $melt;
+                                    color: var(--melt);
                                     font-size: 11px;
                                 }
                             }
@@ -213,7 +213,7 @@
                     .loungeBodyChat {
                         height: 100%;
                         width: 50%;
-                        background-color: $midnight;
+                        background-color: var(--midnight);
                         //padding: 7px;
                         margin: 0 0 0 3.5px;
                         border-radius: 3px;
@@ -222,7 +222,7 @@
                         cursor: not-allowed;
                         .loungeMessagesFeed {
                             height: 100%;
-                            background-color: $midnight;
+                            background-color: var(--midnight);
                             overflow-y: scroll;
                             padding: 7px;
                             ul {
@@ -256,7 +256,7 @@
                                         }
                                         span {
                                             font-weight: 600;
-                                            color: $melt;
+                                            color: var(--melt);
                                             font-size: 9px;
                                         }
                                     }
@@ -264,7 +264,7 @@
                                 .loungeMessageSent {
                                     display: flex;
                                     text-align: right;
-                                    background-color: $paint;
+                                    background-color: var(--paint);
                                     flex-direction: row-reverse;
                                     margin-left: auto;
                                     .loungeMessageIcon {
@@ -280,12 +280,12 @@
                                             margin-bottom: 1px;
                                         }
                                         span {
-                                            color: $midnightH;
+                                            color: var(--midnightH);
                                         }
                                     }
                                 }
                                 .loungeMessageReceived {
-                                    background-color: $midnightL;
+                                    background-color: var(--midnightL);
                                 }
                             }
                         }
@@ -297,13 +297,13 @@
                                 margin: 0px;
                                 width: 100%;
                                 resize: none;
-                                border: solid 1px $midnight;
-                                color: $snow;
-                                background-color: $midnightH;
+                                border: solid 1px var(--midnight);
+                                color: var(--snow);
+                                background-color: var(--midnightH);
                                 border-radius: 2px;
                                 padding: 7px;
                                 &:focus {
-                                    border-color: $candy;
+                                    border-color: var(--candy);
                                 }
                             }
                         }
@@ -321,28 +321,28 @@
                         min-width: 100px;
                         width: 100%;
                         height: 100%;
-                        background-color: $candy;
-                        color: $snow;
+                        background-color: var(--candy);
+                        color: var(--snow);
                         border: none;
                         font-size: 18px;
                         letter-spacing: 2px;
                         font-weight: 600;
                         padding: 7px;
                         border-radius: 3px;
-                        box-shadow: 0 0 3px $midnight;
+                        box-shadow: 0 0 3px var(--midnight);
                         &:first-child {
                             margin-bottom: 7px;
-                            background-color: $paint;
+                            background-color: var(--paint);
                             &:hover {
-                                background-color: $paintL;
+                                background-color: var(--paintL);
                             }
                         }
                         &:hover {
-                            background-color: $candyL;
+                            background-color: var(--candyL);
                         }
                         &:disabled {
                             cursor: not-allowed;
-                            background-color: $paintL;
+                            background-color: var(--paintL);
                         }
                     }
                 }

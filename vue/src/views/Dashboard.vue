@@ -128,6 +128,8 @@ import UserGameAdd from "@/views/UserGameAdd";
 import Queue from "@/components/Queue";
 import Settings from "@/components/Settings";
 
+import { getUserSettings } from "@/services/user.api";
+
 import { mapGetters } from "vuex";
 
 export default {
@@ -165,6 +167,15 @@ export default {
       forum: "forum",
       //notification: true,
     };
+  },
+  async mounted() {
+    // on mount we check if the user has nightmode on or not
+    let htmlElement = document.documentElement;
+    const response = await getUserSettings();
+
+    if(!response.data[0].nightmode == 1) {
+      htmlElement.setAttribute('theme', 'light');
+    }
   },
   methods: {
     // Triggered when `childtodashboard` event is emitted by the child. <---- needs cleaning

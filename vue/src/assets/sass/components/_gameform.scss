@@ -28,9 +28,9 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
     &:first-child>p {
         @include font-size($form-p-font-sizes);
         margin-top: 10px;
-        color: $melt;
+        color: var(--melt);
         b {
-            color: $candy;
+            color: var(--candy);
         }
     }
 }
@@ -50,7 +50,7 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         p,
         label {
             @include font-size($form-p-font-sizes);
-            color: $melt;
+            color: var(--melt);
             margin: 0;
         }
         label {
@@ -74,10 +74,10 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         select {
             color: snow;
             border-radius: 3px;
-            background-color: $midnightL;
-            border: 1px solid $midnightH;
+            background-color: var(--midnightL);
+            border: 1px solid var(--midnightH);
             &:focus {
-                border-color: $candy;
+                border-color: var(--candy);
             }
         }
         select {
@@ -87,15 +87,15 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
             appearance: none;
         }
         button {
-            background-color: $candy;
-            color: $snow;
+            background-color: var(--candy);
+            color: var(--snow);
             border: none;
             border-radius: 3px;
             padding: 15px;
             font-weight: 600;
             margin-top: 30px;
             &:hover {
-                background-color: $candyL;
+                background-color: var(--candyL);
             }
         }
     }

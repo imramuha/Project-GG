@@ -11,7 +11,7 @@
         height: auto;
         fill: red !important;
         &:hover {
-            color: $melt;
+            color: var(--melt);
         }
     }
     a:first-child {
@@ -19,19 +19,19 @@
     }
     .loginButton {
         margin: 10px 30px 0 0;
-        border: 2px solid $melt;
+        border: 2px solid var(--melt);
         border-radius: 3px;
         padding: 6px 20px;
         &:hover {
-            background-color: $midnightL;
+            background-color: var(--midnightL);
         }
     }
     a {
-        color: $melt;
+        color: var(--melt);
         &:hover {
             text-decoration: none;
-            color: $snow;
-            border-color: $snow;
+            color: var(--snow);
+            border-color: var(--snow);
         }
     }
 }

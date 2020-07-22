@@ -1,14 +1,14 @@
 .sidenavContainer {
     display: flex;
-    background-color: $midnightL;
+    background-color: var(--midnightL);
     flex-direction: column;
     padding: 0px 7px 0 0px;
     position: relative;
     .sidenav {
         position: relative;
         display: flex;
-        background-color: $midnightH;
-        box-shadow: 0 0 3px $midnightH;
+        background-color: var(--midnightH);
+        box-shadow: 0 0 3px var(--midnightH);
         flex-direction: column;
         justify-content: space-between;
         box-sizing: border-box;
@@ -19,17 +19,17 @@
             cursor: pointer;
             width: auto;
             padding: 7px;
-            border: 4px solid $snow;
-            background-color: $candy;
+            border: 4px solid var(--snow);
+            background-color: var(--candy);
             border-radius: 50%;
-            color: $snow;
+            color: var(--snow);
             font-size: 21px;
             position: absolute;
             bottom: 50%;
             &:hover {
-                color: $snow;
-                border-color: $snow;
-                background-color: $candyL;
+                color: var(--snow);
+                border-color: var(--snow);
+                background-color: var(--candyL);
                 transform: 0.3s;
             }
         }
@@ -46,29 +46,29 @@
                     margin-bottom: 7px;
                 }
                 &:last-child {
-                    color: $candy;
+                    color: var(--candy);
                     &:hover {
-                        color: $candyL;
+                        color: var(--candyL);
                     }
                 }
                 &:hover {
-                    color: $melt;
+                    color: var(--melt);
                 }
             }
             button {
-                border: 2px solid $melt;
+                border: 2px solid var(--melt);
                 border-radius: 20px;
                 padding: 6px 20px;
                 font-size: 11px;
-                color: $melt;
-                background-color: $midnightL;
+                color: var(--melt);
+                background-color: var(--midnightL);
                 width: 100%;
                 border-radius: 5px;
                 //margin-top: 10px;
                 &:hover {
                     text-decoration: none;
                     cursor: pointer;
-                    color: $snow;
+                    color: var(--snow);
                 }
             }
         }
