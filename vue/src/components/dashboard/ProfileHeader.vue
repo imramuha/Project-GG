@@ -1,13 +1,15 @@
 <template>
   <div class="contentHeader">
-    <div class="userImage" v-if="user.image">
+    <div v-if="loading" class="lds-ripple"><div></div><div></div></div>
+
+    <div class="userImage" v-else-if="user.image && !loading">
       <img :src="user.image" />
     </div>
-    <div class="userImage" v-else>
+    <div v-else-if="!user.image && !loading" class="userImage">
       <img src="@/assets/images/profile.jpeg" />
     </div>
 
-    <div class="userDataContainer">
+    <div v-if="!loading" class="userDataContainer">
       <div class="userData">
         <div class="userDataLeft">
           <h1>{{ user.username }}</h1>
@@ -46,6 +48,7 @@ export default {
     return {
       user: [],
       reviewscore: 0,
+      loading: true,
     };
   },
   async mounted() {
@@ -61,6 +64,7 @@ export default {
         });
 
         this.reviewscore = score / response.data.reviews.length;
+        this.loading = false;
       });
     } catch (error) {
       console.log(error);
