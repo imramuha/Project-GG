@@ -112,7 +112,6 @@ import Inbox from "@/components/dashboard/Inbox";
 import Feed from "@/components/dashboard/Feed";
 import Games from "@/components/dashboard/Games";
 import Posts from "@/components/dashboard/Posts";
-import News from "@/components/dashboard/News";
 
 import SearchInput from "@/components/SearchInput";
 import UserSearch from "@/components/UserSearch";
@@ -138,7 +137,7 @@ export default {
     Post,
     Games,
     Feed,
-    News,
+    
     Inbox,
     Queue,
     Reviews,
@@ -187,8 +186,6 @@ export default {
         this.mainComponent = Feed;
       } else if (value == "inbox") {
         this.mainComponent = Inbox;
-      } else if (value == "news") {
-        this.mainComponent = News;
       } else if (value == "games") {
         this.contentActive = true;
         this.mainComponent = Games;

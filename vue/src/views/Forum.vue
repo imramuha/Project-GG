@@ -21,7 +21,13 @@
         Your likes
       </button>
     </div>
-    <div class="forumPosts">
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div v-if="!loading" class="forumPosts">
       <template>
         <ForumPostCard
           v-on:emitToForum="emitToOverscreen"
@@ -44,6 +50,7 @@ export default {
     return {
       posts: [],
       active: "new",
+      loading: true,
     };
   },
   computed: {
@@ -106,6 +113,7 @@ export default {
     await this.fetchTopPosts();
     await this.fetchLikedPosts();
     this.posts = this.getNewPosts.data;
+    this.loading = false;
     console.log(this.posts);
   },
 };

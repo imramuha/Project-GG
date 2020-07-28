@@ -5,7 +5,13 @@
       :messages="messages"
       @new="saveNewMessage"
     />
-    <MessagersList :friends="friends" @selected="startConversationWith" />
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <MessagersList v-else :friends="friends" @selected="startConversationWith" />
   </div>
 </template>
 
@@ -26,7 +32,8 @@ export default {
       messages: [],
       friends: [],
       // change this
-      user: []
+      user: [], 
+      loading: true,
     };
   },
   mounted() {
@@ -47,6 +54,7 @@ export default {
 
       getAllFriends().then(response => {
         this.friends = response.data;
+        this.loading = false;
       });
     } catch (error) {
       console.log(error);

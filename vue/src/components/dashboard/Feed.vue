@@ -1,6 +1,10 @@
 <template>
   <div class="feed">
-    <div class="feedNews">
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple"><div></div><div></div></div>
+    </div>
+
+    <div v-else-if="!loading" class="feedNews">
       <div class="feedNewsHeader">
         <h1>News</h1>
         <button  :class="[active === 0 ? 'newsButtonActive' : 'newsButtonDeactive']" @click="slide(0)" />
@@ -16,6 +20,7 @@
         <p> {{ newsItem.text }}</p>
       </div>
     </div>
+
     <div class="feedHistory">
       <ul v-if="this.getHistoryNotifications.length">
         <li
@@ -51,6 +56,7 @@ export default {
     return {
       news: [],
       active: 0,
+      loading: true,
     };
   },
   computed: {
@@ -66,6 +72,7 @@ export default {
     try {
       const response = await getNews();
       this.news = response.data;
+      this.loading = false;
     } catch (error) {
       console.log(error);
     }

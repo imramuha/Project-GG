@@ -1,6 +1,8 @@
 <template>
   <div class="contentHeader">
-    <div v-if="loading" class="lds-ripple"><div></div><div></div></div>
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple"><div></div><div></div></div>
+    </div>
 
     <div class="userImage" v-else-if="user.image && !loading">
       <img :src="user.image" />

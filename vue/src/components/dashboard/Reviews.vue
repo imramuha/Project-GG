@@ -1,23 +1,43 @@
 <template>
   <div class="reviewsBoard">
-    <div v-if="this.mode === 'received' && userreviews.length > 0" class="reviews">
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <div
+      v-if="this.mode === 'received' && userreviews.length > 0 && !loading"
+      class="reviews"
+    >
       <ReviewCard
         v-for="userreview in userreviews"
         v-bind:key="userreview.id"
         :review="userreview"
       />
     </div>
-    <div v-else-if="this.mode === 'given' && userpostedreviews.length > 0" class="reviews">
+    <div
+      v-else-if="
+        this.mode === 'given' && userpostedreviews.length > 0 && !loading
+      "
+      class="reviews"
+    >
       <ReviewCard
         v-for="userpostedreview in userpostedreviews"
         v-bind:key="userpostedreview.id"
         :review="userpostedreview"
       />
     </div>
-    <div v-else class="reviews"><h1 class="emptyReviews">Sorry, but there no reviews were found.</h1></div>
+    <div v-else class="reviews">
+      <h1 class="emptyReviews">Sorry, but there no reviews were found.</h1>
+    </div>
 
     <div class="reviewsFooter">
-      <div v-if="this.mode === 'received' && pagination.lastPage > 1" class="reviewsPagination">
+      <div
+        v-if="this.mode === 'received' && pagination.lastPage > 1"
+        class="reviewsPagination"
+      >
         <button
           v-on:click="fetchPaginatedReviews(pagination.prevPage)"
           :disabled="!pagination.prevPage"
@@ -36,8 +56,10 @@
         </button>
       </div>
 
-
-      <div v-else-if="this.mode === 'given' && postedPagination.lastPage > 1" class="reviewsPagination">
+      <div
+        v-else-if="this.mode === 'given' && postedPagination.lastPage > 1"
+        class="reviewsPagination"
+      >
         <button
           v-on:click="fetchPaginatedPostedReviews(postedPagination.prevPage)"
           :disabled="!postedPagination.prevPage"
@@ -83,7 +105,7 @@ export default {
   components: { ReviewCard },
   data() {
     return {
-      isLoading: true,
+      loading: true,
       userreviews: [],
       userpostedreviews: [],
       url_received: "/api/frontend/userreviews",
@@ -91,11 +113,11 @@ export default {
       pagination: [],
       postedPagination: [],
       mode: "received",
-      isActive: "received"
+      isActive: "received",
     };
   },
   computed: {
-    ...mapGetters("Review", ["getUserReviews", "getUserPostedReviews"])
+    ...mapGetters("Review", ["getUserReviews", "getUserPostedReviews"]),
   },
   methods: {
     ...mapActions("Review", ["fetchUserReviews", "fetchUserPostedReviews"]),
@@ -105,7 +127,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url
+        prevPage: data.prev_page_url,
       };
       this.pagination = pagination;
     },
@@ -114,7 +136,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url
+        prevPage: data.prev_page_url,
       };
       this.postedPagination = pagination;
     },
@@ -141,7 +163,7 @@ export default {
     received() {
       this.mode = "received";
       this.isActive = "received";
-    }
+    },
   },
 
   async mounted() {
@@ -151,9 +173,11 @@ export default {
 
       this.userreviews = this.getUserReviews.data;
       this.createPagination(this.getUserReviews);
+      this.loading = false;
     } else {
       this.userreviews = this.getUserReviews.data;
       this.createPagination(this.userreviews);
+      this.loading = false;
     }
 
     // Make network request if the data is empty
@@ -162,11 +186,13 @@ export default {
 
       this.userpostedreviews = this.getUserPostedReviews.data;
       this.createPostedPagination(this.getUserPostedReviews);
+      this.loading = false;
     } else {
       this.userpostedreviews = this.getUserPostedReviews.data;
       this.createPostedPagination(this.userpostedreviews);
+      this.loading = false;
     }
-  }
+  },
 };
 </script>
 

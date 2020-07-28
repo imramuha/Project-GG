@@ -1,13 +1,17 @@
 <template>
   <div class="gamesContainer">
-    <div v-if="usergames" class="games">
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple"><div></div><div></div></div>
+    </div>
+    
+    <div v-if="usergames && !loading" class="games">
       <GameCard
         v-for="usergame in usergames"
         v-bind:key="usergame.id"
         :game="usergame"
       />
     </div>
-    <div v-else class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
+    <div v-else-if="!usergames && loading" class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
     <div class="gamesFooter">
       <div v-if="pagination.lastPage > 1" class="gamesPagination">
         <button
@@ -50,7 +54,8 @@ export default {
       isLoading: true,
       usergames: [],
       url: "/api/frontend/usergames",
-      pagination: []
+      pagination: [],
+      loading: true,
     };
   },
   computed: {
@@ -97,10 +102,11 @@ export default {
       this.usergames = this.getUserGames.data;
       this.createPagination(this.getUserGames);
 
-      console.log(this.pagination);
+    this.loading = false;
     } else {
       this.usergames = this.getUserGames.data;
       this.createPagination(this.usergames);
+      this.loading = false;
     }
   }
 };

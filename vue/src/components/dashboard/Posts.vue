@@ -1,6 +1,10 @@
 <template>
   <div class="postsboard">
-    <div v-if="userposts" class="posts">
+    <div v-if="loading" class="ldsContainer">
+      <div class="ldsRipple"><div></div><div></div></div>
+    </div>
+
+    <div v-if="userposts && !loading" class="posts">
       <PostCard
         v-for="userpost in userposts"
         :key="userpost.id"
@@ -8,7 +12,9 @@
         v-on:emitToPosts="onPostCardClick"
       />
     </div>
-    <div v-else class="posts"><h1 class="emptyPosts">Sorry, but no posts were found, try posting one.</h1></div>
+
+    <div v-else-if="!userposts" class="posts"><h1 class="emptyPosts">Sorry, but no posts were found, try posting one.</h1></div>
+
     <div class="postsFooter">
       <div v-if="pagination.lastPage > 1" class="postsPagination">
         <button
@@ -47,10 +53,10 @@ export default {
   components: { PostCard },
   data() {
     return {
-      isLoading: true,
       userposts: [],
       pagination: [],
       url: "/api/frontend/userposts",
+        loading: true,
     };
   },
   computed: {
@@ -105,9 +111,11 @@ export default {
 
       this.userposts = this.getUserPosts.data;
       this.createPagination(this.getUserPosts);
+      this.loading = false;
     } else {
       this.userposts = this.getUserPosts.data;
       this.createPagination(this.userposts);
+      this.loading = false;
     }
   },
 };
