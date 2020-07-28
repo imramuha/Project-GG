@@ -33,8 +33,11 @@
           class="userReviewScoreBar"
           v-bind:style="{ height: '100%', width: reviewscore + '%' }"
         ></div>
-        <div class="userReviewScorePercentage">
+        <div v-if="reviewscore > 0" class="userReviewScorePercentage">
           {{ reviewscore.toFixed(2) }} %
+        </div>
+        <div v-else class="userReviewScoreEmpty">
+          <span>You haven't received any reviews yet.</span>
         </div>
       </div>
     </div>
@@ -66,6 +69,7 @@ export default {
         });
 
         this.reviewscore = score / response.data.reviews.length;
+
         this.loading = false;
       });
     } catch (error) {

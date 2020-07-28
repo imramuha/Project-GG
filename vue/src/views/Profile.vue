@@ -22,8 +22,11 @@
             class="profileHeaderScorebar"
             v-bind:style="{ height: '100%', width: reviewscore + '%' }"
           ></div>
-          <div class="profileHeaderScorePercentage">
-            {{ reviewscore.toFixed(2) }}%
+          <div v-if="reviewscore > 0" class="profileHeaderScorePercentage">
+            {{ reviewscore.toFixed(2) }} %
+          </div>
+          <div v-else class="profileHeaderScoreEmpty">
+            <span>You haven't received any reviews yet.</span>
           </div>
         </div>
       </div>
@@ -158,12 +161,12 @@ export default {
       reviews_pagination: [],
       games: [],
       games_url: "/api/frontend/profilegames/",
-      games_pagination: []
+      games_pagination: [],
     };
   },
   computed: {
     ...mapGetters("Game", ["getProfileGames"]),
-    ...mapGetters("Review", ["getProfileReviews"])
+    ...mapGetters("Review", ["getProfileReviews"]),
   },
   methods: {
     ...mapActions("Game", ["fetchProfileGames"]),
@@ -174,7 +177,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url
+        prevPage: data.prev_page_url,
       };
       this.games_pagination = pagination;
     },
@@ -183,7 +186,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url
+        prevPage: data.prev_page_url,
       };
       this.reviews_pagination = pagination;
     },
@@ -211,31 +214,32 @@ export default {
       // make a call and send the data ->
       let relationData = {
         relation: data,
-        profile_id: this.friend.id
+        profile_id: this.friend.id,
       };
       try {
-        await updateRelation(relationData).then(response => {
+        await updateRelation(relationData).then((response) => {
           this.$store
             .dispatch("notification", {
-              message: response.data[0].response
+              message: response.data[0].response,
             })
             .then(() => {
               //this.$router.push('dashboard');
             })
-            .catch(errors => {
+            .catch((errors) => {
               console.log(errors);
             });
         });
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
   async mounted() {
     try {
       const response = await getFriend(this.data);
       this.friend = response.data.user[0];
 
+      console.log(response.data);
       var score = 0;
 
       // gets the average score of all the reviews
@@ -243,7 +247,11 @@ export default {
         score += parseFloat(value.score);
       });
 
+      console.log(score);
+
       this.reviewscore = score / response.data.reviews.length;
+
+      console.log(this.reviewscore);
 
       //console.log(this.friend.id);
     } catch (error) {
@@ -288,7 +296,7 @@ export default {
       // this.createGamesPagination(this.getgames);
       this.createGamesPagination(this.getProfileGames);
     }
-  }
+  },
 };
 </script>
 

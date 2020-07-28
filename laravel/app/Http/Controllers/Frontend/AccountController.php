@@ -103,7 +103,7 @@ class AccountController extends Controller
     public function showUser ($id) {
         
         $user = User::where('id', $id)->get();
-        $reviews = Review::where('user_id', '=', auth()->id())->with('reviewer')->get();
+        $reviews = Review::where('user_id', '=', $id)->with('reviewer')->get();
 
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }

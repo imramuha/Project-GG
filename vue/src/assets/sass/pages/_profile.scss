@@ -70,6 +70,16 @@
                                 left: 50%;
                                 //top: 25%;
                             }
+                            .profileHeaderScoreEmpty {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 100%;
+                                font-size: 15px;
+                                padding: 3px;
+                                font-weight: 600;
+                                letter-spacing: 1px;
+                            }
                         }
                     }
                     .profileHeaderButtons {
