@@ -1,5 +1,43 @@
 <template>
   <div class="privacy">
+    <div class="toc">
+      <h2>TABLE OF CONTENTS</h2>
+
+      <ol>
+        <li><a href="#information">WHAT INFORMATION DO WE COLLECT?</a></li>
+
+        <li><a href="#useinformation">HOW DO WE USE YOUR INFORMATION?</a></li>
+
+        <li>
+          <a href="#shareinformation"
+            >WILL YOUR INFORMATION BE SHARED WITH ANYONE?</a
+          >
+        </li>
+
+        <li>
+          <a href="#periodinformation">HOW LONG DO WE KEEP YOUR INFORMATION?</a>
+        </li>
+
+        <li><a href="#privacy">WHAT ARE YOUR PRIVACY RIGHTS?</a></li>
+
+        <li><a href="#features">CONTROLS FOR DO-NOT-TRACK FEATURES</a></li>
+
+        <li><a href="#notice">DO WE MAKE UPDATES TO THIS NOTICE?</a></li>
+
+        <li>
+          <a href="#contact">HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</a>
+        </li>
+
+        <li>
+          <a href="#data"
+            >HOW CAN YOU REVIEW, UPDATE, DELETE DATA WE COLLECT FROM YOU?</a
+          >
+        </li>
+      </ol>
+      <router-link class="homeButton" to="/"
+        ><i class="fas fa-home"></i
+      ></router-link>
+    </div>
     <div class="content">
       <h1>PRIVACY NOTICE</h1>
 
@@ -404,44 +442,6 @@
         contact: admin@projectgg.com. We will respond to your request within 30
         days.
       </p>
-    </div>
-    <div class="toc">
-      <h2>TABLE OF CONTENTS</h2>
-
-      <ol>
-        <li><a href="#information">WHAT INFORMATION DO WE COLLECT?</a></li>
-
-        <li><a href="#useinformation">HOW DO WE USE YOUR INFORMATION?</a></li>
-
-        <li>
-          <a href="#shareinformation"
-            >WILL YOUR INFORMATION BE SHARED WITH ANYONE?</a
-          >
-        </li>
-
-        <li>
-          <a href="#periodinformation">HOW LONG DO WE KEEP YOUR INFORMATION?</a>
-        </li>
-
-        <li><a href="#privacy">WHAT ARE YOUR PRIVACY RIGHTS?</a></li>
-
-        <li><a href="#features">CONTROLS FOR DO-NOT-TRACK FEATURES</a></li>
-
-        <li><a href="#notice">DO WE MAKE UPDATES TO THIS NOTICE?</a></li>
-
-        <li>
-          <a href="#contact">HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</a>
-        </li>
-
-        <li>
-          <a href="#data"
-            >HOW CAN YOU REVIEW, UPDATE, DELETE DATA WE COLLECT FROM YOU?</a
-          >
-        </li>
-      </ol>
-      <router-link class="homeButton" to="/"
-        ><i class="fas fa-home"></i
-      ></router-link>
     </div>
   </div>
 </template>

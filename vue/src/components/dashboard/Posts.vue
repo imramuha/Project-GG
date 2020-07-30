@@ -13,7 +13,7 @@
       />
     </div>
 
-    <div v-else-if="!userposts" class="posts"><h1 class="emptyPosts">Sorry, but no posts were found, try posting one.</h1></div>
+    <div v-if="!userposts.length && !loading" class="posts"><h1 class="emptyPosts">Sorry, there were no posts found made by you, try posting one.</h1></div>
 
     <div class="postsFooter">
       <div v-if="pagination.lastPage > 1" class="postsPagination">

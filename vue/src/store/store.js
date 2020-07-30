@@ -35,8 +35,16 @@ export default new Vuex.Store({
         },
         SET_NOTIFICATIONS(state, message) {
             const today = new Date();
-            const time =
-                today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            function addZeroBefore(n) {
+                return (n < 10 ? '0' : '') + n;
+            }
+
+            const hours = addZeroBefore(today.getHours());
+            const minutes = addZeroBefore(today.getMinutes());
+            const seconds = addZeroBefore(today.getSeconds());
+
+            const time = hours + ":" + minutes + ":" + seconds;
             message.time = time;
 
             // once ut gets over 10 items -> delete the lowest index

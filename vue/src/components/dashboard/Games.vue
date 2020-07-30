@@ -11,7 +11,7 @@
         :game="usergame"
       />
     </div>
-    <div v-else-if="!usergames && loading" class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
+    <div v-if="!usergames.length && !loading" class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
     <div class="gamesFooter">
       <div v-if="pagination.lastPage > 1" class="gamesPagination">
         <button
@@ -102,7 +102,7 @@ export default {
       this.usergames = this.getUserGames.data;
       this.createPagination(this.getUserGames);
 
-    this.loading = false;
+      this.loading = false;
     } else {
       this.usergames = this.getUserGames.data;
       this.createPagination(this.usergames);
