@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Authenticate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +10,8 @@ class LoginController extends Controller
 {
     //validating and signing in
     public function __invoke (Request $request) {
+
+        return $request;
 
         $this->validate(request(), [
             'email' => 'required|email',
