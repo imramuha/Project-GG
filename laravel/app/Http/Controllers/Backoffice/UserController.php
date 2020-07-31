@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Backoffice;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use App\Role;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -29,10 +29,9 @@ class UserController extends Controller
     {
         //
         $users = User::with('roles')->get();
-        $role = Role::get();
-        $userRole = $role->users()->wherePivot('user_id', auth('web')->user()->id);
-
-        //$role = $userRole->name;
+        $user = User::with('roles')->find(auth('web')->user()->id);
+        $userRole = $user->roles[0]->name;
+      
         return view('backoffice.users.user_show', compact('users', 'userRole'));
     }
 

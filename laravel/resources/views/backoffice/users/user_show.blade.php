@@ -7,7 +7,7 @@
             </div>
             <div class="x_content">        
                 <table id="datatable-buttons" class="table table-dark table-bordered">
-                {{ $role }}
+                {{ $userRole }}
                     <thead class="thead-darklight">
                         <tr>
                             <th>Username</th>
@@ -19,8 +19,6 @@
                     </thead>
                     <tbody>
                     @foreach ($users as $user)  
-                        @if ($role === 'Mod') 
-                            @if ($user->role_id === 3)
                             <tr>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
@@ -29,23 +27,14 @@
                                         {{$role->name}} 
                                     @endforeach</td>
                                 <td>
-                                    Buttons after role
+                                    @if($userRole === 'Admin')
+                                        <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
+                                        <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
+                                    @else 
+                                        <a>Only accessible for ADMINS</a>
+                                    @endif
                                 </td>
                             </tr>
-                            @endif
-                        @else
-                            <tr>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at }}</td>
-                                <td>@foreach($user->roles as $role)
-                                        {{$role->name}} 
-                                    @endforeach</td>
-                                <td>
-                                    Buttons after role
-                                </td>
-                            </tr>
-                        @endif
                     @endforeach
 
                     </tbody>
