@@ -34,12 +34,23 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
         ]);;
 
         Route::resource('users', 'UserController');
+        Route::resource('posts', 'PostController');
+        Route::resource('games', 'GameController');
+        Route::resource('reviews', 'ReviewController');
+        Route::resource('reports', 'ReportController');
+        Route::resource('news', 'NewsController');
+        Route::resource('comments', 'CommentController');
 
     });
 });
 
-Route::get('/login', 'Backoffice\LoginController@showLoginForm');
-Route::post('/login', 'Backoffice\LoginController@login')->name('login');
-Route::post('/logout', 'Backoffice\LoginController@logout')->name('logout');
+
+Route::get('/admin', 'Backoffice\Auth\AdminController@index'); 
+Route::get('/mod', 'Backoffice\Auth\ModController@index');
+Route::get('/no-acces', 'Backoffice\Auth\NoAccesController@index');
+
+Route::get('/login', 'Backoffice\Auth\LoginController@showLoginForm');
+Route::post('/login', 'Backoffice\Auth\LoginController@login')->name('login');
+Route::post('/logout', 'Backoffice\Auth\LoginController@logout')->name('logout');
 
 

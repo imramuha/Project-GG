@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Dashboard;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DashboardController extends Controller

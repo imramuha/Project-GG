@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backoffice;
+namespace App\Http\Controllers\Backoffice\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,16 +37,13 @@ class LoginController extends Controller
 
 
     protected function authenticated($request, $user) {
-
-        return redirect('/');
-            /*if($user->hasRole('admin')) {
-                return redirect('/admin');
-            } elseif ($user->hasRole('moderator')) {
-                return redirect('/moderator');
-            } else {
-                // Gotta add a view that tell if the user is banned or customer not allowed acces
-                return redirect('/no-acces');
-            }*/
+        if($user->role_id === 1) {
+            return redirect('/admin');
+        } elseif ($user->role_id === 2) {
+            return redirect('/mod');
+        } else {
+            return redirect('/no-acces');
+        }
     }
 
 

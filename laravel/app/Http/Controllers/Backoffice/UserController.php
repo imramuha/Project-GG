@@ -29,8 +29,11 @@ class UserController extends Controller
     {
         //
         $users = User::with('roles')->get();
+        $role = Role::get();
+        $userRole = $role->users()->wherePivot('user_id', auth('web')->user()->id);
 
-        return view('backoffice.users.user_show', compact('users'));
+        //$role = $userRole->name;
+        return view('backoffice.users.user_show', compact('users', 'userRole'));
     }
 
     /**

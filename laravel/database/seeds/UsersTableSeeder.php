@@ -17,18 +17,21 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@gg.com',
             'password' => bcrypt('admin123'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_id' => '1'
         ]);
         DB::table('users')->insert([
             'username' => 'UserGG',
             'email' => 'user@gg.com',
             'password' => bcrypt('user123'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_id' => '3'
         ]);
         DB::table('users')->insert([
             'username' => 'ModGG',
             'email' => 'mod@gg.com',
             'password' => bcrypt('mod123'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_id' => '2'
         ]);
         DB::table('users')->insert([
             'username' => 'Peeka',
