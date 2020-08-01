@@ -67,13 +67,22 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    /**
-     * The roles that belong to the user.
+       /**
+     * Get the role of users.
      */
-    public function roles()
+    public function role()
     {
-        return $this->belongsToMany('App\Models\Role', 'user_roles');
+        return $this->belongsTo('App\Models\Role', 'role_id');
     }
+
+    /**
+     * Get the status of users.
+     */
+    public function status()
+    {
+        return $this->belongsTo('App\Models\Status', 'status_id');
+    }
+
 
     /**
      * The users that belong to the role.
@@ -90,15 +99,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany('App\Models\Relation', 'user_relations', 'user_id_two')->withPivot(["user_id_one", "user_id_two"]);
     }
-
-    /**
-     * Get the roles of users.
-     */
-    public function status()
-    {
-        return $this->belongsTo('App\Models\Status', 'status_id');
-    }
-
 
     /**
      * get the comments the belong to this user

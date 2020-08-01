@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backoffice\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -37,9 +38,13 @@ class LoginController extends Controller
 
 
     protected function authenticated($request, $user) {
-        if($user->role_id === 1) {
+
+        $loggedUser = User::with('role')->find(auth('web')->user()->id);
+        ;
+
+        if($loggedUser->role->name === 'Admin') {
             return redirect('/admin');
-        } elseif ($user->role_id === 2) {
+        } elseif ($loggedUser->role->name === 'Mod') {
             return redirect('/mod');
         } else {
             return redirect('/no-acces');

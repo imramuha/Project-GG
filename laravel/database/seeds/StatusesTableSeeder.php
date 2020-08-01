@@ -29,5 +29,11 @@ class StatusesTableSeeder extends Seeder
         DB::table('statuses')->insert([
             "name"=> "busy",
         ]);
+        DB::table('statuses')->insert([
+            "name"=> "temporary-banned",
+        ]);
+        DB::table('statuses')->insert([
+            "name"=> "perma-bannaed",
+        ]);
     }
 }

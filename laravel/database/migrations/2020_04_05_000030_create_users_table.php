@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('last_active_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            //$table->integer('role_id')->unsigned()->index()->default(3)->nullable();
+            $table->integer('role_id')->unsigned()->index()->default(3)->nullable();
             $table->integer('status_id')->unsigned()->index()->default(1)->nullable();
         });
 

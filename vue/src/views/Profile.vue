@@ -132,7 +132,7 @@
         </div>
       </div>
 
-      <ReviewInput :id="friend.id" />
+      <ReviewInput  v-on:emitToProfile="getUserReviews"  :id="friend.id" />
     </div>
   </div>
 </template>
@@ -172,6 +172,23 @@ export default {
     ...mapActions("Game", ["fetchProfileGames"]),
     ...mapActions("Review", ["fetchProfileReviews"]),
 
+    async getUserReviews() {
+        if (!this.getProfileReviews.length) {
+        let url = this.reviews_url + this.friend.id;
+        await this.fetchProfileReviews(url);
+
+        this.reviews = this.getProfileReviews.data;
+        console.log(this.reviews);
+        this.createReviewsPagination(this.getProfileReviews);
+      } else {
+        this.reviews = this.getProfileReviews.data;
+        this.createReviewsPagination(this.getProfileReviews);
+        //this.createGamesPagination(this.reviews);
+      }
+    },
+    emitToProfile() {
+      this.$emit("emitToProfile");
+    },
     createGamesPagination(data) {
       let pagination = {
         currentPage: data.current_page,
@@ -272,20 +289,9 @@ export default {
       console.log(error);
     }
 
-    if (this.getProfileReviews.length == 0) {
-      let url = this.reviews_url + this.friend.id;
-      await this.fetchProfileReviews(url);
+    this.getUserReviews();
 
-      this.reviews = this.getProfileReviews.data;
-      console.log(this.reviews);
-      this.createReviewsPagination(this.getProfileReviews);
-    } else {
-      this.reviews = this.getProfileReviews.data;
-      this.createReviewsPagination(this.getProfileReviews);
-      //this.createGamesPagination(this.reviews);
-    }
-
-    if (this.getProfileGames.length == 0) {
+    if (!this.getProfileGames.length) {
       let url = this.games_url + this.friend.id;
       await this.fetchProfileGames(url);
 

@@ -1,8 +1,10 @@
-@extends('layouts.app') @section('content')
+@extends('app') @section('content')
 <div class="jumbotron bg-darklight">
     <h2 class="display-4 mb-5">Edit a User <a href="{{route('users.index')}}" class="btn btn-info btn-xs pull-right  mt-4"><i class="fa fa-chevron-left"></i> Back </a></h2>
-
-    <form method="post" action="{{ route('users.update', ['id' => $user->id]) }}" data-parsley-validate class="form-horizontal form-label-left pb-5">
+{{ $user }}
+{{ $roles }}
+{{ $statuses }}
+   <form method="post" action="{{ route('users.update', $user->id) }}" data-parsley-validate class="form-horizontal form-label-left pb-5">
 
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
            
@@ -25,11 +27,26 @@
                 </div>
 
                 <div class="col-4">
+                    <label>Status</label>
+                    <select id="inlineFormCustomSelect" class="form-control custom-select mr-sm-2" name="status_id">
+                        <option value="" selected disabled>Current: {{ old( 'status_id', $user->status->name) }}</option>
+                        @foreach($statuses as $status)
+                        <option value="{{ $status->id }}">
+                            {{ $status->name }}
+                        </option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('status_id'))
+                    <span class="help-block">{{ $errors->first('status_id') }} <br /></span> <br />
+                    @endif
+                </div>
+
+                <div class="col-4">
                     <label>Role</label>
                     <select id="inlineFormCustomSelect" class="form-control custom-select mr-sm-2" name="role_id">
-                        <option value="" selected disabled>Previous: {{ old( 'role_id', $user->roles->name) }}</option>
+                        <option value="" selected disabled>Current: {{ old( 'role_id', $user->roles[0]->name) }}</option>
                         @foreach($roles as $role)
-                        <option value="{{ $role->id }}">
+                        <option value="{{ $status->id }}">
                             {{ $role->name }}
                         </option>
                         @endforeach
@@ -45,7 +62,7 @@
             <div class="pull-left" >
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 <input name="_method" type="hidden" value="PUT">
-                <button type="submit" class="btn btn-success">Save User Changes</button>
+                <button type="submit" class="btn btn-success">Updates</button>
             </div>
         </div>
     </form>

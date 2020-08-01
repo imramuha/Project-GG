@@ -24,9 +24,7 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at }}</td>
-                                <td>@foreach($user->roles as $role)
-                                        {{$role->name}} 
-                                    @endforeach</td>
+                                <td>{{ $user->role->name }}</td>
                                 <td>
                                     @if($userRole === 'Admin')
                                         <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>

@@ -8,7 +8,7 @@ class Option extends Model
 {
     //
         /**
-     * The roles that belong to the user.
+     * The options that belong to the game.
      */
     public function game()
     {

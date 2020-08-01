@@ -39,6 +39,9 @@ export default {
     };
   },
   methods: {
+    emitToProfile() {
+      this.$emit("emitToProfile");
+    },
     async onSubmit() {
       this.errors = [];
 
@@ -61,6 +64,7 @@ export default {
               message: response.data[0].response,
             })
             .then(() => {
+              this.emitToProfile();
               //this.$router.push('dashboard');
             })
             .catch((errors) => {
@@ -69,10 +73,8 @@ export default {
             this.comment = null;
             this.rating = null;
           }).catch((errors) => {
-            console.log(errors.response.data.errors);
             if(errors) {
                 const err = errors.response.data.errors;
-              console.log(err);
               if(err.comment) {
                 this.errors.push(err.comment[0])
               } if(err.rating) {
@@ -82,8 +84,6 @@ export default {
                 this.errors.push( err.error[0])
               }
             }
-
-           
         });
       }
     }

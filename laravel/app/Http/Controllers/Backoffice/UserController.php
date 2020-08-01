@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Role;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -28,11 +29,10 @@ class UserController extends Controller
     public function index()
     { 
         //
-        $users = User::with('roles')->get();
+        $users = User::with('role')->get();
     
-        $user = User::with('roles')->find(auth('web')->user()->id);
-    
-        $userRole = $user->roles;
+        $user = User::with('role')->find(auth('web')->user()->id);    
+        $userRole = $user->role->name;
       
         return view('backoffice.users.user_show', compact('users', 'userRole'));
     }
@@ -44,13 +44,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        if(!auth()->user()->hasRole('admin')){
-            $roles = Role::where('name', '!=', 'admin')->get();
-        } else {
-            $roles = Role::get()->all();
-        }
-
-        return view('backoffice.users.user_create', compact('roles'));
     }
 
     /**
@@ -61,22 +54,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-          //
-          $this->validate($request, [
-            'username' => 'required|unique:users',
-            'email' => 'required|unique:users',
-            'password' => 'required',
-            'role_id' => 'required',
-        ]);
     
-        $user = User::create([
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-            'role_id' => $request->input('role_id'),
-        ]);
-    
-        return redirect()->route('users.index')->with('success', "The User with <strong>$user->email</strong> email has successfully been created.");
     }
 
     /**
@@ -87,21 +65,6 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-        try{
-            $user = User::findOrFail($id);
-            $params = [
-                'user' => $user,
-            ];
-            return view('backoffice.users.user_delete')->with($params);
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
-            }
-        }
     }
 
     /**
@@ -114,22 +77,22 @@ class UserController extends Controller
     {
         try
         {
-            $user = User::findOrFail($id);
-            if(!auth()->user()->hasRole('admin')){
-                $roles = Role::where('name', '!=', 'admin')->get();
-            } else {
-                $roles = Role::get()->all();
-            }
+            $user = User::with('status', 'role')->findOrFail($id);
+
+            $roles = Role::get();
+            $statuses = Status::get();
+
             $params = [
                 'user' => $user,
             ];
-            return view('backoffice.users.user_edit', compact('roles'))->with($params);
+
+            return view('backoffice.users.user_edit', compact('roles', 'statuses'))->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
             if ($ex instanceof ModelNotFoundException)
             {
-                return response()->view('errors.'.'404');
+                return response()->view('templates.'.'404');
             }
         }
     }
