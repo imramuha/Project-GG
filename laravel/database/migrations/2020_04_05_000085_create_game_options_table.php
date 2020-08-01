@@ -14,7 +14,7 @@ class CreateGameOptionsTable extends Migration
     public function up()
     {
         Schema::create('game_options', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('game_id')->nullable()->unsigned();
             $table->integer('option_id')->unsigned()->nullable();
             $table->timestamps();

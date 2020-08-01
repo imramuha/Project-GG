@@ -28,7 +28,6 @@ class NewsController extends Controller
     {
         //
         $news = News::get();
-
         return view('backoffice.news.news_show', compact('news'));
     }
 

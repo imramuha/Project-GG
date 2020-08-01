@@ -28,7 +28,7 @@ class ReviewController extends Controller
     public function index()
     {
         //
-        $reviews = Review::get();
+        $reviews = Review::with('reviewer', 'user')->get();
 
         return view('backoffice.reviews.review_show', compact('reviews'));
     }
@@ -95,6 +95,20 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
+        try
+        {
+            $review = Review::findOrFail($id);
+            $review->forceDelete();
+            
+            return redirect()->route('reviews.index')->with('success', "A Review with the ID of <strong>$review->id</strong> and comment of<strong>$review->comment</strong> has successfully been deleted from the database.");
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('templates.'.'404');
+            }
+        }
      
     }
 

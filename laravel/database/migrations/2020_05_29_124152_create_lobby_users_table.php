@@ -14,7 +14,7 @@ class CreateLobbyUsersTable extends Migration
     public function up()
     {
         Schema::create('lobby_users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('lobby_id')->nullable()->unsigned();
             $table->integer('user_id')->unsigned()->nullable()->unique();
             $table->timestamps();

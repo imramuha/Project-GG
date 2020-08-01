@@ -20,6 +20,7 @@
                     <tbody>
                     @foreach ($users as $user)  
                             <tr>
+                            <td>{{ $user->id }}</td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at }}</td>
@@ -28,7 +29,7 @@
                                     @endforeach</td>
                                 <td>
                                     @if($userRole === 'Admin')
-                                        <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
+                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
                                         <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
                                     @else 
                                         <a>Only accessible for ADMINS</a>

@@ -14,7 +14,7 @@ class CreateUserRelationsTable extends Migration
     public function up()
     {
         Schema::create('user_relations', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
             $table->integer('relation_id')->nullable();

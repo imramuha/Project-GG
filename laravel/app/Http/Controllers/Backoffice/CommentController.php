@@ -27,7 +27,7 @@ class CommentController extends Controller
     public function index()
     {
         //
-        $comments = Comment::get();
+        $comments = Comment::with('user', 'post')->get();
 
         return view('backoffice.comments.comment_show', compact('comments'));
     }
@@ -94,7 +94,20 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-     
+        try
+        {
+            $comment = Comment::findOrFail($id);
+            $comment->forceDelete();
+            
+            return redirect()->route('comments.index')->with('success', "A Comment with the ID of <strong>$comment->id</strong> and comment of<strong>$comment->comment</strong> has successfully been deleted from the database.");
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('templates.'.'404');
+            }
+        }
     }
 
     

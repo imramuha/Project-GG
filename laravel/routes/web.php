@@ -33,6 +33,42 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
             'as' => 'dashboard',
         ]);;
 
+        // delete user
+        Route::get('users/{id}/delete', [ 
+            'uses' => 'UserController@destroy',
+            'as' => 'users.delete',
+        ]);
+
+         // delete post
+        Route::get('posts/{id}/delete', [ 
+            'uses' => 'PostController@destroy',
+            'as' => 'posts.delete',
+        ]);
+
+        // delete review
+        Route::get('reviews/{id}/delete', [ 
+            'uses' => 'ReviewController@destroy',
+            'as' => 'reviews.delete',
+        ]);
+
+        // delete post
+        Route::get('news/{id}/delete', [ 
+            'uses' => 'NewsController@destroy',
+            'as' => 'news.delete',
+        ]);
+
+        // delete comment
+        Route::get('comments/{id}/delete', [ 
+            'uses' => 'CommentController@destroy',
+            'as' => 'comments.delete',
+        ]);
+
+          // delete game
+          Route::get('games/{id}/delete', [ 
+            'uses' => 'GameController@destroy',
+            'as' => 'games.delete',
+        ]);
+
         Route::resource('users', 'UserController');
         Route::resource('posts', 'PostController');
         Route::resource('games', 'GameController');

@@ -26,11 +26,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         //
         $users = User::with('roles')->get();
+    
         $user = User::with('roles')->find(auth('web')->user()->id);
-        $userRole = $user->roles[0]->name;
+    
+        $userRole = $user->roles;
       
         return view('backoffice.users.user_show', compact('users', 'userRole'));
     }
@@ -178,13 +180,14 @@ class UserController extends Controller
         {
             $user = User::findOrFail($id);
             $user->forceDelete();
+
             return redirect()->route('users.index')->with('success', "A User with the username <strong>$user->username</strong> and email <strong>$user->email</strong> has successfully been deleted from the database.");
         }
         catch (ModelNotFoundException $ex) 
         {
             if ($ex instanceof ModelNotFoundException)
             {
-                return response()->view('errors.'.'404');
+                return response()->view('templates.'.'404');
             }
         }
     }

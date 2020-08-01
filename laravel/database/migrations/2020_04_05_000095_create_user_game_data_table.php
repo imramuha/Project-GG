@@ -14,7 +14,7 @@ class CreateUserGameDataTable extends Migration
     public function up()
     {
         Schema::create('user_game_data', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('user_id')->nullable()->unsigned();
             $table->integer('game_id')->unsigned()->nullable();
             $table->integer('data_id')->nullable()->unsigned();

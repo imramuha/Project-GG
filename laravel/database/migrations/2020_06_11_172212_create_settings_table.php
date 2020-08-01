@@ -14,7 +14,7 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->boolean('nightmode')->default(True);
             $table->boolean('anonymity')->default(False);
             $table->boolean('voice')->default(False);

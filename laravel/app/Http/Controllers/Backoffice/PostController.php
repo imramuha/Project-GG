@@ -93,7 +93,20 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-     
+        try
+        {
+            $post = Post::findOrFail($id);
+            $post->forceDelete();
+            
+            return redirect()->route('posts.index')->with('success', "A Post with the ID of <strong>$post->id</strong> and title of<strong>$post->title</strong> has successfully been deleted from the database.");
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('templates.'.'404');
+            }
+        }
     }
 
     
