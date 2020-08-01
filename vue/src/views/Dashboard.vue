@@ -44,7 +44,7 @@
       <ProfileHeader v-on:emitToOverscreen="onOverscreenClick" />
       <div class="contentNav">
         <template>
-          <DashboardNav v-on:emitToDashboard="onDashboardNavClick" />
+          <DashboardNav :content="this.emit" v-on:emitToDashboard="onDashboardNavClick" />
         </template>
       </div>
       <div class="contentMain">

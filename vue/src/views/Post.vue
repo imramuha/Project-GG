@@ -83,12 +83,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await getPost(this.data);
-      this.post = response.data;
-      this.comments = response.data.comments;
-      console.log(this.comments);
-      this.likes = this.post.liked_posts.length;
-      console.log(this.post);
+      this.getPostData(this.data)
     } catch (error) {
       console.log(error);
     }
@@ -111,7 +106,8 @@ export default {
               message: response.data[0].response,
             })
             .then(() => {
-              //this.$router.push('dashboard');
+              console.log('comment was posted');
+              this.getPostData(this.data)
             })
             .catch((errors) => {
               console.log(errors);
@@ -156,6 +152,12 @@ export default {
         console.log(error);
       }
     },
+    async getPostData(data) {
+        const response = await getPost(data);
+        this.post = response.data;
+        this.comments = response.data.comments;
+        this.likes = this.post.liked_posts.length;
+    }
   },
 };
 </script>

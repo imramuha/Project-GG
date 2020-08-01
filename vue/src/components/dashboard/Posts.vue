@@ -106,7 +106,7 @@ export default {
 
   async mounted() {
     // Make network request if the data is empty
-    if (this.getUserPosts.length === 0) {
+    if (!this.getUserPosts.length) {
       await this.fetchUserPosts(this.url);
 
       this.userposts = this.getUserPosts.data;

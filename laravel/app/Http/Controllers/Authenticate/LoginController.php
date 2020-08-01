@@ -11,8 +11,6 @@ class LoginController extends Controller
     //validating and signing in
     public function __invoke (Request $request) {
 
-        return $request;
-
         $this->validate(request(), [
             'email' => 'required|email',
             'password' => 'required'

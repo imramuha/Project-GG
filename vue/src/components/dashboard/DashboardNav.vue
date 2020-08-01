@@ -2,35 +2,35 @@
   <div class="dashboardNav">
     <button
       @click="feed"
-      :class="{ navButtonActive: isActive === 'feed' }"
+      :class="{ navButtonActive: isActive == 'feed' }"
       v-on:click="emitToDashboard"
     >
       Feed
     </button>
     <button
       @click="inbox"
-      :class="{ navButtonActive: isActive === 'inbox' }"
+      :class="{ navButtonActive: isActive == 'inbox' }"
       v-on:click="emitToDashboard"
     >
       Inbox
     </button>
     <button
       @click="games"
-      :class="{ navButtonActive: isActive === 'games' }"
+      :class="{ navButtonActive: isActive == 'games' }"
       v-on:click="emitToDashboard"
     >
       Games
     </button>
     <button
       @click="reviews"
-      :class="{ navButtonActive: isActive === 'reviews' }"
+      :class="{ navButtonActive: isActive == 'reviews' }"
       v-on:click="emitToDashboard"
     >
       Reviews
     </button>
     <button
       @click="posts"
-      :class="{ navButtonActive: isActive === 'posts' }"
+      :class="{ navButtonActive: isActive == 'posts' }"
       v-on:click="emitToDashboard"
     >
       Posts
@@ -46,6 +46,20 @@ export default {
       isActive: "feed"
     };
   },
+  props: {
+    content: {
+      type: String,
+      default: () => {
+        return {};
+      }
+    }
+  },
+ /*computed: {
+    content: function() {
+      this.isActive = this.content;
+      return this.isActive;
+    }
+  },*/
   methods: {
     feed() {
       this.childMessage = "feed";

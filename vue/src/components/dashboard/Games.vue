@@ -9,6 +9,7 @@
         v-for="usergame in usergames"
         v-bind:key="usergame.id"
         :game="usergame"
+        v-on:emitToGames="reloadGames"
       />
     </div>
     <div v-if="!usergames.length && !loading" class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
@@ -91,12 +92,26 @@ export default {
     },
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
+    },
+    async reloadGames() {
+      console.log('hiiii');
+      if (!this.getUserGames.length) {
+        await this.fetchUserGames(this.url);
+
+        this.usergames = this.getUserGames.data;
+        this.createPagination(this.getUserGames);
+
+        this.loading = false;
+      } else {
+        this.usergames = this.getUserGames.data;
+        this.createPagination(this.usergames);
+        this.loading = false;
+      }
     }
   },
 
   async mounted() {
-    console.log(this.getUserGames.length);
-    if (this.getUserGames.length === 0) {
+    if (!this.getUserGames.length) {
       await this.fetchUserGames(this.url);
 
       this.usergames = this.getUserGames.data;

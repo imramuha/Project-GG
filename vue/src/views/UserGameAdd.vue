@@ -71,7 +71,7 @@ export default {
             message: response.data[0].response,
           })
           .then(() => {
-            this.emitToDashboard('games')
+            this.emitToDashboard('games');
             //this.$router.push('dashboard');
           })
           .catch((errors) => {

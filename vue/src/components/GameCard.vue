@@ -7,7 +7,7 @@
           <div class="gameCardContentHeader">
             <h1>{{ game.game.name }}</h1>
           </div>
-          <div class="gameCardContentBody">
+          <div v-if='game.data' class="gameCardContentBody">
             <p>{{ game.data.username }}</p>
             <p>{{ game.data.data }}</p>
           </div>
@@ -64,7 +64,7 @@ export default {
               message: response.data[0].response
             })
             .then(() => {
-              //this.$router.push('dashboard');
+              this.emitToGames();
             })
             .catch(errors => {
               console.log(errors);
@@ -73,6 +73,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    emitToGames() {
+      this.$emit("emitToGames");
     }
   }
 };
