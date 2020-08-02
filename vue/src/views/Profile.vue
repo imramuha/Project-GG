@@ -1,6 +1,12 @@
 <template>
   <div class="profile">
-    <div class="profileHeader">
+    <div v-if="loadingProfile" class="ldsContainer">
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div v-else class="profileHeader">
       <div class="profileHeaderView">
         <div class="profileHeaderImage" v-if="friend.image">
           <img :src="friend.image" />
@@ -84,6 +90,7 @@
         </div>
       </div>
     </div>
+
     <div class="profileGames">
       <div class="profileGamesNav">
         <button
@@ -93,11 +100,23 @@
           <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
       </div>
+
+      <div v-if="loadingGames" class="ldsContainer">
+        <div class="ldsRipple">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <ProfileGameCard
+        v-else-if="!loadingGames && games"
         v-for="game in games"
         v-bind:key="game.id"
         :game="game"
       />
+      <h1 v-if="!games.length && !loadingGames">
+        User has no favorited Games.
+      </h1>
+
       <div class="profileGamesNav">
         <button
           v-on:click="fetchPaginatedGames(games_pagination.nextPage)"
@@ -107,6 +126,7 @@
         </button>
       </div>
     </div>
+
     <div class="profileReviews">
       <div class="profileReviewsSection">
         <div class="profileReviewsNav">
@@ -117,11 +137,23 @@
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
           </button>
         </div>
+
+        <div v-if="loadingReviews" class="ldsContainer">
+          <div class="ldsRipple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
         <ProfileReviewCard
+          v-else-if="reviews && !loadingReviews"
           v-for="review in reviews"
           v-bind:key="review.id"
           :review="review"
         />
+        <h1 v-if="!reviews.length && !loadingReviews">
+          <span>User hasn't received any reviews yet.</span>
+        </h1>
+
         <div class="profileReviewsNav">
           <button
             v-on:click="fetchPaginatedReviews(reviews_pagination.nextPage)"
@@ -132,7 +164,7 @@
         </div>
       </div>
 
-      <ReviewInput  v-on:emitToProfile="getUserReviews"  :id="friend.id" />
+      <ReviewInput v-on:emitToProfile="getUserReviews" :id="friend.id" />
     </div>
   </div>
 </template>
@@ -162,6 +194,9 @@ export default {
       games: [],
       games_url: "/api/frontend/profilegames/",
       games_pagination: [],
+      loadingProfile: true,
+      loadingGames: true,
+      loadingReviews: true,
     };
   },
   computed: {
@@ -173,17 +208,32 @@ export default {
     ...mapActions("Review", ["fetchProfileReviews"]),
 
     async getUserReviews() {
-        if (!this.getProfileReviews.length) {
+      if (!this.getProfileReviews.length) {
         let url = this.reviews_url + this.friend.id;
         await this.fetchProfileReviews(url);
 
         this.reviews = this.getProfileReviews.data;
         console.log(this.reviews);
         this.createReviewsPagination(this.getProfileReviews);
+        this.loadingReviews = false;
       } else {
         this.reviews = this.getProfileReviews.data;
         this.createReviewsPagination(this.getProfileReviews);
-        //this.createGamesPagination(this.reviews);
+        this.loadingReviews = false;
+      }
+    },
+    async getUserGames() {
+      if (!this.getProfileGames.length) {
+        let url = this.games_url + this.friend.id;
+        await this.fetchProfileGames(url);
+
+        this.games = this.getProfileGames.data;
+        this.createGamesPagination(this.getProfileGames);
+        this.loadingGames = false;
+      } else {
+        this.games = this.getProfileGames.data;
+        this.createGamesPagination(this.getProfileGames);
+        this.loadingGames = false;
       }
     },
     emitToProfile() {
@@ -216,6 +266,7 @@ export default {
       await this.fetchProfileGames(this.games_url);
       this.games = this.getProfileGames.data;
       this.createGamesPagination(this.getProfileGames);
+      this.loadingGames = false;
     },
     async fetchPaginatedReviews(url) {
       this.reviews_url = url;
@@ -226,6 +277,7 @@ export default {
       await this.fetchProfileReviews(this.reviews_url);
       this.reviews = this.getProfileReviews.data;
       this.createReviewsPagination(this.getProfileReviews);
+      this.loadingReviews = false;
     },
     async update(data) {
       // make a call and send the data ->
@@ -271,6 +323,7 @@ export default {
       console.log(this.reviewscore);
 
       //console.log(this.friend.id);
+      this.loadingProfile = false;
     } catch (error) {
       console.log(error);
     }
@@ -284,24 +337,13 @@ export default {
 
       console.log(this.activeButton);
 
-      //console.log(this.friend.id);
+      this.loadingRelation = false;
     } catch (error) {
       console.log(error);
     }
 
     this.getUserReviews();
-
-    if (!this.getProfileGames.length) {
-      let url = this.games_url + this.friend.id;
-      await this.fetchProfileGames(url);
-
-      this.games = this.getProfileGames.data;
-      this.createGamesPagination(this.getProfileGames);
-    } else {
-      this.games = this.getProfileGames.data;
-      // this.createGamesPagination(this.getgames);
-      this.createGamesPagination(this.getProfileGames);
-    }
+    this.getUserGames();
   },
 };
 </script>

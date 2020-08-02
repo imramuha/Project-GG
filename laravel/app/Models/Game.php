@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
+    protected $fillable = [
+        'name',
+        'image'
+    ];
     //
             /**
      * get the comments the belong to this user
@@ -19,8 +23,8 @@ class Game extends Model
     /**
      * The users that belong to the role.
      */
-    public function options()
+    public function criteria()
     {
-        return $this->belongsToMany('App\Option', 'game_options');
+        return $this->belongsToMany('App\Criterion', 'game_criteria');
     }
 }

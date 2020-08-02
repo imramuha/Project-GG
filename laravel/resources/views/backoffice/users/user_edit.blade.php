@@ -1,16 +1,13 @@
 @extends('app') @section('content')
 <div class="jumbotron bg-darklight">
     <h2 class="display-4 mb-5">Edit a User <a href="{{route('users.index')}}" class="btn btn-info btn-xs pull-right  mt-4"><i class="fa fa-chevron-left"></i> Back </a></h2>
-{{ $user }}
-{{ $roles }}
-{{ $statuses }}
    <form method="post" action="{{ route('users.update', $user->id) }}" data-parsley-validate class="form-horizontal form-label-left pb-5">
 
         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
            
             <div class="form-row">
                
-                <div class="col-4">
+                <div class="col-6">
                     <label>Username</label>
                     <input type="text" value="{{ old( 'username', $user->username) }}" name="username" class="form-control">
                     @if ($errors->has('username'))
@@ -18,7 +15,7 @@
                     @endif
                 </div>
 
-                <div class="col-4">
+                <div class="col-6">
                     <label>Username</label>
                     <input type="text" value="{{ old( 'email', $user->email) }}" name="email" class="form-control">
                     @if ($errors->has('email'))
@@ -26,7 +23,7 @@
                     @endif
                 </div>
 
-                <div class="col-4">
+                <div class="col-6">
                     <label>Status</label>
                     <select id="inlineFormCustomSelect" class="form-control custom-select mr-sm-2" name="status_id">
                         <option value="" selected disabled>Current: {{ old( 'status_id', $user->status->name) }}</option>
@@ -41,12 +38,12 @@
                     @endif
                 </div>
 
-                <div class="col-4">
+                <div class="col-6">
                     <label>Role</label>
                     <select id="inlineFormCustomSelect" class="form-control custom-select mr-sm-2" name="role_id">
-                        <option value="" selected disabled>Current: {{ old( 'role_id', $user->roles[0]->name) }}</option>
+                        <option value="" selected disabled>Current: {{ old( 'role_id', $user->role->name) }}</option>
                         @foreach($roles as $role)
-                        <option value="{{ $status->id }}">
+                        <option value="{{ $role->id }}">
                             {{ $role->name }}
                         </option>
                         @endforeach

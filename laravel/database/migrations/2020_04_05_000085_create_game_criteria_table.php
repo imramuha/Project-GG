@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameOptionsTable extends Migration
+class CreateGameCriteriaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateGameOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_options', function (Blueprint $table) {
+        Schema::create('game_criteria', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('game_id')->nullable()->unsigned();
-            $table->integer('option_id')->unsigned()->nullable();
+            $table->integer('criterion_id')->unsigned()->nullable();
             $table->timestamps();
         });
 

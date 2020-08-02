@@ -63,7 +63,7 @@ export default {
     ...mapGetters("Game", ["getUserGames"])
   },
   methods: {
-    ...mapActions("Game", ["fetchUserGames"]),
+    ...mapActions("Game", ["fetchUserGames"]), 
 
     createPagination(data) {
       console.log(data);
@@ -94,7 +94,6 @@ export default {
       this.$emit("emitToOverscreen", value);
     },
     async reloadGames() {
-      console.log('hiiii');
       if (!this.getUserGames.length) {
         await this.fetchUserGames(this.url);
 

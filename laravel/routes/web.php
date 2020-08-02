@@ -69,6 +69,12 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
             'as' => 'games.delete',
         ]);
 
+        // delete user
+        Route::get('criteria/{id}/delete', [ 
+            'uses' => 'CriterionController@destroy',
+            'as' => 'criteria.delete',
+        ]);
+
         Route::resource('users', 'UserController');
         Route::resource('posts', 'PostController');
         Route::resource('games', 'GameController');
@@ -76,6 +82,7 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
         Route::resource('reports', 'ReportController');
         Route::resource('news', 'NewsController');
         Route::resource('comments', 'CommentController');
+        Route::resource('criteria', 'CriterionController');
 
     });
 });

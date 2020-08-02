@@ -38,10 +38,14 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}">Home - Reports <i class="pull-right align-items-center fas fa-home"></i></a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('news.index')}}">News<i class="pull-right align-items-center fas fa-home"></i></a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}">Users<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}">Posts<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('games.index')}}">Games<i class="pull-right align-items-center fas fa-home"></i></a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('reviews.index')}}">Reviews<i class="pull-right align-items-center fas fa-home"></i></a></li>
+                      
+                        <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}">Posts<i class="pull-right align-items-center fas fa-home"></i></a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('comments.index')}}">Comments<i class="pull-right align-items-center fas fa-home"></i></a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{route('games.index')}}">Games<i class="pull-right align-items-center fas fa-home"></i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('criteria.index')}}">Criteria<i class="pull-right align-items-center fas fa-home"></i></a></li>
+                        
                         <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();"><span class="fas fa-sign-out-alt">&nbsp;</span>
                                             {{ __('Logout') }}

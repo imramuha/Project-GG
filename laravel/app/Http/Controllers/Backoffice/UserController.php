@@ -112,12 +112,14 @@ class UserController extends Controller
                 'username' => 'required|unique:users,username,'.$id,
                 'email' => 'required|email|unique:users,email,'.$id,
                 'role_id' => 'required',
+                'status_id' => 'required',
             ]);
 
             $user = User::findOrFail($id);
             $user->username = $request->input('username');
             $user->email = $request->input('email');
             $user->role_id = $request->input('role_id');
+            $user->status_id = $request->input('status_id');
             $user->save();
 
             return redirect()->route('users.index')->with('success', "The User with username: <strong>$user->username</strong> has successfully been updated.");

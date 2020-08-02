@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Backoffice;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Criterion;
 use App\Models\Game;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
-class GameController extends Controller
+class CriterionController extends Controller
 {
 
     public function __construct()
@@ -27,9 +28,9 @@ class GameController extends Controller
     public function index()
     {
         //
-        $games = Game::with('criteria')->get();
+        $criteria = Criterion::with('games')->get();
 
-        return view('backoffice.games.game_show', compact('games'));
+        return view('backoffice.criteria.criterion_show', compact('criteria'));
     }
 
     /**
@@ -39,7 +40,10 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('backoffice.games.game_create');
+        $games = Game::get()->all();
+
+        return view('backoffice.criteria.criterion_create', compact('games'));
+      
     }
 
     /**
@@ -50,23 +54,21 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-          //
-          $this->validate($request, [
+        //
+        $this->validate($request, [
             'name' => 'required|min:1',
+            'game_id' => 'required'
         ]);
-
-        $path = $request->file('image')->getRealPath();
-        $image = file_get_contents($path);      
-        $base64 = base64_encode($image);
-
-
     
-        $game = Game::create([
+        $criterion = Criterion::create([
             'name' => $request->input('name'),
-            'image' => $base64,
         ]);
 
-        return redirect()->route('games.index')->with('success', "A new game with the name of<strong>$game->name></strong> has successfully been added to the database.");
+        // attaching criteria to that certain game
+        $game_id = $request->input('game_id');
+        $criterion->games()->attach($game_id);
+
+        return redirect()->route('criteria.index')->with('success', "A new Critrion with the name of<strong>$criterion->name></strong> has successfully been added to the database.");
    
     }
 
@@ -79,11 +81,11 @@ class GameController extends Controller
     public function show($id)
     {
         try{
-            $game = Game::findOrFail($id);
+            $criterion = Criterion::findOrFail($id);
             $params = [
-                'game' => $game,
+                'criterion' => $criterion,
             ];
-            return view('backoffice.games.game_delete')->with($params);
+            return view('backoffice.criteria.criterion_delete')->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -104,11 +106,15 @@ class GameController extends Controller
     {
         try
         {
-            $game = Game::findOrFail($id);
+            $criterion = Criterion::with('games')->findOrFail($id);
+
+            $games = Game::get();
+
             $params = [
-                'game' => $game,
+                'criterion' => $criterion,
             ];
-            return view('backoffice.games.game_edit')->with($params);
+
+            return view('backoffice.criteria.criterion_edit', compact('games'))->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -130,16 +136,16 @@ class GameController extends Controller
     {
         try
         {
-            $path = $request->file('image')->getRealPath();
-            $image = file_get_contents($path);      
-            $base64 = base64_encode($image);
+            $criterion = Criterion::findOrFail($id);
+    
+            // attaching criteria to that certain game
+            $game_id = $request->input('game_id');
+            $criterion->games()->sync($game_id);
 
-            $game = Game::findOrFail($id);
-            $game->name = $request->input('name');
-            $game->image = $base64;
-            $game->save();
+            $criterion->name = $request->input('name');
+            $criterion->save();
 
-            return redirect()->route('games.index')->with('success', "A game with the name of <strong>$game->name</strong> has successfully been updated.");
+            return redirect()->route('criteria.index')->with('success', "A Criteria with the name of <strong>$criterion->name</strong> has successfully been updated.");
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -160,10 +166,10 @@ class GameController extends Controller
     {
         try
         {
-            $game = Game::findOrFail($id);
-            $game->forceDelete();
+            $criterion = Criterion::findOrFail($id);
+            $criterion->forceDelete();
             
-            return redirect()->route('games.index')->with('success', "A game with the name of <strong> $game->name</strong> has successfully been deleted from the database.");
+            return redirect()->route('criteria.index')->with('success', "A Criteria with the name of <strong> $criterion->name</strong> has successfully been deleted from the database.");
         }
         catch (ModelNotFoundException $ex) 
         {

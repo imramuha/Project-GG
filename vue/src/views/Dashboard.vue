@@ -34,6 +34,9 @@
           >
             <i class="fas fa-cog"></i>
           </a>
+          <a class="infoButton" type="button" title="Info">
+            <i class="fas fa-info"></i>
+          </a>
           <a type="button" @click="logout" title="Logout">
             <i class="fas fa-sign-out-alt"></i>
           </a>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class GamesTableSeeder extends Seeder
 {
@@ -13,47 +14,47 @@ class GamesTableSeeder extends Seeder
     {
         DB::table('games')->insert([
             "name" => "League of Legends",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Teamfight Tactics",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Dead by Daylight",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Path of Exile",
-            "option" => "League",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Final Fantasy XIV",
-            "option" => "Activity",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Valorant",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Apex Legends",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "MineCraft",
-            "option" => "Actitivty",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Counter-Strike: Global Offensive",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Dota 2",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('games')->insert([
             "name" => "Overwatch",
-            "option" => "Rank",
+            "created_at"=> Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
 }

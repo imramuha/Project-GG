@@ -10,10 +10,12 @@
                 {{ $userRole }}
                     <thead class="thead-darklight">
                         <tr>
+                        <th>ID</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Created at</th>
                             <th>Role</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -24,7 +26,8 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at }}</td>
-                                <td>{{ $user->role->name }}</td>
+                                <td>{{ $user->role->name}}</td>
+                                <td>{{ $user->status->name }}</td>
                                 <td>
                                     @if($userRole === 'Admin')
                                         <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
