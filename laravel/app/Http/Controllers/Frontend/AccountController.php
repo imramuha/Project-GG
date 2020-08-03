@@ -125,8 +125,9 @@ class AccountController extends Controller
                 'nightmode' => $request->input('nightmode'),
                 'anonymity' => $request->input('anonymity'),
                 'voice' => $request->input('voice'),
+                'language' => $request->input('language'),
+                'timezone' => $request->input('timezone'),
             ));
-            return $settings;
             return array(['response' => 'Updated settings & preferences.']);
         } else {
             Setting::create(array(
@@ -134,6 +135,8 @@ class AccountController extends Controller
                 'nightmode' => $request->input('nightmode'),
                 'anonymity' => $request->input('anonymity'),
                 'voice' => $request->input('voice'),
+                'language' => $request->input('language'),
+                'timezone' => $request->input('timezone'),
             ));
             return array(['response' => 'Created settings & preferences.']);
         }

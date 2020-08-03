@@ -10,6 +10,8 @@ class Setting extends Model
         'nightmode',
         'anonymity',
         'voice',
+        "language",
+        "timezone",
         'user_id',
     ];
     //

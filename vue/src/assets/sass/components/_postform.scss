@@ -62,17 +62,17 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
         input,
         button {
             margin: 5px 0 5px;
-            background-color: #ff68a5;
-            color: #ffffff;
+            background-color: var(--candy);
+            color: var(--snow);
             border: none;
             border-radius: 3px;
             padding: 15px;
             font-weight: 600;
         }
         input {
-            color: snow;
+            color: vr(--snow);
             border-radius: 3px;
-            background-color: var(--midnightL);
+            background-color: var(--midnight);
             border: 1px solid var(--midnightH);
             &:focus {
                 border-color: var(--candy);

@@ -18,6 +18,8 @@ class CreateSettingsTable extends Migration
             $table->boolean('nightmode')->default(True);
             $table->boolean('anonymity')->default(False);
             $table->boolean('voice')->default(False);
+            $table->string('language')->nullable();
+            $table->string('timezone')->nullable();
             $table->timestamps();
             $table->integer('user_id')->unsigned()->nullable()->unique();
         });

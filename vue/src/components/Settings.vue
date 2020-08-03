@@ -42,12 +42,12 @@
       <h2>
         <span>Language(s)<span>Language that you prefer to speak. </span></span>
         <span>
-          <select v-model="language">
+          <select  @change="update()" v-model="language">
             <option disabled value="0">Select your preferred language</option>
             <option
               v-for="lang in languages"
               v-bind:key="lang.id"
-              :value="lang.id"
+              :value="lang.name"
               >{{ lang.name }}</option
             >
           </select></span
@@ -60,13 +60,13 @@
           ></span
         >
             <span>
-          <select v-model="timezone">
+          <select  @change="update()" v-model="timezone" >
             <option disabled value="0">Select your preferred timezone</option>
             <option
-              v-for="timezone in timezones"
-              v-bind:key="timezone.id"
-              :value="timezone.id"
-              >{{ timezone.text }}</option
+              v-for="tz in timezones"
+              v-bind:key="tz.id"
+              :value="tz.text"
+              >{{ tz.text }}</option
             >
           </select></span>
       </h2>
@@ -86,8 +86,8 @@ export default {
       nightmode: false,
       anonymity: false,
       voice: false,
-      language: null,
-      timezone: null,
+      language: '',
+      timezone: '',
       languages: "",
       timezones: "",
     };
@@ -106,11 +106,13 @@ export default {
         nightmode: this.conversion(this.nightmode),
         anonymity: this.anonymity,
         voice: this.voice,
+        language: this.language,
+        timezone: this.timezone
       };
       console.log(settings);
 
       await editUserSettings(settings).then((response) => {
-        console.log(response);
+        console.log(response.data);
         this.$store
           .dispatch("notification", {
             message: response.data[0].response,
@@ -128,21 +130,19 @@ export default {
     this.languages = languages;
     this.timezones = timezones;
 
-    const response = await getUserSettings();
-
-    console.log(response.data);
-    if (!response.data.length) {
-      console.log("this goes");
-      this.nightmode = false;
-      this.anonymity = false;
-      this.voice = false;
-    } else {
-      console.log(response.data[0]);
-      this.nightmode = response.data[0].nightmode;
-      this.anonymity = response.data[0].anonymity;
-      this.voice = response.data[0].voice;
-      console.log(this.nightmode, this.anonymity, this.voice);
-    }
+    await getUserSettings().then((response) => {
+      if (!response.data.length) {
+        this.nightmode = false;
+        this.anonymity = false;
+        this.voice = false;
+      } else {
+        this.nightmode = response.data[0].nightmode;
+        this.anonymity = response.data[0].anonymity;
+        this.voice = response.data[0].voice;
+        this.language = response.data[0].language;
+        this.timezone = response.data[0].timezone;
+      }
+    });
   },
   watch: {
     nightmode: function() {

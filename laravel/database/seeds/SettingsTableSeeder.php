@@ -17,6 +17,8 @@ class SettingsTableSeeder extends Seeder
             'nightmode' => true,
             'anonymity' => true,
             'voice' => false,
+            'language' => 'English',
+            'timezone' => '(UTC) Dublin, Lisbon',
         ]);
     }
 }
