@@ -51,7 +51,7 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
             'as' => 'reviews.delete',
         ]);
 
-        // delete post
+        // delete news
         Route::get('news/{id}/delete', [ 
             'uses' => 'NewsController@destroy',
             'as' => 'news.delete',
@@ -73,6 +73,18 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
         Route::get('criteria/{id}/delete', [ 
             'uses' => 'CriterionController@destroy',
             'as' => 'criteria.delete',
+        ]);
+
+        // delete user
+        Route::get('reports/{id}/delete', [ 
+            'uses' => 'ReportController@destroy',
+            'as' => 'dashboard',
+        ]);
+
+        // delete user
+        Route::get('reports/{id}/delete', [ 
+            'uses' => 'DashboardController@destroy',
+            'as' => 'reports.delete',
         ]);
 
         Route::resource('users', 'UserController');

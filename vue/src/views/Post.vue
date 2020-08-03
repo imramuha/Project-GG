@@ -25,7 +25,32 @@
           <p>
             Comments [ <span>{{ comments.length }}</span> ]
           </p>
-                    <button class="postPageReport" disabled>Report</button>
+          <div class="postPageReport">
+            <button @click="reportModal = true">Report</button>
+            <div v-if="reportModal" class="postPageReportModalContainer">
+              <div class="postPageReportModal">
+                <h1>
+                  Report post by <span>{{ post.user.username }}</span>
+                </h1>
+                <p v-if="reportErrors.length">
+                  <b>Please correct the following error(s):</b>
+                  <ul>
+                    <li v-for="error in reportErrors" v-bind:key="error" >{{ error }}</li>
+                  </ul>
+                </p>
+                <form v-on:submit.prevent="report()">
+                  <label for="reason">Reason</label>
+                  <textarea v-model="reason" rows="5" placeholder="Enter your reason" type="textarea" name="reason" />
+
+
+                  <div class="reportFormButtons">
+                    <button @click="reportModal = false">Cancel</button>
+                    <button type="submit" >Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <div class="postPageLike" v-if="post.user_liked != true">
             <button type="button" @click="gg">GG</button>
           </div>
@@ -67,6 +92,7 @@
 import CommentCard from "@/components/CommentCard";
 import { getPost, postComment } from "@/services/forum.api";
 import { likePost } from "@/services/forum.api";
+import { addReport } from "@/services/report.api";
 
 export default {
   components: { CommentCard },
@@ -79,6 +105,9 @@ export default {
       user_id: null,
       likes: null,
       errors: [],
+      reportModal: false,
+      reportErrors: [],
+      reason: null,
     };
   },
   async mounted() {
@@ -157,6 +186,44 @@ export default {
         this.post = response.data;
         this.comments = response.data.comments;
         this.likes = this.post.liked_posts.length;
+    },
+    async report() {
+      this.reportErrors = [];
+
+      if(!this.reason) {
+          this.reportErrors.push('A reasoning is required!');
+
+      } else if (this.reason) {
+
+         let reportData = {
+          reason: this.reason,
+          type: 'post',
+          type_id: this.post.id
+        };
+
+        await addReport(reportData).then((response) => {
+          this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              this.reportModal = false;
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
+
+          this.reason = null
+
+        }).catch((errors) => {
+          const err = errors.response.data.errors;
+          if(err.reason) {
+            console.log(err.reason)
+            this.reportErrors.push( err.reason[0] )
+          }
+        });
+      
+      }
     }
   },
 };

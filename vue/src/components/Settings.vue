@@ -40,18 +40,35 @@
         ></span>
       </h2>
       <h2>
-        <span
-          >Language(s)<span
-            >Language(s) you speak or your preferred ones.</span
-          ></span
+        <span>Language(s)<span>Language that you prefer to speak. </span></span>
+        <span>
+          <select v-model="language">
+            <option disabled value="0">Select your preferred language</option>
+            <option
+              v-for="lang in languages"
+              v-bind:key="lang.id"
+              :value="lang.id"
+              >{{ lang.name }}</option
+            >
+          </select></span
         >
       </h2>
       <h2>
         <span
-          >Timezone(s)<span
-            >Timezone(s) that you prefer or most likely to play at.</span
+          >Timezone<span
+            >Timezone that you prefer or most likely to play at.</span
           ></span
         >
+            <span>
+          <select v-model="timezone">
+            <option disabled value="0">Select your preferred timezone</option>
+            <option
+              v-for="timezone in timezones"
+              v-bind:key="timezone.id"
+              :value="timezone.id"
+              >{{ timezone.text }}</option
+            >
+          </select></span>
       </h2>
     </div>
   </div>
@@ -59,6 +76,9 @@
 
 <script>
 import { getUserSettings, editUserSettings } from "@/services/user.api";
+import languages from "@/assets/data/languages.json";
+import timezones from "@/assets/data/timezones.json";
+
 export default {
   name: "Settings",
   data() {
@@ -66,6 +86,10 @@ export default {
       nightmode: false,
       anonymity: false,
       voice: false,
+      language: null,
+      timezone: null,
+      languages: "",
+      timezones: "",
     };
   },
   methods: {
@@ -78,7 +102,6 @@ export default {
       }
     },
     async update() {
-
       let settings = {
         nightmode: this.conversion(this.nightmode),
         anonymity: this.anonymity,
@@ -102,7 +125,11 @@ export default {
     },
   },
   async mounted() {
+    this.languages = languages;
+    this.timezones = timezones;
+
     const response = await getUserSettings();
+
     console.log(response.data);
     if (!response.data.length) {
       console.log("this goes");
@@ -116,18 +143,18 @@ export default {
       this.voice = response.data[0].voice;
       console.log(this.nightmode, this.anonymity, this.voice);
     }
-  },  
+  },
   watch: {
-    nightmode: function () {
-          // add/remove class to/from html tag
-          let htmlElement = document.documentElement;
+    nightmode: function() {
+      // add/remove class to/from html tag
+      let htmlElement = document.documentElement;
 
-          if (this.nightmode) {
-              htmlElement.setAttribute('theme', 'dark');
-          } else {
-              htmlElement.setAttribute('theme', 'light');
-          }
+      if (this.nightmode) {
+        htmlElement.setAttribute("theme", "dark");
+      } else {
+        htmlElement.setAttribute("theme", "light");
       }
+    },
   },
 };
 </script>

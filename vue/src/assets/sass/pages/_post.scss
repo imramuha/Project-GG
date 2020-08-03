@@ -1,254 +1,359 @@
-                .postPage {
+            $access-title-font-sizes: ( null: 28px, sm: 35px, md: 43px, lg: 55px, xl: 65px, );
+            $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
+            .postPage {
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                padding: 7px;
+                overflow: hidden;
+                .postPageContentContainer {
                     display: flex;
-                    flex-direction: row;
-                    height: 100%;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 100%;
+                    box-shadow: 0 0 3px var(--midnightH);
                     padding: 7px;
+                    margin-right: 7px;
+                    background-color: var(--midnight);
                     overflow: hidden;
-                    .postPageContentContainer {
+                    .postPageContentHeader {
                         display: flex;
-                        flex-direction: column;
+                        flex-direction: row;
                         justify-content: space-between;
                         width: 100%;
-                        box-shadow: 0 0 3px var(--midnightH);
-                        padding: 7px;
-                        margin-right: 7px;
-                        background-color: var(--midnight);
                         overflow: hidden;
-                        .postPageContentHeader {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                            width: 100%;
-                            overflow: hidden;
-                            .postPageContent {
-                                max-width: 50%;
-                                h1 {
-                                    display: flex;
-                                    flex-direction: column;
-                                    span {
-                                        letter-spacing: 1px;
-                                        color: var(--melt);
-                                        font-size: 11px;
-                                        margin-bottom: 21px;
-                                        font-weight: 100;
-                                        text-transform: uppercase;
-                                        letter-spacing: 1px;
-                                        span {
-                                            font-size: 13px;
-                                            font-weight: 600;
-                                            color: var(--paint);
-                                        }
-                                    }
-                                }
-                                h2 {
-                                    font-size: 17px;
-                                    color: var(--melt);
-                                }
-                                p {
-                                    padding-right: 7px;
-                                    font-size: 12px;
-                                    line-height: 15.4px;
-                                    word-spacing: 0.5px;
-                                    color: var(--snow);
-                                    overflow-wrap: break-word
-                                }
-                            }
-                            .postPageImage {
+                        .postPageContent {
+                            max-width: 50%;
+                            h1 {
                                 display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                //padding: 7px;
-                                border-radius: 3px;
-                                width: 50%;
-                                img {
-                                    width: 100%;
-                                    height: auto;
-                                    max-width: 300px;
-                                }
-                            }
-                        }
-                        .postPageContentFooter {
-                            display: flex;
-                            flex-direction: column;
-                            margin-top: 7px;
-                            .postPageContentFooterButtons {
-                                display: flex;
-                                flex-direction: row;
-                                //justify-content: space-around;
-                                align-items: flex-end;
-                                p {
-                                    display: flex;
-                                    align-items: center;
-                                    color: var(--melt);
-                                    font-size: 12px;
-                                    margin-right: 21px;
+                                flex-direction: column;
+                                span {
                                     letter-spacing: 1px;
+                                    color: var(--melt);
+                                    font-size: 11px;
+                                    margin-bottom: 21px;
+                                    font-weight: 100;
                                     text-transform: uppercase;
+                                    letter-spacing: 1px;
                                     span {
-                                        font-size: 15px;
+                                        font-size: 13px;
+                                        font-weight: 600;
                                         color: var(--paint);
                                     }
                                 }
-                                .postPageLike,
-                                .postPageUnlike {
-                                    button {
-                                        color: var(--melt);
-                                        padding: 5px;
-                                        min-width: 41px;
-                                        font-size: 11px;
-                                        border: 2px solid var(--melt);
-                                        border-radius: 5px;
-                                        background-color: var(--midnightL);
-                                        cursor: pointer;
-                                        &:hover {
-                                            transition: 1s;
-                                            background-color: var(--paint);
-                                            color: var(--snow);
-                                            border: 2px solid var(--snow);
-                                        }
-                                    }
-                                }
-                                .postPageUnlike {
-                                    button {
-                                        color: var(--snow);
-                                        border: 2px solid var(--snow);
-                                        background-color: var(--paint);
-                                        &:hover {
-                                            background-color: var(--midnightL);
-                                            color: var(--melt);
-                                            border: 2px solid var(--melt);
-                                        }
-                                    }
-                                }
-                                .postPageReport {
-                                    margin-left: auto;
-                                    border: 2px solid var(--melt);
-                                    border-radius: 20px;
-                                    padding: 5px 15px;
-                                    font-size: 11px;
-                                    color: var(--melt);
-                                    background-color: var(--midnightL);
-                                    border-radius: 5px;
-                                    cursor: pointer;
-                                    margin-right: 14px;
-                                    &:hover {
-                                        transition: 1s;
-                                        color: var(--snow);
-                                        //border-color: var(--snow);
-                                        background-color: var(--midnight);
-                                    }
-                                }
                             }
-                            .postPageContentFooterText {}
+                            h2 {
+                                font-size: 17px;
+                                color: var(--melt);
+                            }
+                            p {
+                                padding-right: 7px;
+                                font-size: 12px;
+                                line-height: 15.4px;
+                                word-spacing: 0.5px;
+                                color: var(--snow);
+                                overflow-wrap: break-word
+                            }
+                        }
+                        .postPageImage {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            //padding: 7px;
+                            border-radius: 3px;
+                            width: 50%;
+                            img {
+                                width: 100%;
+                                height: auto;
+                                max-width: 300px;
+                            }
                         }
                     }
-                    .postPageCommentsContainer {
+                    .postPageContentFooter {
                         display: flex;
                         flex-direction: column;
-                        height: 100%;
-                        min-width: 300px;
-                        justify-content: space-between;
-                        box-shadow: 0 0 3px var(--midnightH);
-                        padding: 7px;
-                        h1 {
-                            color: var(--melt);
-                        }
-                        form {
-                            width: 100%;
+                        margin-top: 7px;
+                        .postPageContentFooterButtons {
                             display: flex;
-                            flex-direction: column;
+                            flex-direction: row;
+                            //justify-content: space-around;
+                            align-items: flex-end;
                             p {
-                                font-size: 10px;
-                                margin: 8px 0px 0px;
-                                color: var(--melt);
-                                b {
-                                    color: var(--candy);
-                                }
-                                ul {
-                                    padding: 0;
-                                    list-style-type: none;
-                                    margin: 0px;
-                                }
-                            }
-                            label {
-                                color: var(--melt);
-                                font-weight: 600;
-                                text-transform: uppercase;
-                                letter-spacing: 0.5px;
-                                font-size: 13px;
-                                margin-bottom: 5px;
-                            }
-                            input {
-                                color: snow;
-                                border-radius: 3px;
-                                background-color: var(--midnightH);
-                                border: 1px solid var(--midnight);
-                                padding: 7px;
-                                height: 100%;
-                                &:focus {
-                                    border: 1px solid var(--candy);
-                                }
-                            }
-                            button {
-                                background-color: var(--candy);
-                                color: var(--snow);
-                                border: none;
-                                border-radius: 3px;
-                                padding: 7px;
-                                font-weight: 600;
-                                margin-top: 10px;
-                                cursor: pointer;
-                                &:hover {
-                                    background-color: var(--candyL);
-                                }
-                            }
-                        }
-                        .postPageComments {
-                            width: 100%;
-                            //box-shadow: 0 0 3px var(--midnightH);
-                            height: 100%;
-                            margin-bottom: 14px;
-                            border-bottom: 1px solid var(--midnight);
-                            .commentCard {
                                 display: flex;
                                 align-items: center;
-                                width: 100%;
-                                padding: 7px;
-                                background-color: var(--midnight);
-                                box-shadow: 0 0 3px var(--midnight);
-                                margin: 14px 0;
-                                p {
-                                    font-size: 14px;
+                                color: var(--melt);
+                                font-size: 12px;
+                                margin-right: 21px;
+                                letter-spacing: 1px;
+                                text-transform: uppercase;
+                                span {
+                                    font-size: 15px;
+                                    color: var(--paint);
+                                }
+                            }
+                            .postPageLike,
+                            .postPageUnlike {
+                                button {
+                                    color: var(--melt);
+                                    padding: 7px 21px;
+                                    min-width: 41px;
+                                    font-size: 11px;
+                                    border: 2px solid var(--melt);
+                                    border-radius: 3px;
+                                    background-color: var(--midnight);
+                                    cursor: pointer;
+                                    &:hover {
+                                        transition: 1s;
+                                        background-color: var(--paint);
+                                        color: var(--snow);
+                                        border: 2px solid var(--snow);
+                                    }
+                                }
+                            }
+                            .postPageUnlike {
+                                button {
+                                    color: var(--snow);
+                                    border: 2px solid var(--snow);
+                                    background-color: var(--paint);
+                                    &:hover {
+                                        background-color: var(--midnightL);
+                                        color: var(--melt);
+                                        border: 2px solid var(--melt);
+                                    }
+                                }
+                            }
+                            .postPageReport {
+                                display: flex;
+                                justify-content: flex-end;
+                                margin-left: auto;
+                                button {
+                                    border: 2px solid var(--melt);
+                                    border-radius: 20px;
+                                    padding: 7px 21px;
+                                    font-size: 11px;
+                                    margin-right: 21px;
+                                    color: var(--melt);
+                                    background-color: var(--midnight);
+                                    border-radius: 3px;
+                                    width: 100%;
+                                    max-width: 100px;
+                                    &:hover {
+                                        color: var(--snow);
+                                        border-color: var(--snow);
+                                        background-color: var(--candyH);
+                                        transition: 0.5s;
+                                    }
+                                }
+                                .postPageReportModalContainer {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    z-index: 100;
+                                    background-color: var(--midnightH60);
                                     display: flex;
-                                    flex-direction: row;
+                                    justify-content: center;
                                     align-items: center;
-                                    span {
+                                    .postPageReportModal {
                                         display: flex;
                                         flex-direction: column;
-                                        font-size: 12px;
-                                        color: var(--paint);
-                                        letter-spacing: 1.5px;
-                                        margin: 0px 7px;
-                                        font-weight: 600;
-                                        span {
-                                            font-weight: 200;
-                                            color: var(--snow);
+                                        background-color: var(--midnightL);
+                                        padding: 20px;
+                                        border-radius: 3px;
+                                        h1 {
+                                            @include font-size($access-title-font-sizes);
+                                            line-height: 10px;
+                                            margin: 20px 0px 30px;
+                                            span {
+                                                color: var(--paint);
+                                            }
+                                        }
+                                        label {
+                                            @include font-size($access-p-font-sizes);
+                                            color: var(--melt);
+                                            margin: 0;
+                                            font-weight: 600;
+                                            text-transform: uppercase;
+                                            margin: 20px 0 5px;
                                             letter-spacing: 0.5px;
-                                            font-size: 9px;
-                                            margin: 0px 0px;
-                                            margin-top: 1px;
+                                        }
+                                        ul {
+                                            padding: 0;
+                                            list-style-type: none;
+                                            margin: 0px;
+                                        }
+                                        p {
+                                            display: flex;
+                                            flex-direction: column;
+                                            text-transform: none;
+                                            text-align: left;
+                                            align-items: flex-start;
+                                            font-size: 11px;
+                                            margin-top: 7px;
+                                            color: var(--candy);
+                                            b {
+                                                color: var(--melt);
+                                            }
+                                        }
+                                        &,
+                                        form {
+                                            display: flex;
+                                            flex-direction: column;
+                                            textarea {
+                                                color: snow;
+                                                border-radius: 3px;
+                                                background-color: var(--midnight);
+                                                border: 1px solid var(--midnightH);
+                                                padding: 15px;
+                                                &:focus {
+                                                    border-color: var(--candy);
+                                                }
+                                            }
+                                            .reportFormButtons {
+                                                display: flex;
+                                                flex-direction: row;
+                                                justify-content: space-between;
+                                                button {
+                                                    background-color: var(--candy);
+                                                    color: var(--snow);
+                                                    border: none;
+                                                    border-radius: 3px;
+                                                    padding: 14px 21px;
+                                                    font-weight: 600;
+                                                    margin-top: 22px;
+                                                    &:hover {
+                                                        background-color: var(--candyL);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        @include sm {
+                                            padding: 25px;
+                                        }
+                                        @include md {
+                                            padding: 30px;
+                                        }
+                                        @include lg {
+                                            padding: 35px;
+                                        }
+                                        @include xl {
+                                            padding: 40px;
                                         }
                                     }
                                 }
-                                .commentCardImage {
+                            }
+                        }
+                        .postPageContentFooterText {}
+                    }
+                }
+                .postPageCommentsContainer {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    min-width: 300px;
+                    justify-content: space-between;
+                    box-shadow: 0 0 3px var(--midnightH);
+                    padding: 7px;
+                    h1 {
+                        color: var(--melt);
+                    }
+                    form {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        p {
+                            font-size: 10px;
+                            margin: 8px 0px 0px;
+                            color: var(--melt);
+                            b {
+                                color: var(--candy);
+                            }
+                            ul {
+                                padding: 0;
+                                list-style-type: none;
+                                margin: 0px;
+                            }
+                        }
+                        label {
+                            color: var(--melt);
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                            font-size: 13px;
+                            margin-bottom: 5px;
+                        }
+                        input {
+                            color: snow;
+                            border-radius: 3px;
+                            background-color: var(--midnightH);
+                            border: 1px solid var(--midnight);
+                            padding: 7px;
+                            height: 100%;
+                            &:focus {
+                                border: 1px solid var(--candy);
+                            }
+                        }
+                        button {
+                            background-color: var(--candy);
+                            color: var(--snow);
+                            border: none;
+                            border-radius: 3px;
+                            padding: 7px;
+                            font-weight: 600;
+                            margin-top: 10px;
+                            cursor: pointer;
+                            &:hover {
+                                background-color: var(--candyL);
+                            }
+                        }
+                    }
+                    .postPageComments {
+                        width: 100%;
+                        //box-shadow: 0 0 3px var(--midnightH);
+                        height: 100%;
+                        margin-bottom: 14px;
+                        border-bottom: 1px solid var(--midnight);
+                        .commentCard {
+                            display: flex;
+                            align-items: center;
+                            width: 100%;
+                            padding: 7px;
+                            background-color: var(--midnight);
+                            box-shadow: 0 0 3px var(--midnight);
+                            margin: 14px 0;
+                            p {
+                                font-size: 14px;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                span {
                                     display: flex;
-                                    align-items: center;
-                                    img {
-                                        width: 25px;
-                                        height: 25px;
+                                    flex-direction: column;
+                                    font-size: 12px;
+                                    color: var(--paint);
+                                    letter-spacing: 1.5px;
+                                    margin: 0px 7px;
+                                    font-weight: 600;
+                                    span {
+                                        font-weight: 200;
+                                        color: var(--snow);
+                                        letter-spacing: 0.5px;
+                                        font-size: 9px;
+                                        margin: 0px 0px;
+                                        margin-top: 1px;
                                     }
+                                }
+                            }
+                            .commentCardImage {
+                                display: flex;
+                                align-items: center;
+                                img {
+                                    width: 25px;
+                                    height: 25px;
                                 }
                             }
                         }
                     }
                 }
+            }

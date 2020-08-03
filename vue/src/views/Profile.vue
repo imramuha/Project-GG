@@ -38,7 +38,30 @@
       </div>
       <div class="profileHeaderButtons">
         <div class="profileHeaderReport">
-          <button disabled>Report</button>
+          <button @click="reportModal = true">Report</button>
+          <div v-if="reportModal" class="ProfileHeaderReportModalContainer">
+            <div class="ProfileHeaderReportModal">
+              <h1>
+                Report <span>{{ friend.username }}</span>
+              </h1>
+              <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                  <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
+                </ul>
+              </p>
+              <form v-on:submit.prevent="report()">
+                <label for="reason">Reason</label>
+                <textarea v-model="reason" rows="5" placeholder="Enter your reason" type="textarea" name="reason" />
+
+
+                <div class="reportFormButtons">
+                  <button @click="reportModal = false">Cancel</button>
+                  <button type="submit" >Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
         <div class="profileHeaderRelation">
           <button @click="update('friends')" v-if="this.activeButton == ''">
@@ -178,6 +201,7 @@ import { mapActions, mapGetters } from "vuex";
 import ReviewInput from "@/components/ReviewInput";
 import ProfileGameCard from "@/components/profile/ProfileGameCard";
 import ProfileReviewCard from "@/components/profile/ProfileReviewCard";
+import { addReport } from "@/services/report.api";
 
 export default {
   components: { ReviewInput, ProfileGameCard, ProfileReviewCard },
@@ -197,6 +221,9 @@ export default {
       loadingProfile: true,
       loadingGames: true,
       loadingReviews: true,
+      reportModal: false,
+      errors: [],
+      reason: null,
     };
   },
   computed: {
@@ -302,6 +329,44 @@ export default {
         console.log(error);
       }
     },
+    async report() {
+      this.errors = [];
+
+      if(!this.reason) {
+          this.errors.push('A reasoning is required!');
+
+      } else if (this.reason) {
+
+         let reportData = {
+          reason: this.reason,
+          type: 'profile',
+          type_id: this.friend.id
+        };
+
+        await addReport(reportData).then((response) => {
+          this.$store
+            .dispatch("notification", {
+              message: response.data[0].response,
+            })
+            .then(() => {
+              this.reportModal = false;
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
+
+          this.reason = null
+
+        }).catch((errors) => {
+          const err = errors.response.data.errors;
+          if(err.reason) {
+            console.log(err.reason)
+            this.errors.push( err.reason[0] )
+          }
+        });
+      
+      }
+    }
   },
   async mounted() {
     try {

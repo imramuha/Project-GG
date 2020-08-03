@@ -109,13 +109,13 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-        //
+    //
     /**
      * Get the category that the product belongs to.
      */
     public function reviews()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Review::class);
     }
 
             //
@@ -166,5 +166,14 @@ class User extends Authenticatable implements JWTSubject
     public function news()
     {
         return $this->hasMany(News::class);
+    }
+
+            //
+    /**
+     * Get the category that the product belongs to.
+     */
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
     }
 }

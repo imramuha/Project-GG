@@ -86,6 +86,9 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     Route::post('/pusher/auth', 'AccountController@pusherAuth');
     Route::post('/userstatus', 'AccountController@userStatus');
 
+    // report
+    Route::post('/addreport', 'AccountController@addReport');
+
     Route::post('/mode', 'AccountController@nightmode');
 });
 

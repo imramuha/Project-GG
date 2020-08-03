@@ -29,6 +29,7 @@ $p-font-sizes: (
             
              :root {
                 --midnightH: #202020;
+                --midnightH60: #202020a6;
                 --midnight: #272727;
                 --midnightL: #333333;
                 --paintH: #3e9dcc;
@@ -47,9 +48,9 @@ $p-font-sizes: (
                 --snow: #ffffff;
             }
             
-            // eens proberen om de side colours beetje donkerder te maken
             [theme="light"] {
                 --midnightH: #ffffff;
+                --midnightH60: #ffffffa6;
                 --midnight: #ececec;
                 --midnightL: #b9b9b9;
                 --paintH: #3e9dcc;

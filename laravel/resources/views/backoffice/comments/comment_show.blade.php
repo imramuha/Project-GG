@@ -31,7 +31,7 @@
                             <td>{{ $comment['user']->username }}</td>
                             <td>id: {{ $comment['post_id'] }} <br> title: {{ $comment['post']->title }}</td>
                             <td>{{ $comment->created_at }}</td>
-                                <td><a href="{{ route('comments.delete', ['id' => $comment->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a></td>
+                                <td><a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a></td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Post;
+use App\Models\Report;
 use App\Models\LikedPost;
 use App\Models\Status;
 use App\Models\Comment;
@@ -845,5 +846,31 @@ class AccountController extends Controller
         $news = News::with('user')->orderBy('created_at', 'asc')->limit(3)->get();
        
         return response()->json($news);
+    }
+
+    /*
+    *  REPORT
+    */
+    public function addReport (Request $request) {
+        // attach the game to the user
+        // 
+
+        $reason = $request->input('reason');
+        $type = $request->input('type');
+        $type_id = $request->input('type_id');
+        $reporter_id = auth()->id();
+
+        $this->validate(request(), [
+            'reason' => 'required|min:6|max:64',
+        ]);
+
+        // Create a new report
+        $report = Report::create([
+            'reason' => $reason,
+            'type' => $type,
+            "type_id" => $type_id,
+            "reporter_id" => $reporter_id,
+        ]);
+        return array(['response' => 'A report has been sent.']);
     }
 }

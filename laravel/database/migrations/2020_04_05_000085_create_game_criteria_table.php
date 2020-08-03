@@ -30,6 +30,6 @@ class CreateGameCriteriaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_options');
+        Schema::dropIfExists('game_criteria');
     }
 }
