@@ -18,7 +18,7 @@
       <div class="profileHeaderData">
         <div>
           <h1>
-            {{ friend.username }} <span>{{ this.relation.name }}</span>
+            {{ friend.username }} <span v-if="this.relation">{{ this.relation.name }}</span>
           </h1>
           <p>{{ friend.email }}</p>
           <p>BIO: {{ friend.id }}</p>
@@ -32,38 +32,12 @@
             {{ reviewscore.toFixed(2) }} %
           </div>
           <div v-else class="profileHeaderScoreEmpty">
-            <span>You haven't received any reviews yet.</span>
+            <span>{{ friend.username }} hasn't received received any reviews yet.</span>
           </div>
         </div>
       </div>
       <div class="profileHeaderButtons">
-        <div class="profileHeaderReport">
-          <button @click="reportModal = true">Report</button>
-          <div v-if="reportModal" class="ProfileHeaderReportModalContainer">
-            <div class="ProfileHeaderReportModal">
-              <h1>
-                Report <span>{{ friend.username }}</span>
-              </h1>
-              <p v-if="errors.length">
-                <b>Please correct the following error(s):</b>
-                <ul>
-                  <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
-                </ul>
-              </p>
-              <form v-on:submit.prevent="report()">
-                <label for="reason">Reason</label>
-                <textarea v-model="reason" rows="5" placeholder="Enter your reason" type="textarea" name="reason" />
-
-
-                <div class="reportFormButtons">
-                  <button @click="reportModal = false">Cancel</button>
-                  <button type="submit" >Submit</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="profileHeaderRelation">
+          <div class="profileHeaderRelation">
           <button @click="update('friends')" v-if="this.activeButton == ''">
             Add Friend
           </button>
@@ -111,6 +85,32 @@
             Unblock
           </button>
         </div>
+        <div class="profileHeaderReport">
+          <button @click="reportModal = true">Report</button>
+          <div v-if="reportModal" class="ProfileHeaderReportModalContainer">
+            <div class="ProfileHeaderReportModal">
+              <h1>
+                Report <span>{{ friend.username }}</span>
+              </h1>
+              <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                  <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
+                </ul>
+              </p>
+              <form v-on:submit.prevent="report()">
+                <label for="reason">Reason</label>
+                <textarea v-model="reason" rows="5" placeholder="Enter your reason" type="textarea" name="reason" />
+
+
+                <div class="reportFormButtons">
+                  <button @click="reportModal = false">Cancel</button>
+                  <button type="submit" >Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -152,39 +152,46 @@
 
     <div class="profileReviews">
       <div class="profileReviewsSection">
-        <div class="profileReviewsNav">
-          <button
-            v-on:click="fetchPaginatedReviews(reviews_pagination.prevPage)"
-            :disabled="!reviews_pagination.prevPage"
-          >
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-          </button>
+
+        <div class="profileReviewsNavContainer">
+          <div class="profileReviewsNav">
+            <button
+              v-on:click="fetchPaginatedReviews(reviews_pagination.prevPage)"
+              :disabled="!reviews_pagination.prevPage"
+            >
+              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="profileReviewsNav">
+            <button
+              v-on:click="fetchPaginatedReviews(reviews_pagination.nextPage)"
+              :disabled="!reviews_pagination.nextPage"
+            >
+              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
 
+      <div class="profileReviewCardsContainer">
         <div v-if="loadingReviews" class="ldsContainer">
           <div class="ldsRipple">
             <div></div>
             <div></div>
           </div>
         </div>
+
         <ProfileReviewCard
           v-else-if="reviews && !loadingReviews"
           v-for="review in reviews"
           v-bind:key="review.id"
           :review="review"
         />
+
         <h1 v-if="!reviews.length && !loadingReviews">
           <span>User hasn't received any reviews yet.</span>
         </h1>
+      </div>
 
-        <div class="profileReviewsNav">
-          <button
-            v-on:click="fetchPaginatedReviews(reviews_pagination.nextPage)"
-            :disabled="!reviews_pagination.nextPage"
-          >
-            <i class="fa fa-arrow-down" aria-hidden="true"></i>
-          </button>
-        </div>
       </div>
 
       <ReviewInput v-on:emitToProfile="getUserReviews" :id="friend.id" />
@@ -394,13 +401,10 @@ export default {
     }
     try {
       const response = await getRelation(this.data);
-      console.log(response);
+
       this.relation = response.data[0];
-      console.log(this.relation);
 
       this.activeButton = this.relation.name;
-
-      console.log(this.activeButton);
 
       this.loadingRelation = false;
     } catch (error) {

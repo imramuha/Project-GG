@@ -10,7 +10,6 @@
             flex-direction: row;
             padding: 7px;
             box-shadow: 0 0 3px var(--midnightH);
-            height: 100%;
             .profileHeaderView {
                 display: flex;
                 flex-direction: column;
@@ -30,7 +29,7 @@
             .profileHeaderData {
                 display: flex;
                 width: 100%;
-                justify-content: space-between;
+                //justify-content: space-between;
                 flex-direction: column;
                 padding: 7px;
                 div {
@@ -77,7 +76,7 @@
                         justify-content: center;
                         align-items: center;
                         width: 100%;
-                        font-size: 15px;
+                        font-size: 11px;
                         padding: 3px;
                         font-weight: 600;
                         letter-spacing: 1px;
@@ -305,7 +304,7 @@
             box-shadow: 0 0 3px var(--midnightH);
             .profileReviewsSection {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 align-items: flex-start;
                 width: 100%;
                 h1 {
@@ -315,81 +314,102 @@
                     justify-content: center;
                     align-items: center;
                 }
-                .profileReviewCard {
-                    width: 100%;
-                    margin-bottom: 3px;
-                    background-color: var(--midnight);
-                    flex-grow: 4;
+                .profileReviewCardsContainer {
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
                     justify-content: space-between;
-                    text-align: left;
-                    align-items: center;
-                    padding: 7px;
-                    max-height: 40px;
-                    border-radius: 3px;
-                    .profileReviewCardImage {
+                    width: 100%;
+                    height: 100%;
+                    .profileReviewCard {
+                        width: 100%;
+                        //margin-bottom: 3px;
+                        background-color: var(--midnight);
+                        flex-grow: 4;
                         display: flex;
+                        flex-direction: row;
                         align-items: center;
-                        img {
-                            border-radius: 25px;
-                            width: 25px;
-                            height: 25px;
+                        padding: 7px;
+                        max-height: 40px;
+                        border-radius: 3px;
+                        &:last-child {
+                            margin-bottom: 0px;
                         }
-                    }
-                    .profileReviewCardUserInfo {
-                        p {
-                            margin: 0px;
-                            font-size: 11px;
-                            span {
-                                color: var(--melt);
+                        .profileReviewCardImage {
+                            display: flex;
+                            align-items: center;
+                            margin-right: 21px;
+                            img {
+                                border-radius: 25px;
+                                width: 25px;
+                                height: 25px;
                             }
                         }
-                    }
-                    .profileReviewCardScore {
-                        background-color: var(--candy);
-                        padding: 7px 5px;
-                        p {
-                            font-size: 11px;
-                            font-weight: 600;
-                            margin: 0px;
+                        .profileReviewCardUserInfo {
+                            display: flex;
+                            flex-direction: column;
+                            p {
+                                color: var(--paint);
+                                margin: 0px;
+                                font-size: 11px;
+                                font-weight: 600;
+                                span {
+                                    font-weight: 400;
+                                    color: var(--snow);
+                                }
+                            }
+                        }
+                        .profileReviewCardScore {
+                            margin-left: auto;
+                            background-color: var(--candy);
+                            padding: 7px 5px;
+                            p {
+                                font-size: 11px;
+                                font-weight: 600;
+                                margin: 0px;
+                            }
                         }
                     }
                 }
-                .profileReviewsNav {
+                .profileReviewsNavContainer {
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 7px 0px;
-                    &:first-child {
-                        margin-top: 0px;
-                    }
-                    &:last-child {
-                        margin-bottom: 0px;
-                        margin-top: auto;
-                    }
-                    button {
-                        padding: 7px;
-                        height: 100%;
-                        border: none;
-                        cursor: pointer;
-                        background-color: var(--candy);
-                        width: 100%;
-                        height: 100%;
-                        color: var(--snow);
-                        border-radius: 3px;
-                        &:disabled {
-                            background-color: var(--midnight);
-                            color: var(--melt);
-                            cursor: not-allowed;
-                            &:hover {
+                    flex-direction: column;
+                    height: 100%;
+                    margin-right: 7px;
+                    .profileReviewsNav {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 7px 0px;
+                        &:first-child {
+                            margin-top: 0px;
+                        }
+                        &:last-child {
+                            margin-bottom: 0px;
+                            margin-top: auto;
+                        }
+                        button {
+                            padding: 7px;
+                            height: 100%;
+                            border: none;
+                            cursor: pointer;
+                            background-color: var(--candy);
+                            width: 100%;
+                            height: 100%;
+                            color: var(--snow);
+                            border-radius: 3px;
+                            &:disabled {
                                 background-color: var(--midnight);
                                 color: var(--melt);
+                                cursor: not-allowed;
+                                &:hover {
+                                    background-color: var(--midnight);
+                                    color: var(--melt);
+                                }
                             }
-                        }
-                        &:hover {
-                            background-color: var(--candyL);
-                            transition: 0.5s;
+                            &:hover {
+                                background-color: var(--candyL);
+                                transition: 0.5s;
+                            }
                         }
                     }
                 }

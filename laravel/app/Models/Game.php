@@ -25,6 +25,6 @@ class Game extends Model
      */
     public function criteria()
     {
-        return $this->belongsToMany('App\Criterion', 'game_criteria');
+        return $this->belongsToMany('App\Models\Criterion', 'game_criteria');
     }
 }

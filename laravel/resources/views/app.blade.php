@@ -13,10 +13,11 @@
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
 
     <!-- Fonts -->
+    <script src="https://kit.fontawesome.com/14005d5905.js" crossorigin="anonymous"></script>
 
 
     <!-- Styles -->
-    <link href="../sass/app.scss" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -24,44 +25,101 @@
 </head>
 
 <body>
-    <div id="app" class="conter-fluid">
-        <div class="row">
-            @guest
-            <main class="col-md-12">
-                this one is or not lgged in users
-                @yield('content')
-            </main>
-            @else
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="sidebar-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}">Home - Reports <i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('news.index')}}">News<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}">Users<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('reviews.index')}}">Reviews<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                      
-                        <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}">Posts<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('comments.index')}}">Comments<i class="pull-right align-items-center fas fa-home"></i></a></li>
+    <div id="app">
+        @guest
+        <nav class="navbar header-top navbar-dark bg-darklight">
+            <div class="container-fluid">
+                <a href="{{route('dashboard')}}" class="navbar-brand">Project GG</a>
+                @else
+                <nav class="navbar header-top navbar-expand-sm navbar-dark bg-darklight">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{route('dashboard')}}"><img class="mb-2 mt-2" src="{{URL::asset('logo.svg')}}" alt="logo" height="35px"> </a>
 
-                        <li class="nav-item"><a class="nav-link" href="{{route('games.index')}}">Games<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('criteria.index')}}">Criteria<i class="pull-right align-items-center fas fa-home"></i></a></li>
-                        
-                        <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();"><span class="fas fa-sign-out-alt">&nbsp;</span>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="menu-content">
+                            @endguest
+
+                            @guest
+                            <ul class="navbar-nav ml">
+                                <li class="navbar-brand">
+                                    <span class="fas fa-toolbox">&nbsp;</span>BACKOFFICE
+                                </li>
+                            </ul>
+                            @else
+
+                            <ul id="menu-content" class="navbar-nav ml-auto">
+                                <!-- Authentication Links -->
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <span class="fa fa-user">&nbsp;</span>{{ Auth::user()->username }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
+                                        <a class="divider"></a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"><span class="fas fa-sign-out-alt">&nbsp;</span>
                                             {{ __('Logout') }}
-                                </a>
+                                        </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
-                                        </form></li>
-                    </ul>    
+                                        </form>
+                                    </div>
+                                </li>
+                            </ul>
+                            @endguest
+                        </div>
+                    </div>
+                </nav>
+
+                @guest
+                @else
+                <div class="nav-side-menu navbar-fixed-left">
+                    <div class="menu-list">
+                        <ul>
+                            <div>
+                                &nbsp;
+                            </div>
+                            <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}"><span>Dashboard</span><i class="fa fa-flag" aria-hidden="true"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('news.index')}}"><span>News</span><i class="fa fa-newspaper-o" aria-hidden="true"></i>
+</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}"><span>Users</span> <i class="pull-right align-items-center fas fa-users"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('reviews.index')}}"><span>Reviews</span> <i class="fa fa-star-half-o" aria-hidden="true"></i>
+</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}"><span>Posts</span> <i class="fa fa-comment" aria-hidden="true"></i>
+</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('comments.index')}}"><span>Comments</span> <i class="pull-right align-items-center fa fa-comments-o"></i></a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="{{route('games.index')}}"><span>Games</span> <i class="pull-right align-items-center fas fa-gamepad"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('criteria.index')}}"><span>Criteria</span> <i class="pull-right align-items-center fa fa-check-square-o"></i></a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <span> {{ __('Logout') }} </span> <i class="fas fa-sign-out-alt"></i>
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </nav>
-            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                @include('templates.alerts') @yield('content')
-            </main>
+
+
+            </div>
             @endguest
-        </div>
-    </div>
+
+            @guest
+            <div class="main" role="main">
+                @include('templates.alerts') @yield('content')
+            </div>
+            @else
+            <div class="maincontainer" role="main">
+                @include('templates.alerts') @yield('content')
+            </div>
+
+            @endguest
 </body>
 
 </html>

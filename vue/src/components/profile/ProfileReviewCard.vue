@@ -1,10 +1,13 @@
 <template>
   <div class="profileReviewCard">
-    <div class="profileReviewCardImage">
-      <img :src="review.reviewer.image" />
-    </div>
+      <div class="profileReviewCardImage" v-if="review.reviewer.image">
+        <img :src="review.reviewer.image" />
+      </div>
+      <div class="profileReviewCardImage" v-else>
+        <img src="@/assets/images/profile.jpeg" />
+      </div>
     <div class="profileReviewCardUserInfo">
-      <p>
+      <p> 
         {{ review.reviewer.username }}:
         <span>{{ review.comment }}</span>
       </p>

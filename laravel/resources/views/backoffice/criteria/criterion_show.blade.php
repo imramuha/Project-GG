@@ -1,9 +1,9 @@
 @extends('app')
 
 @section('content')
-    <div class="x_panel">
-        <div class="x_title">
-            <h2 class="display-4 mb-5">Criteria <a href="{{route('criteria.create')}}" class="btn btn-primary btn-xs pull-right  mt-4"><i class="fa fa-plus"></i> Create New </a></h2>
+<div class="container-fluid">
+    <div class='mt-2 mb-4'>
+            <h2 >Criteria <a href="{{route('criteria.create')}}" class="btn btn-primary btn-xs float-right"><i class="fa fa-plus"></i> Create New </a></h2>
         </div>
         <div class="x_content">        
             <table id="datatable-buttons" class="table table-dark table-bordered">
@@ -12,8 +12,8 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Games</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
+                        <th>Created</th>
+                        <th>Updated</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
