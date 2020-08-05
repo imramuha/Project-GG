@@ -27,7 +27,7 @@
                     <td>{{ $post['text'] }}</td>
                     <td> {{ $post['user']->username }} </td>
                     <td>{{ $post['created_at'] }}</td>
-                    <td><a href="{{ route('posts.delete', ['id' => $post->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a></td>
+                    <td><a href="{{ route('posts.show', $post->id) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

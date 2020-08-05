@@ -62,6 +62,17 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
+        try {
+            $review = Review::findOrFail($id);
+            $params = [
+                'review' => $review,
+            ];
+            return view('backoffice.reviews.review_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
+        }
         }
 
     /**

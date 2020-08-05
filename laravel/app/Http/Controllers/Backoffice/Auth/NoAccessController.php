@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 
-class NoAccesController extends Controller
+class NoAccessController extends Controller
 {
     public function __construct()
     {
@@ -17,12 +17,12 @@ class NoAccesController extends Controller
     public function index()
     {
         auth('web')->logout();
-        return view('auth.no-acces.acces');
+        return view('auth.no-access.access');
     }
 
     //No acces for moderator
     public function indexModerator()
     {
-        return view('auth.moderator.acces');
+        return view('auth.moderator.access');
     }
 }

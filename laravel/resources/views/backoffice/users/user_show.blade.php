@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class='mt-2 mb-4'>
-        <h2>Users <a href="{{route('users.create')}}" class="btn btn-primary btn-xs float-right"><i class="fa fa-plus"></i> Create New </a></h2>
+        <h2>Users</h2>
     </div>
     <div>
         <table id="datatable-buttons" class="table table-dark table-bordered">
@@ -31,8 +31,8 @@
                     <td>{{ $user->updated_at }}</td>
                     <td>
                         @if($userRole === 'Admin')
-                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
-                        <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
+                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
+                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
                         @else
                         <a>Only accessible for ADMINS</a>
                         @endif

@@ -47,7 +47,7 @@ class LoginController extends Controller
         } elseif ($loggedUser->role->name === 'Mod') {
             return redirect('/mod');
         } else {
-            return redirect('/no-acces');
+            return redirect('/no-access');
         }
     }
 

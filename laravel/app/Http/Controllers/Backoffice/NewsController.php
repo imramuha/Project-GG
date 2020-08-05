@@ -76,6 +76,17 @@ class NewsController extends Controller
      */
     public function show($id)
     {
+        try {
+            $news = News::findOrFail($id);
+            $params = [
+                'news' => $news,
+            ];
+            return view('backoffice.news.news_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
+        }
         }
 
     /**

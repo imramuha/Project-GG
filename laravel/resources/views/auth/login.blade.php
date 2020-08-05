@@ -1,9 +1,10 @@
 @extends('app')
 
 @section('content')
-<div class="container-fluid text-center">
-    <img class="mb-5 mt-5" src="{{URL::asset('logo.svg')}}" alt="logo" width="100px" height="75px">
-    <h1 class="h3 mb-4 mt-1 font-weight-normal">{{ __("Project GG's BACKOFFICE") }}</h1>
+<div class="container-fluid text-center ">
+    <img class="mb-5 logo-img" src="{{URL::asset('logo.svg')}}" alt="logo" width="100px" height="75px">
+    <h1 class="h3 mt-1 font-weight-normal"><strong>a warm welcome back!</strong></h1>
+    <p class="mb-3">another day, different cries</p>
 
     <form class="form-signin" method="POST" action="{{ route('login') }}">
         @csrf

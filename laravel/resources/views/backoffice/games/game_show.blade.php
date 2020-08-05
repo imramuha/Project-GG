@@ -29,7 +29,7 @@
                     </td>
                     <td>{{ $game->created_at}}</td>
                     <td>
-                        <a href="{{ route('games.edit', ['game' => $game->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
+                        <a href="{{ route('games.edit', ['game' => $game->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
                         <a href="{{ route('games.show', $game->id) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i>Delete </a></td>
                 </tr>
                 @endforeach

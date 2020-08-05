@@ -26,6 +26,27 @@ class DashboardController extends Controller
         return view('dashboard', compact('reports'));
     }
 
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try {
+            $report = Report::findOrFail($id);
+            $params = [
+                'report' => $report,
+            ];
+            return view('backoffice.reports.report_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
+        }
+    }
+
       /**
      * Remove the specified resource from storage.
      *

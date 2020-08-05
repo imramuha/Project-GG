@@ -39,7 +39,6 @@ class CommentController extends Controller
      */
     public function create()
     {
-      
     }
 
     /**
@@ -50,8 +49,8 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-          //
-         }
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -61,7 +60,18 @@ class CommentController extends Controller
      */
     public function show($id)
     {
+        try {
+            $comment = Comment::findOrFail($id);
+            $params = [
+                'comment' => $comment,
+            ];
+            return view('backoffice.comments.comment_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
         }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +81,6 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -83,7 +92,6 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
     }
 
     /**
@@ -94,23 +102,19 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        try
-        {
+        try {
             $comment = Comment::findOrFail($id);
             $comment->forceDelete();
-            
+
             return redirect()->route('comments.index')->with('success', "A Comment with the ID of <strong>$comment->id</strong> and comment of<strong>$comment->comment</strong> has successfully been deleted from the database.");
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('templates.'.'404');
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
             }
         }
     }
 
-    
+
     /**
      * Soft Delete a specified item.
      *
@@ -119,10 +123,9 @@ class CommentController extends Controller
      */
     public function softDelete($id)
     {
-
     }
 
-        /**
+    /**
      * Restore a soft deleted item.
      *
      * @param  int  $id
@@ -130,7 +133,5 @@ class CommentController extends Controller
      */
     public function softUndelete($id)
     {
-
-       
     }
 }

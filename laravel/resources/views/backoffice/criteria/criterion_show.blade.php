@@ -31,8 +31,8 @@
                             <td>{{ $criterion->updated_at }}</td>
                             <td>
             
-                                    <a href="{{ route('criteria.edit', $criterion->id ) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
-                                    <a href="{{ route('criteria.delete', $criterion->id ) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
+                                    <a href="{{ route('criteria.edit', $criterion->id ) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
+                                    <a href="{{ route('criteria.show', $criterion->id ) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
                             </td>
                         </tr>
                 @endforeach

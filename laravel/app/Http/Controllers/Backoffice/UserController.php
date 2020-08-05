@@ -65,6 +65,17 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        try {
+            $user = User::findOrFail($id);
+            $params = [
+                'user' => $user,
+            ];
+            return view('backoffice.users.user_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
+        }
     }
 
     /**

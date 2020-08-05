@@ -1,12 +1,11 @@
 @extends('app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container no-access">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header noAcces">UNAUTHORIZED</div>
-                <div class="card-body noAcces">
+                <div class="card-header no-access-header">UNAUTHORIZED</div>
+                <div class=" no-access-body card-body">
                     You have to be an ADMIN or a MODERATOR to be able to log into the backoffice!
                 </div>
                 <a class="nav-link" href="{{route('login')}}">GO BACK</a>

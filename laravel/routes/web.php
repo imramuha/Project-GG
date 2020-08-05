@@ -63,8 +63,8 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
             'as' => 'comments.delete',
         ]);
 
-          // delete game
-          Route::get('games/{id}/delete', [ 
+        // delete game
+        Route::get('games/{id}/delete', [ 
             'uses' => 'GameController@destroy',
             'as' => 'games.delete',
         ]);
@@ -102,7 +102,7 @@ Route::group(['prefix' => 'backoffice', 'namespace' => 'Backoffice'], function (
 
 Route::get('/admin', 'Backoffice\Auth\AdminController@index'); 
 Route::get('/mod', 'Backoffice\Auth\ModController@index');
-Route::get('/no-acces', 'Backoffice\Auth\NoAccesController@index');
+Route::get('/no-access', 'Backoffice\Auth\NoAccessController@index');
 
 Route::get('/login', 'Backoffice\Auth\LoginController@showLoginForm');
 Route::post('/login', 'Backoffice\Auth\LoginController@login')->name('login');

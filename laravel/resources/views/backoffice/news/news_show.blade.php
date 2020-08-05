@@ -29,8 +29,8 @@
                     <td>{{ $newsItem->updated_at }}</td>
                     <td>
                         @if($userRole === 'Admin')
-                        <a href="{{ route('news.edit', ['news' => $newsItem->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
-                        <a href="{{ route('news.delete', ['id' => $newsItem->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
+                        <a href="{{ route('news.edit', ['news' => $newsItem->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i>Edit</a>
+                        <a href="{{ route('news.show', $newsItem->id) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a>
                         @else
                         <a>Only accessible for ADMINS</a>
                         @endif

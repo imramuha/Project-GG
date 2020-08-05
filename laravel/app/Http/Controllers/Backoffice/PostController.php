@@ -38,7 +38,6 @@ class PostController extends Controller
      */
     public function create()
     {
-      
     }
 
     /**
@@ -49,8 +48,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-          //
-         }
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -59,8 +58,20 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+
     {
+        try {
+            $post = Post::findOrFail($id);
+            $params = [
+                'post' => $post,
+            ];
+            return view('backoffice.posts.post_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
         }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -70,7 +81,6 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -82,7 +92,6 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
     }
 
     /**
@@ -93,23 +102,19 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        try
-        {
+        try {
             $post = Post::findOrFail($id);
             $post->forceDelete();
-            
+
             return redirect()->route('posts.index')->with('success', "A Post with the ID of <strong>$post->id</strong> and title of<strong>$post->title</strong> has successfully been deleted from the database.");
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('templates.'.'404');
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
             }
         }
     }
 
-    
+
     /**
      * Soft Delete a specified item.
      *
@@ -118,10 +123,9 @@ class PostController extends Controller
      */
     public function softDelete($id)
     {
-
     }
 
-        /**
+    /**
      * Restore a soft deleted item.
      *
      * @param  int  $id
@@ -129,7 +133,5 @@ class PostController extends Controller
      */
     public function softUndelete($id)
     {
-
-       
     }
 }

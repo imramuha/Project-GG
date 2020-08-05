@@ -52,9 +52,8 @@
                             <ul id="menu-content" class="navbar-nav ml-auto">
                                 <!-- Authentication Links -->
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <span class="fa fa-user">&nbsp;</span>{{ Auth::user()->username }}
-                                    </a>
+                                    ({{ Auth::user()->role->name }}) [ {{ Auth::user()->username }} ] <span class="fa fa-user">&nbsp;</span>
+
 
                                     <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
                                         <a class="divider"></a>
@@ -81,15 +80,15 @@
                             <div>
                                 &nbsp;
                             </div>
-                            <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}"><span>Dashboard</span><i class="fa fa-flag" aria-hidden="true"></i></a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('dashboard')}}"><span>Reports</span><i class="fa fa-flag" aria-hidden="true"></i></a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('news.index')}}"><span>News</span><i class="fa fa-newspaper-o" aria-hidden="true"></i>
-</a></li>
+                                </a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('users.index')}}"><span>Users</span> <i class="pull-right align-items-center fas fa-users"></i></a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('reviews.index')}}"><span>Reviews</span> <i class="fa fa-star-half-o" aria-hidden="true"></i>
-</a></li>
+                                </a></li>
 
                             <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}"><span>Posts</span> <i class="fa fa-comment" aria-hidden="true"></i>
-</a></li>
+                                </a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('comments.index')}}"><span>Comments</span> <i class="pull-right align-items-center fa fa-comments-o"></i></a></li>
 
                             <li class="nav-item"><a class="nav-link" href="{{route('games.index')}}"><span>Games</span> <i class="pull-right align-items-center fas fa-gamepad"></i></a></li>

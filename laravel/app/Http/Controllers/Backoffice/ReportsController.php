@@ -39,7 +39,6 @@ class ReportController extends Controller
      */
     public function create()
     {
-      
     }
 
     /**
@@ -50,8 +49,8 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-          //
-         }
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -61,7 +60,18 @@ class ReportController extends Controller
      */
     public function show($id)
     {
+        try {
+            $report = Report::findOrFail($id);
+            $params = [
+                'report' => $report,
+            ];
+            return view('backoffice.reports.report_delete')->with($params);
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('templates.' . '404');
+            }
         }
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +81,6 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -83,7 +92,6 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
     }
 
     /**
@@ -94,10 +102,9 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-     
     }
 
-    
+
     /**
      * Soft Delete a specified item.
      *
@@ -106,10 +113,9 @@ class ReportController extends Controller
      */
     public function softDelete($id)
     {
-
     }
 
-        /**
+    /**
      * Restore a soft deleted item.
      *
      * @param  int  $id
@@ -117,7 +123,5 @@ class ReportController extends Controller
      */
     public function softUndelete($id)
     {
-
-       
     }
 }

@@ -27,7 +27,7 @@
                     <td>{{ $review['reviewer']->username }}</td>
                     <td>{{ $review['user']->username }}</td>
                     <td>{{ $review['created_at'] }}</td>
-                    <td><a href="{{ route('reviews.delete', ['id' => $review->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a></td>
+                    <td><a href="{{ route('reviews.show', $review->id) }}" class="btn btn-danger btn-xs"><i class="fa fa-pencil" title="Delete"></i>Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>
