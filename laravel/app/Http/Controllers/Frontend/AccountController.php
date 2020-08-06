@@ -353,7 +353,7 @@ class AccountController extends Controller
     */
     public function showLikedPosts () {
 
-        $posts = Post::with('likedPosts', 'comments')->paginate(10);
+        $posts = Post::with('likedPosts', 'comments')->paginate(5);
 
         // check if user liked this post; if yes, send it.
         foreach($posts as $key => $post) {

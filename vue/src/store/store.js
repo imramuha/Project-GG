@@ -27,7 +27,8 @@ export default new Vuex.Store({
             localStorage.setItem("user", JSON.stringify(userData));
 
             const authInterceptor = config => {
-                config.headers["Authorization"] = `Bearer ${userData.token}`;
+                config.headers["Authorization"] = `Bearer ${state.user.token}`;
+                console.log(config);
                 return config;
             };
 
@@ -93,13 +94,32 @@ export default new Vuex.Store({
                 });
         },
         LOGOUT(state) {
-            localStorage.removeItem("user");
-            state.user = null;
+
+            axios
+                .post(api + "/api/auth/logout", state.user)
+                .then(({ data }) => {
+                    console.log(data);
+                    localStorage.removeItem("user");
+                    state.user = null
+                    console.log(state.user)
+                    console.log(localStorage.getItem("user"));
+
+                    const authInterceptor = config => {
+                        config.headers["Authorization"] = `Bearer ${state.user.token}`;
+                        console.log(config);
+                        console.log('iyahah')
+                        return config;
+                    };
+
+                    httpClient.interceptors.request.use(authInterceptor);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
         },
         ACTIVATE_PUSHER(userData) {
             Pusher.logToConsole = true;
-
-            console.log("pusher");
 
             window.pusher = new Pusher("c8af74134473385784fa", {
                 authEndpoint: api + "/api/frontend/pusher/auth",
@@ -135,6 +155,7 @@ export default new Vuex.Store({
                     .post(api + "/api/auth/login", credentials)
                     .then(({ data }) => {
                         resolve(
+                            console.log(data.token),
                             commit("SET_USER_DATA", data.token),
                             commit("USER_ONLINE"),
                             commit("ACTIVATE_PUSHER")

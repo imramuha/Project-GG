@@ -17,10 +17,14 @@
           <i class="fa fa-gamepad" aria-hidden="true"></i>
         </button>
         <div class="sidenavButtons">
-          <a @click="onDashboardNavClick('feed')" class="button" title="Dashboard">
+          <a
+            @click="onDashboardNavClick('feed')"
+            class="button"
+            title="Dashboard"
+          >
             <i class="fas fa-columns"></i>
           </a>
-          <router-link to="/"  title="Home">
+          <router-link to="/" title="Home">
             <i class="fas fa-home"></i>
           </router-link>
           <a @click="onOverscreenClick(forum)" class="button" title="Forum">
@@ -34,7 +38,12 @@
           >
             <i class="fas fa-cog"></i>
           </a>
-          <a class="infoButton" type="button" title="Info">
+          <a
+            @click="infoModal = true"
+            class="infoButton"
+            type="button"
+            title="Info"
+          >
             <i class="fas fa-info"></i>
           </a>
           <a type="button" @click="logout" title="Logout">
@@ -47,18 +56,19 @@
       <ProfileHeader v-on:emitToOverscreen="onOverscreenClick" />
       <div class="contentNav">
         <template>
-          <DashboardNav :content="this.emit" v-on:emitToDashboard="onDashboardNavClick" />
+          <DashboardNav
+            :content="this.emit"
+            v-on:emitToDashboard="onDashboardNavClick"
+          />
         </template>
       </div>
       <div class="contentMain">
-        <!-- TBD loading/api call loader <template v-if="!isLoading">-->
         <template>
           <component
             v-on:emitToOverscreen="onOverscreenClick"
             :is="mainComponent"
           ></component>
         </template>
-        <!--<p v-else>Loading posts</p>-->
       </div>
     </div>
     <div v-else class="overscreenContainer">
@@ -101,6 +111,17 @@
         </template>
       </div>
     </div>
+    <div class="infoModal" v-if="infoModal">
+      <div class="infoModalData">
+        <h1>
+          How to use Project GG
+        </h1>
+
+        <button @click="infoModal = false">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -140,7 +161,7 @@ export default {
     Post,
     Games,
     Feed,
-    
+
     Inbox,
     Queue,
     Reviews,
@@ -167,32 +188,34 @@ export default {
       overscreenComponent: null,
       overscreenData: null,
       forum: "forum",
-      //notification: true,
+      infoModal: false,
     };
   },
   async mounted() {
     // on mount we check if the user has nightmode on or not
     let htmlElement = document.documentElement;
-    const response = await getUserSettings();
-
-    if(!response.data[0].nightmode == 1) {
-      htmlElement.setAttribute('theme', 'light');
-    }
+    await getUserSettings().then((response) => {
+      if (!response.data[0].nightmode == 1) {
+        htmlElement.setAttribute("theme", "light");
+      }
+    });
   },
   methods: {
     // Triggered when `childtodashboard` event is emitted by the child. <---- needs cleaning
     onDashboardNavClick(value) {
-      console.log(value);
       this.emit = value;
       if (value == "feed") {
+        console.log("yeh");
         this.contentActive = true;
         this.mainComponent = Feed;
       } else if (value == "inbox") {
+        this.contentActive = true;
         this.mainComponent = Inbox;
       } else if (value == "games") {
         this.contentActive = true;
         this.mainComponent = Games;
       } else if (value == "reviews") {
+        this.contentActive = true;
         this.mainComponent = Reviews;
       } else if (value == "posts") {
         this.contentActive = true;

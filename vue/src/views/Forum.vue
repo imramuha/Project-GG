@@ -37,6 +37,24 @@
         />
       </template>
     </div>
+    <div v-if="pagination.lastPage > 1" class="forumPagination">
+      <button
+        v-on:click="fetchPaginatedNewPosts(pagination.prevPage)"
+        :disabled="!pagination.prevPage"
+      >
+        <i class="fa fa-arrow-left" aria-hidden="true" />
+      </button>
+      <p>
+        Page <span>{{ pagination.currentPage }}</span> of
+        <span>{{ pagination.lastPage }}</span>
+      </p>
+      <button
+        v-on:click="fetchPaginatedNewPosts(pagination.nextPage)"
+        :disabled="!pagination.nextPage"
+      >
+        <i class="fa fa-arrow-right" aria-hidden="true" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -51,6 +69,10 @@ export default {
       posts: [],
       active: "new",
       loading: true,
+      pagination: [],
+      url_new_posts: "/api/frontend/postsnew",
+      url_top_posts: "/api/frontend/poststop",
+      url_liked_posts: "/api/frontend/postsliked",
     };
   },
   computed: {
@@ -63,22 +85,44 @@ export default {
       "fetchLikedPosts",
     ]),
 
+    createPagination(data) {
+      let pagination = {
+        currentPage: data.current_page,
+        lastPage: data.last_page,
+        nextPage: data.next_page_url,
+        prevPage: data.prev_page_url,
+      };
+      this.pagination = pagination;
+    },
+
+    async fetchPaginatedNewPosts(url) {
+      this.url_new_posts = url;
+      console.log(this.url_new_posts);
+
+      await this.fetchNewPosts(this.url_new_posts);
+      this.posts = this.getNewPosts.data;
+      this.createPagination(this.getNewPosts);
+    },
+
     async sortPosts(value) {
       console.log(value);
       if (value === "new") {
-        await this.fetchNewPosts().then(() => {
+        await this.fetchNewPosts(this.url_new_posts).then(() => {
           this.posts = this.getNewPosts.data;
+          this.createPagination(this.getNewPosts);
         });
         this.active = "new";
       } else if (value === "top") {
-        this.fetchTopPosts().then(() => {
+        this.fetchTopPosts(this.url_top_posts).then(() => {
           this.posts = this.getTopPosts.data;
+          this.createPagination(this.getTopPosts);
         });
         this.active = "top";
         console.log(this.active);
       } else if (value === "liked") {
-        this.fetchLikedPosts().then(() => {
+        this.fetchLikedPosts(this.url_liked_posts).then(() => {
           this.posts = this.getLikedPosts;
+          this.createPagination(this.getLikedPosts);
         });
         this.active = "liked";
       }
@@ -109,12 +153,13 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchNewPosts();
-    await this.fetchTopPosts();
-    await this.fetchLikedPosts();
+    await this.fetchNewPosts(this.url_new_posts);
+    await this.fetchTopPosts(this.url_top_posts);
+    await this.fetchLikedPosts(this.url_liked_posts);
+
     this.posts = this.getNewPosts.data;
+    this.createPagination(this.getNewPosts);
     this.loading = false;
-    console.log(this.posts);
   },
 };
 </script>

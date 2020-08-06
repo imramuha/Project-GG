@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       childMessage: "",
-      isActive: "feed"
+      isActive: "feed",
     };
   },
   props: {
@@ -51,15 +51,14 @@ export default {
       type: String,
       default: () => {
         return {};
-      }
-    }
+      },
+    },
   },
- /*computed: {
+  watch: {
     content: function() {
-      this.isActive = this.content;
-      return this.isActive;
-    }
-  },*/
+      this.checkActive(this.content);
+    },
+  },
   methods: {
     feed() {
       this.childMessage = "feed";
@@ -83,8 +82,29 @@ export default {
     },
     emitToDashboard() {
       this.$emit("emitToDashboard", this.childMessage);
-    }
-  }
+    },
+    checkActive(content) {
+      content = this.content
+      if (content === "feed") {
+        this.isActive = "feed";
+      } else if (content === "posts") {
+        this.isActive = "posts";
+      } else if (content === "inbox") {
+        this.isActive = "inbox";
+      } else if (content === "games") {
+        this.isActive = "games";
+      } else if (content === "posts") {
+        this.isActive = "posts";
+      } else if (content === "reviews") {
+        this.isActive = "reviews";
+      } else {
+        this.isActive = "feed";
+      }
+    },
+  },
+  mounted() {
+    this.checkActive(this.content);
+  },
 };
 </script>
 

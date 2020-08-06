@@ -1,266 +1,386 @@
-                            .dashboard {
-                                background-color: var(--midnightH);
-                                color: var(--snow);
-                                width: 100vw;
-                                height: 100vh;
-                                display: flex;
-                                box-sizing: border-box;
-                            }
-                            
-                            .content {
-                                display: flex;
-                                background-color: var(--midnightL);
-                                width: 100%;
-                                flex-direction: column;
-                                box-sizing: border-box;
-                                padding: 7px;
-                                .contentHeader {
-                                    height: 22%;
-                                    min-height: 22%;
-                                    background-color: var(--midnightH);
-                                    margin-bottom: 7px;
-                                    border-radius: 3px;
-                                    padding: 7px;
-                                    box-shadow: 0 0 3px var(--midnightH);
-                                    box-sizing: border-box;
-                                    display: flex;
-                                    width: 100%;
-                                    /*&:hover {
+.dashboard {
+    background-color: var(--midnightH);
+    color: var(--snow);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.content {
+    display: flex;
+    background-color: var(--midnightL);
+    width: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 7px;
+    .contentHeader {
+        height: 22%;
+        min-height: 22%;
+        background-color: var(--midnightH);
+        margin-bottom: 7px;
+        border-radius: 3px;
+        padding: 7px;
+        box-shadow: 0 0 3px var(--midnightH);
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        /*&:hover {
                                     box-shadow: 0 0 3px var(--candy);
                                 }*/
-                                    .userImage {
-                                        display: flex;
-                                        padding: 7px;
-                                        border-radius: 3px;
-                                        width: 150px;
-                                        overflow: hidde;
-                                        img {
-                                            border-radius: 3px;
-                                            height: 100%;
-                                            width: auto;
-                                            max-width: 150px;
-                                            overflow: hidden;
-                                        }
-                                    }
-                                    .userDataContainer {
-                                        width: 75%;
-                                        background-color: var(--midnightH);
-                                        padding: 7px;
-                                        width: 100%;
-                                        display: flex;
-                                        flex-direction: column;
-                                        h1,
-                                        p {
-                                            margin: 0px;
-                                        }
-                                        .userData {
-                                            width: 100%;
-                                            height: 75%;
-                                            box-sizing: border-box;
-                                            overflow: hidden;
-                                            display: flex;
-                                            flex-direction: row;
-                                            p {
-                                                color: var(--melt);
-                                            }
-                                            .userDataRight {
-                                                display: flex;
-                                                width: 35%;
-                                                justify-content: flex-end;
-                                                button {
-                                                    cursor: pointer;
-                                                    border: 2px solid var(--melt);
-                                                    border-radius: 2px;
-                                                    padding: 7px 21px;
-                                                    font-size: 11px;
-                                                    color: var(--melt);
-                                                    background-color: var(--midnightL);
-                                                    border-radius: 3px;
-                                                    &:hover {
-                                                        color: var(--snow);
-                                                        border-color: var(--snow);
-                                                        transition: 0.3s;
-                                                    }
-                                                }
-                                            }
-                                            .userDataLeft {
-                                                width: 65%;
-                                            }
-                                        }
-                                        .userReviewScore {
-                                            display: flex;
-                                            margin-left: auto;
-                                            position: relative;
-                                            height: 25%;
-                                            width: 100%;
-                                            border-radius: 3px;
-                                            background-color: var(--candy);
-                                            border: 2px solid var(--snow);
-                                            .userReviewScoreBar {
-                                                background-color: var(--slate);
-                                            }
-                                            .userReviewScorePercentage {
-                                                display: flex;
-                                                align-items: center;
-                                                font-size: 15px;
-                                                padding: 3px;
-                                                font-weight: 600;
-                                                letter-spacing: 1px;
-                                                position: absolute;
-                                                left: 50%;
-                                                //top: 25%;
-                                            }
-                                            .userReviewScoreEmpty {
-                                                display: flex;
-                                                justify-content: center;
-                                                align-items: center;
-                                                width: 100%;
-                                                font-size: 11px;
-                                                padding: 3px;
-                                                font-weight: 600;
-                                                letter-spacing: 1px;
-                                            }
-                                        }
-                                    }
-                                }
-                                .contentNav {
-                                    height: 8%;
-                                    min-height: 8%;
-                                    display: flex;
-                                    padding: 7px;
-                                    box-shadow: 0 0 3px var(--midnightH);
-                                    box-sizing: border-box;
-                                    margin-bottom: 7px;
-                                    .dashboardNav {
-                                        width: 100%;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        box-sizing: border-box;
-                                        button {
-                                            cursor: pointer;
-                                            font-size: 13px;
-                                            font-weight: 600;
-                                            border-radius: 2px;
-                                            width: 100%;
-                                            background-color: inherit;
-                                            font-size: 11px;
-                                            color: var(--snow);
-                                            border: none;
-                                            //border: 1px solid var(--melt);
-                                            background-color: var(--midnight);
-                                            box-shadow: 0 0 3px var(--midnight);
-                                            text-transform: uppercase;
-                                            &:not(:last-child) {
-                                                margin-right: 7px;
-                                            }
-                                            &:hover {
-                                                color: var(--candy);
-                                            }
-                                        }
-                                        .navButtonActive {
-                                            background-color: var(--candy);
-                                            &:hover {
-                                                color: inherit;
-                                            }
-                                        }
-                                    }
-                                }
-                                .contentMain {
-                                    height: 70%;
-                                    background-color: var(--midnightL);
-                                    box-sizing: border-box;
-                                    border-radius: 3px;
-                                    padding: 7px;
-                                    box-shadow: 0 0 3px var(--midnightH);
-                                }
-                            }
-                            
-                            .sidecontent {
-                                display: flex;
-                                flex-direction: column;
-                                box-sizing: border-box;
-                                padding: 7px;
-                                background-color: var(--midnightL);
-                                max-width: 25%;
-                                .sidecontentHeader {
-                                    height: 22%;
-                                    min-height: 22%;
-                                    background-color: var(--midnightL);
-                                    //padding: 7px;
-                                    box-sizing: border-box;
-                                    border-radius: 3px;
-                                    box-shadow: 0 0 3px var(--midnightH);
-                                    margin-bottom: 7px;
-                                    .sidecontentNotifications {
-                                        display: flex;
-                                        flex-direction: column;
-                                        //justify-content: space-around;
-                                        overflow: hidden;
-                                        width: 100%;
-                                        height: 100%;
-                                        background-color: var(--midnightH);
-                                        box-shadow: 0 0 3px var(--midnightH);
-                                        border-radius: 2px;
-                                        padding: 7px;
-                                        .notificationsEmpty {
-                                            height: 100%;
-                                            display: flex;
-                                            font-size: 13px;
-                                            color: var(--melt);
-                                            text-align: center;
-                                            align-items: center;
-                                            justify-content: center;
-                                        }
-                                    }
-                                }
-                                .sidecontentFunction {
-                                    height: 8%;
-                                    min-height: 8%;
-                                    display: flex;
-                                    justify-content: space-evenly;
-                                    background-color: var(--midnightL);
-                                    box-sizing: border-box;
-                                    padding: 7px;
-                                    align-items: center;
-                                    justify-content: center;
-                                    box-shadow: 0 0 3px var(--midnightH);
-                                    margin-bottom: 7px;
-                                    .searchForm {
-                                        height: 100%;
-                                        width: 100%;
-                                        form {
-                                            display: flex;
-                                            height: 100%;
-                                            width: 100%;
-                                            input {
-                                                color: var(--melt);
-                                                padding: 0 7px;
-                                                border: none;
-                                                background-color: var(--midnightH);
-                                                flex-grow: 7;
-                                                border-radius: 1px;
-                                                &:focus {
-                                                    border: 1px solid var(--candy);
-                                                }
-                                            }
-                                            button {
-                                                flex-grow: 2.5;
-                                                background-color: var(--midnight);
-                                                border: none;
-                                                color: var(--snow);
-                                                border-radius: 1px;
-                                                &:hover {
-                                                    color: var(--melt);
-                                                    cursor: pointer;
-                                                }
-                                            }
-                                            box-shadow: 0 0 3px var(--midnightH);
-                                        }
-                                    }
-                                }
-                                .sidecontentFriendlist {
-                                    height: 70%;
-                                    background-color: var(--mysteryL);
-                                    box-shadow: 0 0 3px var(--midnightH);
-                                }
-                            }
+        .userImage {
+            display: flex;
+            padding: 7px;
+            border-radius: 3px;
+            width: 150px;
+            overflow: hidde;
+            img {
+                border-radius: 3px;
+                height: 100%;
+                width: auto;
+                max-width: 150px;
+                overflow: hidden;
+            }
+        }
+        .userDataContainer {
+            width: 75%;
+            background-color: var(--midnightH);
+            padding: 7px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            h1,
+            p {
+                margin: 0px;
+            }
+            .userData {
+                width: 100%;
+                height: 75%;
+                box-sizing: border-box;
+                overflow: hidden;
+                display: flex;
+                flex-direction: row;
+                p {
+                    color: var(--melt);
+                }
+                .userDataRight {
+                    display: flex;
+                    width: 35%;
+                    justify-content: flex-end;
+                    button {
+                        cursor: pointer;
+                        border: 2px solid var(--melt);
+                        border-radius: 2px;
+                        padding: 7px 21px;
+                        font-size: 11px;
+                        color: var(--melt);
+                        background-color: var(--midnightL);
+                        border-radius: 3px;
+                        &:hover {
+                            color: var(--snow);
+                            border-color: var(--snow);
+                            transition: 0.3s;
+                        }
+                    }
+                }
+                .userDataLeft {
+                    width: 65%;
+                }
+            }
+            .userReviewScore {
+                display: flex;
+                margin-left: auto;
+                position: relative;
+                height: 25%;
+                width: 100%;
+                border-radius: 3px;
+                background-color: var(--candy);
+                border: 2px solid var(--snow);
+                .userReviewScoreBar {
+                    background-color: var(--slate);
+                }
+                .userReviewScorePercentage {
+                    display: flex;
+                    align-items: center;
+                    font-size: 15px;
+                    padding: 3px;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                    position: absolute;
+                    left: 50%;
+                    //top: 25%;
+                }
+                .userReviewScoreEmpty {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    font-size: 11px;
+                    padding: 3px;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                }
+            }
+        }
+    }
+    .contentNav {
+        height: 8%;
+        min-height: 8%;
+        display: flex;
+        padding: 7px;
+        box-shadow: 0 0 3px var(--midnightH);
+        box-sizing: border-box;
+        margin-bottom: 7px;
+        .dashboardNav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            button {
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 600;
+                border-radius: 2px;
+                width: 100%;
+                background-color: inherit;
+                font-size: 11px;
+                color: var(--snow);
+                border: none;
+                //border: 1px solid var(--melt);
+                background-color: var(--midnight);
+                box-shadow: 0 0 3px var(--midnight);
+                text-transform: uppercase;
+                &:not(:last-child) {
+                    margin-right: 7px;
+                }
+                &:hover {
+                    color: var(--candy);
+                }
+            }
+            .navButtonActive {
+                background-color: var(--candy);
+                &:hover {
+                    color: inherit;
+                }
+            }
+        }
+    }
+    .contentMain {
+        height: 70%;
+        background-color: var(--midnightL);
+        box-sizing: border-box;
+        border-radius: 3px;
+        padding: 7px;
+        box-shadow: 0 0 3px var(--midnightH);
+    }
+}
+
+.sidecontent {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 7px;
+    background-color: var(--midnightL);
+    max-width: 25%;
+    .sidecontentHeader {
+        height: 22%;
+        min-height: 22%;
+        background-color: var(--midnightL);
+        //padding: 7px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        box-shadow: 0 0 3px var(--midnightH);
+        margin-bottom: 7px;
+        .sidecontentNotifications {
+            display: flex;
+            flex-direction: column;
+            //justify-content: space-around;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: var(--midnightH);
+            box-shadow: 0 0 3px var(--midnightH);
+            border-radius: 2px;
+            padding: 7px;
+            .notificationsEmpty {
+                height: 100%;
+                display: flex;
+                font-size: 13px;
+                color: var(--melt);
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    .sidecontentFunction {
+        height: 8%;
+        min-height: 8%;
+        display: flex;
+        justify-content: space-evenly;
+        background-color: var(--midnightL);
+        box-sizing: border-box;
+        padding: 7px;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 3px var(--midnightH);
+        margin-bottom: 7px;
+        .searchForm {
+            height: 100%;
+            width: 100%;
+            form {
+                display: flex;
+                height: 100%;
+                width: 100%;
+                input {
+                    color: var(--melt);
+                    padding: 0 7px;
+                    border: none;
+                    background-color: var(--midnightH);
+                    flex-grow: 7;
+                    border-radius: 1px;
+                    &:focus {
+                        border: 1px solid var(--candy);
+                    }
+                }
+                button {
+                    flex-grow: 2.5;
+                    background-color: var(--midnight);
+                    border: none;
+                    color: var(--snow);
+                    border-radius: 1px;
+                    &:hover {
+                        color: var(--melt);
+                        cursor: pointer;
+                    }
+                }
+                box-shadow: 0 0 3px var(--midnightH);
+            }
+        }
+    }
+    .sidecontentFriendlist {
+        height: 70%;
+        background-color: var(--mysteryL);
+        box-shadow: 0 0 3px var(--midnightH);
+    }
+}
+
+.infoModal {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: var(--midnightH60);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 3px var(--midnightH);
+    button {
+        cursor: pointer;
+        width: auto;
+        padding: 7px;
+        border: 4px solid var(--snow);
+        background-color: var(--candy);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        color: var(--snow);
+        font-size: 21px;
+        margin-bottom: 14px;
+        &:hover {
+            color: var(--snow);
+            border-color: var(--snow);
+            background-color: var(--candyL);
+            transform: 0.3s;
+        }
+    }
+    .infoModalData {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--midnightL);
+        width: 75%;
+        height: 100%;
+        margin: 14px;
+        padding: 20px;
+        border-radius: 3px;
+        border: 4px solid var(--snow);
+        h1 {
+            @include font-size($access-title-font-sizes);
+            line-height: 10px;
+            margin: 20px 0px 30px;
+            span {
+                color: var(--paint);
+            }
+        }
+        label {
+            @include font-size($access-p-font-sizes);
+            color: var(--melt);
+            margin: 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 20px 0 5px;
+            letter-spacing: 0.5px;
+        }
+        ul {
+            padding: 0;
+            list-style-type: none;
+            margin: 0px;
+        }
+        &:first-child>p {
+            font-size: 11px;
+            margin-top: 7px;
+            color: var(--candy);
+            b {
+                color: var(--melt);
+            }
+        }
+        &,
+        form {
+            display: flex;
+            flex-direction: column;
+            textarea {
+                color: snow;
+                border-radius: 3px;
+                background-color: var(--midnight);
+                border: 1px solid var(--midnightH);
+                padding: 15px;
+                &:focus {
+                    border-color: var(--candy);
+                }
+            }
+            .reportFormButtons {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                button {
+                    background-color: var(--candy);
+                    color: var(--snow);
+                    border: none;
+                    border-radius: 3px;
+                    padding: 14px 21px;
+                    font-weight: 600;
+                    margin-top: 22px;
+                    &:hover {
+                        background-color: var(--candyL);
+                    }
+                }
+            }
+        }
+        @include sm {
+            padding: 25px;
+        }
+        @include md {
+            padding: 30px;
+        }
+        @include lg {
+            padding: 35px;
+        }
+        @include xl {
+            padding: 40px;
+        }
+    }
+}

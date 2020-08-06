@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'auth', 'namespace' => 'Authenticate'], function () {
     Route::get('login', 'LoginController');
     Route::post('login', 'LoginController');
-    //Route::get('login', 'LoginController')->name('login');
-    //Route::post('login', 'LoginController')->name('login');
     Route::post('register', 'RegisterController');
     Route::post('logout', 'LogoutController');
     Route::get('me', 'MeController');
