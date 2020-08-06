@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       childMessage: "",
-      isActive: "feed",
+      isActive: "feed"
     };
   },
   props: {
@@ -51,13 +51,13 @@ export default {
       type: String,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   watch: {
     content: function() {
       this.checkActive(this.content);
-    },
+    }
   },
   methods: {
     feed() {
@@ -84,7 +84,7 @@ export default {
       this.$emit("emitToDashboard", this.childMessage);
     },
     checkActive(content) {
-      content = this.content
+      content = this.content;
       if (content === "feed") {
         this.isActive = "feed";
       } else if (content === "posts") {
@@ -100,11 +100,11 @@ export default {
       } else {
         this.isActive = "feed";
       }
-    },
+    }
   },
   mounted() {
     this.checkActive(this.content);
-  },
+  }
 };
 </script>
 

@@ -1,7 +1,10 @@
 <template>
   <div class="postsboard">
     <div v-if="loading" class="ldsContainer">
-      <div class="ldsRipple"><div></div><div></div></div>
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
     </div>
 
     <div v-if="userposts && !loading" class="posts">
@@ -13,7 +16,11 @@
       />
     </div>
 
-    <div v-if="!userposts.length && !loading" class="posts"><h1 class="emptyPosts">Sorry, there were no posts found made by you, try posting one.</h1></div>
+    <div v-if="!userposts.length && !loading" class="posts">
+      <h1 class="emptyPosts">
+        Sorry, there were no posts found made by you, try posting one.
+      </h1>
+    </div>
 
     <div class="postsFooter">
       <div v-if="pagination.lastPage > 1" class="postsPagination">
@@ -56,11 +63,11 @@ export default {
       userposts: [],
       pagination: [],
       url: "/api/frontend/userposts",
-        loading: true,
+      loading: true
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getUserPosts"]),
+    ...mapGetters("Forum", ["getUserPosts"])
   },
   methods: {
     ...mapActions("Forum", ["fetchUserPosts"]),
@@ -70,7 +77,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.pagination = pagination;
     },
@@ -95,13 +102,13 @@ export default {
 
     onClickCreate() {
       let value = {
-        component: "PostCreate",
+        component: "PostCreate"
       };
       this.emitToOverscreen(value);
     },
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    },
+    }
   },
 
   async mounted() {
@@ -117,7 +124,7 @@ export default {
       this.createPagination(this.userposts);
       this.loading = false;
     }
-  },
+  }
 };
 </script>
 

@@ -10,6 +10,7 @@
             flex-direction: row;
             padding: 7px;
             box-shadow: 0 0 3px var(--midnightH);
+            background-color: var(--midnightH);
             .profileHeaderView {
                 display: flex;
                 flex-direction: column;
@@ -300,12 +301,11 @@
             display: flex;
             height: 100%;
             flex-direction: row;
-            padding: 14px;
-            box-shadow: 0 0 3px var(--midnightH);
             .profileReviewsSection {
                 display: flex;
                 flex-direction: row;
                 align-items: flex-start;
+                padding: 14px;
                 width: 100%;
                 h1 {
                     width: 100%;
@@ -417,7 +417,8 @@
             .profileReviewInput {
                 flex-grow: 1;
                 height: 100%;
-                padding-left: 7px;
+                padding: 14px;
+                background-color: var(--midnightH);
                 display: flex;
                 form {
                     display: flex;
@@ -450,7 +451,7 @@
                     textarea {
                         color: snow;
                         border-radius: 3px;
-                        background-color: var(--midnightH);
+                        background-color: var(--midnight);
                         border: 1px solid var(--midnight);
                         padding: 7px;
                         margin-bottom: 7px;

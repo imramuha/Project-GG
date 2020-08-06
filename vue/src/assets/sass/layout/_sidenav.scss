@@ -15,6 +15,11 @@
         padding: 14px;
         height: 100%;
         min-width: 75px;
+        .sidenavlogo {
+            a {
+                background-color: red;
+            }
+        }
         .queueButton {
             cursor: pointer;
             width: auto;

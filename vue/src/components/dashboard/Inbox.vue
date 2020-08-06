@@ -11,7 +11,11 @@
         <div></div>
       </div>
     </div>
-    <MessagersList v-else :friends="friends" @selected="startConversationWith" />
+    <MessagersList
+      v-else
+      :friends="friends"
+      @selected="startConversationWith"
+    />
   </div>
 </template>
 
@@ -32,8 +36,8 @@ export default {
       messages: [],
       friends: [],
       // change this
-      user: [], 
-      loading: true,
+      user: [],
+      loading: true
     };
   },
   mounted() {

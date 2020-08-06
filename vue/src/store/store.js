@@ -28,7 +28,6 @@ export default new Vuex.Store({
 
             const authInterceptor = config => {
                 config.headers["Authorization"] = `Bearer ${state.user.token}`;
-                console.log(config);
                 return config;
             };
 
@@ -38,7 +37,7 @@ export default new Vuex.Store({
             const today = new Date();
 
             function addZeroBefore(n) {
-                return (n < 10 ? '0' : '') + n;
+                return (n < 10 ? "0" : "") + n;
             }
 
             const hours = addZeroBefore(today.getHours());
@@ -94,20 +93,19 @@ export default new Vuex.Store({
                 });
         },
         LOGOUT(state) {
-
             axios
                 .post(api + "/api/auth/logout", state.user)
                 .then(({ data }) => {
                     console.log(data);
                     localStorage.removeItem("user");
-                    state.user = null
-                    console.log(state.user)
+                    state.user = null;
+                    console.log(state.user);
                     console.log(localStorage.getItem("user"));
 
                     const authInterceptor = config => {
                         config.headers["Authorization"] = `Bearer ${state.user.token}`;
                         console.log(config);
-                        console.log('iyahah')
+                        console.log("iyahah");
                         return config;
                     };
 
@@ -116,7 +114,6 @@ export default new Vuex.Store({
                 .catch(error => {
                     console.log(error);
                 });
-
         },
         ACTIVATE_PUSHER(userData) {
             Pusher.logToConsole = true;

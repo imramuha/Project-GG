@@ -72,17 +72,17 @@ export default {
       pagination: [],
       url_new_posts: "/api/frontend/postsnew",
       url_top_posts: "/api/frontend/poststop",
-      url_liked_posts: "/api/frontend/postsliked",
+      url_liked_posts: "/api/frontend/postsliked"
     };
   },
   computed: {
-    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"]),
+    ...mapGetters("Forum", ["getNewPosts", "getTopPosts", "getLikedPosts"])
   },
   methods: {
     ...mapActions("Forum", [
       "fetchNewPosts",
       "fetchTopPosts",
-      "fetchLikedPosts",
+      "fetchLikedPosts"
     ]),
 
     createPagination(data) {
@@ -90,7 +90,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.pagination = pagination;
     },
@@ -150,7 +150,7 @@ export default {
       } else {
         this.emitToOverscreen(value);
       }
-    },
+    }
   },
   async mounted() {
     await this.fetchNewPosts(this.url_new_posts);
@@ -160,6 +160,6 @@ export default {
     this.posts = this.getNewPosts.data;
     this.createPagination(this.getNewPosts);
     this.loading = false;
-  },
+  }
 };
 </script>

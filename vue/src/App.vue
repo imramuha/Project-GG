@@ -3,12 +3,12 @@
     <div class="wrapper">
       <div></div>
       <div class="circle"></div>
-      <div class='triangle'></div>
+      <div class="triangle"></div>
       <div class="x">&times;</div>
       <div></div>
       <div></div>
     </div>
-
+<!-- hier de logo-->
     <AppNav />
     <router-view class="page" />
   </div>
@@ -24,9 +24,9 @@ export default {
     AppNav
   },
   data() {
-      return {
-          darkMode: false,
-      }
+    return {
+      darkMode: false
+    };
   },
   methods: {
     toggle() {

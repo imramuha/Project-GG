@@ -79,7 +79,7 @@ export default {
       active: true,
       lounge: "",
       loungeData: "",
-      loungeUsers: [],
+      loungeUsers: []
     };
   },
   props: {
@@ -87,13 +87,13 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   methods: {
     async exitLounge() {
       try {
-        await exitLounge().then((response) => {
+        await exitLounge().then(response => {
           console.log(response);
         });
       } catch (error) {
@@ -101,14 +101,14 @@ export default {
       }
     },
     handleIncoming(data) {
-      if(!data) {
+      if (!data) {
         this.active = false;
       } else {
         this.active = true;
       }
-      this.loungeData = data
-      this.loungeUsers = data.users
-    },
+      this.loungeData = data;
+      this.loungeUsers = data.users;
+    }
   },
   async mounted() {
     /* global pusher */
@@ -116,7 +116,7 @@ export default {
     this.lounge = this.lobby;
     try {
       console.log(this.lounge);
-      await getLoungeData(this.lounge.id).then((response) => {
+      await getLoungeData(this.lounge.id).then(response => {
         console.log(response.data);
         this.loungeData = response.data;
         console.log(this.loungeData);
@@ -127,7 +127,7 @@ export default {
           `private-lounge${this.loungeData.code}`
         );
 
-        channel.bind("NewLounge", (data) => {
+        channel.bind("NewLounge", data => {
           console.log(data);
           this.handleIncoming(data);
         });
@@ -135,7 +135,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };
 </script>
 

@@ -1,7 +1,10 @@
 <template>
   <div class="contentHeader">
     <div v-if="loading" class="ldsContainer">
-      <div class="ldsRipple"><div></div><div></div></div>
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
     </div>
 
     <div class="userImage" v-else-if="user.image && !loading">
@@ -53,12 +56,12 @@ export default {
     return {
       user: [],
       reviewscore: 0,
-      loading: true,
+      loading: true
     };
   },
   async mounted() {
     try {
-      await getMe().then((response) => {
+      await getMe().then(response => {
         this.user = response.data.user[0];
 
         var score = 0;
@@ -79,14 +82,14 @@ export default {
   methods: {
     onEditClick() {
       let value = {
-        component: "UserEdit",
+        component: "UserEdit"
       };
       this.emitToOverscreen(value);
     },
     emitToOverscreen(value) {
       this.$emit("emitToOverscreen", value);
-    },
-  },
+    }
+  }
 };
 </script>
 

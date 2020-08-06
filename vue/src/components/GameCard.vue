@@ -7,7 +7,7 @@
           <div class="gameCardContentHeader">
             <h1>{{ game.game.name }}</h1>
           </div>
-          <div v-if='game.data' class="gameCardContentBody">
+          <div v-if="game.data" class="gameCardContentBody">
             <p>{{ game.data.username }}</p>
             <p>{{ game.data.data }}</p>
           </div>

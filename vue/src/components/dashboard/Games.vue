@@ -1,9 +1,12 @@
 <template>
   <div class="gamesContainer">
     <div v-if="loading" class="ldsContainer">
-      <div class="ldsRipple"><div></div><div></div></div>
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
     </div>
-    
+
     <div v-if="usergames && !loading" class="games">
       <GameCard
         v-for="usergame in usergames"
@@ -12,7 +15,11 @@
         v-on:emitToGames="reloadGames"
       />
     </div>
-    <div v-if="!usergames.length && !loading" class="games"><h1 class="emptyGames">Sorry, but no games were found, try adding one.</h1></div>
+    <div v-if="!usergames.length && !loading" class="games">
+      <h1 class="emptyGames">
+        Sorry, but no games were found, try adding one.
+      </h1>
+    </div>
     <div class="gamesFooter">
       <div v-if="pagination.lastPage > 1" class="gamesPagination">
         <button
@@ -32,8 +39,7 @@
           <i class="fa fa-arrow-right" aria-hidden="true" />
         </button>
       </div>
-      <div v-else class="gamesPagination">
-      </div>
+      <div v-else class="gamesPagination"></div>
       <div class="gamesFooterButtons">
         <a v-on:click="onClickAdd">
           <button>Add</button>
@@ -56,14 +62,14 @@ export default {
       usergames: [],
       url: "/api/frontend/usergames",
       pagination: [],
-      loading: true,
+      loading: true
     };
   },
   computed: {
     ...mapGetters("Game", ["getUserGames"])
   },
   methods: {
-    ...mapActions("Game", ["fetchUserGames"]), 
+    ...mapActions("Game", ["fetchUserGames"]),
 
     createPagination(data) {
       console.log(data);

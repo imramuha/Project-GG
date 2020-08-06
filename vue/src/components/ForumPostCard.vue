@@ -1,19 +1,22 @@
 <template>
   <div class="forumPostCard">
     <div class="forumPostCardImage" v-if="post.image">
-            <a @click="onForumPostCardClick">
-      <img :src="post.image" />
-            </a>
+      <a @click="onForumPostCardClick">
+        <img :src="post.image" />
+      </a>
     </div>
     <div class="forumPostCardImage" v-else>
-            <a @click="onForumPostCardClick">
-      <img src="@/assets/images/post.png" />
-            </a>
+      <a @click="onForumPostCardClick">
+        <img src="@/assets/images/post.png" />
+      </a>
     </div>
     <div class="forumPostcardContent">
       <a @click="onForumPostCardClick">
         <div class="forumPostcardContentHeader">
-          <h1>{{ post.title }}<span>[ created at {{ post.created_at | formatDate}}]</span></h1>
+          <h1>
+            {{ post.title
+            }}<span>[ created at {{ post.created_at | formatDate }}]</span>
+          </h1>
         </div>
         <div class="forumPostcardContentBody">
           <p>
@@ -50,17 +53,17 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
-      childMessage: "",
+      childMessage: ""
       //toggleLike: "liked",
     };
   },
   methods: {
-     async gg() {
+    async gg() {
       let data = {
         post_id: this.post.id
       };
@@ -92,15 +95,15 @@ export default {
     onForumPostCardClick() {
       this.childMessage = {
         component: "ForumPostCard",
-        id: this.post.id,
+        id: this.post.id
       };
 
       this.emitToForum(this.childMessage);
     },
     emitToForum(value) {
       this.$emit("emitToForum", value);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped></style>

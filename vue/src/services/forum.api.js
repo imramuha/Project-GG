@@ -9,7 +9,8 @@ const NEWS_END_POINT = "/api/frontend/news";
 const getUserPosts = url => httpClient.get(url);
 const getPost = id => httpClient.get(POST_END_POINT + id);
 const postComment = data => httpClient.post(COMMENT_END_POINT, data);
-const createPost = (data, config) => httpClient.post(CREATE_END_POINT, data, config);
+const createPost = (data, config) =>
+  httpClient.post(CREATE_END_POINT, data, config);
 const likePost = data => httpClient.post(LIKE_POST_END_POINT, data);
 
 /*
@@ -22,13 +23,13 @@ const getLikedPosts = url => httpClient.get(url);
 const getNews = () => httpClient.get(NEWS_END_POINT);
 
 export {
-    getUserPosts,
-    getNewPosts,
-    getTopPosts,
-    getLikedPosts,
-    getPost,
-    postComment,
-    createPost,
-    likePost,
-    getNews
+  getUserPosts,
+  getNewPosts,
+  getTopPosts,
+  getLikedPosts,
+  getPost,
+  postComment,
+  createPost,
+  likePost,
+  getNews
 };

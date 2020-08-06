@@ -113,11 +113,11 @@ export default {
       pagination: [],
       postedPagination: [],
       mode: "received",
-      isActive: "received",
+      isActive: "received"
     };
   },
   computed: {
-    ...mapGetters("Review", ["getUserReviews", "getUserPostedReviews"]),
+    ...mapGetters("Review", ["getUserReviews", "getUserPostedReviews"])
   },
   methods: {
     ...mapActions("Review", ["fetchUserReviews", "fetchUserPostedReviews"]),
@@ -127,7 +127,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.pagination = pagination;
     },
@@ -136,7 +136,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.postedPagination = pagination;
     },
@@ -163,7 +163,7 @@ export default {
     received() {
       this.mode = "received";
       this.isActive = "received";
-    },
+    }
   },
 
   async mounted() {
@@ -192,7 +192,7 @@ export default {
       this.createPostedPagination(this.userpostedreviews);
       this.loading = false;
     }
-  },
+  }
 };
 </script>
 

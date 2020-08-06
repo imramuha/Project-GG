@@ -1,23 +1,41 @@
 <template>
   <div class="feed">
     <div v-if="loading" class="ldsContainer">
-      <div class="ldsRipple"><div></div><div></div></div>
+      <div class="ldsRipple">
+        <div></div>
+        <div></div>
+      </div>
     </div>
 
     <div v-else-if="!loading" class="feedNews">
       <div class="feedNewsHeader">
         <h1>News</h1>
-        <button  :class="[active === 0 ? 'newsButtonActive' : 'newsButtonDeactive']" @click="slide(0)" />
-        <button  :class="[active === 1 ? 'newsButtonActive' : 'newsButtonDeactive']" @click="slide(1)" />
-        <button  :class="[active === 2 ? 'newsButtonActive' : 'newsButtonDeactive']" @click="slide(2)" />
+        <button
+          :class="[active === 0 ? 'newsButtonActive' : 'newsButtonDeactive']"
+          @click="slide(0)"
+        />
+        <button
+          :class="[active === 1 ? 'newsButtonActive' : 'newsButtonDeactive']"
+          @click="slide(1)"
+        />
+        <button
+          :class="[active === 2 ? 'newsButtonActive' : 'newsButtonDeactive']"
+          @click="slide(2)"
+        />
       </div>
       <div
         :class="[active === index ? 'newsActive' : 'newsDeactive']"
         v-for="(newsItem, index) in news"
         :key="index"
       >
-        <h2>{{ newsItem.title }}<span>[ created at <span>{{ newsItem.created_at | formatDate}}</span> by <span>{{newsItem.user.username}}</span> ]</span></h2>
-        <p> {{ newsItem.text }}</p>
+        <h2>
+          {{ newsItem.title
+          }}<span
+            >[ created at <span>{{ newsItem.created_at | formatDate }}</span> by
+            <span>{{ newsItem.user.username }}</span> ]</span
+          >
+        </h2>
+        <p>{{ newsItem.text }}</p>
       </div>
     </div>
 
@@ -49,24 +67,24 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   data() {
     return {
       news: [],
       active: 0,
-      loading: true,
+      loading: true
     };
   },
   computed: {
-    ...mapGetters(["getHistoryNotifications"]),
+    ...mapGetters(["getHistoryNotifications"])
   },
   methods: {
     slide(value) {
       console.log(value);
       this.active = value;
-    },
+    }
   },
   async mounted() {
     try {
@@ -76,7 +94,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };
 </script>
 

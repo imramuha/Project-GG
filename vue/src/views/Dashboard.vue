@@ -3,9 +3,13 @@
     <div class="sidenavContainer">
       <div class="sidenav">
         <div class="sidenavLogo">
-          <router-link to="/"
-            ><img src="@/assets/images/logo.svg"
-          /></router-link>
+          <router-link to="/">
+            <img
+              v-if="this.mode == 'light'"
+              src="@/assets/images/logoDark.svg"
+            />
+            <img v-else src="@/assets/images/logo.svg" />
+          </router-link>
         </div>
         <!--<router-link to="/user" class="button">Lobby</router-link>-->
         <button
@@ -66,6 +70,7 @@
         <template>
           <component
             v-on:emitToOverscreen="onOverscreenClick"
+            v-on:emitToMode="theme"
             :is="mainComponent"
           ></component>
         </template>
@@ -116,7 +121,6 @@
         <h1>
           How to use Project GG
         </h1>
-
         <button @click="infoModal = false">
           <i class="fas fa-times-circle"></i>
         </button>
@@ -173,10 +177,10 @@ export default {
     UserSearch,
     UserGameAdd,
     Profile,
-    Forum,
+    Forum
   },
   computed: {
-    ...mapGetters(["getNotifications"]),
+    ...mapGetters(["getNotifications"])
   },
   data() {
     return {
@@ -189,14 +193,16 @@ export default {
       overscreenData: null,
       forum: "forum",
       infoModal: false,
+      mode: "dark"
     };
   },
   async mounted() {
     // on mount we check if the user has nightmode on or not
     let htmlElement = document.documentElement;
-    await getUserSettings().then((response) => {
+    await getUserSettings().then(response => {
       if (!response.data[0].nightmode == 1) {
         htmlElement.setAttribute("theme", "light");
+        this.mode = "light";
       }
     });
   },
@@ -205,7 +211,6 @@ export default {
     onDashboardNavClick(value) {
       this.emit = value;
       if (value == "feed") {
-        console.log("yeh");
         this.contentActive = true;
         this.mainComponent = Feed;
       } else if (value == "inbox") {
@@ -223,9 +228,11 @@ export default {
       }
     },
     queue() {
+      this.contentActive = true;
       this.mainComponent = Queue;
     },
     settings() {
+      this.contentActive = true;
       this.mainComponent = Settings;
     },
     logout() {
@@ -234,7 +241,7 @@ export default {
       });
     },
     onOverscreenClick(value) {
-      console.log(value.component);
+      console.log(value);
       // clear the overscreen if someone else is pressed..
       if (
         value.component === "PostCard" ||
@@ -271,7 +278,11 @@ export default {
         this.overscreenComponent = Forum;
       }
     },
-  },
+    theme(value) {
+      this.mode = value;
+    }
+
+  }
 };
 </script>
 

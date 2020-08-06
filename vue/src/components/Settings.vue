@@ -42,7 +42,7 @@
       <h2>
         <span>Language(s)<span>Language that you prefer to speak. </span></span>
         <span>
-          <select  @change="update()" v-model="language">
+          <select @change="update()" v-model="language">
             <option disabled value="0">Select your preferred language</option>
             <option
               v-for="lang in languages"
@@ -59,8 +59,8 @@
             >Timezone that you prefer or most likely to play at.</span
           ></span
         >
-            <span>
-          <select  @change="update()" v-model="timezone" >
+        <span>
+          <select @change="update()" v-model="timezone">
             <option disabled value="0">Select your preferred timezone</option>
             <option
               v-for="tz in timezones"
@@ -68,7 +68,8 @@
               :value="tz.text"
               >{{ tz.text }}</option
             >
-          </select></span>
+          </select></span
+        >
       </h2>
     </div>
   </div>
@@ -86,10 +87,10 @@ export default {
       nightmode: false,
       anonymity: false,
       voice: false,
-      language: '',
-      timezone: '',
+      language: "",
+      timezone: "",
       languages: "",
-      timezones: "",
+      timezones: ""
     };
   },
   methods: {
@@ -109,28 +110,26 @@ export default {
         language: this.language,
         timezone: this.timezone
       };
-      console.log(settings);
 
-      await editUserSettings(settings).then((response) => {
-        console.log(response.data);
+      await editUserSettings(settings).then(response => {
         this.$store
           .dispatch("notification", {
-            message: response.data[0].response,
+            message: response.data[0].response
           })
           .then(() => {
             //this.$router.push('dashboard');
           })
-          .catch((errors) => {
+          .catch(errors => {
             console.log(errors);
           });
       });
-    },
+    }
   },
   async mounted() {
     this.languages = languages;
     this.timezones = timezones;
 
-    await getUserSettings().then((response) => {
+    await getUserSettings().then(response => {
       if (!response.data.length) {
         this.nightmode = false;
         this.anonymity = false;
@@ -151,11 +150,13 @@ export default {
 
       if (this.nightmode) {
         htmlElement.setAttribute("theme", "dark");
+        this.$emit("emitToMode", 'dark');
       } else {
         htmlElement.setAttribute("theme", "light");
+        this.$emit("emitToMode", 'light');
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
