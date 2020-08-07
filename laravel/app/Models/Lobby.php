@@ -21,9 +21,15 @@ class Lobby extends Model
         /**
      * get the comments the belong to this user
      */
-    public function users()
-    {
+    public function users() {
         return $this->belongsToMany('App\User', 'lobby_users');
     }
 
+    /**
+     * The users that belong to the role.
+     */
+    public function groupMessages()
+    {
+        return $this->hasMany(GroupMessage::class);
+    }
 }

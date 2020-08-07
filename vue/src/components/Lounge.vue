@@ -107,7 +107,9 @@ export default {
         this.active = true;
       }
       this.loungeData = data;
-      this.loungeUsers = data.users;
+      if(this.loungeData.users) {
+        this.loungeUsers = this.loungeData.users;
+      }
     }
   },
   async mounted() {
@@ -115,13 +117,13 @@ export default {
 
     this.lounge = this.lobby;
     try {
+      
       console.log(this.lounge);
+
       await getLoungeData(this.lounge.id).then(response => {
-        console.log(response.data);
+        console.log(this.resposne.data);
         this.loungeData = response.data;
-        console.log(this.loungeData);
         this.loungeUsers = response.data.users;
-        console.log(this.loungeUsers);
 
         const channel = pusher.subscribe(
           `private-lounge${this.loungeData.code}`

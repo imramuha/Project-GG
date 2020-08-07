@@ -32,29 +32,31 @@ class AccountController extends Controller
 {
     // siging
     var $pusher;
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(['auth:api']);
 
         $app_id = '1007194';
         $app_key = 'c8af74134473385784fa';
         $app_secret = '0c0667626ba79b7d337e';
         $app_cluster = 'eu';
-    
-        $this->pusher = new Pusher\Pusher( $app_key, $app_secret, $app_id, array('cluster' => $app_cluster) );
-    
+
+        $this->pusher = new Pusher\Pusher($app_key, $app_secret, $app_id, array('cluster' => $app_cluster));
     }
 
     /*
     * show logged in user ^^
     */
-    public function showMe () {
+    public function showMe()
+    {
 
         $user = User::where('id', '=', auth()->id())->with('status')->get();
         $reviews = Review::where('user_id', '=', auth()->id())->with('reviewer')->get();
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
 
-    public function editUser (Request $request) {
+    public function editUser(Request $request)
+    {
 
         $this->validate(request(), [
             'email' => 'required|unique:users|email',
@@ -75,12 +77,13 @@ class AccountController extends Controller
     /*
     * Updates user status
     */
-    public function userStatus (Request $request) {
+    public function userStatus(Request $request)
+    {
 
         $status_name = $request->input('status');
         $status = Status::where('name', "=", $status_name)->first();
 
-        
+
         User::where('id', '=', auth()->id())->update(array(
             'status_id' => $status->id,
         ));
@@ -92,35 +95,39 @@ class AccountController extends Controller
         return response()->json($status_name);
     }
 
-        /*
+    /*
     * Get all users except the logged one in ^^
     */
-    public function showUsers () {
+    public function showUsers()
+    {
         $users = User::where('id', '!=', auth()->id())->get();
         return response()->json($users);
     }
 
 
-    public function showUser ($id) {
-        
+    public function showUser($id)
+    {
+
         $user = User::where('id', $id)->get();
         $reviews = Review::where('user_id', '=', $id)->with('reviewer')->get();
 
         return response()->json(['user' => $user, 'reviews' => $reviews]);
     }
 
-    public function showUserSettings () {
-        
+    public function showUserSettings()
+    {
+
         $settings = Setting::where('user_id', '=', auth()->id())->get();
 
         return response()->json($settings);
     }
 
-    public function editUserSettings (Request $request) {
+    public function editUserSettings(Request $request)
+    {
         $settings =  Setting::where('user_id', '=', auth()->id())->first();
 
 
-        if($settings) {
+        if ($settings) {
             $settings->update(array(
                 'nightmode' => $request->input('nightmode'),
                 'anonymity' => $request->input('anonymity'),
@@ -141,14 +148,15 @@ class AccountController extends Controller
             return array(['response' => 'Created settings & preferences.']);
         }
     }
-    
+
     /* 
     * search for users
     */
-    public function searchUsers (Request $request) {
+    public function searchUsers(Request $request)
+    {
         $searchTerm = $request->input('searchTerm');
 
-        $users = User::where('username','LIKE','%'.$searchTerm.'%')->get();
+        $users = User::where('username', 'LIKE', '%' . $searchTerm . '%')->get();
 
         return response()->json(['users' => $users]);
     }
@@ -156,14 +164,15 @@ class AccountController extends Controller
     /* 
     * determine the authenticated user's relation with the opened user :)
     */
-    public function showRelation($id) {
+    public function showRelation($id)
+    {
 
         // TODO:: !! WHILE REGISTEING FRIENDSHIP WE NEED TO ADD requesters ID ON user_id_one in relation_user ELSE on user_id_two
         // TODO: JOIN WITH THE PREVIOUS CALL
 
         $user = User::find($id)->get();
-        $relation_one = User::find( auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
-        $relation_two = User::find( auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();  
+        $relation_one = User::find(auth()->id())->relationOne()->orderBy('name')->where('user_id_one', auth()->id())->where("user_id_two", $id)->get();
+        $relation_two = User::find(auth()->id())->relationTwo()->orderBy('name')->where('user_id_one', $id)->where("user_id_two", auth()->id())->get();
 
         $relation = array_merge($relation_one->toArray(), $relation_two->toArray());
 
@@ -171,7 +180,8 @@ class AccountController extends Controller
     }
 
     // show all friends
-    public function showFriends() {
+    public function showFriends()
+    {
         // show friends -> works!! CLEAN IT UP
 
         $relations_one = User::find(auth()->id())->relationOne()->where('name', 'friends')->get();
@@ -179,18 +189,18 @@ class AccountController extends Controller
 
         $user_ids_array = array();
 
-        foreach($relations_one as $user) {
+        foreach ($relations_one as $user) {
             array_push($user_ids_array, $user->pivot->user_id_two);
         }
 
-        foreach($relations_two as $user) {
+        foreach ($relations_two as $user) {
             array_push($user_ids_array, $user->pivot->user_id_one);
         }
 
         $users = User::with("status")->find($user_ids_array);
 
         $relations = array_merge($relations_one->toArray(), $relations_two->toArray());
-        
+
         // return all the friends
         return response()->json($users);
     }
@@ -198,13 +208,14 @@ class AccountController extends Controller
     /*
     *  update or create an existing relation relation
     */
-    public function updateRelation (Request $request) {
-        
-        
+    public function updateRelation(Request $request)
+    {
+
+
         // looks for relations name and gets the relation id
-        $relation = Relation::where('name', $request->input('relation'))->first();  
-        if($relation) {
-            $relation_id = $relation->id;   
+        $relation = Relation::where('name', $request->input('relation'))->first();
+        if ($relation) {
+            $relation_id = $relation->id;
         } else {
             $relation_id = null;
         }
@@ -214,7 +225,7 @@ class AccountController extends Controller
         $profile_id = $request->input('profile_id');
 
         // gets data of the authenticated user
-        $user_id = auth()->user()->id;      
+        $user_id = auth()->user()->id;
         $user = User::find(auth()->id());
 
         // find a better solution for this
@@ -224,41 +235,41 @@ class AccountController extends Controller
         $both_block_relation_id = 6;
         $first_second_block_relation_id = 4;
         $second_first_block_relation_id = 5;
-            
-        if($user_id < $profile_id) {
+
+        if ($user_id < $profile_id) {
 
             // BLOCKING SECTION
             // first second / second first
-            if($request->input('relation') === "friends") {
-                $user->relationOne()->attach( $first_second_pending_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+            if ($request->input('relation') === "friends") {
+                $user->relationOne()->attach($first_second_pending_relation_id, ['user_id_two' => $profile->id, "user_id_one" => $user_id]);
                 return array(['response' => 'Sent friend request.']);
 
-            // both friends
-            } else if ($request->input('relation') === "accept" ) {
-                if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_pending_relation_id)->first()) {
-                    $user->relationOne()->attach($both_friend_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                // both friends
+            } else if ($request->input('relation') === "accept") {
+                if ($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_pending_relation_id)->first()) {
+                    $user->relationOne()->attach($both_friend_relation_id, ['user_id_two' => $profile->id, "user_id_one" => $user_id]);
                     return array(['response' => 'Accepted friend request.']);
                 } else {
                     return array(['response' => 'No request for you to accept.']);
                 }
-            // remove the friendship request
-            } else if($request->input('relation') === "unfriend" || $request->input('relation') === "deny" || $request->input('relation') === "cancel") {
+                // remove the friendship request
+            } else if ($request->input('relation') === "unfriend" || $request->input('relation') === "deny" || $request->input('relation') === "cancel") {
                 $user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach();
                 return array(['response' => 'Removed friend request.']);
-            } else if($request->input('relation') === "block") {
+            } else if ($request->input('relation') === "block") {
                 // block user -> first_second unless second_first exists -> then both_block
-                if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
-                    $user->relationOne()->attach($both_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                if ($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
+                    $user->relationOne()->attach($both_block_relation_id, ['user_id_two' => $profile->id, "user_id_one" => $user_id]);
                     return array(['response' => 'Blocked a user.']);
                 } else {
-                    $user->relationOne()->attach($first_second_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                    $user->relationOne()->attach($first_second_block_relation_id, ['user_id_two' => $profile->id, "user_id_one" => $user_id]);
                     return array(['response' => 'Blocked a user.']);
                 }
             } else if ($request->input('relation') === "unblock") {
 
                 // if both_block exists -> change it to second first else unblock
-                if($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $both_block_relation_id)->detach()) {
-                    $user->relationOne()->attach($second_first_block_relation_id, ['user_id_two'=>$profile->id, "user_id_one"=>$user_id]);
+                if ($user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->wherePivot('relation_id', $both_block_relation_id)->detach()) {
+                    $user->relationOne()->attach($second_first_block_relation_id, ['user_id_two' => $profile->id, "user_id_one" => $user_id]);
                     return array(['response' => 'Unblocked a user.']);
                 } else {
                     $user->relationOne()->wherePivot('user_id_one',  auth()->id())->wherePivot("user_id_two", $profile_id)->detach();
@@ -266,38 +277,36 @@ class AccountController extends Controller
                 }
             }
         } else {
-                // BLOCKING SECTION <
-                if($request->input('relation') === "friends") {
-                    $user->relationTwo()->attach( $second_first_pending_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile->id]);
-                    return array(['response' => 'Sent friend request.']);
-    
-                // both friends
-                } else if ($request->input('relation') === "accept" ) {
-                    if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->wherePivot('relation_id', $first_second_pending_relation_id)->first()) {
-                        $user->relationTwo()->attach($both_friend_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
-                        return array(['response' => 'Accepted friend request.']);
-                    } else {
-                        return array(['response' => 'Nothing to accept.']);
-                    }          
-                // remove the friendship request
-                } else if($request->input('relation') === "deny" || $request->input('relation') === "cancel" || $request->input('relation') === "unfriend") {
-                    $user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->detach();
-                    return array(['response' => 'Removed friend request.']);
+            // BLOCKING SECTION <
+            if ($request->input('relation') === "friends") {
+                $user->relationTwo()->attach($second_first_pending_relation_id, ['user_id_two' => $user_id, "user_id_one" => $profile->id]);
+                return array(['response' => 'Sent friend request.']);
 
-                } else if($request->input('relation') === "block") {
-                // block user -> first_second unless second_first exists -> then both_block
-                if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
-                    $user->relationTwo()->attach($both_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
-                    return array(['response' => 'Blocked a user.']);
-                    
+                // both friends
+            } else if ($request->input('relation') === "accept") {
+                if ($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->wherePivot('relation_id', $first_second_pending_relation_id)->first()) {
+                    $user->relationTwo()->attach($both_friend_relation_id, ['user_id_two' => $user_id, "user_id_one" => $profile_id]);
+                    return array(['response' => 'Accepted friend request.']);
                 } else {
-                    $user->relationTwo()->attach($second_first_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
+                    return array(['response' => 'Nothing to accept.']);
+                }
+                // remove the friendship request
+            } else if ($request->input('relation') === "deny" || $request->input('relation') === "cancel" || $request->input('relation') === "unfriend") {
+                $user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two", $user_id)->detach();
+                return array(['response' => 'Removed friend request.']);
+            } else if ($request->input('relation') === "block") {
+                // block user -> first_second unless second_first exists -> then both_block
+                if ($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $second_first_block_relation_id)->first()) {
+                    $user->relationTwo()->attach($both_block_relation_id, ['user_id_two' => $user_id, "user_id_one" => $profile_id]);
                     return array(['response' => 'Blocked a user.']);
-                }                
+                } else {
+                    $user->relationTwo()->attach($second_first_block_relation_id, ['user_id_two' => $user_id, "user_id_one" => $profile_id]);
+                    return array(['response' => 'Blocked a user.']);
+                }
             } else if ($request->input('relation') === "unblock") {
                 // if both_block exists -> change it to second first else unblock
-                if($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $both_block_relation_id)->detach()) {
-                    $user->relationTwo()->attach($first_second_block_relation_id, ['user_id_two'=>$user_id, "user_id_one"=>$profile_id]);
+                if ($user->relationTwo()->wherePivot('user_id_one',  $profile_id)->wherePivot("user_id_two",  auth()->id())->wherePivot('relation_id', $both_block_relation_id)->detach()) {
+                    $user->relationTwo()->attach($first_second_block_relation_id, ['user_id_two' => $user_id, "user_id_one" => $profile_id]);
                     return array(['response' => 'Unblocked a user.']);
                     // check why this happens if button is pressed twice unblock/block
                 } else {
@@ -306,21 +315,21 @@ class AccountController extends Controller
                 }
             }
         }
-        
     }
 
 
     /*
     * Get all users except the logged one in ^^
     */
-    public function showNewPosts () {
+    public function showNewPosts()
+    {
 
         $posts = Post::with('likedPosts', 'comments')->orderBy('created_at', 'asc')->paginate(5);
 
         // check if user liked this post; if yes, send it.
-        foreach($posts as $key => $post) {
-            foreach($post->likedPosts as $key => $like) {
-                if($like->user_id === auth()->id()) {
+        foreach ($posts as $key => $post) {
+            foreach ($post->likedPosts as $key => $like) {
+                if ($like->user_id === auth()->id()) {
                     $post["user_liked"] = true;
                 }
             }
@@ -329,17 +338,18 @@ class AccountController extends Controller
         return response()->json($posts);
     }
 
-        /*
+    /*
     * Get all users except the logged one in ^^
     */
-    public function showTopPosts () {
+    public function showTopPosts()
+    {
 
         $posts = Post::with('likedPosts', 'comments')->withCount('likedPosts')->orderBy('liked_posts_count', 'desc')->paginate(5);
 
         // check if user liked this post; if yes, send it.
-        foreach($posts as $key => $post) {
-            foreach($post->likedPosts as $key => $like) {
-                if($like->user_id === auth()->id()) {
+        foreach ($posts as $key => $post) {
+            foreach ($post->likedPosts as $key => $like) {
+                if ($like->user_id === auth()->id()) {
                     $post["user_liked"] = true;
                 }
             }
@@ -348,17 +358,18 @@ class AccountController extends Controller
         return response()->json($posts);
     }
 
-        /*
+    /*
     * Get all users except the logged one in ^^
     */
-    public function showLikedPosts () {
+    public function showLikedPosts()
+    {
 
         $posts = Post::with('likedPosts', 'comments')->paginate(5);
 
         // check if user liked this post; if yes, send it.
-        foreach($posts as $key => $post) {
-            foreach($post->likedPosts as $key => $like) {
-                if($like->user_id === auth()->id()) {
+        foreach ($posts as $key => $post) {
+            foreach ($post->likedPosts as $key => $like) {
+                if ($like->user_id === auth()->id()) {
                     $post["user_liked"] = true;
                 }
             }
@@ -366,21 +377,21 @@ class AccountController extends Controller
 
         $liked_posts = $posts->where('user_liked', "=", true);
         return $liked_posts;
-        
+
         return response()->json($liked_posts);
     }
 
-         /*
+    /*
     * Get all users except the logged one in ^^
     */
-    public function showUserPosts () {
-        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts', 'comments'  
-        )->paginate(5);
+    public function showUserPosts()
+    {
+        $posts = Post::where('user_id', '=', auth()->id())->with('likedPosts', 'comments')->paginate(5);
 
         // check if user liked this post; if yes, send it.
-        foreach($posts as $post) {
-            foreach($post->likedPosts as $like) {
-                if($like->user_id === auth()->id()) {
+        foreach ($posts as $post) {
+            foreach ($post->likedPosts as $like) {
+                if ($like->user_id === auth()->id()) {
                     $post["user_liked"] = true;
                 }
             }
@@ -389,42 +400,44 @@ class AccountController extends Controller
         return $posts;
     }
 
-           /*
+    /*
     * Get all likedposts by the logged in user
     */
-    public function showUserLikedPosts () {
-     
+    public function showUserLikedPosts()
+    {
+
         $posts = Post::with(
-             array('likedPosts' => function($query)
-             {
-                 $query->where('user_id', auth()->id());
-             })        
-         )->get();
+            array('likedPosts' => function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+        )->get();
 
-         return $posts;
-     }
+        return $posts;
+    }
 
 
-        /*
+    /*
     * Get all users except the logged one in ^^
     */
-    public function showPost ($id) {
-        $post = Post::where('id', '=', $id)->with("user","comments", "comments.user", "likedPosts")->first();
+    public function showPost($id)
+    {
+        $post = Post::where('id', '=', $id)->with("user", "comments", "comments.user", "likedPosts")->first();
 
         // check if user liked this post; if yes, send it.
-        foreach($post->likedPosts as $like) {
-            if($like->user_id === auth()->id()) {
+        foreach ($post->likedPosts as $like) {
+            if ($like->user_id === auth()->id()) {
                 $post["user_liked"] = true;
             }
         }
-        
+
         return response()->json($post);
     }
 
     /*
     * Like or dislike a post
     */
-    public function likePost (Request $request) {
+    public function likePost(Request $request)
+    {
 
         $post_id = $request->input('post_id');
         $user_id = auth()->id();
@@ -433,22 +446,23 @@ class AccountController extends Controller
         $likedPost = LikedPost::where('user_id', '=', $user_id)->where('post_id', "=", $post_id)->first();
 
         // if post is liked -> delete it else create a like
-        if($likedPost) {
+        if ($likedPost) {
             $likedPost->delete();
-            return array(["response"=>"Unliked a post."]);
+            return array(["response" => "Unliked a post."]);
         } else {
             $like = LikedPost::create([
                 'user_id' => $user_id,
                 'post_id' => $post_id,
             ]);
-            return array(["response"=>"Liked a post."]);
+            return array(["response" => "Liked a post."]);
         }
     }
 
     /*
     *   Delete a post
     */
-    public function deleteUserPost ($id) {
+    public function deleteUserPost($id)
+    {
         Post::where('id', $id)->where('user_id',  auth()->user()->id)->delete();
         $response = array('response' => "Your post has been deleted!", 'success' => true);
         return $response;
@@ -460,17 +474,18 @@ class AccountController extends Controller
     * POST REVIEW ON USER PROFILE
     */
 
-    public function postReview(Request $request) {
+    public function postReview(Request $request)
+    {
 
         $review_exists = Review::where('user_id', '=', $request->input('id'))->where('reviewer_id', '=', auth()->user()->id)->first();
-        
+
         $this->validate(request(), [
             'comment' => 'required|min:16|max:64',
             'rating' => 'required|integer|between:0,100'
         ]);
 
         // checks if the user already has reviewed, if yes, they cn't if not they can
-        if($review_exists) {
+        if ($review_exists) {
             //return $review_exists;
             $response = response(['errors' => ['error' => ["You already reviewed this user before."], "message" => "You can't review the same person twice."]], 422);
         } else {
@@ -480,13 +495,14 @@ class AccountController extends Controller
                 'user_id' => $request->input('id'),
                 'reviewer_id' => auth()->user()->id,
             ]);
-    
+
             $response = array(['response' => 'Posted a review.', 'succes' => true]);
         }
         return $response;
     }
 
-    public function createComment(Request $request) {
+    public function createComment(Request $request)
+    {
 
         $this->validate(request(), [
             'comment' => 'required|min:2|max:64',
@@ -502,7 +518,8 @@ class AccountController extends Controller
         return $response;
     }
 
-    public function createPost(Request $request) {
+    public function createPost(Request $request)
+    {
 
         $image = base64_encode($request->input('image'));
         $user_id = auth()->user()->id;
@@ -528,16 +545,18 @@ class AccountController extends Controller
     /*
     * Get all logged in users game data
     */
-    public function showUserGameData () {
+    public function showUserGameData()
+    {
 
         $data = UserGameData::where('user_id', '=', auth()->user()->id)->with("game", "data")->paginate(8);
         return response()->json($data);
     }
 
-     /*
+    /*
     * Get all logged in users game data
     */
-    public function showProfileGameData ($id) {
+    public function showProfileGameData($id)
+    {
         $data = UserGameData::where('user_id', '=', $id)->with("game", "data")->paginate(5);
         return response()->json($data);
     }
@@ -546,15 +565,16 @@ class AccountController extends Controller
     *  Get all games that aren't linked to the user
     */
 
-    public function getUserGamesUnadded() {
+    public function getUserGamesUnadded()
+    {
         $user_id = auth()->id();
 
         // get all game id's connected to the user
         $user_game_data = UserGameData::where('user_id', '=', auth()->user()->id)->get();
-        
+
         $game_ids_array = array();
 
-        foreach($user_game_data as $data) {
+        foreach ($user_game_data as $data) {
             array_push($game_ids_array, $data->game_id);
         }
 
@@ -562,12 +582,13 @@ class AccountController extends Controller
         $games_unadded = Game::whereNotIn("id", $game_ids_array)->get();
 
         return $games_unadded;
-      }
+    }
 
-        /*
+    /*
     *  user adds games to their collection
     */
-    public function addUserGame (Request $request) {
+    public function addUserGame(Request $request)
+    {
         // attach the game to the user
         // 
 
@@ -598,7 +619,8 @@ class AccountController extends Controller
     /*
     *  user removes games to their collection
     */
-    public function removeUserGame (Request $request) {
+    public function removeUserGame(Request $request)
+    {
         // remove/detach the game from user
 
         $game_id = $request->input('game_id');
@@ -610,7 +632,7 @@ class AccountController extends Controller
 
         $gameUserData->delete();
 
-        if($data_id) {        
+        if ($data_id) {
             $data = Data::where('id', "=", $data_id)->first();
             $data->delete();
         }
@@ -622,7 +644,8 @@ class AccountController extends Controller
     /*
     * Get all logged in users receiven-reviews
     */
-    public function showUserReviews () {
+    public function showUserReviews()
+    {
 
         $data = Review::where('user_id', '=', auth()->user()->id)->with('reviewer')->paginate(8);
         return response()->json($data);
@@ -631,155 +654,161 @@ class AccountController extends Controller
     /*
     * Get all logged in users receiven-reviews
     */
-    public function showProfileReviews ($id) {
+    public function showProfileReviews($id)
+    {
 
         $data = Review::where('user_id', '=', $id)->with('reviewer')->paginate(5);
         return response()->json($data);
     }
 
-       /*
+    /*
     * Get all logged in users given-reviews
     */
-    public function showPostedReviews () {
+    public function showPostedReviews()
+    {
 
         $data = Review::where('reviewer_id', '=', auth()->user()->id)->with('user')->paginate(8);
         return response()->json($data);
     }
 
-        /*
+    /*
     * Get all games
     */
-    public function showQueueGames () {
+    public function showQueueGames()
+    {
 
-        $games = Game::with('options')->get();
+        $games = Game::with('criteria')->get();
         return response()->json($games);
     }
 
-    public function queue(Request $request) {
+    public function queue(Request $request)
+    {
 
-    
-        // checks if a lobby with similar code/name exists else create
-        $lobby = Lobby::firstOrCreate([
-            'name' => $request->input('name'),
-            'code' => $request->input('code')
-        ]);
 
-        // checks if a new lobby was created
-        if($lobby->wasRecentlyCreated) {
+        // logged in user
+        $user = User::find(auth()->user()->id);
 
-        
-            // attaches user to that newly created lobby/pivot
-            $user_id = auth()->user()->id;
-            $lobby->users()->attach($user_id);
-                        
-            $response = array('response' => 'Entered the lounge', 'succes' => true);
-            return $response;
+        // 1. check if the user is in a lobby 
+        // 2. if yes -> send lobby id else
+        // 3. check if a lobby with the similiar code exists else create
+        // 4. if it wasn't created -> we join an existing one
+        // 5. check the amount of users it has, if above 5, we create/join one
+        // 6. then we create one with new ID
 
+        if ($user->lobby) {
+            return array('response' => 'Already in a lobby', "data" => $user->lobby->id);
         } else {
-            // else join
-            $user = User::find(auth()->user()->id);
 
-            if(!$user->lobbies()->wherePivot('user_id','=',  auth()->user()->id)->count()) {
+            // checks if a lobby with similar code/name exists else create
+            $lobby = Lobby::firstOrCreate([
+                'name' => $request->input('name'),
+                'code' => $request->input('code')
+            ]);
 
-                // means use already has a lobby;
-               
-                // gets the lobby and checks how many users it has
-                $lobbyId = $lobby->id;
-              
-                
-                $users = $lobby->users()->wherePivot('lobby_id','=', $lobbyId)->count();
-                if($users < 5) {
+            // if the lobby wasn't recently created then we join one with similar code
+            if ($lobby->wasRecentlyCreated) {
 
-                    // attaches user to that newly created lobby/pivot
-                    $user_id = auth()->user()->id;
-                    $lobby->users()->attach($user_id);
+                if (!$user) {
 
-                    return array('response' => 'Added to existing lounge', 'data' => $lobby->id);
-                } else {
-                    return array('response' => 'Lobby is full', 'data' => $lobby->id);
-                    // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
+                    // gets the lobby and checks how many users it has
+                    $lobbyId = $lobby->id;
+
+
+                    $users = $lobby->users()->wherePivot('lobby_id', '=', $lobbyId)->count();
+                    if ($users < 5) {
+
+                        // attaches user to that newly created lobby/pivot
+                        $user_id = auth()->user()->id;
+                        $lobby->users()->attach($user_id);
+
+                        return array('response' => 'Added to existing lounge', 'data' => $lobby->id);
+                    } else {
+                        return array('response' => 'Lobby is full', 'data' => $lobby->id);
+                        // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
+                    }
                 }
             } else {
-                
-                // get the lobby and return it :) -> keep returning until the played leaves it
-                return array('response' => 'Already in a lobby', "data" => $lobby->id);
-            
-            } 
-        } 
+
+                // attaches user to that newly created lobby/pivot
+                $lobby->users()->attach(auth()->user()->id);
+
+                return array('response' => 'Entered the lounge', 'succes' => true);
+            }
+        }
     }
 
-    public function lounge($id) {
+    public function lounge($id)
+    {
 
-        $lobby = Lobby::where('id', $id)->with('users')->first();
+        $lobby = Lobby::find($id)->with('users', 'groupMessages')->first();
 
         // triggers the real time event
-        $this->pusher->trigger('private-lounge'.$lobby->code, 'NewLounge', $lobby);
+        $this->pusher->trigger('private-lounge' . $lobby->code, 'NewLounge', $lobby);
 
         return response()->json($lobby);
-
     }
 
-    public function exitLounge () {
+    public function exitLounge()
+    {
         // finds the logged in user
         $user = User::find(auth()->user()->id);
-        
-        // checks if user has any active lobbies
-        $userLobby = User::where('id', auth()->user()->id)->with('lobbies')->first();
-        
-        // gets the lobby user is in
-        if(count($userLobby->lobbies)) {
-            $userLobbyId = $userLobby->lobbies[0]->id;       
 
-            // finds the users active lobby
-            $lobby = Lobby::where('id', $userLobbyId)->with('users')->first();
+        // gets the lobby user is in
+        if ($user->lobby) {
+
+            // get the lobby user's in
+            $lobby = Lobby::find($user->lobby->id);
 
             // detach that user from that lobby
-            $user->lobbies()->wherePivot('user_id','=', auth()->user()->id)->detach();
+            $userLobby = $lobby->users()->where('user_id', "=", $user->id)->first();
+            $userLobby->pivot->delete();
 
+            // once the user is detached check how many users are left, if 0, remove that lobby
             // gets all the users in that lobby
-            $lobbies = $lobby->users()->wherePivot('lobby_id','=', $userLobbyId)->get();
-
-            // counts how many users that active lobby has
-            $length = count($lobbies);
+            $usersLeft = $lobby->users()->count();
 
             // if the lobby has 0 users deletes it else the user just gets cleared from that lobby
-            if(!$length) {
-                // delete the lobby
-                Lobby::where('id', $userLobbyId)->delete();
+            if (!$usersLeft) {
 
-                // finds the lobby user is exited from
-                $lobbyExited = Lobby::where('id', $userLobbyId)->with('users')->first();
-                $this->pusher->trigger('private-lounge'.$lobby->code, 'NewLounge', $lobbyExited);
+
+                // finds the lobby user is exiting from
+                $lobbyExited = Lobby::where('id', $user->lobby->id)->with('users')->first();
+
+                // delete the lobby
+                Lobby::where('id', $user->lobby->id)->delete();
+
+                // trigger pusher for live update
+                $this->pusher->trigger('private-lounge' . $lobbyExited->code, 'NewLounge', $lobbyExited);
 
                 return response()->json(['response' => "your lobby has been cleared.", 'succes' => true]);
             }
 
             // finds the lobby user is exited from
-            $lobbyExited = Lobby::where('id', $userLobbyId)->with('users')->first();
+            $lobbyExited = Lobby::where('id', $user->lobby->id)->with('users')->first();
 
-            $this->pusher->trigger('private-lounge'.$lobby->code, 'NewLounge', $lobbyExited);
+            // send updated data through the pusher
+            $this->pusher->trigger('private-lounge' . $lobbyExited->code, 'NewLounge', $lobbyExited);
+
             return response()->json(['response' => "User has exited the lobby."]);
         }
         return response()->json(['data' => "User was not in a lobby.", 'succes' => true]);
-        // else 
-        
-        //return array('response' => 'User just existed the lobby', 'succes' => true);
     }
-    
+
     /*
     * Get all messages for a user
     */
-    public function showMessagesFor ($id) {
+    public function showMessagesFor($id)
+    {
 
-        $messages = Message::where(function($query) use($id) {
+        $messages = Message::where(function ($query) use ($id) {
             $query->where('from', $id)
                 ->where('to',  auth()->user()->id);
         })
-        ->orWhere(function($query) use($id) {
-            $query->where('to', $id)
-                ->where('from',  auth()->user()->id);
-        })
-        ->orderBy('id', 'asc')->get();
+            ->orWhere(function ($query) use ($id) {
+                $query->where('to', $id)
+                    ->where('from',  auth()->user()->id);
+            })
+            ->orderBy('id', 'asc')->get();
 
         //$messagess = $messages->merge($messages2)->sort('id');
         return response()->json($messages);
@@ -788,7 +817,7 @@ class AccountController extends Controller
     public function pusherAuth(Request $request)
     {
 
-        if(!auth()->user()) {
+        if (!auth()->user()) {
             return response(null, 401);
         }
 
@@ -803,7 +832,8 @@ class AccountController extends Controller
     /*
     * send message
     */
-    public function sendMessageTo (Request $request) {
+    public function sendMessageTo(Request $request)
+    {
 
         $message = Message::create([
             'from' => auth()->user()->id,
@@ -813,14 +843,15 @@ class AccountController extends Controller
 
         $user = Auth::user();
 
-        $this->pusher->trigger('private-messages'.$request->friend_id, 'NewMessage', $message);
+        $this->pusher->trigger('private-messages' . $request->friend_id, 'NewMessage', $message);
         //event(new NewMessage($message));
         //event(new MyEvent($message));
 
         return response()->json($message);
     }
 
-    public function nightmode (Request $request) {
+    public function nightmode(Request $request)
+    {
         // first create settings else if exists!
         // then update
 
@@ -829,7 +860,7 @@ class AccountController extends Controller
 
         $setting = Setting::where('user_id', "=", auth()->user()->id)->first();
 
-        if($setting) {
+        if ($setting) {
             Setting::where('user_id', '=', auth()->user()->id)->update(array(
                 'nightmode' => $mode,
             ));
@@ -844,17 +875,19 @@ class AccountController extends Controller
     /*
     * NEWS
     */
-    public function getNews () {
+    public function getNews()
+    {
 
         $news = News::with('user')->orderBy('created_at', 'asc')->limit(3)->get();
-       
+
         return response()->json($news);
     }
 
     /*
     *  REPORT
     */
-    public function addReport (Request $request) {
+    public function addReport(Request $request)
+    {
         // attach the game to the user
         // 
 

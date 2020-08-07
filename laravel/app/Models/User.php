@@ -149,9 +149,12 @@ class User extends Authenticatable implements JWTSubject
        /**
      * Get the post of this user
      */
-    public function lobbies()
-    {
-        return $this->belongsToMany('App\Models\Lobby', 'lobby_users');
+    public function lobbyUser() {
+        return $this->hasOne('App\Models\LobbyUser')->with('lobby');
+    }
+
+    public function getLobbyAttribute(){
+        return $this->lobbyUser->lobby;
     }
 
     public function setting()
@@ -175,5 +178,13 @@ class User extends Authenticatable implements JWTSubject
     public function reports()
     {
         return $this->hasMany(Report::class);
+    }
+
+       /**
+     * get the comments the belong to this user
+     */
+    public function groupMessages()
+    {
+        return $this->hasMany(GroupMessage::class);
     }
 }

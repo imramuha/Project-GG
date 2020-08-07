@@ -18,18 +18,18 @@
           </div>
 
           <div class="queueOptions">
-            <label for="firstOption">Options</label>
+            <label for="firstOption">Criteria</label>
             <select
               v-model="secondOption"
               :selected="0"
               v-if="this.queuegames[firstOption]"
             >
-              <option disabled value>Select your option</option>
+              <option disabled value>Select your criteria</option>
               <option
-                v-for="(option, index) in queuegames[firstOption].options"
-                v-bind:key="option.id"
+                v-for="(criterion, index) in queuegames[firstOption].criteria"
+                v-bind:key="criterion.id"
                 :value="index"
-                >{{ option.name }}</option
+                >{{ criterion.name }}</option
               >
             </select>
           </div>
@@ -95,12 +95,12 @@ export default {
       try {
         if(!this.queuegames[this.firstOption]) {
             this.errors.push('Please select a game!');
-        } if (!this.queuegames[this.firstOption].options[this.secondOption]) {
+        } if (!this.queuegames[this.firstOption].criteria[this.secondOption]) {
             this.errors.push('Please select an option');
         } else {
 
-          let loungeName = this.queuegames[this.firstOption].name + " [" + this.queuegames[this.firstOption].options[this.secondOption].name + "]";
-          let loungeCode = this.firstOption + "-" + this.queuegames[this.firstOption].options[this.secondOption].id;
+          let loungeName = this.queuegames[this.firstOption].name + " [" + this.queuegames[this.firstOption].criteria[this.secondOption].name + "]";
+          let loungeCode = this.firstOption + "-" + this.queuegames[this.firstOption].criteria[this.secondOption].id;
 
           let lounge = {
             name: loungeName,
@@ -124,7 +124,9 @@ export default {
                 this.mainComponent = null;
               }
 
+
               this.lobby.id = response.data.data;
+              console.log(this.lobby.id);
 
               this.name = null;
               this.code = null;
@@ -135,14 +137,15 @@ export default {
           });
         }
       } catch (errors) {
-          let err = errors.response.data.errors;
+        console.log(errors)
+          /*let err = errors.response.data.errors;
           console.log(errors);
           if(err.name) {
             this.errors.push(err.name[0] )
           }
           if(err.code) {
             this.errors.push(err.code[0] )
-          }
+          }*/
       }
 
 
