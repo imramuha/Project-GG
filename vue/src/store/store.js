@@ -21,6 +21,7 @@ export default new Vuex.Store({
         historyNotifications: []
     },
     mutations: {
+        // sets user data in localstorage and also assigns the user headers
         SET_USER_DATA(state, userData) {
             state.user = userData;
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
 
             httpClient.interceptors.request.use(authInterceptor);
         },
+        // sets notification and pushes to the array
         SET_NOTIFICATIONS(state, message) {
             const today = new Date();
 
@@ -60,9 +62,11 @@ export default new Vuex.Store({
                 state.historyNotifications = message;
             }
         },
+        // removes the oldest notification from the array of notifcations
         REMOVE_NOTIFICATION(state, index) {
             state.notifications.splice(index, 1);
         },
+        // changes the user to online
         USER_ONLINE(state) {
             let online = {
                 token: state.user.token,
@@ -78,6 +82,7 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+        // changes the user status to offline
         USER_OFFLINE(state) {
             let offline = {
                 token: state.user.token,
@@ -92,6 +97,7 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+        // logs user out and reassigns the headers
         LOGOUT(state) {
             axios
                 .post(api + "/api/auth/logout", state.user)
@@ -99,13 +105,9 @@ export default new Vuex.Store({
                     console.log(data);
                     localStorage.removeItem("user");
                     state.user = null;
-                    console.log(state.user);
-                    console.log(localStorage.getItem("user"));
 
                     const authInterceptor = config => {
                         config.headers["Authorization"] = `Bearer ${state.user.token}`;
-                        console.log(config);
-                        console.log("iyahah");
                         return config;
                     };
 
@@ -115,6 +117,7 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+        // activates the pusher/real time tech
         ACTIVATE_PUSHER(userData) {
             Pusher.logToConsole = true;
 

@@ -9,7 +9,6 @@
     img {
         width: 65px;
         height: auto;
-        fill: red !important;
         &:hover {
             color: var(--melt);
         }
@@ -24,6 +23,14 @@
         padding: 6px 20px;
         &:hover {
             background-color: var(--midnightL);
+        }
+    }
+    .logoutButton {
+        background-color: var(--candy);
+        border-color: var(--snow);
+        color: var(--snow);
+        &:hover {
+            background-color: var(--candyL);
         }
     }
     a {

@@ -8,9 +8,8 @@
       <div></div>
       <div></div>
     </div>
-<!-- hier de logo-->
-    <AppNav />
-    <router-view class="page" />
+    <AppNav :mode="mode" />
+    <router-view v-on:emitToAppNav="shiftMode" class="page" />
   </div>
 </template>
 
@@ -25,12 +24,12 @@ export default {
   },
   data() {
     return {
-      darkMode: false
-    };
+      mode: '',
+    }
   },
   methods: {
-    toggle() {
-      this.darkMode = true;
+    shiftMode(value) {
+      this.mode = value;
     }
   }
 };

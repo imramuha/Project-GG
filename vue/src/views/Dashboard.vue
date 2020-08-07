@@ -280,6 +280,7 @@ export default {
     },
     theme(value) {
       this.mode = value;
+      this.$emit("emitToAppNav", value);
     }
 
   }
