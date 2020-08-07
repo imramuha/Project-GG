@@ -87,6 +87,10 @@ Route::group(['prefix' => 'frontend', 'namespace' => 'Frontend'], function () {
     // report
     Route::post('/addreport', 'AccountController@addReport');
 
+    // group message
+    Route::post('/groupmessage', 'AccountController@sendGroupMessage');
+
+    // mode
     Route::post('/mode', 'AccountController@nightmode');
 });
 

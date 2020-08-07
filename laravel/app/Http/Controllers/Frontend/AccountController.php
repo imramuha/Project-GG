@@ -16,6 +16,7 @@ use App\Models\UserGameData;
 use App\Models\Data;
 use App\Models\Game;
 use App\Models\Message;
+use App\Models\GroupMessage;
 use App\Models\Setting;
 use App\Models\News;
 
@@ -694,10 +695,12 @@ class AccountController extends Controller
         // 4. if it wasn't created -> we join an existing one
         // 5. check the amount of users it has, if above 5, we create/join one
         // 6. then we create one with new ID
-
-        if ($user->lobby) {
+ 
+        // check if user has an active lobby
+        if ($user->lobbyUser) {
             return array('response' => 'Already in a lobby', "data" => $user->lobby->id);
         } else {
+
 
             // checks if a lobby with similar code/name exists else create
             $lobby = Lobby::firstOrCreate([
@@ -706,29 +709,27 @@ class AccountController extends Controller
             ]);
 
             // if the lobby wasn't recently created then we join one with similar code
-            if ($lobby->wasRecentlyCreated) {
+            if (!$lobby->wasRecentlyCreated) {
 
-                if (!$user) {
+                // gets the lobby and checks how many users it has
+                $lobbyId = $lobby->id;
+                $users = $lobby->users()->wherePivot('lobby_id', '=', $lobbyId)->count();
 
-                    // gets the lobby and checks how many users it has
-                    $lobbyId = $lobby->id;
+                // vanaf dees
+                if ($users < 5) {
 
+                    $lobby->users()->attach($user->id);
 
-                    $users = $lobby->users()->wherePivot('lobby_id', '=', $lobbyId)->count();
-                    if ($users < 5) {
-
-                        // attaches user to that newly created lobby/pivot
-                        $user_id = auth()->user()->id;
-                        $lobby->users()->attach($user_id);
-
-                        return array('response' => 'Added to existing lounge', 'data' => $lobby->id);
-                    } else {
-                        return array('response' => 'Lobby is full', 'data' => $lobby->id);
-                        // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
-                    }
+                    return array('response' => 'Added to existing lounge', 'data' => $lobby->id);
+                } else {
+                    return array('response' => 'Lobby is full', 'data' => $lobby->id);
+                    // TODO::CREATE A NEW LOBBY IF THE OTHER ONE ALREADY HAS 5 USERS !! 
                 }
+
+                // tot dees
             } else {
 
+                return "enter the lounge";
                 // attaches user to that newly created lobby/pivot
                 $lobby->users()->attach(auth()->user()->id);
 
@@ -754,7 +755,7 @@ class AccountController extends Controller
         $user = User::find(auth()->user()->id);
 
         // gets the lobby user is in
-        if ($user->lobby) {
+        if ($user->lobbyUser) {
 
             // get the lobby user's in
             $lobby = Lobby::find($user->lobby->id);
@@ -908,5 +909,28 @@ class AccountController extends Controller
             "reporter_id" => $reporter_id,
         ]);
         return array(['response' => 'A report has been sent.']);
+    }
+
+    /*
+    * send message
+    */
+    public function sendGroupMessage(Request $request)
+    {
+
+        $user = auth()->user();
+
+        $message = GroupMessage::create([
+            'text' => $request->input('text'),
+            'user_id' => auth()->user()->id,
+            'lobby_id' => $user->lobby->id, 
+        ]);
+        
+        // get users active lobby
+        $lobby = Lobby::where('id', $user->lobby->id)->with('users', 'groupMessages', 'groupMessages.user')->first();
+
+        // send updated data through the pusher
+        $this->pusher->trigger('private-lounge' . $lobby->code, 'NewLounge', $lobby);
+
+        return response()->json($message);
     }
 }
