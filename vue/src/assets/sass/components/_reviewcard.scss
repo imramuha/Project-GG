@@ -14,10 +14,18 @@
     justify-content: space-between;
     color: var(--melt);
     overflow: hidden;
-    .emptyReviews {
-        width: 100%;
-        margin-top: 70px;
+}
+
+.reviewsEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--melt);
+    overflow: hidden;
+    height: 100%;
+    h2 {
         text-align: center;
+        width: 100%;
     }
 }
 

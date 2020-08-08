@@ -8,14 +8,16 @@
 .friendlistCategory {
     display: flex;
     flex-direction: column;
-    h1 {
-        box-shadow: 0 0 3px var(--midnightH);
+    h2 {
+        font-weight: 900;
+        letter-spacing: 2px;
+        box-shadow: 0 0 3px var(--midnight);
         text-transform: uppercase;
-        border-radius: 2px;
-        padding: 5px;
-        background-color: var(--midnight);
+        border-radius: 1px;
+        padding: 7px;
+        background-color: var(--midnightH);
         color: var(--snow);
-        font-size: 12px;
+        font-size: 11px;
         margin: 0 0 7px;
         &:hover {
             cursor: pointer;
@@ -24,13 +26,14 @@
             }
         }
         span {
+            font-weight: 900;
             float: right;
         }
     }
 }
 
 .friendlistCard {
-    background-color: var(--midnightH);
+    background-color: var(--midnight);
     font-size: 11px;
     margin-bottom: 7px;
     box-shadow: 0 0 3px var(--midnightH);
@@ -43,8 +46,9 @@
         justify-content: center;
         margin-right: 2px;
         img {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
+            border-radius: 1px;
         }
     }
     .friendlistCardUser {
@@ -53,14 +57,18 @@
         p {
             margin: 0px;
             font-size: 11px;
-            &:first-child {
-                letter-spacing: 1px;
-                font-weight: 400;
-                font-size: 13px;
-                margin: 0px;
-                color: var(--paint);
-            }
             color: var(--melt);
+        }
+        .friendlistCardUserName {
+            letter-spacing: 1px;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 0px;
+            color: var(--paint);
+            padding: 0;
+            background-color: inherit;
+            box-shadow: none;
+            text-transform: none;
         }
     }
     .friendlistCardStatus {

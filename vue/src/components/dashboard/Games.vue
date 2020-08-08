@@ -16,9 +16,9 @@
       />
     </div>
     <div v-if="!usergames.length && !loading" class="games">
-      <h1 class="emptyGames">
+      <h2 class="emptyGames">
         Sorry, but no games were found, try adding one.
-      </h1>
+      </h2>
     </div>
     <div class="gamesFooter">
       <div v-if="pagination.lastPage > 1" class="gamesPagination">

@@ -17,9 +17,9 @@
     </div>
 
     <div v-if="!userposts.length && !loading" class="posts">
-      <h1 class="emptyPosts">
+      <h2 class="emptyPosts">
         Sorry, there were no posts found made by you, try posting one.
-      </h1>
+      </h2>
     </div>
 
     <div class="postsFooter">

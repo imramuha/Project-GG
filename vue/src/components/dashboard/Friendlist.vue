@@ -1,10 +1,10 @@
 <template>
   <div class="friendlist">
     <div class="friendlistCategory">
-      <h1 v-on:click="toggleOnline">
+      <h2 v-on:click="toggleOnline">
         online ({{ onlineFriends.length }})
         <span>{{ toggleIconOnline }}</span>
-      </h1>
+      </h2>
 
       <FriendlistCard
         v-show="showOnlineSection"
@@ -15,10 +15,10 @@
       />
     </div>
     <div class="friendlistCategory">
-      <h1 v-on:click="toggleOffline">
+      <h2 v-on:click="toggleOffline">
         offline ({{ offlineFriends.length }})
         <span>{{ toggleIconOffline }}</span>
-      </h1>
+      </h2>
       <FriendlistCard
         v-show="showOfflineSection"
         v-for="friend in offlineFriends"

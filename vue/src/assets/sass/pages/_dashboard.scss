@@ -194,7 +194,6 @@
         .sidecontentNotifications {
             display: flex;
             flex-direction: column;
-            //justify-content: space-around;
             overflow: hidden;
             width: 100%;
             height: 100%;
@@ -210,6 +209,14 @@
                 text-align: center;
                 align-items: center;
                 justify-content: center;
+                cursor: not-allowed;
+                h2 {
+                    text-align: center;
+                    color: var(--melt);
+                    font-weight: 300;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                }
             }
         }
     }

@@ -13,7 +13,7 @@
           <img src="@/assets/images/profile.jpeg" />
         </div>
         <div class="messageText">
-          <p>{{ message.text }}</p>
+          <p><!--<span>{{ friend.username }}</span>: -->{{ message.text }}</p>
           <span>{{ message.created_at | formatDateTime }}</span>
         </div>
       </li>

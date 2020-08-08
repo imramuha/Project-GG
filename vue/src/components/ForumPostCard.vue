@@ -13,10 +13,10 @@
     <div class="forumPostcardContent">
       <a @click="onForumPostCardClick">
         <div class="forumPostcardContentHeader">
-          <h1>
+          <h2>
             {{ post.title
             }}<span>[ created at {{ post.created_at | formatDate }}]</span>
-          </h1>
+          </h2>
         </div>
         <div class="forumPostcardContentBody">
           <p>

@@ -6,37 +6,37 @@
     .feedNews {
         display: flex;
         flex-direction: column;
-        background-color: var(--midnightH);
-        box-shadow: 0 0 3px var(--midnightH);
+        background-color: var(--midnight);
         width: 75%;
         height: 100%;
-        border-radius: 3px;
+        border-radius: 2px;
         margin-right: 7px;
-        padding: 21px;
+        //padding: 21px;
         .feedNewsHeader {
             display: flex;
             flex-direction: row;
             width: 100%;
-            margin-bottom: 21px;
+            padding: 21px;
+            border-bottom: 7px solid var(--midnightL);
             h1 {
                 width: 100%;
                 margin-right: 21px;
-                color: var(--melt);
+                color: var(--snow);
             }
             .newsButtonActive {
-                background-color: var(--midnightL);
-                &:hover {
-                    background-color: var(--midnight);
-                }
-            }
-            .newsButtonDeactive {
-                background-color: var(--midnight);
+                background-color: var(--candy);
                 &:hover {
                     background-color: var(--midnightL);
                 }
             }
+            .newsButtonDeactive {
+                background-color: var(--midnightL);
+                &:hover {
+                    background-color: var(--candy);
+                }
+            }
             button {
-                box-shadow: 0 0 3px var(--midnightL);
+                box-shadow: 0 0 1px var(--midnightH);
                 border: none;
                 width: 100%;
                 max-width: 41px;
@@ -48,31 +48,37 @@
             }
         }
         .newsActive {
-            background-color: var(--midnight);
+            background-color: var(--midnightH);
             width: 100%;
             height: 100%;
             padding: 14px 14px;
-            box-shadow: 0 0 3px var(--midnightL);
+            box-shadow: 0 0 3px var(--midnightH);
             h2 {
-                font-size: 28px;
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 21px;
                 span {
-                    font-size: 11px;
+                    margin-top: 7px;
+                    font-size: 14px;
                     font-weight: 400;
                     letter-spacing: 1.5px;
                     color: var(--melt);
                     span {
+                        font-family: roboto slab;
+                        font-weight: 600;
                         color: var(--paint);
                         font-size: 14px;
-                        font-weight: 600;
+                        &:first-child {
+                            color: var(--slate);
+                            font-family: roboto mono;
+                            font-weight: 600;
+                        }
                     }
                 }
             }
             p {
                 color: var(--melt);
-                font-size: 14px
+                font-size: 14px;
             }
         }
         .newsDeactive {
@@ -86,7 +92,7 @@
         box-shadow: 0 0 3px var(--midnightH);
         width: 25%;
         height: 100%;
-        border-radius: 3px;
+        border-radius: 2px;
         padding: 7px;
         overflow: hidden;
         ul {
@@ -101,20 +107,21 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                text-align: left;
                 height: 10%;
-                padding: 7px;
-                font-size: 10px;
+                padding: 0 7px;
+                font-size: 11px;
                 border-radius: 3px;
+                text-transform: uppercase;
                 color: var(--snow);
-                background-color: var(--midnightL);
-                opacity: 0.8;
-                border-left: 3px solid var(--slate);
+                background-color: var(--midnight);
+                border-left: 7px solid var(--mystery);
+                box-shadow: 0 0 2px var(--midnightH);
                 span {
                     text-align: right;
                     font-size: 9px;
-                    margin-bottom: 1px;
-                    color: var(--melt);
+                    color: var(--slate);
+                    font-family: roboto mono;
+                    font-weight: 600;
                 }
                 &:not(:last-child) {
                     margin-bottom: 7px;
@@ -127,6 +134,13 @@
         justify-content: center;
         height: 100%;
         align-items: center;
-        color: var(--melt);
+        cursor: not-allowed;
+        h2 {
+            text-align: center;
+            color: var(--melt);
+            font-weight: 300;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
     }
 }

@@ -614,7 +614,7 @@ class AccountController extends Controller
             'user_id' => $user_id,
             "game_id" => $game_id,
         ]);
-        return array(['response' => 'Games was favorited.']);
+        return array(['response' => 'Game was favorited.']);
     }
 
     /*

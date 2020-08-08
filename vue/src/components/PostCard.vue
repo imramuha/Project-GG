@@ -11,7 +11,7 @@
     <div class="postcardContent">
       <a @click="onPostCardClick" v-on:click="emitToPosts">
         <div class="postcardContentHeader">
-          <h1>{{ post.title }}</h1>
+          <h2>{{ post.title }}</h2>
         </div>
         <div class="postcardContentBody">
           <p>

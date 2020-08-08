@@ -18,7 +18,7 @@
       />
     </div>
     <div
-      v-else-if="
+      v-if="
         this.mode === 'given' && userpostedreviews.length > 0 && !loading
       "
       class="reviews"
@@ -29,8 +29,8 @@
         :review="userpostedreview"
       />
     </div>
-    <div v-else class="reviews">
-      <h1 class="emptyReviews">Sorry, but there no reviews were found.</h1>
+    <div v-else class="reviewsEmpty">
+      <h2>Sorry, but there no reviews were found.</h2>
     </div>
 
     <div class="reviewsFooter">

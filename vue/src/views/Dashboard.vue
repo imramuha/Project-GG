@@ -103,7 +103,7 @@
             />
           </div>
           <div v-else class="notificationsEmpty">
-            There are no notifications available.
+            <h2>no notifications available</h2>
           </div>
         </div>
       </div>

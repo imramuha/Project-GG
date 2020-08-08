@@ -8,7 +8,7 @@
         <img src="@/assets/images/profile.jpeg" />
       </div>
       <div class="friendlistCardUser">
-        <p>{{ friend.username }}</p>
+        <h1 class="friendlistCardUserName">{{ friend.username }}</h1>
         <p>{{ friend.email }}</p>
       </div>
       <div v-if="friend.status.name == 'online'" class="friendlistCardStatus">
