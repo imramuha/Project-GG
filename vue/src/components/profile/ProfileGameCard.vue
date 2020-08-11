@@ -1,7 +1,7 @@
 <template>
   <div class="profileGameCard">
     <div class="profileGameCardImage">
-      <img src="@/assets/images/profile.jpeg" />
+      <img src="@/assets/images/game.png" />
       <div class="profileGameCardName">{{ game.game.name }}</div>
     </div>
     <div class="profileGameCardUsername">{{ game.data.username }}</div>

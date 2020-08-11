@@ -100,6 +100,8 @@ $form-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
             appearance: none;
         }
         button {
+            width: 25%;
+            cursor: pointer;
             background-color: var(--candy);
             color: var(--snow);
             border: none;

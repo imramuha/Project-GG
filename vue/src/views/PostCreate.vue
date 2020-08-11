@@ -32,7 +32,10 @@
           <button @click="removeImage">Remove</button>
         </div>
     
-        <button type="submit">Create</button>
+        <div class="formButtons">
+          <button class="formButtonsCancel" @click="cancel">Cancel</button>
+          <button type="submit">Create</button>
+        </div>
 
     </form>
     </div>
@@ -131,6 +134,9 @@ export default {
     },
     emitToDashboard(component) {
       this.$emit("emitToDashboard", component);
+    },
+    cancel() {
+       this.emitToDashboard('posts')
     }
   }
 };

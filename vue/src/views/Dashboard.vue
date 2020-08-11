@@ -117,13 +117,261 @@
       </div>
     </div>
     <div class="infoModal" v-if="infoModal">
-      <div class="infoModalData">
-        <h1>
-          How to use Project GG
-        </h1>
-        <button @click="infoModal = false">
-          <i class="fas fa-times-circle"></i>
-        </button>
+      <button class="infoModalClose" @click="infoModal = false">
+        <i class="fas fa-times-circle"></i>
+      </button>
+      <div class="infoModalNav">
+        <span><i class="fas fa-info-circle"></i></span>
+        <div class="infoModalNavInfo">
+          <div class="infoModalData">
+            <div class="infoModalTitle">
+              SIDE NAVGIATION
+            </div>
+            <div class="infoModalExplaination">
+              This is your side [NAVIGATION]
+            </div>
+          </div>
+          <div class="infoModalData">
+            <div class="infoModalTitle">
+              <img
+                v-if="this.mode == 'light'"
+                src="@/assets/images/logoDark.svg"
+              />
+              <img v-else src="@/assets/images/logo.svg" />
+            </div>
+            <div class="infoModalExplaination">
+              Link/logo to visit the [HOMEPAGE]
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle">
+              <button class="queueButtonInfo" title="Queue up" disabled>
+                <i class="fa fa-gamepad" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="infoModalExplaination">
+              Button to [QUEUE UP] to find other players to play games with
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle"><i class="fas fa-columns"></i></div>
+            <div class="infoModalExplaination">
+              Button to visit the [DASHBOARD]
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle"><i class="fas fa-home"></i></div>
+            <div class="infoModalExplaination">
+              Button to visit the [HOMEPAGE]
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle">
+              <i class="fas fa-object-group"></i>
+            </div>
+            <div class="infoModalExplaination">
+              Button to visit the [FORUM] and see all the posts based on how you
+              sort them
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle"><i class="fas fa-cog"></i></div>
+            <div class="infoModalExplaination">
+              Button to change your [SETTINGS & PREFERENCES] such as nightmode,
+              anonimity, voice, language & timezone preferences.
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle"><i class="fas fa-info"></i></div>
+            <div class="infoModalExplaination">
+              Button to show [INFORMATION] about this application and how it
+              works
+            </div>
+          </div>
+
+          <div class="infoModalData">
+            <div class="infoModalTitle">
+              <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <div class="infoModalExplaination">Button to [LOGOUT]</div>
+          </div>
+        </div>
+      </div>
+      <div class="infoModalMain">
+        <div class="infoModalMainHeader">
+          <span><i class="fas fa-info-circle"></i></span>
+          <div class="infoModalMainHeaderInfo">
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                PROFILE
+              </div>
+              <div class="infoModalExplaination">
+                THIS IS WHERE YOUR PROFILE IS LOCATED
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                EDIT
+              </div>
+              <div class="infoModalExplaination">
+                Button to [EDIT] your profile information or image
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                REVIEWBAR
+              </div>
+              <div class="infoModalExplaination">
+                Shows your average reviewsrating, if it's empty then you haven't
+                received any
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="infoModalMainBody">
+          <span><i class="fas fa-info-circle"></i></span>
+          <div class="infoModalMainBodyInfo">
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                DASHBOARD NAVIGATION
+              </div>
+              <div class="infoModalExplaination">
+                This is your dashboard [NAVIGATION]
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                FEED
+              </div>
+              <div class="infoModalExplaination">
+                This is where you can find the latest news from the developers
+                and also see your sessions history
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                INBOX
+              </div>
+              <div class="infoModalExplaination">
+                Brings you to [INBOX], where you can send messages to your
+                friends
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                GAMES
+              </div>
+              <div class="infoModalExplaination">
+                Brings you to your favorite [GAMES], where you can also favorite
+                new games or unfavorite an older one
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                REVIEWS
+              </div>
+              <div class="infoModalExplaination">
+                Brings you to [REVIEWS], where you can see your given and
+                received reviews
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                POSTS
+              </div>
+              <div class="infoModalExplaination">
+                Brings you to [POSTS] created by you, you can also post new ones
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="infoModalMainFooter">
+          <span><i class="fas fa-info-circle"></i></span>
+          <div class="infoModalMainFooterInfo">
+             <div class="infoModalData">
+              <div class="infoModalTitle">
+                CONTENT
+              </div>
+              <div class="infoModalExplaination">
+                This area shows content that is currently active
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="infoModalSide">
+        <div class="infoModalSideHeader">
+          <span><i class="fas fa-info-circle"></i></span>
+          <div class="infoModalSideHeaderInfo">
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                NOTIFICATIONCENTER
+              </div>
+              <div class="infoModalExplaination">
+                This is where your notifications pop up, you can also remove
+                them
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="infoModalSideBody">
+          <span><i class="fas fa-info-circle"></i></span>
+          <div class="infoModalSideBodyInfo">
+            <div class="infoModalData">-
+              <div class="infoModalTitle">
+                SEARCH
+              </div>
+              <div class="infoModalExplaination">
+                This is where you [SEARCH] for users, visit their [PROFILE] and
+                maybe [ADD FRIEND] them
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="infoModalSideFooter">
+          <span><i class="fas fa-info-circle"></i></span>
+          <div class="infoModalSideFooterInfo">
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                FRIENDLIST
+              </div>
+              <div class="infoModalExplaination">
+                This is your [FRENDLIST]
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                ONLINE
+              </div>
+              <div class="infoModalExplaination">
+                Toggle to your [ONLINE] [FRIENDS]
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                OFFLINE
+              </div>
+              <div class="infoModalExplaination">
+                Toggle to show your [OFFLINE] [FRIENDS]
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -177,10 +425,10 @@ export default {
     UserSearch,
     UserGameAdd,
     Profile,
-    Forum
+    Forum,
   },
   computed: {
-    ...mapGetters(["getNotifications"])
+    ...mapGetters(["getNotifications"]),
   },
   data() {
     return {
@@ -193,13 +441,13 @@ export default {
       overscreenData: null,
       forum: "forum",
       infoModal: false,
-      mode: "dark"
+      mode: "dark",
     };
   },
   async mounted() {
     // on mount we check if the user has nightmode on or not
     let htmlElement = document.documentElement;
-    await getUserSettings().then(response => {
+    await getUserSettings().then((response) => {
       if (!response.data[0].nightmode == 1) {
         htmlElement.setAttribute("theme", "light");
         this.mode = "light";
@@ -281,9 +529,8 @@ export default {
     theme(value) {
       this.mode = value;
       this.$emit("emitToAppNav", value);
-    }
-
-  }
+    },
+  },
 };
 </script>
 

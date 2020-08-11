@@ -59,12 +59,12 @@ class AccountController extends Controller
     public function editUser(Request $request)
     {
 
+        $id = auth()->user()->id;
+
         $this->validate(request(), [
-            'email' => 'required|unique:users|email',
+            'email' => 'required|unique:users,email,'.$id,
             'image' => 'required'
         ]);
-
-        $id = auth()->user()->id;
 
         User::where('id', '=', $id)->update(array(
             'email' => $request->input('email'),

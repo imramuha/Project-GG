@@ -28,7 +28,10 @@
         <label for="data">Extra info</label>
         <input id="data" v-model="data" placeholder="any extra info" />
 
-        <button type="submit">Add</button>
+        <div class="formButtons">
+          <button class="formButtonsCancel" @click="cancel">Cancel</button>
+          <button type="submit">Add</button>
+        </div>
       </form>
     </div>
   </div>
@@ -76,9 +79,9 @@ export default {
           })
           .catch((errors) => {
             console.log(errors);
-          });
+          }); 
 
-this.game_id = null
+          this.game_id = null
           this.username = null;
           this.data = null;
 
@@ -96,6 +99,9 @@ this.game_id = null
     },
     emitToDashboard(component) {
       this.$emit("emitToDashboard", component);
+    },
+    cancel() {
+      this.emitToDashboard('games');
     }
   },
   async mounted() {
