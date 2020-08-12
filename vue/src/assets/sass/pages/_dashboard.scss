@@ -18,7 +18,6 @@
         height: 22%;
         min-height: 22%;
         background-color: var(--midnightH);
-        margin-bottom: 7px;
         border-radius: 3px;
         padding: 7px;
         box-shadow: 0 0 3px var(--midnightH);
@@ -127,7 +126,7 @@
         padding: 7px;
         box-shadow: 0 0 3px var(--midnightH);
         box-sizing: border-box;
-        margin-bottom: 7px;
+        margin: 7px 0;
         .dashboardNav {
             width: 100%;
             display: flex;
@@ -163,7 +162,8 @@
         }
     }
     .contentMain {
-        height: 70%;
+        height: calc(70% - 14px);
+        max-height: 70%;
         background-color: var(--midnightL);
         box-sizing: border-box;
         border-radius: 3px;
@@ -311,11 +311,123 @@
     .infoModalData {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 14px;
+        &:last-child {
+            margin-bottom: 0px;
+        }
         .infoModalTitle {
             width: 25%;
+            margin-right: 14px;
+            padding-right: 14px;
+            border-right: 4px solid var(--candy);
+            font-size: 14px;
+            display: flex;
+            justify-content: right;
+            i {
+                font-size: 21px;
+            }
         }
         .infoModalExplaination {
             width: 75%;
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+        }
+        .modalEditButton {
+            button {
+                padding: 7px 14px;
+                background-color: var(--midnightL);
+                color: var(--melt);
+                border-radius: 3px;
+                border: 2px solid var(--melt);
+            }
+        }
+        .userReviewBar {
+            border: 3px solid var(--snow);
+            padding: 7px;
+            text-align: center;
+            border-radius: 3px;
+            background-color: var(--candy);
+            width: 100%;
+        }
+        .dashboardNavButton {
+            padding: 7px 14px;
+            border-radius: 2px;
+            background-color: var(--candy);
+            color: var(--snow);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .friendlistOnlineToggle {
+            background-color: var(--midnightH);
+            color: var(--snow);
+            border-radius: 2 px;
+            padding: 3px 7px;
+        }
+        .notificationCard {
+            .notificationContent {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                background-color: var(--midnightL);
+                font-size: 11px;
+                color: var(--snow);
+                padding: 7px 3px;
+                border-left: 5px solid var(--paint);
+                border-radius: 1px;
+                p {
+                    display: flex;
+                    justify-content: center;
+                    margin: 0 3px;
+                }
+                svg {
+                    color: var(--slate);
+                }
+                a {
+                    svg {
+                        color: var(--melt);
+                    }
+                }
+            }
+            .slider {
+                height: 1px;
+                margin-bottom: 6.3px;
+                border-radius: 3px;
+                background-color: var(--paint);
+                width: 100%;
+                -webkit-transition: width 10s ease;
+                transition: width 10s ease;
+            }
+        }
+        .searchForm {
+            form {
+                display: flex;
+                input {
+                    color: var(--melt);
+                    padding: 3px;
+                    border: none;
+                    background-color: var(--midnightL);
+                    border-radius: 1px;
+                    width: 58px;
+                    &:focus {
+                        border: 1px solid var(--candy);
+                    }
+                }
+                button {
+                    background-color: var(--midnightH);
+                    border: none;
+                    color: var(--snow);
+                    border-radius: 1px;
+                    &:hover {
+                        color: var(--melt);
+                        cursor: pointer;
+                    }
+                }
+                box-shadow: 0 0 3px var(--midnightH);
+            }
         }
     }
     .infoModalNav {
@@ -347,6 +459,7 @@
             border-color: var(--candy);
             .infoModalNavInfo {
                 display: flex;
+                justify-content: space-between;
                 flex-direction: column;
             }
             span {

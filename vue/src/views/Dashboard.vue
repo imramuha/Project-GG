@@ -125,7 +125,7 @@
         <div class="infoModalNavInfo">
           <div class="infoModalData">
             <div class="infoModalTitle">
-              SIDE NAVGIATION
+              NAVGIATION
             </div>
             <div class="infoModalExplaination">
               This is your side [NAVIGATION]
@@ -218,7 +218,11 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                EDIT
+                <div class="modalEditButton">
+                  <a>
+                    <button>Edit</button>
+                  </a>
+                </div>
               </div>
               <div class="infoModalExplaination">
                 Button to [EDIT] your profile information or image
@@ -227,7 +231,9 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                REVIEWBAR
+                <div class="userReviewBar">
+                  0%
+                </div>
               </div>
               <div class="infoModalExplaination">
                 Shows your average reviewsrating, if it's empty then you haven't
@@ -250,7 +256,7 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                FEED
+                <div class="dashboardNavButton">FEED</div>
               </div>
               <div class="infoModalExplaination">
                 This is where you can find the latest news from the developers
@@ -260,7 +266,7 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                INBOX
+                <div class="dashboardNavButton">INBOX</div>
               </div>
               <div class="infoModalExplaination">
                 Brings you to [INBOX], where you can send messages to your
@@ -270,7 +276,7 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                GAMES
+                <div class="dashboardNavButton">GAMES</div>
               </div>
               <div class="infoModalExplaination">
                 Brings you to your favorite [GAMES], where you can also favorite
@@ -280,7 +286,7 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                REVIEWS
+                <div class="dashboardNavButton">REVIEWS</div>
               </div>
               <div class="infoModalExplaination">
                 Brings you to [REVIEWS], where you can see your given and
@@ -290,7 +296,7 @@
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                POSTS
+                <div class="dashboardNavButton">POSTS</div>
               </div>
               <div class="infoModalExplaination">
                 Brings you to [POSTS] created by you, you can also post new ones
@@ -301,7 +307,7 @@
         <div class="infoModalMainFooter">
           <span><i class="fas fa-info-circle"></i></span>
           <div class="infoModalMainFooterInfo">
-             <div class="infoModalData">
+            <div class="infoModalData">
               <div class="infoModalTitle">
                 CONTENT
               </div>
@@ -318,11 +324,27 @@
           <div class="infoModalSideHeaderInfo">
             <div class="infoModalData">
               <div class="infoModalTitle">
-                NOTIFICATIONCENTER
+                NOTIFICATION CENTER
               </div>
               <div class="infoModalExplaination">
                 This is where your notifications pop up, you can also remove
                 them
+              </div>
+            </div>
+
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                <div class="notificationCard">
+                  <div class="notificationContent">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <p>Liked post</p>
+                    <a><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="slider" :style="styleObject"></div>
+                </div>
+              </div>
+              <div class="infoModalExplaination">
+                This is how a notification looks like.
               </div>
             </div>
           </div>
@@ -330,13 +352,32 @@
         <div class="infoModalSideBody">
           <span><i class="fas fa-info-circle"></i></span>
           <div class="infoModalSideBodyInfo">
-            <div class="infoModalData">-
+            <div class="infoModalData">
               <div class="infoModalTitle">
                 SEARCH
               </div>
               <div class="infoModalExplaination">
-                This is where you [SEARCH] for users, visit their [PROFILE] and
-                maybe [ADD FRIEND] them
+                If you're looking for someone, try to [INPUT] their username in
+                here.
+              </div>
+            </div>
+            <div class="infoModalData">
+              <div class="infoModalTitle">
+                <div class="searchForm">
+                  <form>
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                    />
+                    <button>
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="infoModalExplaination">
+                After [SEARCH] you'll be able to see all the users that meet
+                your search criteria.
               </div>
             </div>
           </div>
@@ -349,25 +390,25 @@
                 FRIENDLIST
               </div>
               <div class="infoModalExplaination">
-                This is your [FRENDLIST]
+                This is your [FRENDLIST].
               </div>
             </div>
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                ONLINE
+                <div class="friendlistOnlineToggle">ONLINE +</div>
               </div>
               <div class="infoModalExplaination">
-                Toggle to your [ONLINE] [FRIENDS]
+                Toggle to your [ONLINE] [FRIENDS].
               </div>
             </div>
 
             <div class="infoModalData">
               <div class="infoModalTitle">
-                OFFLINE
+                <div class="friendlistOnlineToggle">OFFLINE +</div>
               </div>
               <div class="infoModalExplaination">
-                Toggle to show your [OFFLINE] [FRIENDS]
+                Toggle to show your [OFFLINE] [FRIENDS].
               </div>
             </div>
           </div>

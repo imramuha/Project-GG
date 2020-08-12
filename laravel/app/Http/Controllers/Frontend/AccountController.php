@@ -741,7 +741,7 @@ class AccountController extends Controller
     public function lounge($id)
     {
 
-        $lobby = Lobby::find($id)->with('users', 'groupMessages')->first();
+        $lobby = Lobby::find($id)->with('users', 'users.usergamedata', 'groupMessages', 'groupMessages.user')->first();
 
         // triggers the real time event
         $this->pusher->trigger('private-lounge' . $lobby->code, 'NewLounge', $lobby);

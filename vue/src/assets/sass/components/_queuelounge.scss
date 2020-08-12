@@ -11,10 +11,9 @@
             .queue {
                 display: flex;
                 flex-direction: row;
-                height: 25%;
                 width: 100%;
-                max-height: 125px;
-                margin-bottom: 7px;
+                height: 25%;
+                min-height: 25%;
                 .queueHeader {
                     height: 100%;
                     width: 25px;
@@ -25,7 +24,7 @@
                     align-items: center;
                     background-color: var(--candy);
                     border-radius: 3px;
-                    padding: 7px;
+                    padding: 3.5px;
                     p {
                         font-size: 14px;
                         font-weight: 600;
@@ -39,7 +38,7 @@
                     margin: 0 7px;
                     width: 100%;
                     background-color: var(--midnight);
-                    padding: 7px;
+                    padding: 3.5px;
                     border-radius: 3px;
                     .queueForm {
                         display: flex;
@@ -69,8 +68,8 @@
                             font-weight: 600;
                             color: snow;
                             border-radius: 3px;
-                            background-color: #333333;
-                            border: 1px solid #202020;
+                            background-color: var(--midnightL);
+                            border: 1px solid var(--midnightH);
                             -webkit-appearance: none;
                             -moz-appearance: none;
                             &:focus {
@@ -133,9 +132,10 @@
             .lounge {
                 display: flex;
                 flex-direction: row;
-                height: 75%;
+                margin-top: 7px;
                 width: 100%;
-                box-sizing: border-box;
+                height: calc(75% - 7px);
+                max-height: 75%;
                 .loungeHeader {
                     width: 25px;
                     writing-mode: vertical-rl;
@@ -143,7 +143,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    background-color: var(--paint);
+                    background-color: var(--paintL);
                     border-radius: 3px;
                     padding: 7px;
                     p {
@@ -155,25 +155,40 @@
                 .loungeBody {
                     display: flex;
                     justify-content: row;
+                    background-color: var(--midnight);
                     height: 100%;
                     width: 100%;
                     margin: 0 7px;
-                    //padding: 7px;
-                    border-radius: 3px;
+                    padding: 7px;
+                    border-radius: 2px;
                     .loungeBodyUsers {
                         display: flex;
                         flex-direction: column;
                         height: 100%;
                         width: 50%;
-                        //background-color: var(--midnight);
                         margin: 0 3.5px 0 0;
                         border-radius: 3px;
                         box-sizing: border-box;
+                        h3 {
+                            font-size: 14px;
+                            text-transform: uppercase;
+                            margin-top: 0px;
+                            margin-bottom: 7px;
+                            display: flex;
+                            justify-content: space-between;
+                            letter-spacing: 1.5px;
+                            span {
+                                font-size: 14px;
+                                text-transform: initial;
+                                color: var(--paintL);
+                            }
+                        }
                         .loungeBodyUsersCard {
                             &:not(:last-child) {
                                 margin-bottom: 7px;
                             }
-                            height: 100%;
+                            height: 20%;
+                            max-height: 20%;
                             display: flex;
                             flex-direction: row;
                             justify-content: center;
@@ -181,10 +196,16 @@
                             padding: 7px;
                             background-color: var(--midnightH);
                             border-radius: 3px;
-                            img {
-                                height: 40px;
-                                width: auto;
-                                border-radius: 3px;
+                            box-shadow: 0 0 3px var(--midnightH);
+                            .imgContainer {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                img {
+                                    height: 40px;
+                                    width: auto;
+                                    border-radius: 3px;
+                                }
                             }
                             .loungeBodyUsersCardContent {
                                 display: flex;
@@ -219,9 +240,11 @@
                         border-radius: 3px;
                         display: flex;
                         flex-direction: column;
+                        box-shadow: 0 0 3px var(--midnightH);
                         .loungeMessagesFeed {
                             height: 100%;
-                            background-color: var(--midnight);
+                            background-color: var(--midnightL);
+                            border-radius: 1px;
                             overflow-y: scroll;
                             padding: 7px;
                             ul {
@@ -229,7 +252,7 @@
                                 list-style-type: none;
                                 margin: 0px;
                                 li {
-                                    width: 75%;
+                                    width: 90%;
                                     margin-bottom: 7px;
                                     padding: 7px;
                                     border-radius: 2px;
@@ -244,12 +267,17 @@
                                             height: 30px;
                                             margin-right: 7px;
                                         }
+                                        h1 {
+                                            font-size: 11px;
+                                            margin-right: 7px;
+                                            color: var(--paint);
+                                        }
                                     }
                                     .loungeMessageText {
                                         display: flex;
                                         flex-direction: column;
                                         p {
-                                            font-size: 14px;
+                                            font-size: 11px;
                                             font-weight: 600;
                                             margin-bottom: 1px;
                                         }
@@ -284,7 +312,7 @@
                                     }
                                 }
                                 .loungeMessageReceived {
-                                    background-color: var(--midnightL);
+                                    background-color: var(--midnightH);
                                 }
                             }
                         }
@@ -310,9 +338,10 @@
                 }
                 .loungeButtons {
                     //padding: 7px;
+                    margin-top: auto;
                     margin-left: auto;
-                    height: 100%;
                     max-width: 100px;
+                    height: 100%;
                     display: flex;
                     flex-direction: column;
                     button {
@@ -320,7 +349,7 @@
                         min-width: 100px;
                         width: 100%;
                         height: 100%;
-                        background-color: var(--candy);
+                        background-color: var(--candyH);
                         color: var(--snow);
                         border: none;
                         font-size: 18px;

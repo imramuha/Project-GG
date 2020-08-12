@@ -70,12 +70,13 @@
                 justify-content: center;
                 align-items: center;
                 height: auto;
-                width: 20%;
-                font-size: 140px;
+                img {
+                    width: 50%;
+                }
                 span {
                     letter-spacing: 3px;
                     margin-top: 21px;
-                    font-size: 35px;
+                    font-size: 28px;
                 }
             }
         }
@@ -125,44 +126,36 @@
             background-color: transparent;
             border: 7px solid var(--candyL);
             &:nth-child(1) {
-                top: 12%;
-                left: 60%;
+                top: 22%;
+                left: 57%;
                 animation: animate 10s linear infinite;
             }
             &:nth-child(2) {
-                top: 44.5%;
-                left: 89.5%;
-                height: 125px;
-                width: 125px;
-                border-width: 20px;
-                border-color: var(--paintH);
-                opacity: 0.3;
-                ;
+                top: 5%;
+                left: 0%;
+                animation: animate 8s linear infinite;
+                opacity: 0.1;
+                border-color: transparent transparent var(--candy) transparent;
             }
             &:nth-child(3) {
-                top: 0%;
-                left: 0%;
-                animation: animate 10s linear infinite;
-                opacity: 0.1;
+                top: 68.7%;
+                left: 15%;
+                animation: animate 8s linear infinite;
+                border: 7px solid var(--snow);
             }
             &:nth-child(4) {
-                top: 25%;
-                left: 36%;
-                opacity: 0.3;
+                top: 58%;
+                left: 98%;
+                animation: animate 14s linear infinite;
+                border: 7px solid var(--candy);
+                opacity: 0.1;
             }
             &:nth-child(5) {
-                top: 27.7%;
-                left: 29.3%;
-                height: 100px;
-                width: 100px;
-                border-width: 20px;
-                border-color: var(--sand);
-                opacity: 0.2;
-            }
-            &:nth-child(6) {
-                top: 54.7%;
-                left: 11.3%;
-                animation: animate 8s linear infinite;
+                top: 99%;
+                left: 68%;
+                animation: animate 12s linear infinite;
+                opacity: 0.1;
+                border-color: transparent transparent var(--snow) transparent;
             }
         }
         .circle {
@@ -174,7 +167,6 @@
             height: 0;
             border-style: solid;
             border-width: 0 70px 115px 70px;
-            border-color: transparent transparent var(--snow) transparent;
         }
         .triangle:before {
             content: "";
