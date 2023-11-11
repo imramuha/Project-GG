@@ -365,10 +365,7 @@
               <div class="infoModalTitle">
                 <div class="searchForm">
                   <form>
-                    <input
-                      type="text"
-                      placeholder="Search..."
-                    />
+                    <input type="text" placeholder="Search..." />
                     <button>
                       <i class="fa fa-search"></i>
                     </button>
@@ -466,10 +463,10 @@ export default {
     UserSearch,
     UserGameAdd,
     Profile,
-    Forum,
+    Forum
   },
   computed: {
-    ...mapGetters(["getNotifications"]),
+    ...mapGetters(["getNotifications"])
   },
   data() {
     return {
@@ -482,13 +479,13 @@ export default {
       overscreenData: null,
       forum: "forum",
       infoModal: false,
-      mode: "dark",
+      mode: "dark"
     };
   },
   async mounted() {
     // on mount we check if the user has nightmode on or not
     let htmlElement = document.documentElement;
-    await getUserSettings().then((response) => {
+    await getUserSettings().then(response => {
       if (!response.data[0].nightmode == 1) {
         htmlElement.setAttribute("theme", "light");
         this.mode = "light";
@@ -570,8 +567,8 @@ export default {
     theme(value) {
       this.mode = value;
       this.$emit("emitToAppNav", value);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -43,22 +43,23 @@ import { getUserSettings } from "@/services/user.api";
 
 export default {
   computed: {
-    ...authComputed,
+    ...authComputed
   },
   props: {
     mode: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
-      theme: "dark",
+      theme: "dark"
     };
   },
   async mounted() {
     // based on the usersettings changes the theme and svg type
     let htmlElement = document.documentElement;
-      await getUserSettings().then((response) => {
+    await getUserSettings()
+      .then(response => {
         if (!response.data[0].nightmode == 1) {
           this.theme = "light";
           htmlElement.setAttribute("theme", "light");
@@ -66,7 +67,8 @@ export default {
           this.theme = "dark";
           htmlElement.setAttribute("theme", "dark");
         }
-      }).catch((error) => {
+      })
+      .catch(error => {
         console.log(error.response.data.message);
       });
   },
@@ -74,15 +76,15 @@ export default {
     // gets the mode from the app emit
     mode: function(value) {
       this.theme = value;
-    },
+    }
   },
   methods: {
     logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

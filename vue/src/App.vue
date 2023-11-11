@@ -3,9 +3,9 @@
     <div class="wrapper">
       <div></div>
       <div class="triangle"></div>
-      <div></div> 
-      <div></div> 
-         <div class="triangle"></div> 
+      <div></div>
+      <div></div>
+      <div class="triangle"></div>
     </div>
     <AppNav :mode="mode" />
     <router-view v-on:emitToAppNav="shiftMode" class="page" />
@@ -23,8 +23,8 @@ export default {
   },
   data() {
     return {
-      mode: '',
-    }
+      mode: ""
+    };
   },
   methods: {
     shiftMode(value) {

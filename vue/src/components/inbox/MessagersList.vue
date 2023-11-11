@@ -27,19 +27,19 @@ export default {
   props: {
     friends: {
       type: Array,
-      defaults: [],
-    },
+      defaults: []
+    }
   },
   data() {
     return {
-      selected: 0,
+      selected: 0
     };
   },
   methods: {
     selectedFriend(index, friend) {
       this.selected = index;
       this.$emit("selected", friend);
-    },
-  },
+    }
+  }
 };
 </script>

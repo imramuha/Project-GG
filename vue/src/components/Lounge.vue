@@ -4,12 +4,14 @@
     <div class="loungeBody">
       <div class="loungeBodyUsers">
         <h3>
-          Lounge <span>[{{ this.loungeData.name }}-{{ this.loungeData.code }}]</span>
+          Lounge
+          <span>[{{ this.loungeData.name }}-{{ this.loungeData.code }}]</span>
         </h3>
         <div
           v-for="(loungeUser, index) in this.loungeUsers"
           :key="index"
-          class="loungeBodyUsersCard">
+          class="loungeBodyUsersCard"
+        >
           <div v-if="loungeUser.image" class="imgContainer">
             <img :src="loungeUser.image" />
           </div>
@@ -25,16 +27,9 @@
             <!--<p>Here comes the game info</p>-->
           </div>
         </div>
-        <div class="loungeBodyUsersCard">
-
-        </div>
-           <div class="loungeBodyUsersCard">
-          
-        </div>
-           <div class="loungeBodyUsersCard">
-          
-        </div>
-
+        <div class="loungeBodyUsersCard"></div>
+        <div class="loungeBodyUsersCard"></div>
+        <div class="loungeBodyUsersCard"></div>
       </div>
 
       <div class="loungeBodyChat">
@@ -82,7 +77,7 @@
 import {
   getLoungeData,
   exitLounge,
-  postGroupMessage,
+  postGroupMessage
 } from "@/services/queue.api";
 
 export default {
@@ -93,7 +88,7 @@ export default {
       loungeData: "",
       loungeUsers: [],
       loungeGroupmessages: [],
-      text: "",
+      text: ""
     };
   },
   props: {
@@ -101,13 +96,13 @@ export default {
       type: Object,
       default: () => {
         return {};
-      },
-    },
+      }
+    }
   },
   methods: {
     async exitLounge() {
       try {
-        await exitLounge().then((response) => {
+        await exitLounge().then(response => {
           console.log(response);
         });
       } catch (error) {
@@ -137,10 +132,10 @@ export default {
       }
 
       let groupMessage = {
-        text: this.text,
+        text: this.text
       };
       try {
-        await postGroupMessage(groupMessage).then((response) => {
+        await postGroupMessage(groupMessage).then(response => {
           console.log(response);
           this.text = "";
         });
@@ -157,14 +152,14 @@ export default {
         this.$refs.feed.scrollTop =
           this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
       }, 50);
-    },
+    }
   },
   async mounted() {
     /* global pusher */
 
     this.lounge = this.lobby;
     try {
-      await getLoungeData(this.lounge.id).then((response) => {
+      await getLoungeData(this.lounge.id).then(response => {
         console.log(response);
         this.loungeData = response.data;
         this.loungeUsers = response.data.users;
@@ -174,7 +169,7 @@ export default {
           `private-lounge${this.loungeData.code}`
         );
 
-        channel.bind("NewLounge", (data) => {
+        channel.bind("NewLounge", data => {
           this.handleIncoming(data);
         });
       });
@@ -186,8 +181,8 @@ export default {
     loungeData: function(loungeData) {
       this.scrollToBottom();
       console.log(loungeData);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -150,10 +150,10 @@ export default {
 
       if (this.nightmode) {
         htmlElement.setAttribute("theme", "dark");
-        this.$emit("emitToMode", 'dark');
+        this.$emit("emitToMode", "dark");
       } else {
         htmlElement.setAttribute("theme", "light");
-        this.$emit("emitToMode", 'light');
+        this.$emit("emitToMode", "light");
       }
     }
   }

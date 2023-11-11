@@ -18,7 +18,8 @@
       <div class="profileHeaderData">
         <div>
           <h1>
-            {{ friend.username }} <span v-if="this.relation">{{ this.relation.name }}</span>
+            {{ friend.username }}
+            <span v-if="this.relation">{{ this.relation.name }}</span>
           </h1>
           <p>{{ friend.email }}</p>
           <p>BIO: {{ friend.id }}</p>
@@ -32,12 +33,15 @@
             {{ reviewscore.toFixed(2) }} %
           </div>
           <div v-else class="profileHeaderScoreEmpty">
-            <span>{{ friend.username }} hasn't received received any reviews yet.</span>
+            <span
+              >{{ friend.username }} hasn't received received any reviews
+              yet.</span
+            >
           </div>
         </div>
       </div>
       <div class="profileHeaderButtons">
-          <div class="profileHeaderRelation">
+        <div class="profileHeaderRelation">
           <button @click="update('friends')" v-if="this.activeButton == ''">
             Add Friend
           </button>
@@ -94,18 +98,24 @@
               </h1>
               <p v-if="errors.length">
                 <b>Please correct the following error(s):</b>
-                <ul>
-                  <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
-                </ul>
               </p>
+
+              <ul>
+                <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+              </ul>
               <form v-on:submit.prevent="report()">
                 <label for="reason">Reason</label>
-                <textarea v-model="reason" rows="5" placeholder="Enter your reason" type="textarea" name="reason" />
-
+                <textarea
+                  v-model="reason"
+                  rows="5"
+                  placeholder="Enter your reason"
+                  type="textarea"
+                  name="reason"
+                />
 
                 <div class="reportFormButtons">
                   <button @click="reportModal = false">Cancel</button>
-                  <button type="submit" >Submit</button>
+                  <button type="submit">Submit</button>
                 </div>
               </form>
             </div>
@@ -152,7 +162,6 @@
 
     <div class="profileReviews">
       <div class="profileReviewsSection">
-
         <div class="profileReviewsNavContainer">
           <div class="profileReviewsNav">
             <button
@@ -172,26 +181,25 @@
           </div>
         </div>
 
-      <div class="profileReviewCardsContainer">
-        <div v-if="loadingReviews" class="ldsContainer">
-          <div class="ldsRipple">
-            <div></div>
-            <div></div>
+        <div class="profileReviewCardsContainer">
+          <div v-if="loadingReviews" class="ldsContainer">
+            <div class="ldsRipple">
+              <div></div>
+              <div></div>
+            </div>
           </div>
+
+          <ProfileReviewCard
+            v-else-if="reviews && !loadingReviews"
+            v-for="review in reviews"
+            v-bind:key="review.id"
+            :review="review"
+          />
+
+          <h1 v-if="!reviews.length && !loadingReviews">
+            <span>User hasn't received any reviews yet.</span>
+          </h1>
         </div>
-
-        <ProfileReviewCard
-          v-else-if="reviews && !loadingReviews"
-          v-for="review in reviews"
-          v-bind:key="review.id"
-          :review="review"
-        />
-
-        <h1 v-if="!reviews.length && !loadingReviews">
-          <span>User hasn't received any reviews yet.</span>
-        </h1>
-      </div>
-
       </div>
 
       <ReviewInput v-on:emitToProfile="getUserReviews" :id="friend.id" />
@@ -230,12 +238,12 @@ export default {
       loadingReviews: true,
       reportModal: false,
       errors: [],
-      reason: null,
+      reason: null
     };
   },
   computed: {
     ...mapGetters("Game", ["getProfileGames"]),
-    ...mapGetters("Review", ["getProfileReviews"]),
+    ...mapGetters("Review", ["getProfileReviews"])
   },
   methods: {
     ...mapActions("Game", ["fetchProfileGames"]),
@@ -278,7 +286,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.games_pagination = pagination;
     },
@@ -287,7 +295,7 @@ export default {
         currentPage: data.current_page,
         lastPage: data.last_page,
         nextPage: data.next_page_url,
-        prevPage: data.prev_page_url,
+        prevPage: data.prev_page_url
       };
       this.reviews_pagination = pagination;
     },
@@ -317,18 +325,18 @@ export default {
       // make a call and send the data ->
       let relationData = {
         relation: data,
-        profile_id: this.friend.id,
+        profile_id: this.friend.id
       };
       try {
-        await updateRelation(relationData).then((response) => {
+        await updateRelation(relationData).then(response => {
           this.$store
             .dispatch("notification", {
-              message: response.data[0].response,
+              message: response.data[0].response
             })
             .then(() => {
               //this.$router.push('dashboard');
             })
-            .catch((errors) => {
+            .catch(errors => {
               console.log(errors);
             });
         });
@@ -339,39 +347,37 @@ export default {
     async report() {
       this.errors = [];
 
-      if(!this.reason) {
-          this.errors.push('A reasoning is required!');
-
+      if (!this.reason) {
+        this.errors.push("A reasoning is required!");
       } else if (this.reason) {
-
-         let reportData = {
+        let reportData = {
           reason: this.reason,
-          type: 'profile',
+          type: "profile",
           type_id: this.friend.id
         };
 
-        await addReport(reportData).then((response) => {
-          this.$store
-            .dispatch("notification", {
-              message: response.data[0].response,
-            })
-            .then(() => {
-              this.reportModal = false;
-            })
-            .catch((errors) => {
-              console.log(errors);
-            });
+        await addReport(reportData)
+          .then(response => {
+            this.$store
+              .dispatch("notification", {
+                message: response.data[0].response
+              })
+              .then(() => {
+                this.reportModal = false;
+              })
+              .catch(errors => {
+                console.log(errors);
+              });
 
-          this.reason = null
-
-        }).catch((errors) => {
-          const err = errors.response.data.errors;
-          if(err.reason) {
-            console.log(err.reason)
-            this.errors.push( err.reason[0] )
-          }
-        });
-      
+            this.reason = null;
+          })
+          .catch(errors => {
+            const err = errors.response.data.errors;
+            if (err.reason) {
+              console.log(err.reason);
+              this.errors.push(err.reason[0]);
+            }
+          });
       }
     }
   },
@@ -413,7 +419,7 @@ export default {
 
     this.getUserReviews();
     this.getUserGames();
-  },
+  }
 };
 </script>
 

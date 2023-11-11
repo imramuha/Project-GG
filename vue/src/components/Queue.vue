@@ -35,12 +35,13 @@
           </div>
         </div>
         <div class="queueErrors">
-         <p v-if="errors.length">
+          <p v-if="errors.length">
             <b>Please correct the following error(s):</b>
-            <ul>
-              <li v-for="error in errors" v-bind:key="error" >- {{ error }}</li>
-            </ul>
           </p>
+
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">- {{ error }}</li>
+          </ul>
         </div>
       </div>
       <div class="queueUp">
@@ -57,7 +58,6 @@
         :is="mainComponent"
       ></component>
     </template>
-
   </div>
 </template>
 
@@ -69,7 +69,7 @@ import Lounge from "@/components/Lounge";
 export default {
   name: "Queue",
   components: {
-   Lounge
+    Lounge
   },
   data() {
     return {
@@ -80,65 +80,71 @@ export default {
       secondOption: "",
       lobbyComponent: null,
       lobby: "",
-      errors: [],
+      errors: []
     };
   },
   computed: {
     option: function() {
       console.log(this.queuegames[this.firstOption]);
       return this.queuegames[this.firstOption];
-    },
+    }
   },
   methods: {
     async lounge() {
       this.errors = [];
       try {
-        if(!this.queuegames[this.firstOption]) {
-            this.errors.push('Please select a game!');
-        } if (!this.queuegames[this.firstOption].criteria[this.secondOption]) {
-            this.errors.push('Please select an option');
+        if (!this.queuegames[this.firstOption]) {
+          this.errors.push("Please select a game!");
+        }
+        if (!this.queuegames[this.firstOption].criteria[this.secondOption]) {
+          this.errors.push("Please select an option");
         } else {
-
-          let loungeName = this.queuegames[this.firstOption].name + " [" + this.queuegames[this.firstOption].criteria[this.secondOption].name + "]";
-          let loungeCode = this.firstOption + "-" + this.queuegames[this.firstOption].criteria[this.secondOption].id;
+          let loungeName =
+            this.queuegames[this.firstOption].name +
+            " [" +
+            this.queuegames[this.firstOption].criteria[this.secondOption].name +
+            "]";
+          let loungeCode =
+            this.firstOption +
+            "-" +
+            this.queuegames[this.firstOption].criteria[this.secondOption].id;
 
           let lounge = {
             name: loungeName,
-            code: loungeCode,
+            code: loungeCode
           };
 
           this.lobby = lounge;
 
-          await queue(lounge).then((response) => {
+          await queue(lounge).then(response => {
             console.log(response.data);
             this.$store
-            .dispatch("notification", {
-              message: response.data.response,
-            })
-            .then(() => {
-              // the lounge component is visible to do:
-              if (this.mainComponent == null) {
-                this.mainComponent = Lounge;
-                this.lobbyComponent = 'lobby'
-              } else {
-                this.mainComponent = null;
-              }
+              .dispatch("notification", {
+                message: response.data.response
+              })
+              .then(() => {
+                // the lounge component is visible to do:
+                if (this.mainComponent == null) {
+                  this.mainComponent = Lounge;
+                  this.lobbyComponent = "lobby";
+                } else {
+                  this.mainComponent = null;
+                }
 
+                this.lobby.id = response.data.data;
+                console.log(this.lobby.id);
 
-              this.lobby.id = response.data.data;
-              console.log(this.lobby.id);
-
-              this.name = null;
-              this.code = null;
-            })
-            .catch((errors) => {
-              console.log(errors);
-            });
+                this.name = null;
+                this.code = null;
+              })
+              .catch(errors => {
+                console.log(errors);
+              });
           });
         }
       } catch (errors) {
-        console.log(errors)
-          /*let err = errors.response.data.errors;
+        console.log(errors);
+        /*let err = errors.response.data.errors;
           console.log(errors);
           if(err.name) {
             this.errors.push(err.name[0] )
@@ -147,10 +153,7 @@ export default {
             this.errors.push(err.code[0] )
           }*/
       }
-
-
-
-    },
+    }
   },
   async mounted() {
     try {
@@ -161,7 +164,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 };
 </script>
 

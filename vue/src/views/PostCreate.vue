@@ -4,40 +4,37 @@
       <h1>CREATE A POST</h1>
       <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors" v-bind:key="error" >- {{ error }}</li>
-        </ul>
       </p>
+
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">- {{ error }}</li>
+      </ul>
     </div>
     <div class="postFormBody">
-    <form @submit.prevent="onSubmit">
-     
+      <form @submit.prevent="onSubmit">
         <label for="title">title</label>
         <input id="title" v-model="title" />
-      
+
         <label for="subtitle">subtitle</label>
-        <input id="subtitle" v-model="subtitle"/>
-    
+        <input id="subtitle" v-model="subtitle" />
+
         <label for="text">text</label>
         <input id="text" type="textarea" v-model="text" />
-  
 
-      
-      <label for="image">image</label>
-       <div class="postFormUpload" v-if="!image">
-          <input accept="image/*" type="file" @change="onImageChange">
+        <label for="image">image</label>
+        <div class="postFormUpload" v-if="!image">
+          <input accept="image/*" type="file" @change="onImageChange" />
         </div>
         <div class="postFormUpload" v-else>
           <img class="postFormImage" :src="image" />
           <button @click="removeImage">Remove</button>
         </div>
-    
+
         <div class="formButtons">
           <button class="formButtonsCancel" @click="cancel">Cancel</button>
           <button type="submit">Create</button>
         </div>
-
-    </form>
+      </form>
     </div>
   </div>
 </template>
@@ -51,8 +48,8 @@ export default {
       title: null,
       subtitle: null,
       text: null,
-      image: '',
-      errors: [],
+      image: "",
+      errors: []
     };
   },
   methods: {
@@ -61,82 +58,79 @@ export default {
         title: this.title,
         subtitle: this.subtitle,
         text: this.text,
-        image: this.image,
+        image: this.image
       };
 
       let config = {
         header: {
-            'Content-Type': 'multipart/form-data'
+          "Content-Type": "multipart/form-data"
         }
-      }
+      };
       try {
         this.errors = [];
-        if(!this.title) {
-          this.errors.push('Title is required!');
-
-        } if(!this.subtitle) {
-            this.errors.push('Subtitle or Subject is also required!');
-
-        } if(!this.text) {
-            this.errors.push('Please enter some text to your post.');
-
+        if (!this.title) {
+          this.errors.push("Title is required!");
+        }
+        if (!this.subtitle) {
+          this.errors.push("Subtitle or Subject is also required!");
+        }
+        if (!this.text) {
+          this.errors.push("Please enter some text to your post.");
         } else if (this.title && this.subtitle && this.text) {
-          await createPost(post, config).then((response) => {
+          await createPost(post, config).then(response => {
             this.$store
-            .dispatch("notification", {
-              message: response.data[0].response,
-            })
-            .then(() => {
-              this.emitToDashboard('posts')
-            })
-            .catch((errors) => {
-              console.log(errors);
-            });
+              .dispatch("notification", {
+                message: response.data[0].response
+              })
+              .then(() => {
+                this.emitToDashboard("posts");
+              })
+              .catch(errors => {
+                console.log(errors);
+              });
 
-            
             this.title = null;
             this.subtitle = null;
             this.text = null;
             this.image = null;
-          })          
+          });
         }
       } catch (errors) {
         let err = errors.response.data.errors;
         console.log(errors);
-         if(err.title) {
-            this.errors.push(err.title[0] )
-          }
-          if(err.subtitle) {
-            this.errors.push(err.subtitle[0] )
-          }
-           if(err.text) {
-            this.errors.push(err.text[0] )
-          }
+        if (err.title) {
+          this.errors.push(err.title[0]);
+        }
+        if (err.subtitle) {
+          this.errors.push(err.subtitle[0]);
+        }
+        if (err.text) {
+          this.errors.push(err.text[0]);
+        }
       }
     },
     onImageChange(e) {
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length)
-            return;
-        this.createImage(files[0]);
-        console.log(files[0])
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+      console.log(files[0]);
     },
     createImage(file) {
-        let reader = new FileReader();
-        let vm = this;
-        reader.onload = (e) => {
-            vm.image = e.target.result;
-        };
-        reader.readAsDataURL(file);
+      let reader = new FileReader();
+      let vm = this;
+      reader.onload = e => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
-    removeImage: function () {
-      this.image = '';
+    removeImage: function() {
+      this.image = "";
     },
     emitToDashboard(component) {
       this.$emit("emitToDashboard", component);
     },
     cancel() {
-       this.emitToDashboard('posts')
+      this.emitToDashboard("posts");
     }
   }
 };

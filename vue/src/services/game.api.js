@@ -15,9 +15,9 @@ const addUserGame = data => httpClient.post(ADD_USER_GAME_END_POINT, data);
 const getProfileGames = url => httpClient.get(url);
 
 export {
-    getUserGames,
-    removeUserGame,
-    getUserGamesUnadded,
-    addUserGame,
-    getProfileGames
+  getUserGames,
+  removeUserGame,
+  getUserGamesUnadded,
+  addUserGame,
+  getProfileGames
 };

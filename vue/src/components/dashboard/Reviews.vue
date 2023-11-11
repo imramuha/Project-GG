@@ -18,9 +18,7 @@
       />
     </div>
     <div
-      v-if="
-        this.mode === 'given' && userpostedreviews.length > 0 && !loading
-      "
+      v-if="this.mode === 'given' && userpostedreviews.length > 0 && !loading"
       class="reviews"
     >
       <ReviewCard
@@ -29,7 +27,13 @@
         :review="userpostedreview"
       />
     </div>
-    <div v-if="(this.mode === 'given' && !userpostedreviews.length > 0 && !loading) || (this.mode === 'received' && !userreviews.length > 0 && !loading)" class="reviewsEmpty">
+    <div
+      v-if="
+        (this.mode === 'given' && !userpostedreviews.length > 0 && !loading) ||
+          (this.mode === 'received' && !userreviews.length > 0 && !loading)
+      "
+      class="reviewsEmpty"
+    >
       <h2>Sorry, but there no reviews were found.</h2>
     </div>
 

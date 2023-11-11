@@ -45,9 +45,8 @@
           v-for="(historyNotification, index) in this.getHistoryNotifications"
           :key="index"
         >
-         {{ historyNotification.message }}
-          <span>[{{ historyNotification.time }}]</span
-          >
+          {{ historyNotification.message }}
+          <span>[{{ historyNotification.time }}]</span>
         </li>
       </ul>
       <div v-else class="feedNotificationsEmpty">

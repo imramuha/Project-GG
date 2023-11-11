@@ -2,12 +2,13 @@
   <div class="userEditForm">
     <div class="userEditFormHeader">
       <h1>EDIT PROFILE</h1>
-       <p v-if="errors.length">
+      <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
-        </ul>
       </p>
+
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+      </ul>
     </div>
     <div class="userEditFormBody">
       <form @submit.prevent="onSubmit">
@@ -22,7 +23,7 @@
           <img class="userEditFormImage" :src="image" />
           <button @click="removeImage">Remove image</button>
         </div>
-           <div class="formButtons">
+        <div class="formButtons">
           <button class="formButtonsCancel" @click="cancel">Cancel</button>
           <button type="submit">Update</button>
         </div>
@@ -40,12 +41,12 @@ export default {
       user: [],
       email: null,
       image: null,
-      errors: [],
+      errors: []
     };
   },
   async mounted() {
     try {
-      await getMe().then((response) => {
+      await getMe().then(response => {
         this.email = response.data.user[0].email;
         this.image = response.data.user[0].image;
 
@@ -60,42 +61,40 @@ export default {
     async onSubmit() {
       let userData = {
         email: this.email,
-        image: this.image,
+        image: this.image
       };
 
       try {
         this.errors = [];
-        if(!this.email) {
-          this.errors.push('Email is required!');
-
-        } if(!this.image) {
-            this.errors.push('Please insert an image!');
-
+        if (!this.email) {
+          this.errors.push("Email is required!");
+        }
+        if (!this.image) {
+          this.errors.push("Please insert an image!");
         } else if (this.image && this.email) {
-          await editUser(userData).then((response) => {
+          await editUser(userData).then(response => {
             this.$store
               .dispatch("notification", {
-                message: response.data[0].response,
+                message: response.data[0].response
               })
               .then(() => {
-                this.emitToDashboard('feed')
+                this.emitToDashboard("feed");
               })
-              .catch((errors) => {
+              .catch(errors => {
                 console.log(errors);
               });
             this.email = null;
             this.image = null;
-        });
-      }
-
+          });
+        }
       } catch (errors) {
         let err = errors.response.data.errors;
-         if(err.email) {
-            this.errors.push(err.email[0] )
-          }
-          if(err.image) {
-            this.errors.push(err.image[0] )
-          }
+        if (err.email) {
+          this.errors.push(err.email[0]);
+        }
+        if (err.image) {
+          this.errors.push(err.image[0]);
+        }
       }
     },
     onImageChange(e) {
@@ -107,7 +106,7 @@ export default {
     createImage(file) {
       let reader = new FileReader();
       let vm = this;
-      reader.onload = (e) => {
+      reader.onload = e => {
         vm.image = e.target.result;
       };
       reader.readAsDataURL(file);
@@ -119,9 +118,9 @@ export default {
       this.$emit("emitToDashboard", component);
     },
     cancel() {
-      this.emitToDashboard('feed')
+      this.emitToDashboard("feed");
     }
-  },
+  }
 };
 </script>
 

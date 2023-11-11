@@ -10,6 +10,7 @@ const getQueueGames = () => httpClient.get(END_POINT);
 const queue = data => httpClient.post(QUEUE_END_POINT, data);
 const getLoungeData = id => httpClient.get(LOUNGE_END_POINT + id);
 const exitLounge = () => httpClient.get(EXIT_LOUNGE_END_POINT);
-const postGroupMessage = data => httpClient.post(POST_GROUP_MESSAGE_POINT_SEND, data);
+const postGroupMessage = data =>
+  httpClient.post(POST_GROUP_MESSAGE_POINT_SEND, data);
 
 export { getQueueGames, queue, getLoungeData, exitLounge, postGroupMessage };

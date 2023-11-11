@@ -4,10 +4,11 @@
       <h1>Welcome back!</h1>
       <p v-if="errors.length">
         <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors" v-bind:key="error" >{{ error }}</li>
-        </ul>
       </p>
+
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+      </ul>
       <form v-on:submit.prevent="login">
         <label for="email">Email</label>
         <input v-model="email" type="email" name="email" value />
@@ -16,7 +17,7 @@
         <input v-model="password" type="password" name="password" value />
         <p><router-link to="/">Forgot your password?</router-link></p>
 
-        <button type="submit" >Login</button>
+        <button type="submit">Login</button>
         <p>
           Don't have an account?
           <router-link to="/register">Register</router-link>
@@ -34,19 +35,18 @@ export default {
     return {
       email: "",
       password: "",
-      errors: [],
+      errors: []
     };
   },
   methods: {
     login() {
       this.errors = [];
 
-      if(!this.email) {
-          this.errors.push('Email is required!');
-
-      } if(!this.password) {
-          this.errors.push('Password is also required!');
-
+      if (!this.email) {
+        this.errors.push("Email is required!");
+      }
+      if (!this.password) {
+        this.errors.push("Password is also required!");
       } else if (this.email && this.password) {
         this.$store
           .dispatch("login", {
@@ -54,17 +54,14 @@ export default {
             password: this.password
           })
           .then(() => {
-            this.$router.push('dashboard');
-            
+            this.$router.push("dashboard");
           })
           .catch(errors => {
             console.log(errors);
             this.errors.push(errors);
-          })    
-        }
-
+          });
+      }
     }
-    
   }
 };
 </script>
