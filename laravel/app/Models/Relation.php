@@ -11,16 +11,16 @@ class Relation extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_relations', 'user_id_one', 'user_id_two');
+        return $this->belongsToMany('App\Models\User', 'user_relations', 'user_id_one', 'user_id_two');
     }
 /*
     public function usersOne()
     {
-        return $this->belongsToMany('App\User', 'user_relations', "relation_id", "user_id_two")->withPivot(["user_id_one", "user_id_two"]);
+        return $this->belongsToMany('App\Models\User', 'user_relations', "relation_id", "user_id_two")->withPivot(["user_id_one", "user_id_two"]);
     }
 
     public function usersTwo()
     {
-        return $this->belongsToMany('App\User', 'user_relations', "relation_id", "user_id_one")->withPivot(["user_id_one", "user_id_two"]);;
+        return $this->belongsToMany('App\Models\User', 'user_relations', "relation_id", "user_id_one")->withPivot(["user_id_one", "user_id_two"]);;
     }*/
 }

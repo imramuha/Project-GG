@@ -20,10 +20,10 @@ class CreateGroupMessagesTable extends Migration
             $table->text('text');
             $table->timestamps();
         });
-
+        /*
         Schema::table('group_messages', function($table) {
             $table->foreign('lobby_id')->references('id')->on('lobbies')->onDelete('cascade')->onUpdate('cascade');
-        });
+        });*/
     }
 
     /**

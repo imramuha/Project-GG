@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\LikedPost;

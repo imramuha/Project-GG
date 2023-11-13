@@ -22,7 +22,7 @@ class Lobby extends Model
      * get the comments the belong to this user
      */
     public function users() {
-        return $this->belongsToMany('App\User', 'lobby_users');
+        return $this->belongsToMany('App\Models\User', 'lobby_users');
     }
 
     /**

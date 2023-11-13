@@ -22,6 +22,6 @@ class Report extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'reporter_id');
+        return $this->belongsTo('App\Models\User', 'reporter_id');
     }
 }
