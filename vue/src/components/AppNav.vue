@@ -1,6 +1,4 @@
-<xvj*
-$^p:;,boiuytreza
-321<template>
+<template>
   <div class="accessNavigation">
     <router-link
       v-if="
