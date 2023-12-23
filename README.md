@@ -1,2 +1,2 @@
 # Project GG
-Project GG under construction - BP
+Web app - Vue.js, Laravel, MySQL 
