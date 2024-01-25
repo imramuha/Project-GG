@@ -1,0 +1,185 @@
+.reviewsBoard {
+    height: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.reviews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: var(--melt);
+    overflow: hidden;
+}
+
+.reviewsEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--melt);
+    overflow: hidden;
+    height: 100%;
+    h2 {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.reviewCard {
+    flex: 0 0 49.5%;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--midnight);
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: 0 0 3px var(--midnightH);
+    margin-bottom: 7px;
+    .reviewCardImage {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        img {
+            border-radius: 3px;
+            max-height: 50px;
+            height: 100%;
+            width: auto;
+        }
+        .reviewCardContentHeader {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            h1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                color: var(--paint);
+                font-size: 21px;
+                span {
+                    font-size: 9px;
+                    color: var(--melt);
+                }
+                margin: 0px 14px;
+            }
+            p {
+                font-size: 14px;
+                color: var(--snow);
+            }
+        }
+        .reviewCardContentBody {
+            margin-left: auto;
+            p {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
+            .reviewCardScoreRed,
+            .reviewCardScoreGreen {
+                color: var(--snow);
+                border-radius: 3px;
+                box-shadow: 0 0 3px var(--midnightH);
+            }
+            .reviewCardScoreRed {
+                background-color: var(--candy);
+            }
+            .reviewCardScoreGreen {
+                background-color: var(--slate);
+            }
+        }
+    }
+}
+
+.reviewsFooter {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 0px;
+}
+
+.reviewsHeader,
+.reviewsPagination {
+    display: flex;
+    justify-content: flex-end;
+    a:first-child {
+        margin-right: 10px;
+    }
+    button {
+        border: none;
+        font-size: 21px;
+        color: var(--paint);
+        background-color: transparent;
+        height: 33px;
+        cursor: pointer;
+        &:disabled {
+            color: var(--melt);
+            cursor: not-allowed;
+            &:hover {
+                background-color: var(--midnight);
+                color: var(--melt);
+            }
+        }
+        &:hover {
+            color: var(--paintL);
+            transition: 0.3s;
+        }
+    }
+}
+
+.reviewsHeader {
+    button {
+        border: 2px solid var(--melt);
+        font-size: 21px;
+        color: var(--melt);
+        background-color: var(--midnightL);
+        border-radius: 3px;
+        height: 33px;
+        font-size: 11px;
+        min-width: 100px;
+        &:hover {
+            color: var(--snow);
+            border-color: var(--snow);
+            //background-color: var(--midnight);
+            transition: 0.3s;
+        }
+    }
+}
+
+.reviewsHeaderActive {
+    button {
+        color: var(--snow);
+        border-color: var(--snow);
+        background-color: var(--candy);
+    }
+}
+
+.reviewsPagination {
+    width: 100%;
+    justify-content: center;
+    margin-left: 200px;
+    p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px 14px;
+        font-size: 11px;
+        color: var(--melt);
+        span {
+            margin: 0 3px;
+            font-weight: 600;
+            color: var(--paint);
+            font-size: 16px
+        }
+    }
+}

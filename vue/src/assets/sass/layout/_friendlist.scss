@@ -1,0 +1,104 @@
+.friendlist {
+    height: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+    background-color: var(--midnightL);
+}
+
+.friendlistCategory {
+    display: flex;
+    flex-direction: column;
+    h2 {
+        font-weight: 900;
+        letter-spacing: 2px;
+        box-shadow: 0 0 3px var(--midnight);
+        text-transform: uppercase;
+        border-radius: 1px;
+        padding: 7px;
+        background-color: var(--midnightH);
+        color: var(--snow);
+        font-size: 11px;
+        margin: 0 0 7px;
+        &:hover {
+            cursor: pointer;
+            span {
+                color: var(--melt);
+            }
+        }
+        span {
+            font-weight: 900;
+            float: right;
+        }
+    }
+}
+
+.friendlistCard {
+    background-color: var(--midnight);
+    font-size: 11px;
+    margin-bottom: 7px;
+    box-shadow: 0 0 3px var(--midnightH);
+    padding: 7px;
+    border-radius: 2px;
+    .friendlistCardImg {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 2px;
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 1px;
+        }
+    }
+    .friendlistCardUser {
+        flex-grow: 3;
+        margin: 0px;
+        p {
+            margin: 0px;
+            font-size: 11px;
+            color: var(--melt);
+        }
+        .friendlistCardUserName {
+            letter-spacing: 1px;
+            font-weight: 600;
+            font-size: 13px;
+            margin: 0px;
+            color: var(--paint);
+            padding: 0;
+            background-color: inherit;
+            box-shadow: none;
+            text-transform: none;
+        }
+    }
+    .friendlistCardStatus {
+        flex-grow: 1;
+        text-align: center;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .statusCircle,
+        .statusCircleOffline {
+            width: 100%;
+            height: 100%;
+            width: 5px;
+            height: 5px;
+            margin-top: 3px;
+            border-radius: 1px;
+            background-color: var(--slate);
+        }
+        .statusCircleOffline {
+            background-color: var(--melt);
+        }
+        p {
+            color: var(--melt);
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            margin: 0px;
+        }
+    }
+    a {
+        display: flex;
+    }
+}

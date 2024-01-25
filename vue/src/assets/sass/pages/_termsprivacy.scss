@@ -1,0 +1,107 @@
+.terms,
+.privacy {
+    color: var(--melt);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .content {
+        position: fixed;
+        top: 0;
+        right: 0;
+        overflow-y: scroll;
+        padding: 35px;
+        height: 100%;
+        width: 75%;
+        margin-bottom: 35px;
+    }
+    .toc {
+        display: flex;
+        position: fixed;
+        flex-direction: column;
+        background-color: var(--midnight);
+        padding: 105px 21px 21px;
+        width: 25%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        h2 {
+            color: var(--snow);
+            margin: 0px;
+        }
+        ol {
+            padding: 21px;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            margin: 0px;
+            li {
+                margin-bottom: 7px;
+                ol {
+                    color: var(--melt);
+                    padding: 0px;
+                    margin: 5px 0px 0px;
+                    font-size: 9px;
+                    li {
+                        margin: 7px;
+                    }
+                    li a {
+                        color: var(--melt);
+                        font-size: 9px;
+                    }
+                }
+            }
+            li a {
+                letter-spacing: 0.5px;
+                font-size: 11px;
+                color: var(--melt);
+                font-weight: 700;
+                &:hover {
+                    color: var(--candy);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    h1 {
+        color: var(--snow);
+        &:first-child {
+            line-height: 21px;
+        }
+    }
+    h2 {
+        color: var(--melt);
+        margin: 14px 0 3px;
+    }
+    h3 {}
+    blockquote {
+        font-size: 11px;
+    }
+    p {
+        color: var(--melt);
+        font-size: 13px;
+        margin-bottom: 14px;
+        &:last-child {
+            padding-bottom: 35px;
+        }
+    }
+    ol,
+    ul {
+        font-size: 13px;
+        margin: 0px;
+    }
+    .homeButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--snow);
+        background-color: var(--candy);
+        padding: 7px 21px;
+        border: 3px solid var(--snow);
+        border-radius: 3px;
+        margin-top: auto;
+        &:hover {
+            transition: 0.5s;
+            background-color: var(--candyL);
+        }
+    }
+}

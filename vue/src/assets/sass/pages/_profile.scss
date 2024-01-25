@@ -1,0 +1,487 @@
+    $access-title-font-sizes: ( null: 28px, sm: 35px, md: 43px, lg: 55px, xl: 65px, );
+    $access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
+    .profile {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .profileHeader {
+            display: flex;
+            flex-direction: row;
+            padding: 7px;
+            box-shadow: 0 0 3px var(--midnightH);
+            background-color: var(--midnightH);
+            .profileHeaderView {
+                display: flex;
+                flex-direction: column;
+                padding: 7px;
+                .profileHeaderImage {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img {
+                        width: 125px;
+                        height: auto;
+                        //max-height: 125px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+            .profileHeaderData {
+                display: flex;
+                width: 100%;
+                //justify-content: space-between;
+                flex-direction: column;
+                padding: 7px;
+                div {
+                    p {
+                        color: var(--melt);
+                        margin: 0px 0 7px;
+                        font-size: 13px;
+                        padding-left: 1px;
+                    }
+                    h1 {
+                        margin: 5px 5px 5px 0px;
+                        span {
+                            margin-left: 7px;
+                            font-size: 17px;
+                            padding: 0px 7px;
+                            background-color: var(--slate);
+                            border-radius: 3px;
+                        }
+                    }
+                }
+                .profileHeaderScore {
+                    display: flex;
+                    margin-left: auto;
+                    position: relative;
+                    width: 100%;
+                    border-radius: 3px;
+                    background-color: var(--candy);
+                    border: 2px solid var(--snow);
+                    height: 30px;
+                    .profileHeaderScorebar {
+                        background-color: var(--slate);
+                    }
+                    .profileHeaderScorePercentage {
+                        font-size: 15px;
+                        padding: 3px;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+                        position: absolute;
+                        left: 50%;
+                        //top: 25%;
+                    }
+                    .profileHeaderScoreEmpty {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        font-size: 11px;
+                        padding: 3px;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+                    }
+                }
+            }
+            .profileHeaderButtons {
+                width: 100%;
+                display: flex;
+                margin-left: auto;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 7px;
+                .profileHeaderReport {
+                    display: flex;
+                    justify-content: flex-end;
+                    button {
+                        border: 2px solid var(--melt);
+                        border-radius: 20px;
+                        padding: 7px 21px;
+                        font-size: 11px;
+                        color: var(--melt);
+                        background-color: var(--midnightL);
+                        border-radius: 3px;
+                        width: 100%;
+                        max-width: 100px;
+                        &:hover {
+                            color: var(--snow);
+                            border-color: var(--snow);
+                            transition: 0.5s;
+                        }
+                    }
+                    .ProfileHeaderReportModalContainer {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 100;
+                        background-color: var(--midnightH60);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .ProfileHeaderReportModal {
+                            display: flex;
+                            flex-direction: column;
+                            background-color: var(--midnightL);
+                            padding: 20px;
+                            border-radius: 3px;
+                            h1 {
+                                @include font-size($access-title-font-sizes);
+                                line-height: 10px;
+                                margin: 20px 0px 30px;
+                                span {
+                                    color: var(--paint);
+                                }
+                            }
+                            label {
+                                @include font-size($access-p-font-sizes);
+                                color: var(--melt);
+                                margin: 0;
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                margin: 20px 0 5px;
+                                letter-spacing: 0.5px;
+                            }
+                            ul {
+                                padding: 0;
+                                list-style-type: none;
+                                margin: 0px;
+                            }
+                            &:first-child>p {
+                                font-size: 11px;
+                                margin-top: 7px;
+                                color: var(--candy);
+                                b {
+                                    color: var(--melt);
+                                }
+                            }
+                            &,
+                            form {
+                                display: flex;
+                                flex-direction: column;
+                                textarea {
+                                    color: snow;
+                                    border-radius: 3px;
+                                    background-color: var(--midnight);
+                                    border: 1px solid var(--midnightH);
+                                    padding: 15px;
+                                    &:focus {
+                                        border-color: var(--candy);
+                                    }
+                                }
+                                .reportFormButtons {
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: space-between;
+                                    button {
+                                        background-color: var(--candy);
+                                        color: var(--snow);
+                                        border: none;
+                                        border-radius: 3px;
+                                        padding: 14px 21px;
+                                        font-weight: 600;
+                                        margin-top: 22px;
+                                        &:hover {
+                                            background-color: var(--candyL);
+                                        }
+                                    }
+                                }
+                            }
+                            @include sm {
+                                padding: 25px;
+                            }
+                            @include md {
+                                padding: 30px;
+                            }
+                            @include lg {
+                                padding: 35px;
+                            }
+                            @include xl {
+                                padding: 40px;
+                            }
+                        }
+                    }
+                }
+                .profileHeaderRelation {
+                    display: flex;
+                    justify-content: flex-end;
+                    button {
+                        border: 2px solid snow;
+                        border-radius: 3px;
+                        padding: 7px;
+                        margin: 0px 0px 0 7px;
+                        width: 100%;
+                        font-size: 11px;
+                        color: var(--snow);
+                        background-color: var(--candy);
+                        border-radius: 3px;
+                        box-shadow: 0 0 3px var(--midnightH);
+                        max-width: 100px;
+                        &:hover {
+                            color: var(--snow);
+                            border-color: var(--snow);
+                            background-color: var(--candyL);
+                            transition: 0.5s;
+                        }
+                    }
+                }
+            }
+        }
+        .profileGames {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            box-shadow: 0 0 3px var(--midnightH);
+            height: 100%;
+            .profileGamesNav {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 95%;
+                button {
+                    border: none;
+                    cursor: pointer;
+                    background-color: var(--candy);
+                    width: 100%;
+                    height: 100%;
+                    color: var(--snow);
+                    border-radius: 3px;
+                    &:disabled {
+                        background-color: var(--midnight);
+                        color: var(--melt);
+                        cursor: not-allowed;
+                        &:hover {
+                            background-color: var(--midnight);
+                            color: var(--melt);
+                        }
+                    }
+                    &:hover {
+                        background-color: var(--candyL);
+                        transition: 0.5s;
+                    }
+                }
+            }
+            .profileGameCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .profileGameCardImage {
+                    img {
+                        width: 100px;
+                        height: auto;
+                        max-height: 125px;
+                        border-radius: 2px;
+                    }
+                    position: relative;
+                    .profileGameCardName {
+                        background-color: var(--midnightL);
+                        position: absolute;
+                        bottom: 0;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        justify-content: center;
+                        text-align: center;
+                        font-size: 11px;
+                    }
+                }
+                .profileGameCardUsername {
+                    border-radius: 2px;
+                    text-align: center;
+                    background-color: var(--slate);
+                    font-weight: 600;
+                    font-size: 13px;
+                    padding: 7px;
+                }
+            }
+        }
+        .profileReviews {
+            display: flex;
+            height: 100%;
+            flex-direction: row;
+            .profileReviewsSection {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                padding: 14px;
+                width: 100%;
+                h1 {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .profileReviewCardsContainer {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 100%;
+                    height: 100%;
+                    .profileReviewCard {
+                        width: 100%;
+                        //margin-bottom: 3px;
+                        background-color: var(--midnight);
+                        flex-grow: 4;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        padding: 7px;
+                        max-height: 40px;
+                        border-radius: 3px;
+                        &:last-child {
+                            margin-bottom: 0px;
+                        }
+                        .profileReviewCardImage {
+                            display: flex;
+                            align-items: center;
+                            margin-right: 21px;
+                            img {
+                                border-radius: 25px;
+                                width: 25px;
+                                height: 25px;
+                            }
+                        }
+                        .profileReviewCardUserInfo {
+                            display: flex;
+                            flex-direction: column;
+                            p {
+                                color: var(--paint);
+                                margin: 0px;
+                                font-size: 11px;
+                                font-weight: 600;
+                                span {
+                                    font-weight: 400;
+                                    color: var(--snow);
+                                }
+                            }
+                        }
+                        .profileReviewCardScore {
+                            margin-left: auto;
+                            background-color: var(--candy);
+                            padding: 7px 5px;
+                            p {
+                                font-size: 11px;
+                                font-weight: 600;
+                                margin: 0px;
+                            }
+                        }
+                    }
+                }
+                .profileReviewsNavContainer {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    margin-right: 7px;
+                    .profileReviewsNav {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 7px 0px;
+                        &:first-child {
+                            margin-top: 0px;
+                        }
+                        &:last-child {
+                            margin-bottom: 0px;
+                            margin-top: auto;
+                        }
+                        button {
+                            padding: 7px;
+                            height: 100%;
+                            border: none;
+                            cursor: pointer;
+                            background-color: var(--candy);
+                            width: 100%;
+                            height: 100%;
+                            color: var(--snow);
+                            border-radius: 3px;
+                            &:disabled {
+                                background-color: var(--midnight);
+                                color: var(--melt);
+                                cursor: not-allowed;
+                                &:hover {
+                                    background-color: var(--midnight);
+                                    color: var(--melt);
+                                }
+                            }
+                            &:hover {
+                                background-color: var(--candyL);
+                                transition: 0.5s;
+                            }
+                        }
+                    }
+                }
+            }
+            .profileReviewInput {
+                flex-grow: 1;
+                height: 100%;
+                padding: 14px;
+                background-color: var(--midnightH);
+                display: flex;
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    ul {
+                        padding: 0;
+                        list-style-type: none;
+                        margin: 0px;
+                    }
+                    &:first-child>p {
+                        font-size: 10px;
+                        margin: 3px 0px 8px;
+                        color: var(--melt);
+                        b {
+                            color: var(--candy);
+                        }
+                    }
+                    label {
+                        color: var(--melt);
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        font-size: 13px;
+                    }
+                    label:last-child {
+                        margin-top: 20px;
+                    }
+                    input,
+                    textarea {
+                        color: snow;
+                        border-radius: 3px;
+                        background-color: var(--midnight);
+                        border: 1px solid var(--midnight);
+                        padding: 7px;
+                        margin-bottom: 7px;
+                        &:focus {
+                            border: 1px solid var(--candy);
+                        }
+                    }
+                    input {
+                        padding: 0px;
+                        &::-moz-range-thumb {
+                            width: 15px;
+                            height: 15px;
+                            border: none;
+                            background: var(--candy);
+                            cursor: pointer;
+                        }
+                    }
+                    button {
+                        background-color: var(--candy);
+                        color: var(--snow);
+                        border: none;
+                        border-radius: 3px;
+                        padding: 7px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: var(--candyL);
+                        }
+                    }
+                }
+            }
+        }
+    }

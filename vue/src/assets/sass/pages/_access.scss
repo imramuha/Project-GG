@@ -1,0 +1,157 @@
+/*
+*** user for login, register and perhaps password reset, anything that has to do with user access
+*/
+
+$access-title-font-sizes: ( null: 28px, sm: 35px, md: 43px, lg: 55px, xl: 65px, );
+$access-p-font-sizes: ( null: 10px, sm: 11px, md: 12px, lg: 13px, xl: 14px, );
+.accessContainer {
+    //background-color: var(--midnight);
+    color: var(--snow);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    h1 {
+        @include font-size($access-title-font-sizes);
+        line-height: 10px;
+        margin: 20px 0px 30px;
+    }
+    a {
+        color: var(--candy);
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+            color: var(--candyL);
+        }
+    }
+    p,
+    label {
+        @include font-size($access-p-font-sizes);
+        color: var(--melt);
+        margin: 0;
+    }
+    label {
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-top: 20px;
+        letter-spacing: 0.5px;
+    }
+    input,
+    button {
+        margin: 5px 0 5px;
+    }
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-weight: normal;
+        text-transform: none;
+    }
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 17px;
+        width: 17px;
+        background-color: var(--midnight);
+    }
+    .container:hover input~.checkmark {
+        background-color: var(--snow);
+    }
+    .container input:checked~.checkmark {
+        background-color: var(--candy);
+    }
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    .container input:checked~.checkmark:after {
+        display: block;
+    }
+    .container .checkmark:after {
+        left: 5.5px;
+        top: 3px;
+        width: 3px;
+        height: 5px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .accessForm {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--midnightL);
+        padding: 20px;
+        border-radius: 3px;
+        ul {
+            padding: 0;
+            list-style-type: none;
+            margin: 0px;
+        }
+        &:first-child>p {
+            margin-top: 10px;
+            color: var(--melt);
+            b {
+                color: var(--candy);
+            }
+        }
+        &,
+        form {
+            display: flex;
+            flex-direction: column;
+            input,
+            textarea {
+                color: snow;
+                border-radius: 3px;
+                background-color: var(--midnight);
+                border: 1px solid var(--midnightH);
+                padding: 15px;
+                &:focus {
+                    border-color: var(--candy);
+                }
+            }
+            button {
+                background-color: var(--candy);
+                color: var(--snow);
+                border: none;
+                border-radius: 3px;
+                padding: 15px;
+                font-weight: 600;
+                margin-top: 22px;
+                &:hover {
+                    background-color: var(--candyL);
+                }
+            }
+        }
+        @include sm {
+            padding: 25px;
+        }
+        @include md {
+            padding: 30px;
+        }
+        @include lg {
+            padding: 35px;
+        }
+        @include xl {
+            padding: 40px;
+        }
+    }
+}

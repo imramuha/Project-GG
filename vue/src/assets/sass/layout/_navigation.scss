@@ -1,0 +1,44 @@
+.accessNavigation {
+    width: 100%;
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    font-size: 11px;
+    z-index: 100;
+    img {
+        width: 65px;
+        height: auto;
+        &:hover {
+            color: var(--melt);
+        }
+    }
+    a:first-child {
+        margin: 20px 0 0 35px;
+    }
+    .loginButton {
+        margin: 10px 30px 0 0;
+        border: 2px solid var(--melt);
+        border-radius: 3px;
+        padding: 6px 20px;
+        &:hover {
+            background-color: var(--midnightL);
+        }
+    }
+    .logoutButton {
+        background-color: var(--candy);
+        border-color: var(--snow);
+        color: var(--snow);
+        &:hover {
+            background-color: var(--candyL);
+        }
+    }
+    a {
+        color: var(--melt);
+        &:hover {
+            text-decoration: none;
+            color: var(--snow);
+            border-color: var(--snow);
+        }
+    }
+}

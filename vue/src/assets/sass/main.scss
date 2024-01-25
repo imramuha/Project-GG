@@ -1,0 +1,79 @@
+    // abstracts 
+    @import 'abstracts/variables';
+    @import 'abstracts/functions';
+    @import 'abstracts/mixins';
+    @import 'base/typography';
+    @import 'layout/overscreen';
+    @import 'layout/navigation';
+    @import 'layout/grid';
+    @import 'layout/header';
+    @import 'layout/footer';
+    @import 'layout/sidebar';
+    @import 'layout/sidenav';
+    @import 'layout/friendlist'; //@import 'layout/forms';
+    @import 'layout/_inbox';
+    @import 'layout/_games';
+    @import 'layout/_feed';
+    @import 'components/_buttons';
+    @import 'components/_loader';
+    @import 'components/_postcard';
+    @import 'components/_gamecard';
+    @import 'components/_reviewcard';
+    @import 'components/_queuelounge';
+    @import 'components/_postform';
+    @import 'components/_gameform';
+    @import 'components/_notificationcard';
+    @import 'components/_userform';
+    //@import 'components/slider';
+    //@import 'pages/home';
+    @import 'pages/_landingspage';
+    @import 'pages/_access';
+    @import 'pages/_dashboard';
+    @import 'pages/_profile';
+    @import 'pages/_post';
+    @import 'pages/_forum';
+    @import 'pages/_termsprivacy';
+    @import 'pages/_settings';
+    //@import 'themes/theme';
+    //@import 'themes/admin';
+    html {
+        font-family: roboto mono, serif;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0px;
+    }
+    
+    h1 {
+        font-family: roboto slab;
+        letter-spacing: 1.5px;
+        font-weight: 600;
+    }
+    
+    h2 {
+        font-family: roboto;
+        letter-spacing: 1px;
+        font-weight: 400;
+    }
+    
+    p,
+    a,
+    input,
+    textarea {}
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    
+    div {
+        box-sizing: border-box;
+    }

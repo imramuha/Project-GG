@@ -1,0 +1,187 @@
+            .postsboard {
+                height: 100%;
+                width: 100%;
+                box-sizing: border-box;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .posts {
+                display: flex;
+                box-sizing: border-box;
+                color: var(--melt);
+                height: 90%;
+                .emptyPosts {
+                    width: 100%;
+                    margin-top: 70px;
+                    text-align: center;
+                }
+            }
+            
+            .postCard {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                padding: 7px;
+                border-radius: 2px;
+                background-color: var(--midnight);
+                box-shadow: 0 0 3px var(--midnight);
+                max-width: 25%;
+                &:not(:last-child) {
+                    margin-right: 7px;
+                }
+                .postcardImg {
+                    max-height: 50%;
+                    overflow: hidden;
+                    margin-bottom: 7px;
+                    img {
+                        margin-bottom: 0px;
+                        width: 100%;
+                        height: auto;
+                        border-radius: 2px;
+                    }
+                    cursor: pointer;
+                }
+                .postcardContent {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: column;
+                    margin-top: auto;
+                    .postcardContentHeader {
+                        h2 {
+                            color: var(--snow);
+                            font-size: 15px;
+                            height: 35px;
+                            overflow: hidden;
+                        }
+                    }
+                    .postcardContentBody {
+                        p {
+                            margin: 0px;
+                            font-size: 13px;
+                            color: var(--snow);
+                        }
+                        p:nth-child(1) {
+                            color: var(--melt);
+                            font-size: 11px;
+                            margin-bottom: 7px;
+                        }
+                    }
+                    .postcardContentFooter {
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: row;
+                        flex-grow: 1;
+                        font-size: 9px;
+                        color: var(--candy);
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        p:nth-child(1) {
+                            color: var(--melt);
+                        }
+                    }
+                }
+                .postcardStats {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 7px;
+                    button {
+                        font-size: 11px;
+                        height: auto;
+                        color: var(--melt);
+                        background-color: var(--midnightL);
+                        width: 35px;
+                        height: 35px;
+                        padding: 7px;
+                        border-radius: 3px;
+                        border: 2px solid var(--snow);
+                        &:hover {
+                            text-decoration: none;
+                            cursor: pointer;
+                            color: var(--snow);
+                        }
+                    }
+                    .likeButtonActive {
+                        background-color: var(--candy);
+                        color: var(--snow);
+                    }
+                }
+            }
+            
+            .postsFooter {
+                height: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 7px 0px;
+            }
+            
+            .postsPagination,
+            .postsFooterButtons {
+                display: flex;
+                justify-content: flex-end;
+                button {
+                    border: none;
+                    font-size: 21px;
+                    color: var(--paint);
+                    background-color: transparent;
+                    height: 33px;
+                    cursor: pointer;
+                    &:disabled {
+                        color: var(--melt);
+                        cursor: not-allowed;
+                        &:hover {
+                            background-color: var(--midnight);
+                            color: var(--melt);
+                        }
+                    }
+                    &:hover {
+                        color: var(--paintL);
+                        transition: 0.3s;
+                    }
+                }
+            }
+            
+            .postsFooterButtons {
+                button {
+                    border: 2px solid var(--melt);
+                    font-size: 21px;
+                    color: var(--melt);
+                    background-color: var(--midnightL);
+                    border-radius: 3px;
+                    height: 33px;
+                    font-size: 11px;
+                    min-width: 100px;
+                    &:hover {
+                        color: var(--snow);
+                        border-color: var(--snow);
+                        //background-color: var(--midnight);
+                        transition: 0.3s;
+                    }
+                }
+            }
+            
+            .postsPagination {
+                width: 100%;
+                justify-content: center;
+                margin-left: 100px;
+                p {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0px 14px;
+                    font-size: 11px;
+                    color: var(--melt);
+                    span {
+                        margin: 0 3px;
+                        font-weight: 600;
+                        color: var(--paint);
+                        font-size: 16px
+                    }
+                }
+            }
